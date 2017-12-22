@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: f4c370e8d02479d4ea431f024522c32a
+timeCreated: 1513262334
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cordelina
+  fontNames:
+  - Cordelina
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
