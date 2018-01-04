@@ -16,7 +16,7 @@ public class FollowCharacter : MonoBehaviour {
     targetPosition = mainCharacter.transform.position;
     targetPosition.z = this.transform.position.z;
     if (this.transform.position != targetPosition) {
-      float step = movementSpeed * Time.deltaTime;
+      float step = Vector3.Distance(this.transform.position, targetPosition) * movementSpeed * Time.deltaTime;//movementSpeed * Time.deltaTime;
       this.transform.position = Vector3.MoveTowards(this.transform.position, targetPosition, step);
     }
   }

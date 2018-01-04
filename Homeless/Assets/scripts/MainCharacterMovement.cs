@@ -16,13 +16,14 @@ public class MainCharacterMovement : MonoBehaviour {
     if (Input.GetMouseButtonDown((int)MouseButton.LEFT)) {
       Debug.Log("LMB");
       targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-      targetPosition.z = 10.0f;
+      targetPosition.z = this.transform.position.z;
       Debug.Log("Mouse clicked position in world is: " + targetPosition);
     }
-    if(this.transform.position != targetPosition) {
-      float step = movementSpeed * Time.deltaTime;
+    float step = movementSpeed * Time.deltaTime;
+    if (this.transform.position != targetPosition && !Physics2D.Raycast(this.transform.position, (targetPosition - this.transform.position).normalized, step)) {
       this.transform.position = Vector3.MoveTowards(this.transform.position, targetPosition, step);
     }
+
   }
 
 }
