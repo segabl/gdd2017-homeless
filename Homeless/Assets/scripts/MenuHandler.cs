@@ -22,6 +22,7 @@ public class MenuHandler : MonoBehaviour {
 	}
 
   public void gameStart() {
+    UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
     Debug.Log("Start game");
   }
 
