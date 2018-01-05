@@ -7,6 +7,8 @@ public class MenuHandler : MonoBehaviour {
 
   public Button continueButton;
 
+  public BackgroundAudioLoop backgroundAudio;
+
 	// Use this for initialization
 	void Start () {
     if (continueButton && System.IO.File.Exists("savefile.txt")) {
@@ -21,6 +23,9 @@ public class MenuHandler : MonoBehaviour {
 
   public void gameStart() {
     UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
+    if (backgroundAudio) {
+      backgroundAudio.fadeToVolume(0, 2);
+    }
     Debug.Log("Start game");
   }
 
