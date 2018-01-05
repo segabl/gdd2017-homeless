@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class MenuHandler : MonoBehaviour {
 
-  public Button b_start;
-  public Button b_continue;
-  public Button b_end;
+  public Button continueButton;
 
 	// Use this for initialization
 	void Start () {
-    if (System.IO.File.Exists("savefile.txt")) {
-      b_continue.interactable = true;
+    if (continueButton && System.IO.File.Exists("savefile.txt")) {
+      continueButton.interactable = true;
     }
   }
 	
@@ -36,5 +34,15 @@ public class MenuHandler : MonoBehaviour {
       UnityEditor.EditorApplication.isPlaying = false;
     #endif
     Application.Quit();
+  }
+
+  public void gameMainMenu() {
+    UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    Debug.Log("Start game");
+  }
+
+  public void gameResume() {
+    this.gameObject.SetActive(false);
+    Debug.Log("Resume game");
   }
 }
