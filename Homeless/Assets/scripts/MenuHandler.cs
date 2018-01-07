@@ -48,6 +48,14 @@ public class MenuHandler : MonoBehaviour {
 
   public void gameResume() {
     this.gameObject.SetActive(false);
+    unpauseAll();
     Debug.Log("Resume game");
+  }
+
+  private void unpauseAll() {
+    UnityEngine.Object[] objects = FindObjectsOfType(typeof(PausableObject));
+    foreach (PausableObject pausableObject in objects) {
+      pausableObject.SendMessage("OnUnpauseGame", SendMessageOptions.DontRequireReceiver);
+    }
   }
 }
