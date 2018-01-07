@@ -6,6 +6,6 @@ using UnityEngine;
 public class ItemInteraction : InteractionHandler {
   public override void interact() {
     Debug.Log("Item interaction");
-
+    
   }
 }
