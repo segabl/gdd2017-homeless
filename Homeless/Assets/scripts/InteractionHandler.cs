@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InteractionHandler : MonoBehaviour {
+public abstract class InteractionHandler : PausableObject {
 
   public GameObject mainCharacter;
   public GameObject canvas;
@@ -14,10 +14,15 @@ public abstract class InteractionHandler : MonoBehaviour {
     defaultText = text.text;
   }
 
-	void Update () {
+  protected override void updatePausable() { 
+
     if (Vector3.Distance(this.transform.position, mainCharacter.transform.position) < triggerDistance) {
+      Debug.Log("Interaction with " + this.name + " possible");
+      //TODO: set the value of text offset to something reasonable
+      float textOffset = 0.5f;
+      text.transform.position = this.transform.position + new Vector3(0.0f, textOffset, 0.0f);
       canvas.SetActive(true);
-      if (Input.GetKeyDown("e")) {
+      if (Input.GetKeyDown(KeyCode.E)) {
         interact();
       }
     }
