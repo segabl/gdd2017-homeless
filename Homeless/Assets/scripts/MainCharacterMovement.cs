@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCharacterMovement : MonoBehaviour {
+public class MainCharacterMovement : PausableObject {
 
   private enum MouseButton{LEFT, RIGHT, MIDDLE };
   private Vector3 targetPosition;
@@ -12,7 +12,8 @@ public class MainCharacterMovement : MonoBehaviour {
     targetPosition = this.transform.position;
   }
 
-	void Update () {
+	protected override void updatePausable () {
+
     if (Input.GetMouseButtonDown((int)MouseButton.LEFT)) {
       Debug.Log("LMB");
       targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
