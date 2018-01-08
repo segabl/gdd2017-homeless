@@ -14,7 +14,7 @@ public class PostProcessing : MonoBehaviour {
 
   // Postprocess the image
   void OnRenderImage(RenderTexture source, RenderTexture destination) {
-    daylightCycleMaterial.SetFloat("_time", GameController.Instance.Daytime);
+    daylightCycleMaterial.SetFloat("_time", GameController.instance.dayTime);
     Graphics.Blit(source, destination, daylightCycleMaterial);
   }
 }

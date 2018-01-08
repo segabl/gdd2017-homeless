@@ -2828,6 +2828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206e01b6a194cf94ebbaf16941fcb3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 699539236}
   dayLength: 30
 --- !u!1 &1771766963
 GameObject:
@@ -3585,6 +3586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueButton: {fileID: 0}
+  player: {fileID: 699539236}
   backgroundAudio: {fileID: 0}
 --- !u!114 &2137048550
 MonoBehaviour:

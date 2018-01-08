@@ -10,14 +10,7 @@ public class Inventory : PausableObject {
   private int nrOfSlots = 10;
   private Dictionary<string, int> items = new Dictionary<string, int>();
 
-  private static Inventory instance;
-
   void Start() { 
-    instance = this;
-  }
-
-  public static Inventory getInstance() {
-    return instance;
   }
 
   protected override void updatePausable() {
