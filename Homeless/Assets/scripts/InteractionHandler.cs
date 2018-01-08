@@ -17,7 +17,6 @@ public abstract class InteractionHandler : PausableObject {
   protected override void updatePausable() { 
 
     if (Vector3.Distance(this.transform.position, mainCharacter.transform.position) < triggerDistance) {
-      Debug.Log("Interaction with " + this.name + " possible");
       //TODO: set the value of text offset to something reasonable
       float textOffset = 0.5f;
       text.transform.position = this.transform.position + new Vector3(0.0f, textOffset, 0.0f);

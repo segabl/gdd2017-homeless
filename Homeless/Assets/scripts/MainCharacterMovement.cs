@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainCharacterMovement : PausableObject {
 
-  private enum MouseButton{LEFT, RIGHT, MIDDLE };
+  private enum MouseButton{LEFT, RIGHT, MIDDLE};
   private Vector3 targetPosition;
   public float movementSpeed;
 	
