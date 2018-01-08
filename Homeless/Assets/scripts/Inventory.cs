@@ -10,6 +10,16 @@ public class Inventory : PausableObject {
   private int nrOfSlots = 10;
   private Dictionary<string, int> items = new Dictionary<string, int>();
 
+  private static Inventory instance;
+
+  void Start() { 
+    instance = this;
+  }
+
+  public static Inventory getInstance() {
+    return instance;
+  }
+
   protected override void updatePausable() {
     if (Input.GetKeyDown(KeyCode.I) && !isOpen) {
       isOpen = true;
@@ -34,7 +44,14 @@ public class Inventory : PausableObject {
     else {
       items[item.name] = 1;
     }    
+    Debug.Log("Added item " + item.name + " to inventory");
+    showInventoryInfoDebug();
+  }
 
+  private void showInventoryInfoDebug() {
+    foreach(KeyValuePair<string, int> item in items) {
+      Debug.Log("Item: " + item.Key + " Instances: " + item.Value);
+    }
   }
 
   public void removeSingleInstanceOfItem(Collectible item) {
