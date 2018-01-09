@@ -34,6 +34,7 @@ public class MenuHandler : MonoBehaviour {
 
   void OnGameSceneLoaded(Scene scene , LoadSceneMode mode) { 
     GameController.instance.loadGame();
+    SceneManager.sceneLoaded -= OnGameSceneLoaded;
   }
 
   public void gameContinue() {
@@ -51,7 +52,6 @@ public class MenuHandler : MonoBehaviour {
   }
 
   public void gameMainMenu() {
-    SceneManager.sceneLoaded -= OnGameSceneLoaded;
     SceneManager.LoadScene("MainMenu");
     Debug.Log("Back to Main menu");
   }

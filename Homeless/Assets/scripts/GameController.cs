@@ -14,12 +14,11 @@ public class GameController : PausableObject {
   public int day { get; private set; }
   public float dayTime { get; private set; }
 
-  private static GameObject controllerObject;
   private static GameController controllerInstance;
 
   public static GameController instance {
     get {
-      if (!controllerObject) {
+      if (!controllerInstance) {
         GameObject obj = new GameObject("GameController");
         return obj.AddComponent<GameController>();
       }
@@ -38,7 +37,6 @@ public class GameController : PausableObject {
       Destroy(gameObject);
     } else {
       Debug.Log("Controller created");
-      controllerObject = gameObject;
       controllerInstance = this;
     }
     day = 0;
