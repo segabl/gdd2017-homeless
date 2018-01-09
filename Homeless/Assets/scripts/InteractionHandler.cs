@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class InteractionHandler : PausableObject {
 
-  public GameObject mainCharacter;
   public GameObject canvas;
   public float triggerDistance;
   public UnityEngine.UI.Text text;
@@ -16,7 +15,7 @@ public abstract class InteractionHandler : PausableObject {
 
   protected override void updatePausable() { 
 
-    if (Vector3.Distance(this.transform.position, mainCharacter.transform.position) < triggerDistance) {
+    if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
       //TODO: set the value of text offset to something reasonable
       float textOffset = 0.5f;
       text.transform.position = this.transform.position + new Vector3(0.0f, textOffset, 0.0f);
