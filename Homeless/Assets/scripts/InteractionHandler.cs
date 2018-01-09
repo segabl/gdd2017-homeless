@@ -8,7 +8,7 @@ public abstract class InteractionHandler : PausableObject {
   public float triggerDistance;
   private string defaultText = "Press 'E' to interact";
   protected Text text;
-  private static GameObject interactObject = null;
+  public static InteractionHandler interactObject; 
 
   void Start() {
   }
@@ -27,13 +27,11 @@ public abstract class InteractionHandler : PausableObject {
       //TODO: set the value of text offset to something reasonable
       float textOffset = 0.5f;
       text.transform.position = this.transform.position + new Vector3(0.0f, textOffset, 0.0f);
-      interactObject = gameObject;
+      interactObject = this;
       canvas.SetActive(true);
-      if (Input.GetKeyDown(KeyCode.E)) {
-        interact();
-      }
+
     }
-    else if(interactObject == gameObject) {
+    else if(interactObject == this) {
       canvas.SetActive(false);
       text.text = defaultText;
       interactObject = null;

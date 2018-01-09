@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
+using UnityEngine.Events;
 
 public class MenuHandler : MonoBehaviour {
 
@@ -29,8 +32,14 @@ public class MenuHandler : MonoBehaviour {
     Debug.Log("Start game");
   }
 
+  void OnGameSceneLoaded(Scene scene , LoadSceneMode mode) { 
+    GameController.instance.loadGame();
+  }
+
   public void gameContinue() {
     Debug.Log("Continue game");
+    SceneManager.sceneLoaded += OnGameSceneLoaded;
+    gameStart();
   }
 
   public void gameEnd() {
@@ -42,20 +51,15 @@ public class MenuHandler : MonoBehaviour {
   }
 
   public void gameMainMenu() {
-    UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
-    Debug.Log("Start game");
+    SceneManager.sceneLoaded -= OnGameSceneLoaded;
+    SceneManager.LoadScene("MainMenu");
+    Debug.Log("Back to Main menu");
   }
 
   public void gameResume() {
     this.gameObject.SetActive(false);
-    unpauseAll();
+    GameController.instance.unpauseAll();
     Debug.Log("Resume game");
   }
 
-  private void unpauseAll() {
-    UnityEngine.Object[] objects = FindObjectsOfType(typeof(PausableObject));
-    foreach (PausableObject pausableObject in objects) {
-      pausableObject.SendMessage("OnUnpauseGame", SendMessageOptions.DontRequireReceiver);
-    }
-  }
 }

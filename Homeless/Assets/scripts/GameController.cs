@@ -70,9 +70,25 @@ public class GameController : PausableObject {
   }
 
   public void loadGame() {
+    Debug.Log("Start loading from savefile");
     using (BinaryReader reader = new BinaryReader(File.Open("savefile.dat", FileMode.Open))) {
       player.transform.position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
     }
+    Debug.Log("Finished loading");
   }
 
+  public void pauseAll() {
+    Object[] objects = FindObjectsOfType(typeof(PausableObject));
+    foreach (PausableObject pausableObject in objects) {
+      pausableObject.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
+    }
+  }
+
+  public void unpauseAll() {
+    Debug.Log("Unpause all PausableObjects");
+    Object[] objects = FindObjectsOfType(typeof(PausableObject));
+    foreach (PausableObject pausableObject in objects) {
+      pausableObject.SendMessage("OnUnpauseGame", SendMessageOptions.DontRequireReceiver);
+    }
+  }
 }

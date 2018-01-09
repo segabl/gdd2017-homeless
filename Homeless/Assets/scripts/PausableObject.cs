@@ -4,14 +4,14 @@ using UnityEngine;
 
 public abstract class PausableObject : MonoBehaviour {
 
+  public bool paused { get; private set; }
+
   void Update() {
     if (paused) {
       return;
     }
     updatePausable();
   }
-
-  protected bool paused = false;
 
   public void OnPauseGame() {
     Debug.Log("Pausing object: " + this.name);
