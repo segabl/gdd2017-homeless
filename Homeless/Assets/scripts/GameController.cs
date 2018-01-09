@@ -6,6 +6,9 @@ using System.IO;
 public class GameController {
   
   public GameObject player { get; set; }
+  public GameObject screenCanvas { get; set; }
+  public GameObject menuCanvas { get; set; }
+
   public float dayLength { get; set; }
   private float accumulatedDelta = 0;
   private int day = 0;

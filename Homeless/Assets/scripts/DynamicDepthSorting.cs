@@ -10,11 +10,11 @@ public class DynamicDepthSorting : MonoBehaviour {
 
   // Use this for initialization
   void Start () {
-    spriteRenderer = GetComponent<SpriteRenderer>();
+    spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     if (spriteRenderer) {
       spriteRenderer.sortingLayerName = "Dynamic";
     }
-    spriterBehaviour = GetComponent<SpriterDotNetBehaviour>();
+    spriterBehaviour = GetComponentInChildren<SpriterDotNetBehaviour>();
     if (spriterBehaviour) {
       spriterBehaviour.SortingLayer = "Dynamic";
     }
