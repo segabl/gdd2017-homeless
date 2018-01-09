@@ -11,5 +11,6 @@ public class ItemInteraction : InteractionHandler {
     Inventory inventory = GameController.instance.player.GetComponent<Inventory>();
     inventory.addItem(c);
     this.gameObject.SetActive(false);
+    GameController.instance.screenCanvas.SetActive(false);
   }
 }
