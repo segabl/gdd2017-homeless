@@ -6,28 +6,36 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour {
 
   void Update () {
-    GameController instance = GameController.instance;
+    GameController controller = GameController.instance;
     if (Input.GetKeyDown(KeyCode.Escape)) { 
       Debug.Log("ESC Key pressed");
-      GameObject menuCanvas = instance.menuCanvas;
-      menuCanvas.SetActive(!menuCanvas.activeSelf);
-      if (menuCanvas.activeSelf) {
-        instance.pauseAll();
-        instance.saveGame();
+      controller.toggleActiveStateForMenuCanvasPanel(controller.panelInGameMenu);
+      if (controller.panelInGameMenu.activeSelf) {
+        controller.pauseAll();
+        controller.deactivateChildsOfMenuPanels(controller.panelInGameMenu);
+        controller.saveGame();
       }
       else {
-        instance.unpauseAll();
+        controller.unpauseAll();
       }
     }
 
-    if (instance.paused) {
+
+    if (Input.GetKeyDown(KeyCode.I) && !controller.panelInGameMenu.activeSelf) {
+      Debug.Log("I Key pressed");
+      controller.toggleActiveStateForMenuCanvasPanel(controller.panelInventory);
+      if (controller.panelInventory.activeSelf) {
+        controller.pauseAll();
+      }
+      else {
+        controller.unpauseAll();
+      }
+    }
+
+    if (controller.paused) {
       return;
     }
 
-    if (Input.GetKeyDown(KeyCode.I)) {
-      Debug.Log("I Key pressed");
-      //open inventory
-    }
     if(Input.GetKeyDown(KeyCode.E)) {
       Debug.Log("E Key pressed");
         InteractionHandler.interactObject.interact();

@@ -2,26 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Inventory : PausableObject {
+public class Inventory : MonoBehaviour{
 
-  private bool isOpen = false;
-  //TODO: change to a reasonable value
-  private int nrOfSlots = 10;
-  private Dictionary<string, int> items = new Dictionary<string, int>();
+  private int nrOfSlots;
+  //TODO: possibly replace value of items with Collectible
+  private Dictionary<string, int> items;
+  Button[] buttons;
 
-  void Start() { 
-  }
-
-  protected override void updatePausable() {
-    if (Input.GetKeyDown(KeyCode.I) && !isOpen) {
-      isOpen = true;
-      //TODO: show inventory
-    }
-    else if(Input.GetKeyDown(KeyCode.I) && isOpen) {
-      isOpen = false;
-      //TODO: hide inventory
-    }
+  void Start() {
+    nrOfSlots = GameController.instance.panelInventory.GetComponentsInChildren<Button>().Length;
+    buttons = GameController.instance.panelInventory.GetComponentsInChildren<Button>();
+    items = new Dictionary<string, int>();
   }
 
   public void addItem(Collectible item) {
@@ -33,11 +26,26 @@ public class Inventory : PausableObject {
     
     if(items.ContainsKey(item.name)) {
       items[item.name] += 1;
+      Debug.Log("Added instance of item " + item.name);
+      foreach(Button button in buttons) {
+        if(button.GetComponentInChildren<Text>().text == item.name) {
+          button.GetComponentsInChildren<Text>()[1].text = items[item.name].ToString();
+          Debug.Log("Added item instances to text of " + button.name);
+          break;
+        }
+      }
     }
     else {
       items[item.name] = 1;
+      Debug.Log("Created new item entry " + item.name + " in inventory");
+      Button button = buttons[items.Count - 1];
+      buttons = GameController.instance.panelInventory.GetComponentsInChildren<Button>();
+      Text itemName = button.GetComponentInChildren<Text>();
+      itemName.text = item.name;
+      Debug.Log("Added item name to text of " + button.name);
+      itemName.GetComponentsInChildren<Text>()[1].text = items[item.name].ToString();
+      Debug.Log("Added item instances to text of " + button.name);
     }    
-    Debug.Log("Added item " + item.name + " to inventory");
     showInventoryInfoDebug();
   }
 

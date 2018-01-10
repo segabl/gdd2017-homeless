@@ -8,6 +8,17 @@ public class GameController : PausableObject {
   public GameObject player;
   public GameObject screenCanvas;
   public GameObject menuCanvas;
+  /*
+  Menu Canvas contains panels which need to be independently activated/deactivated.
+  It is somehow not possible to access a Panel from the canvas without using its name.
+  Using GameObject.Find(<Game objects name>) is a bad idea, because if the GameObjects
+  name changes in Unity this wouldn't be recognized in the code.
+  To avoid this effect we store a reference to the Panels as a GameObject right here
+  in the game handler. 
+  TODO: think of a better solution (Possibly get inspired by other peoples experiences.)
+  */
+  public GameObject panelInGameMenu;
+  public GameObject panelInventory;
   public float dayLength;
 
   private float accumulatedDelta;
@@ -35,6 +46,8 @@ public class GameController : PausableObject {
       controllerInstance.dayLength = dayLength;
       controllerInstance.screenCanvas = screenCanvas;
       controllerInstance.menuCanvas = menuCanvas;
+      controllerInstance.panelInGameMenu = panelInGameMenu;
+      controllerInstance.panelInventory = panelInventory;
       Destroy(gameObject);
     } else {
       Debug.Log("Controller created");
@@ -89,6 +102,25 @@ public class GameController : PausableObject {
     Object[] objects = FindObjectsOfType(typeof(PausableObject));
     foreach (PausableObject pausableObject in objects) {
       pausableObject.SendMessage("OnUnpauseGame", SendMessageOptions.DontRequireReceiver);
+    }
+  }
+
+  public void setActiveStateForMenuCanvasPanel(GameObject panel, bool active) {
+    menuCanvas.SetActive(active);
+    panel.SetActive(active);
+  }
+
+  public void toggleActiveStateForMenuCanvasPanel(GameObject panel) {
+    menuCanvas.SetActive(!panel.activeSelf);
+    panel.SetActive(!panel.activeSelf);
+  }
+
+  public void deactivateChildsOfMenuPanels(GameObject panel) {
+    foreach(GameObject itPanel in GameObject.FindGameObjectsWithTag("MenuPanel")) {
+      if(itPanel != panel) {
+        Debug.Log("MenuPanel " + itPanel.name + " deactivated");
+        itPanel.SetActive(false);
+      }
     }
   }
 }
