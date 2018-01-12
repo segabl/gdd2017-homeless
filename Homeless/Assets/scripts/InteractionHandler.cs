@@ -15,7 +15,7 @@ public abstract class InteractionHandler : PausableObject {
 
   protected override void updatePausable() {
 
-    GameObject canvas = GameController.instance.screenCanvas;
+    GameObject canvas = GameController.instance.menuCanvas;
     text = canvas.GetComponentInChildren<Text>();
 
     if(!canvas || !text) {
@@ -27,13 +27,17 @@ public abstract class InteractionHandler : PausableObject {
       //TODO: set the value of text offset to something reasonable
       float textOffset = 0.5f;
       text.transform.position = this.transform.position + new Vector3(0.0f, textOffset, 0.0f);
+      if (interactObject != this) {
+        if (this is ItemInteraction) {
+          text.text = "Press 'E' to pick up " + this.name;
+        } else {
+          text.text = defaultText;
+        }
+      }
+      text.enabled = true;
       interactObject = this;
-      canvas.SetActive(true);
-
-    }
-    else if(interactObject == this) {
-      canvas.SetActive(false);
-      text.text = defaultText;
+    } else if(interactObject == this) {
+      text.enabled = false;
       interactObject = null;
     }
   }

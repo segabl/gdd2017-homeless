@@ -6,7 +6,6 @@ using System.IO;
 public class GameController : PausableObject {
 
   public GameObject player;
-  public GameObject screenCanvas;
   public GameObject menuCanvas;
   /*
   Menu Canvas contains panels which need to be independently activated/deactivated.
@@ -43,7 +42,6 @@ public class GameController : PausableObject {
       Debug.Log("Controller exists, only taking new editor params");
       controllerInstance.player = player;
       controllerInstance.dayLength = dayLength;
-      controllerInstance.screenCanvas = screenCanvas;
       controllerInstance.menuCanvas = menuCanvas;
       controllerInstance.panelInGameMenu = panelInGameMenu;
       controllerInstance.panelInventory = panelInventory;
@@ -101,16 +99,6 @@ public class GameController : PausableObject {
     foreach (PausableObject pausableObject in objects) {
       pausableObject.SendMessage("OnUnpauseGame", SendMessageOptions.DontRequireReceiver);
     }
-  }
-
-  public void setActiveStateForMenuCanvasPanel(GameObject panel, bool active) {
-    menuCanvas.SetActive(active);
-    panel.SetActive(active);
-  }
-
-  public void toggleActiveStateForMenuCanvasPanel(GameObject panel) {
-    menuCanvas.SetActive(!panel.activeSelf);
-    panel.SetActive(!panel.activeSelf);
   }
 
   public void deactivateChildsOfMenuPanels(GameObject panel) {
