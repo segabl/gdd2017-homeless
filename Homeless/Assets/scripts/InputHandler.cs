@@ -9,14 +9,18 @@ public class InputHandler : MonoBehaviour {
     GameController controller = GameController.instance;
     if (Input.GetKeyDown(KeyCode.Escape)) { 
       Debug.Log("ESC Key pressed");
-      controller.panelInGameMenu.SetActive(!controller.panelInGameMenu.activeSelf);
-      if (controller.panelInGameMenu.activeSelf) {
+      if (!controller.panelInGameMenu.activeSelf && !controller.panelInventory.activeSelf) {
         controller.pauseAll();
         controller.deactivateChildsOfMenuPanels(controller.panelInGameMenu);
         controller.saveGame();
+        controller.panelInGameMenu.SetActive(!controller.panelInGameMenu.activeSelf);
+      } else if (!controller.panelInGameMenu.activeSelf) {
+        controller.panelInventory.SetActive(false);
+        controller.unpauseAll();
       }
       else {
         controller.unpauseAll();
+        controller.panelInGameMenu.SetActive(!controller.panelInGameMenu.activeSelf);
       }
     }
 
@@ -26,8 +30,7 @@ public class InputHandler : MonoBehaviour {
       controller.panelInventory.SetActive(!controller.panelInventory.activeSelf);
       if (controller.panelInventory.activeSelf) {
         controller.pauseAll();
-      }
-      else {
+      } else {
         controller.unpauseAll();
       }
     }

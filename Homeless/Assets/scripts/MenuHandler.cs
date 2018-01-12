@@ -52,6 +52,7 @@ public class MenuHandler : MonoBehaviour {
   }
 
   public void gameMainMenu() {
+    GameController.instance.unpauseAll();
     SceneManager.LoadScene("MainMenu");
     Debug.Log("Back to Main menu");
   }
