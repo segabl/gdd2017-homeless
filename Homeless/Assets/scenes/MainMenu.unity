@@ -941,8 +941,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  screenCanvas: {fileID: 0}
   menuCanvas: {fileID: 1160005036}
+  panelInGameMenu: {fileID: 0}
+  panelInventory: {fileID: 0}
   dayLength: 30
 --- !u!4 &944633434
 Transform:
@@ -1037,6 +1038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueButton: {fileID: 1586404713}
+  exitButton: {fileID: 1115113424}
   backgroundAudio: {fileID: 1329103024}
 --- !u!1 &1102257382
 GameObject:
