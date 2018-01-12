@@ -5,28 +5,31 @@ using SpriterDotNetUnity;
 
 public class DynamicDepthSorting : MonoBehaviour {
 
-  private SpriteRenderer spriteRenderer;
+  private SpriteRenderer[] spriteRenderers;
   private SpriterDotNetBehaviour spriterBehaviour;
 
   // Use this for initialization
   void Start () {
-    spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    if (spriteRenderer) {
-      spriteRenderer.sortingLayerName = "Dynamic";
-    }
     spriterBehaviour = GetComponentInChildren<SpriterDotNetBehaviour>();
     if (spriterBehaviour) {
       spriterBehaviour.SortingLayer = "Dynamic";
+    }
+    else {
+      spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+      foreach (var spriteRenderer in spriteRenderers) {
+        spriteRenderer.sortingLayerName = "Dynamic";
+      }
     }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-    if (spriteRenderer) {
-      spriteRenderer.sortingOrder = (int)(transform.position.y * (-50));
-    }
     if (spriterBehaviour) {
       spriterBehaviour.SortingOrder = (int)(transform.position.y * (-50));
+    } else {
+      foreach (var spriteRenderer in spriteRenderers) {
+        spriteRenderer.sortingOrder = (int)(transform.position.y * (-50));
+      }
     }
   }
 }
