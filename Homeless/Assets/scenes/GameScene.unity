@@ -14190,6 +14190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   continueButton: {fileID: 0}
+  exitButton: {fileID: 1792840701}
   backgroundAudio: {fileID: 0}
 --- !u!114 &2137048550
 MonoBehaviour:
