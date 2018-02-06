@@ -12,5 +12,6 @@ public class ItemInteraction : InteractionHandler {
     inventory.addItem(c);
     this.gameObject.SetActive(false);
     text.enabled = false;
+    endInteraction();
   }
 }

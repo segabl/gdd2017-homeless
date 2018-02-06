@@ -41,7 +41,10 @@ public class InputHandler : MonoBehaviour {
 
     if(Input.GetKeyDown(KeyCode.E)) {
       Debug.Log("E Key pressed");
+      if (InteractionHandler.playerCanInteract)
+      {
         InteractionHandler.interactObject.interact();
+      }
     }    
   }
 

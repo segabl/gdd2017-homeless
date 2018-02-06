@@ -8,7 +8,8 @@ public abstract class InteractionHandler : PausableObject {
   public float triggerDistance;
   private string defaultText = "Press 'E' to interact";
   protected Text text;
-  public static InteractionHandler interactObject; 
+  public static InteractionHandler interactObject;
+  public static bool playerCanInteract;
 
   void Start() {
   }
@@ -36,12 +37,17 @@ public abstract class InteractionHandler : PausableObject {
       }
       text.enabled = true;
       interactObject = this;
+      playerCanInteract = true;
     } else if(interactObject == this) {
-      text.enabled = false;
-      interactObject = null;
+      endInteraction();
     }
   }
 
   public abstract void interact();
-
+  protected void endInteraction()
+  {
+    text.enabled = false;
+    interactObject = null;
+    playerCanInteract = false;
+  }
 }
