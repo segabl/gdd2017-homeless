@@ -10,11 +10,12 @@ public class Inventory : MonoBehaviour{
   private int nrOfSlots;
   //TODO: possibly replace value of items with Collectible
   private Dictionary<Collectible, int> items;
-  Button[] buttons;
+  InventoryButton[] buttons;
+  public Sprite defaultSprite;
 
   void Start() {
-    nrOfSlots = GameController.instance.panelInventory.GetComponentsInChildren<Button>().Length;
-    buttons = GameController.instance.panelInventory.GetComponentsInChildren<Button>();
+    nrOfSlots = GameController.instance.panelInventory.GetComponentsInChildren<InventoryButton>().Length;
+    buttons = GameController.instance.panelInventory.GetComponentsInChildren<InventoryButton>();
     items = new Dictionary<Collectible, int>();
   }
 
@@ -29,7 +30,7 @@ public class Inventory : MonoBehaviour{
     if (match != null) {
       items[match] += 1;
       Debug.Log("Added instance of item " + item.name);
-      foreach (Button button in buttons) {
+      foreach (InventoryButton button in buttons) {
         int buttonNr = Int32.Parse(button.name.Replace("ButtonItemSlot", ""));
         if (match.inventoryIndex == buttonNr) {
           Text itemInstances = button.GetComponentInChildren<Text>();
@@ -50,12 +51,10 @@ public class Inventory : MonoBehaviour{
       items[item] = 1;
       Debug.Log("Created new item entry " + item.name + " in inventory");
 
-      Button button = null;
-      foreach(Button itButton in buttons) {
-        int buttonNr = Int32.Parse(itButton.name.Replace("ButtonItemSlot", ""));
-        if(buttonNr == currentItemIndex) {
-          button = itButton;
-        }
+      InventoryButton button = findButtonMatchingCollectible(item);
+      if(button == null) {
+        Debug.Log("Button matching failed");
+        return;
       }
 
       Text itemInstances = button.GetComponentInChildren<Text>();
@@ -71,46 +70,63 @@ public class Inventory : MonoBehaviour{
     showInventoryInfoDebug();
   }
 
+  public void useItem(InventoryButton button) {
+    int buttonNr = Int32.Parse(button.name.Replace("ButtonItemSlot", ""));
+    var itemToUse = items.Keys.FirstOrDefault(item => item.inventoryIndex == buttonNr);
+    if(itemToUse == null) {
+      Debug.Log("ItemSlot empty, no item to use");
+      return;
+    }
+    Debug.Log("Use " + itemToUse.name);
+    //TODO: Use item
+    items[itemToUse] -= 1;
+    Text itemInstances = button.GetComponentInChildren<Text>();
+    itemInstances.text = items[itemToUse].ToString();
+    removeIfNoInstances(itemToUse);
+  }
+
   private void showInventoryInfoDebug() {
     foreach(KeyValuePair<Collectible, int> item in items) {
       Debug.Log("Item: " + item.Key.name + " Instances: " + item.Value);
     }
   }
 
-  public void removeSingleInstanceOfItem(Collectible item) {
-    var match = findMatch(item);
-    if (match == null)
-    {
-      Debug.Log("Failed to remove Item: Invalid Key");
+  public void dropItem(InventoryButton button) {
+    int buttonNr = Int32.Parse(button.name.Replace("ButtonItemSlot", ""));
+    var itemToUse = items.Keys.FirstOrDefault(item => item.inventoryIndex == buttonNr);
+    if (itemToUse == null) {
+      Debug.Log("ItemSlot empty, no item to remove");
       return;
     }
-    items[match] -= 1;
-    removeIfNoInstances(match);
-    Debug.Log("1 instance of " + item.name + " removed from inventory");
+    Debug.Log("Remove " + itemToUse.name);
+    items[itemToUse] -= 1;
+    Text itemInstances = button.GetComponentInChildren<Text>();
+    itemInstances.text = items[itemToUse].ToString();
+    removeIfNoInstances(itemToUse);
   }
 
-  public void removeMultipleInstancesOfItem(Collectible item, int count) {
-    var match = findMatch(item);
-    if (match == null)
-    {
-      Debug.Log("Failed to remove Item: Invalid Key");
-      return;
-    }
-    items[match] -= count;
-    removeIfNoInstances(match);
-    Debug.Log(count + " instances of " + item.name + " removed from inventory");
-  }
-
-  private void removeIfNoInstances(Collectible type) {
-    if (items[type] <= 0) {
-      items.Remove(type);
-      Debug.Log(name + " deleted from inventory");
+  private void removeIfNoInstances(Collectible item) {
+    if (items[item] <= 0) {
+      InventoryButton button = findButtonMatchingCollectible(item);
+      button.GetComponent<Image>().sprite = defaultSprite;
+      items.Remove(item);
+      Debug.Log(item.name + " deleted from inventory");
     }
   }
   private Collectible findMatch(Collectible item)
   {
     Collectible match = items.Keys.FirstOrDefault(type => (type.name == item.name));
     return match;
+  }
+
+  private InventoryButton findButtonMatchingCollectible(Collectible item) {
+    foreach (InventoryButton itButton in buttons) {
+      int buttonNr = Int32.Parse(itButton.name.Replace("ButtonItemSlot", ""));
+      if (buttonNr == item.inventoryIndex) {
+        return itButton;
+      }
+    }
+    return null;
   }
 
 }
