@@ -21,11 +21,10 @@ public class MainCharacterMovement : PausableObject {
   }
 
   private void handleMouseMovementInput() {
-    if (Input.GetMouseButtonDown((int)MouseButton.LEFT)) {
-      Debug.Log("LMB");
+    if (Input.GetMouseButton((int)MouseButton.LEFT)) {
+      //Debug.Log("LMB");
       targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-      targetPosition.z = this.transform.position.z;
-      Debug.Log("Mouse clicked position in world is: " + targetPosition);
+      //Debug.Log("Mouse clicked position in world is: " + targetPosition);
     }
   }
 
@@ -49,8 +48,29 @@ public class MainCharacterMovement : PausableObject {
   }
 
   private void updatePosition(float step) {
-    if (this.transform.position != targetPosition && !Physics2D.Raycast(this.transform.position, (targetPosition - this.transform.position).normalized, step)) {
-      this.transform.position = Vector3.MoveTowards(this.transform.position, targetPosition, step);
+    float dis = Mathf.Sqrt(Mathf.Pow(this.transform.position.x - targetPosition.x, 2) + Mathf.Pow(this.transform.position.y - targetPosition.y, 2));
+    if (dis <= 0) {
+      return;
     }
+    float direction = Mathf.Atan2(this.transform.position.x - targetPosition.x, this.transform.position.y - targetPosition.y);
+    float a = 0;
+    Vector3 direction_left = Vector3.zero;
+    Vector3 direction_right = Vector3.zero;
+    Vector3 direction_vector = Vector3.zero;
+    while (a < Mathf.Deg2Rad * 80) {
+      direction_left.x = -Mathf.Sin(direction + a);
+      direction_left.y = -Mathf.Cos(direction + a);
+      direction_right.x = -Mathf.Sin(direction - a);
+      direction_right.y = -Mathf.Cos(direction - a);
+      if (!Physics2D.Raycast(this.transform.position, direction_left, step)) {
+        direction_vector = direction_left;
+        break;
+      } else if (!Physics2D.Raycast(this.transform.position, direction_right, step)) {
+        direction_vector = direction_right;
+        break;
+      }
+      a += Mathf.Deg2Rad;
+    }
+    this.transform.position += direction_vector * Mathf.Min(step, dis);
   }
 }
