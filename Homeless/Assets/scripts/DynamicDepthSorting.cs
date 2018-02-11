@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SpriterDotNetUnity;
 
+[ExecuteInEditMode]
 public class DynamicDepthSorting : MonoBehaviour {
 
   private SpriteRenderer[] spriteRenderers;
