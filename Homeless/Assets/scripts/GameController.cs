@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameController : PausableObject {
 
@@ -69,20 +68,20 @@ public class GameController : PausableObject {
 	}
 
   public void saveGame() {
-    // TODO: use a serializer or something
-    using (BinaryWriter writer = new BinaryWriter(File.Open("savefile.dat", FileMode.Create))) {
-      writer.Write(player.transform.position.x);
-      writer.Write(player.transform.position.y);
-      writer.Write(player.transform.position.z);
-    }
+    BinaryFormatter bf = new BinaryFormatter();
+    FileStream file = File.Open("savefile.dat", FileMode.Create);
+    bf.Serialize(file, new SaveData(this));
+    file.Close();
     Debug.Log("Progress saved");
   }
 
   public void loadGame() {
     Debug.Log("Start loading from savefile");
-    using (BinaryReader reader = new BinaryReader(File.Open("savefile.dat", FileMode.Open))) {
-      player.transform.position = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
-    }
+    BinaryFormatter bf = new BinaryFormatter();
+    FileStream file = File.Open("savefile.dat", FileMode.Open);
+    SaveData data = (SaveData) bf.Deserialize(file);
+    data.apply(this);
+    file.Close();
     Debug.Log("Finished loading");
   }
 
@@ -107,6 +106,32 @@ public class GameController : PausableObject {
         Debug.Log("MenuPanel " + itPanel.name + " deactivated");
         itPanel.SetActive(false);
       }
+    }
+  }
+
+  /* 
+  Serializeable save data class that contains data to be saved
+  */
+  [System.Serializable]
+  class SaveData {
+    public int day;
+    public float dayTime;
+    public float playerX;
+    public float playerY;
+    public float playerZ;
+
+    public SaveData(GameController controller) {
+      day = controller.day;
+      dayTime = controller.dayTime;
+      playerX = controller.player.transform.position.x;
+      playerY = controller.player.transform.position.y;
+      playerZ = controller.player.transform.position.z;
+    }
+
+    public void apply(GameController controller) {
+      controller.day = day;
+      controller.dayTime = dayTime;
+      controller.player.transform.position = new Vector3(playerX, playerY, playerZ);
     }
   }
 }
