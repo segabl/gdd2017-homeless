@@ -29,23 +29,43 @@ public class Inventory : MonoBehaviour{
     if (match != null) {
       items[match] += 1;
       Debug.Log("Added instance of item " + item.name);
-      foreach(Button button in buttons) {
-        if(button.GetComponentInChildren<Text>().text == item.name) {
-          button.GetComponentsInChildren<Text>()[1].text = items[match].ToString();
+      foreach (Button button in buttons) {
+        int buttonNr = Int32.Parse(button.name.Replace("ButtonItemSlot", ""));
+        if (match.inventoryIndex == buttonNr) {
+          Text itemInstances = button.GetComponentInChildren<Text>();
+          itemInstances.text = items[match].ToString();
           Debug.Log("Added item instances to text of " + button.name);
+          if (button.GetComponent<Image>() == null) {
+            Debug.Log("Can't add sprite to button");
+            break;
+          }
+          button.GetComponent<Image>().sprite = item.spriteRenderer.sprite;
           break;
         }
       }
     }
     else {
+      int currentItemIndex = items.Count + 1;
+      item.inventoryIndex = currentItemIndex;
       items[item] = 1;
       Debug.Log("Created new item entry " + item.name + " in inventory");
-      Button button = buttons[items.Count - 1];
-      buttons = GameController.instance.panelInventory.GetComponentsInChildren<Button>();
-      Text itemName = button.GetComponentInChildren<Text>();
-      itemName.text = item.name;
+
+      Button button = null;
+      foreach(Button itButton in buttons) {
+        int buttonNr = Int32.Parse(itButton.name.Replace("ButtonItemSlot", ""));
+        if(buttonNr == currentItemIndex) {
+          button = itButton;
+        }
+      }
+
+      Text itemInstances = button.GetComponentInChildren<Text>();
+      itemInstances.text = items[item].ToString();
       Debug.Log("Added item name to text of " + button.name);
-      itemName.GetComponentsInChildren<Text>()[1].text = items[item].ToString();
+      if (button.GetComponent<Image>() == null) {
+        Debug.Log("Can't add sprite to button");
+        return;
+      }
+      button.GetComponent<Image>().sprite = item.spriteRenderer.sprite;
       Debug.Log("Added item instances to text of " + button.name);
     }    
     showInventoryInfoDebug();
