@@ -6,9 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour{
-
+  private const string inventoryButtonPrefix = "ButtonItemSlot";
   private int nrOfSlots;
-  //TODO: possibly replace value of items with Collectible
   private Dictionary<Collectible, int> items;
   InventoryButton[] buttons;
   public Sprite defaultSprite;
@@ -31,7 +30,7 @@ public class Inventory : MonoBehaviour{
       items[match] += 1;
       Debug.Log("Added instance of item " + item.name);
       foreach (InventoryButton button in buttons) {
-        int buttonNr = Int32.Parse(button.name.Replace("ButtonItemSlot", ""));
+        int buttonNr = Int32.Parse(button.name.Replace(inventoryButtonPrefix, ""));
         if (match.inventoryIndex == buttonNr) {
           Text itemInstances = button.GetComponentInChildren<Text>();
           itemInstances.text = items[match].ToString();
@@ -71,7 +70,7 @@ public class Inventory : MonoBehaviour{
   }
 
   public void useItem(InventoryButton button) {
-    int buttonNr = Int32.Parse(button.name.Replace("ButtonItemSlot", ""));
+    int buttonNr = Int32.Parse(button.name.Replace(inventoryButtonPrefix, ""));
     var itemToUse = items.Keys.FirstOrDefault(item => item.inventoryIndex == buttonNr);
     if(itemToUse == null) {
       Debug.Log("ItemSlot empty, no item to use");
@@ -92,7 +91,7 @@ public class Inventory : MonoBehaviour{
   }
 
   public void dropItem(InventoryButton button) {
-    int buttonNr = Int32.Parse(button.name.Replace("ButtonItemSlot", ""));
+    int buttonNr = Int32.Parse(button.name.Replace(inventoryButtonPrefix, ""));
     var itemToUse = items.Keys.FirstOrDefault(item => item.inventoryIndex == buttonNr);
     if (itemToUse == null) {
       Debug.Log("ItemSlot empty, no item to remove");
@@ -109,10 +108,46 @@ public class Inventory : MonoBehaviour{
     if (items[item] <= 0) {
       InventoryButton button = findButtonMatchingCollectible(item);
       button.GetComponent<Image>().sprite = defaultSprite;
+      int itemToRemoveIndex = item.inventoryIndex;
       items.Remove(item);
-      Debug.Log(item.name + " deleted from inventory");
+      Debug.Log(item.name + " deleted from inventory, reorganizing Inventory");
+      reorganizeInventory(itemToRemoveIndex);
     }
   }
+
+  private void reorganizeInventory(int index) {
+    foreach(KeyValuePair<Collectible, int> entry in items) {
+      Collectible item = entry.Key;
+      int instances = entry.Value;
+      if(item.inventoryIndex > index) {
+        InventoryButton oldButton = findButtonMatchingCollectible(item);
+        Text oldButtonItemInstances = oldButton.GetComponentInChildren<Text>();
+        oldButtonItemInstances.text = "0";
+
+        InventoryButton newButton = null;
+        foreach(InventoryButton itButton in buttons) {
+          int buttonNr = Int32.Parse(itButton.name.Replace(inventoryButtonPrefix, ""));
+          if (buttonNr == item.inventoryIndex - 1) {
+            newButton = itButton;
+            break;
+          }
+        }
+
+        if(newButton == null) {
+          Debug.Log("Reorganizing failed");
+          return;
+        }
+
+        newButton.GetComponent<Image>().sprite = oldButton.GetComponent<Image>().sprite;
+        Text newButtonItemInstances = newButton.GetComponentInChildren<Text>();
+        newButtonItemInstances.text = instances.ToString();
+        oldButton.GetComponent<Image>().sprite = defaultSprite;
+        item.inventoryIndex -= 1;
+      } 
+    }
+    Debug.Log("Inventory reorganized");
+  }
+
   private Collectible findMatch(Collectible item)
   {
     Collectible match = items.Keys.FirstOrDefault(type => (type.name == item.name));
@@ -121,7 +156,7 @@ public class Inventory : MonoBehaviour{
 
   private InventoryButton findButtonMatchingCollectible(Collectible item) {
     foreach (InventoryButton itButton in buttons) {
-      int buttonNr = Int32.Parse(itButton.name.Replace("ButtonItemSlot", ""));
+      int buttonNr = Int32.Parse(itButton.name.Replace(inventoryButtonPrefix, ""));
       if (buttonNr == item.inventoryIndex) {
         return itButton;
       }
