@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using KarmaSystem;
 
 public class GameController : PausableObject {
 
@@ -22,6 +23,8 @@ public class GameController : PausableObject {
   private float accumulatedDelta;
   public int day { get; private set; }
   public float dayTime { get; private set; }
+
+  public KarmaController karmaController = null;
 
   private static GameController controllerInstance;
 
@@ -56,6 +59,10 @@ public class GameController : PausableObject {
   protected override void updatePausable() {
     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "GameScene") {
       return;
+    }
+    if (karmaController == null)
+    {
+      karmaController = new KarmaController();
     }
     accumulatedDelta += Time.deltaTime;
     dayTime = accumulatedDelta / dayLength;

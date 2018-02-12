@@ -164,4 +164,18 @@ public class Inventory : MonoBehaviour{
     return null;
   }
 
+  public bool giveItem(Collectible item, Inventory other)
+  {
+    Collectible itemToGive = findMatch(item);
+    if (itemToGive == null)
+    {
+      Debug.Log("Cannot give item: Count = 0");
+      return false;
+    }
+    items[itemToGive] -= 1;
+    other.addItem(itemToGive);
+    removeIfNoInstances(itemToGive);
+    return true;
+  }
+
 }

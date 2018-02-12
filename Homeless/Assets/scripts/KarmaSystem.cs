@@ -7,31 +7,39 @@ using UnityEngine;
 
 namespace KarmaSystem
 {
-  public class KarmaController : PausableObject
+  public class KarmaController
   {
-    private Dictionary<GameObject,SocialStatus> socialStatusList;
+    private Dictionary<GameObject,SocialStatus> SocialStatusDict;
 
 
-    protected override void updatePausable()
+    /*protected override void updatePausable()
     {
 
-    }
+    }*/
 
-    public void Awake()
+    public KarmaController()
     {
-      socialStatusList = new Dictionary<GameObject, SocialStatus>();
-      GameObject[] characters = GameObject.FindGameObjectsWithTag("character");
+      SocialStatusDict = new Dictionary<GameObject, SocialStatus>();
+      GameObject[] characters = GameObject.FindGameObjectsWithTag("SocialCharacter");
       foreach (GameObject character in characters)
       {
-        socialStatusList.Add(character, new SocialStatus(new Dictionary<GameObject, Relationship>(),new Reputation()));
+        Dictionary<GameObject, Relationship> current_relationships = new Dictionary<GameObject, Relationship>();
+        foreach (GameObject other_character in characters)
+        {
+          if (other_character.GetInstanceID() != character.GetInstanceID())
+          {
+            current_relationships.Add(other_character, new Relationship());
+          }
+        }
+        SocialStatusDict.Add(character, new SocialStatus(current_relationships,new Reputation()));
       }
     }
 
     public void DebugKarmaList()
     {
-      foreach (GameObject g1 in socialStatusList.Keys)
+      foreach (GameObject g1 in SocialStatusDict.Keys)
       {
-        SocialStatus k = socialStatusList[g1];
+        SocialStatus k = SocialStatusDict[g1];
         Debug.Log("Charater: " + g1.name);
         Debug.Log("Reputation: Charity: " + k.reputation.charity);
         Debug.Log("Reputation: Reliability: " + k.reputation.reliability);
@@ -45,6 +53,13 @@ namespace KarmaSystem
           Debug.Log(" " + g1.name + "->" + g2.name + ": Affection: " + r.affection);
         }
       }
+    }
+
+    public void SocialAction(GameObject actor, SocialEffector action, GameObject reactor)
+    {
+      SocialEffector copied_action = new SocialEffector(action);
+      copied_action.setTarget(reactor);
+      copied_action.Apply(SocialStatusDict[actor]);
     }
   }
   internal class SocialStatus //Links relationships and reputation to a character
@@ -89,7 +104,7 @@ namespace KarmaSystem
   }
 
 
-  internal class SocialEffector
+  public class SocialEffector
   {
     protected ReputationEffector reputationEffector;
     protected RelationshipEffector relationshipEffector;
@@ -98,6 +113,11 @@ namespace KarmaSystem
       reputationEffector = reputationEffector_;
       relationshipEffector = relationshipEffector_;
     }
+    public SocialEffector(SocialEffector other)
+    {
+      reputationEffector = other.reputationEffector;
+      relationshipEffector = other.relationshipEffector;
+    }
     internal void Apply(SocialStatus socialStatus)
     {
       if (reputationEffector != null)
@@ -105,8 +125,13 @@ namespace KarmaSystem
       if (relationshipEffector != null && relationshipEffector.target != null)
         relationshipEffector.Apply(socialStatus.relationships[relationshipEffector.target]);
     }
+    internal void setTarget(GameObject target)
+    {
+      relationshipEffector.target = target;
+    }
+
   }
-  internal class ReputationEffector
+  public class ReputationEffector
   {
     protected int charityEffector, reliabilityEffector, criminalityEffector, crueltyEffector;
     public ReputationEffector(int charityEffector_=0, int reliabilityEffector_=0,
@@ -132,7 +157,7 @@ namespace KarmaSystem
 
     }
   }
-  internal class RelationshipEffector
+  public class RelationshipEffector
   {
     internal GameObject target;
     protected int trustEffector, affectionEffector;
@@ -169,7 +194,7 @@ namespace KarmaSystem
 
 
     //Some exemplar actions
-    internal static readonly SocialEffector sharingFood = new SocialEffector(new ReputationEffector(1,0,0,0),
+    internal static readonly SocialEffector sharingBeer = new SocialEffector(new ReputationEffector(1,0,0,0),
       new RelationshipEffector(null,1,1));
     internal static readonly SocialEffector stealingBeerFromShop = new SocialEffector(new ReputationEffector(-1, -1, 1, 0),
       new RelationshipEffector(null, -5, -5));
