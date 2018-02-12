@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - MenuPanel
+  - SocialCharacter
   layers:
   - Default
   - TransparentFX
