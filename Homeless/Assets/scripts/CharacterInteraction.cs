@@ -7,7 +7,6 @@ using KarmaSystem;
 public class CharacterInteraction : InteractionHandler {
 
   public override void interact() {
-    text.text = "This is a character text";
     Debug.Log("Character Interaction");
 
     //sample social interaction
@@ -18,6 +17,11 @@ public class CharacterInteraction : InteractionHandler {
     {
       GameController.instance.karmaController.SocialAction(GameController.instance.player, SocialConstants.sharingBeer,gameObject);
       Debug.Log("Shared some beer");
+      text.text = "Thanks!";
+    }
+    else
+    {
+      text.text = "I'm soo thirsty...";
     }
 
     GameController.instance.karmaController.DebugKarmaList();
