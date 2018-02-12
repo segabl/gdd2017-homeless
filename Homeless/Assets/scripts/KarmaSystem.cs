@@ -58,8 +58,8 @@ namespace KarmaSystem
     public void SocialAction(GameObject actor, SocialEffector action, GameObject reactor)
     {
       SocialEffector copied_action = new SocialEffector(action);
-      copied_action.setTarget(reactor);
-      copied_action.Apply(SocialStatusDict[actor]);
+      copied_action.setTarget(actor);
+      copied_action.Apply(SocialStatusDict[actor],SocialStatusDict[reactor]);
     }
   }
   internal class SocialStatus //Links relationships and reputation to a character
@@ -118,12 +118,12 @@ namespace KarmaSystem
       reputationEffector = other.reputationEffector;
       relationshipEffector = other.relationshipEffector;
     }
-    internal void Apply(SocialStatus socialStatus)
+    internal void Apply(SocialStatus socialStatusActor, SocialStatus socialStatusReactor)
     {
       if (reputationEffector != null)
-        reputationEffector.Apply(socialStatus.reputation);
+        reputationEffector.Apply(socialStatusActor.reputation);
       if (relationshipEffector != null && relationshipEffector.target != null)
-        relationshipEffector.Apply(socialStatus.relationships[relationshipEffector.target]);
+        relationshipEffector.Apply(socialStatusReactor.relationships[relationshipEffector.target]);
     }
     internal void setTarget(GameObject target)
     {
