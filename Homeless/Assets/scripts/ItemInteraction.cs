@@ -7,15 +7,12 @@ public class ItemInteraction : InteractionHandler {
 
   public override void interact() {
     Debug.Log("Item interaction");
-    SpriteRenderer spriteRenderer = this.GetComponent<SpriteRenderer>();
-    if(spriteRenderer == null) {
-      Debug.Log("SpriteRenderer not found, can't set SpriteRenderer to Collectible. Item can't be added to inventory.");
-      endInteraction();
+    Inventory inventory = GameController.instance.player.GetComponent<Inventory>();
+    Collectible c = this.GetComponent<Collectible>();
+    if(c == null) {
+      Debug.Log("No Collectible script attached to: " + this.name);
       return;
     }
-    Sprite sprite = spriteRenderer.sprite;
-    Collectible c = new Collectible(this.name, sprite);
-    Inventory inventory = GameController.instance.player.GetComponent<Inventory>();
     inventory.addItem(c);
     this.gameObject.SetActive(false);
     text.enabled = false;

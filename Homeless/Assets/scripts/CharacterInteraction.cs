@@ -12,8 +12,7 @@ public class CharacterInteraction : InteractionHandler {
     //sample social interaction
     Inventory player_inventory = GameController.instance.player.GetComponent<Inventory>();
     Inventory this_inventory = gameObject.GetComponent<Inventory>();
-    Collectible alcohol = new Collectible("Alcohol", null);
-    if (player_inventory.giveItem(alcohol, this_inventory))
+    if (player_inventory.giveItem("Alcohol", this_inventory))
     {
       GameController.instance.karmaController.SocialAction(GameController.instance.player, SocialConstants.sharingBeer,gameObject);
       Debug.Log("Shared some beer");

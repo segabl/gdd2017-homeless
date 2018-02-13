@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour{
+public class Inventory : MonoBehaviour {
   private const string inventoryButtonPrefix = "ButtonItemSlot";
   private const string mainCharacterName = "MainCharacter";
   private int nrOfSlots;
@@ -26,10 +26,10 @@ public class Inventory : MonoBehaviour{
       return;
     }
 
-    items.Add(item);
     int currentItemIndex = items.Count;
-    item.inventoryIndex = currentItemIndex;
-    if (this.name != mainCharacterName) {
+    item.inventoryIndex = currentItemIndex + 1;
+    items.Add(item);
+    if (!this.name.Equals(mainCharacterName)) {
       showInventoryInfoDebug();
       return;
     }
@@ -47,20 +47,26 @@ public class Inventory : MonoBehaviour{
     }
     button.GetComponent<Image>().sprite = item.sprite;
     Debug.Log("Added item instances to " + button.name);
- 
+
     showInventoryInfoDebug();
   }
 
   public void useItem(InventoryButton button) {
     int buttonNr = Int32.Parse(button.name.Replace(inventoryButtonPrefix, ""));
     var itemToUse = items.FirstOrDefault(item => item.inventoryIndex == buttonNr);
-    if(itemToUse == null) {
+    if (itemToUse == null) {
       Debug.Log("ItemSlot empty, no item to use");
       return;
     }
     Debug.Log("Use " + itemToUse.name);
-    //TODO: Use item
-    removeItemFromInventory(itemToUse);
+    Character character = this.GetComponent<Character>();
+    if (character == null) {
+      Debug.Log("No Character script attached to: " + this.name);
+      return;
+    }
+    if (itemToUse.use(character)) { 
+      removeItemFromInventory(itemToUse);
+    }
   }
 
   private void showInventoryInfoDebug() {
@@ -83,7 +89,6 @@ public class Inventory : MonoBehaviour{
   private void removeItemFromInventory(Collectible item) {
     InventoryButton button = findButtonMatchingCollectible(item);
     button.GetComponent<Image>().sprite = defaultSprite;
-    int itemToRemoveIndex = item.inventoryIndex;
     items.Remove(item);
     Debug.Log(item.name + " deleted from inventory");
   }
@@ -91,6 +96,11 @@ public class Inventory : MonoBehaviour{
   private Collectible findMatch(Collectible item)
   {
     Collectible match = items.FirstOrDefault(type => (type.name == item.name));
+    return match;
+  }
+
+  private Collectible findMatch(String itemName) {
+    Collectible match = items.FirstOrDefault(type => (type.name == itemName));
     return match;
   }
 
@@ -104,19 +114,16 @@ public class Inventory : MonoBehaviour{
     return null;
   }
 
-  public bool giveItem(Collectible item, Inventory other)
+  public bool giveItem(String itemName, Inventory other)
   {
-    Collectible itemToGive = findMatch(item);
+    Collectible itemToGive = findMatch(itemName);
     if (itemToGive == null)
     {
       Debug.Log("Cannot give item: Count = 0");
       return false;
     }
-
-    InventoryButton buttonSlotMatchingItem = findButtonMatchingCollectible(itemToGive);
-
-    other.addItem(itemToGive);
     removeItemFromInventory(itemToGive);
+    other.addItem(itemToGive);
     return true;
   }
 
