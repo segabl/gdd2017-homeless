@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Collectible {
 
-  public Collectible(string name, SpriteRenderer spriteRenderer) {
+  public Collectible(string name, Sprite sprite) {
     this.name = name;
-    this.spriteRenderer = spriteRenderer;
+    this.sprite = sprite;
     this.inventoryIndex = -1;
   }
 
   public string name { get; set; }
-  public SpriteRenderer spriteRenderer { get; set; }
+  public Sprite sprite { get; set; }
   public int inventoryIndex { get; set; }
 
 }

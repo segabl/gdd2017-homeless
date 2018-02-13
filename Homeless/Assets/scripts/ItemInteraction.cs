@@ -13,7 +13,8 @@ public class ItemInteraction : InteractionHandler {
       endInteraction();
       return;
     }
-    Collectible c = new Collectible(this.name, spriteRenderer);
+    Sprite sprite = spriteRenderer.sprite;
+    Collectible c = new Collectible(this.name, sprite);
     Inventory inventory = GameController.instance.player.GetComponent<Inventory>();
     inventory.addItem(c);
     this.gameObject.SetActive(false);
