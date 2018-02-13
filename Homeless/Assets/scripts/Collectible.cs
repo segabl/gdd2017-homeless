@@ -26,8 +26,6 @@ public class Collectible : MonoBehaviour{
   }
 
   public bool use(Character character) {
-    //If the influence on stat value is positive and the characters stat value wouldn't exceed the max stat value add stat value influence of item
-    //Else if cut the characters repletion to max
     if (this.consumable) {
       character.adjustStats(this.repletion, this.health, this.sanity, this.intoxication);
       Debug.Log("Increase " + character.name + "'s Repletion by " + repletion + ", Health by " + health + ", Sanity by " + sanity + ", Intoxication level by " + intoxication);
