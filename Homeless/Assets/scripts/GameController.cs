@@ -26,6 +26,8 @@ public class GameController : PausableObject {
 
   public KarmaController karmaController = null;
 
+  public BackgroundAudioLoop backgroundAudioLoop { get; private set; }
+
   private static GameController controllerInstance;
 
   public static GameController instance {
@@ -51,18 +53,16 @@ public class GameController : PausableObject {
     } else {
       Debug.Log("Controller created");
       controllerInstance = this;
+      backgroundAudioLoop = gameObject.GetComponent<BackgroundAudioLoop>();
+      karmaController = new KarmaController();
+      day = 0;
+      accumulatedDelta = 0;
     }
-    day = 0;
-    accumulatedDelta = 0;
   }
 
   protected override void updatePausable() {
     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "GameScene") {
       return;
-    }
-    if (karmaController == null)
-    {
-      karmaController = new KarmaController();
     }
     accumulatedDelta += Time.deltaTime;
     dayTime = accumulatedDelta / dayLength;
@@ -83,13 +83,12 @@ public class GameController : PausableObject {
   }
 
   public void loadGame() {
-    Debug.Log("Start loading from savefile");
     BinaryFormatter bf = new BinaryFormatter();
     FileStream file = File.Open("savefile.dat", FileMode.Open);
     SaveData data = (SaveData) bf.Deserialize(file);
     data.apply(this);
     file.Close();
-    Debug.Log("Finished loading");
+    Debug.Log("Loaded game");
   }
 
   public void pauseAll() {

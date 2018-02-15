@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BackgroundAudioLoop : MonoBehaviour {
 
+  public AudioClip audioClip;
   public float loopStart;
   public float loopEnd;
 
@@ -17,11 +18,15 @@ public class BackgroundAudioLoop : MonoBehaviour {
 
   // Use this for initialization
   void Start () {
-    audioSource = gameObject.GetComponent<AudioSource>();
+    audioSource = gameObject.AddComponent<AudioSource>();
+    audioSource.clip = audioClip;
     if (loopEnd <= loopStart) {
       loopEnd = audioSource.clip.length;
     }
     DontDestroyOnLoad(gameObject);
+    if (audioSource.clip) {
+      audioSource.Play();
+    }
   }
 
   // Update is called once per frame
@@ -43,5 +48,17 @@ public class BackgroundAudioLoop : MonoBehaviour {
     fadeDelay = time;
     fadeFrom = audioSource.volume;
     fadeTo = volume;
+  }
+
+  public void play() {
+    audioSource.Play();
+  }
+
+  public void stop() {
+    audioSource.Stop();
+  }
+
+  public void pause() {
+    audioSource.Pause();
   }
 }

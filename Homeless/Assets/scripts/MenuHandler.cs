@@ -1,17 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
-using UnityEngine.Events;
 
 public class MenuHandler : MonoBehaviour {
 
   public Button continueButton;
   public Button exitButton;
-
-  public BackgroundAudioLoop backgroundAudio;
 
 	// Use this for initialization
 	void Start () {
@@ -29,10 +23,8 @@ public class MenuHandler : MonoBehaviour {
 	}
 
   public void gameStart() {
-    UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
-    if (backgroundAudio) {
-      backgroundAudio.fadeToVolume(0, 2);
-    }
+    SceneManager.LoadScene("GameScene");
+    GameController.instance.backgroundAudioLoop.fadeToVolume(0, 2);
     Debug.Log("Start game");
   }
 
@@ -58,6 +50,8 @@ public class MenuHandler : MonoBehaviour {
   public void gameMainMenu() {
     GameController.instance.unpauseAll();
     SceneManager.LoadScene("MainMenu");
+    GameController.instance.backgroundAudioLoop.fadeToVolume(1, 0);
+    GameController.instance.backgroundAudioLoop.play();
     Debug.Log("Back to Main menu");
   }
 
