@@ -84,6 +84,15 @@ public class Inventory : MonoBehaviour {
     }
     Debug.Log("Remove " + itemToUse.name);
     removeItemFromInventory(itemToUse);
+
+    //Drop item on circle around character
+    GameObject go = itemToUse.gameObject;
+    float r = 1.0f;
+    float angle = UnityEngine.Random.Range(0.0f, 360.0f);
+    float x = r * Mathf.Cos(angle);
+    float y = r * Mathf.Sin(angle);
+    go.transform.position = new Vector3(this.transform.position.x + x, this.transform.position.y + y, go.transform.position.z);
+    go.SetActive(true);
   }
 
   private void removeItemFromInventory(Collectible item) {
