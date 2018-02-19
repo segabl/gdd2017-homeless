@@ -3500,6 +3500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   daylightCycleShader: {fileID: 4800000, guid: 4bc012eb7d8cb4b41b171ee1c6bde20d, type: 3}
+  blurShader: {fileID: 4800000, guid: 84add9291c1586c49929c7e4dd8d2cf1, type: 3}
+  redRadiationShader: {fileID: 4800000, guid: a81d5d296daf22047be40040397605b2, type: 3}
 --- !u!1001 &682079769
 Prefab:
   m_ObjectHideFlags: 0
