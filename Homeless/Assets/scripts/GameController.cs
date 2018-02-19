@@ -49,6 +49,10 @@ public class GameController : PausableObject {
       controllerInstance.menuCanvas = menuCanvas;
       controllerInstance.panelInGameMenu = panelInGameMenu;
       controllerInstance.panelInventory = panelInventory;
+      BackgroundAudioLoop loop = gameObject.GetComponent<BackgroundAudioLoop>();
+      controllerInstance.backgroundAudioLoop.fadeToAudioClip(loop.audioClip, 1);
+      controllerInstance.backgroundAudioLoop.loopStart = loop.loopStart;
+      controllerInstance.backgroundAudioLoop.loopEnd = loop.loopEnd;
       Destroy(gameObject);
     } else {
       Debug.Log("Controller created");
@@ -57,6 +61,12 @@ public class GameController : PausableObject {
       karmaController = new KarmaController();
       day = 0;
       accumulatedDelta = 0;
+    }
+  }
+
+  private void Start() {
+    if (backgroundAudioLoop) {
+      backgroundAudioLoop.play();
     }
   }
 

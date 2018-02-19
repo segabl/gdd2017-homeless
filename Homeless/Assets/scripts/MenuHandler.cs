@@ -24,7 +24,6 @@ public class MenuHandler : MonoBehaviour {
 
   public void gameStart() {
     SceneManager.LoadScene("GameScene");
-    GameController.instance.backgroundAudioLoop.fadeToVolume(0, 2);
     Debug.Log("Start game");
   }
 
@@ -50,8 +49,6 @@ public class MenuHandler : MonoBehaviour {
   public void gameMainMenu() {
     GameController.instance.unpauseAll();
     SceneManager.LoadScene("MainMenu");
-    GameController.instance.backgroundAudioLoop.fadeToVolume(1, 0);
-    GameController.instance.backgroundAudioLoop.play();
     Debug.Log("Back to Main menu");
   }
 

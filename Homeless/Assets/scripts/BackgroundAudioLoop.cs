@@ -17,16 +17,14 @@ public class BackgroundAudioLoop : MonoBehaviour {
   private float fadeTime = -1;
 
   // Use this for initialization
-  void Start () {
+  void Awake () {
     audioSource = gameObject.AddComponent<AudioSource>();
     audioSource.clip = audioClip;
+    audioSource.playOnAwake = false;
     if (loopEnd <= loopStart) {
       loopEnd = audioSource.clip.length;
     }
     DontDestroyOnLoad(gameObject);
-    if (audioSource.clip) {
-      audioSource.Play();
-    }
   }
 
   // Update is called once per frame
@@ -42,6 +40,11 @@ public class BackgroundAudioLoop : MonoBehaviour {
     } else if (audioSource.volume != fadeTo) {
       audioSource.volume = fadeTo;
     }
+    if (audioSource.clip != audioClip && Time.time > fadeTime + fadeDelay) {
+      audioSource.clip = audioClip;
+      audioSource.Play();
+      fadeToVolume(fadeFrom, fadeDelay);
+    }
   }
   public void fadeToVolume(float volume, float time) {
     fadeTime = Time.time;
@@ -50,8 +53,19 @@ public class BackgroundAudioLoop : MonoBehaviour {
     fadeTo = volume;
   }
 
+  public void fadeToAudioClip(AudioClip clip, float time) {
+    if (clip == audioClip) {
+      return;
+    }
+    audioClip = clip;
+    fadeTime = Time.time;
+    fadeDelay = time;
+    fadeFrom = audioSource.volume;
+    fadeTo = 0;
+  }
+
   public void play() {
-    audioSource.Play();
+     audioSource.Play();
   }
 
   public void stop() {
