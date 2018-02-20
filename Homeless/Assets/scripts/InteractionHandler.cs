@@ -31,7 +31,13 @@ public abstract class InteractionHandler : PausableObject {
       if (interactObject != this) {
         if (this is ItemInteraction) {
           text.text = "Press 'E' to pick up " + this.name;
-        } else {
+        }
+				if (this is Thrascans) {
+					text.text="Press E to searh the trash";
+				}
+			
+			
+		else {
           text.text = defaultText;
         }
       }
