@@ -69,6 +69,10 @@ public class Inventory : MonoBehaviour {
     }
   }
 
+  public Boolean containsItem(String itemName) {
+    return findMatch(itemName) != null;
+  }
+
   private void showInventoryInfoDebug() {
     foreach(Collectible item in items) {
       Debug.Log("Item: " + item.name);
