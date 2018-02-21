@@ -3212,11 +3212,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 629656154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40d482d5632af6d4c9f1365c0bc6824d, type: 3}
+  m_Script: {fileID: 11500000, guid: 00fea07f36820e242b065c25dfdf91b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggerDistance: 3
-  npc: {fileID: 1186345332}
+  npc: {fileID: 629656160}
 --- !u!114 &629656158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3252,8 +3252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Set:
-  - CurrentId: 10
-    NewWindowOpen: 0
+  - CurrentId: 14
+    NewWindowOpen: 1
     FirstWindow: 0
     Windows:
     - ID: 0
@@ -3319,12 +3319,12 @@ MonoBehaviour:
         y: 51
         width: 150
         height: 125
-      Text: Thank you
+      Text: Thank's <BURP>
       Type: 0
       NodeType: 2
       Parent: 2
-      Trigger: 0
-      TriggerText: 
+      Trigger: 1
+      TriggerText: SetNextTree,HappyBeerGuy
       Connections: 
     - ID: 5
       Size:
@@ -3337,8 +3337,8 @@ MonoBehaviour:
       Type: 0
       NodeType: 2
       Parent: 3
-      Trigger: 0
-      TriggerText: 
+      Trigger: 1
+      TriggerText: SetNextTree,default
       Connections: 
     - ID: 6
       Size:
@@ -3352,7 +3352,7 @@ MonoBehaviour:
       NodeType: 1
       Parent: 0
       Trigger: 1
-      TriggerText: hasBeer
+      TriggerText: HasItem,Alcohol
       Connections: 0700000008000000
     - ID: 7
       Size:
@@ -3393,8 +3393,8 @@ MonoBehaviour:
       Type: 0
       NodeType: 2
       Parent: 8
-      Trigger: 0
-      TriggerText: 
+      Trigger: 1
+      TriggerText: SetNextTree,default
       Connections: 
   CurrentSet: 0
   TabList:
