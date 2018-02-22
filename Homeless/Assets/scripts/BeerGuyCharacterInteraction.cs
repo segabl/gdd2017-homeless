@@ -13,6 +13,8 @@ namespace Assets.scripts {
       if (player_inventory.giveItem("Alcohol", this_inventory)) {
         GameController.instance.karmaController.SocialAction(GameController.instance.player, SocialConstants.sharingBeer, gameObject);
         Debug.Log("Shared some beer");
+      } else {
+        Debug.LogWarning("Couldn't give Alcohol to Beerguy");
       }
 
       GameController.instance.karmaController.DebugKarmaList();
