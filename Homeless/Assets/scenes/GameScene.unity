@@ -3427,21 +3427,7 @@ MonoBehaviour:
       Parent: 0
       Trigger: 0
       TriggerText: 
-      Connections: 02000000
-    - ID: 2
-      Size:
-        serializedVersion: 2
-        x: 483
-        y: 322
-        width: 150
-        height: 125
-      Text: asd
-      Type: 0
-      NodeType: 2
-      Parent: 1
-      Trigger: 0
-      TriggerText: 
-      Connections: 
+      Connections:
   CurrentSet: 1
   TabList:
   - default
