@@ -3253,7 +3253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Set:
   - CurrentId: 14
-    NewWindowOpen: 1
+    NewWindowOpen: 0
     FirstWindow: 0
     Windows:
     - ID: 0
@@ -3396,9 +3396,42 @@ MonoBehaviour:
       Trigger: 1
       TriggerText: SetNextTree,default
       Connections: 
-  CurrentSet: 0
+  - CurrentId: 2
+    NewWindowOpen: 0
+    FirstWindow: 0
+    Windows:
+    - ID: 0
+      Size:
+        serializedVersion: 2
+        x: 109
+        y: 323
+        width: 150
+        height: 125
+      Text: Thanks man, that really hit the spot
+      Type: 0
+      NodeType: 0
+      Parent: -1
+      Trigger: 0
+      TriggerText: 
+      Connections: 01000000
+    - ID: 1
+      Size:
+        serializedVersion: 2
+        x: 323
+        y: 322
+        width: 150
+        height: 125
+      Text: Just tell me whenever you need anything
+      Type: 0
+      NodeType: 2
+      Parent: 0
+      Trigger: 0
+      TriggerText: 
+      Connections: 
+  CurrentSet: 1
   TabList:
   - default
+  - HappyBeerGuy
 --- !u!1 &640075263
 GameObject:
   m_ObjectHideFlags: 0
@@ -7104,7 +7137,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10fe5d6867c1b5449b4bf163fcd72ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Set: []
+  Set:
+  - CurrentId: 0
+    NewWindowOpen: 0
+    FirstWindow: -562
+    Windows: []
   CurrentSet: 0
   TabList: []
 --- !u!1 &1188133033
