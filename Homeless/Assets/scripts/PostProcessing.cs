@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PostProcessing : MonoBehaviour {
 
+  public Texture daylightTexture;
   public Shader daylightCycleShader;
   public Shader blurShader;
   public Shader redRadiationShader;
@@ -45,6 +46,7 @@ public class PostProcessing : MonoBehaviour {
 
   internal void ProcessDaylight(RenderTexture source, RenderTexture destination)
   {
+    daylightCycleMaterial.SetTexture("_daylight", daylightTexture);
     daylightCycleMaterial.SetFloat("_time", GameController.instance.dayTime);
     Graphics.Blit(source, destination, daylightCycleMaterial);
   }

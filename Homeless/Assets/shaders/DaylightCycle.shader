@@ -3,6 +3,7 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+    _daylight ("Texture", 2D) = "white" {}
 		_time ("Time between 0 and 1", Range (0, 1)) = 0
 	}
 	SubShader
@@ -41,16 +42,12 @@
 			}
 			
 			sampler2D _MainTex;
+      sampler2D _daylight;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, i.uv);
-				float f = 1;
-				if (_time >= 0.5) {
-					// TODO: give night some more time
-					f = max(abs(((_time - 0.5) * 2) - 0.5) * 2, 0.5);
-				}
-				return fixed4(col.r * f, col.g * f, col.b, col.a);
+				fixed4 col = tex2D(_MainTex, i.uv) * tex2D(_daylight, fixed2(_time, 0));
+				return col;
 			}
 			ENDCG
 		}
