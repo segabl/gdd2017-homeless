@@ -92,7 +92,8 @@ public class PostProcessing : MonoBehaviour {
       if (intoxicationTime == 0)
         intoxicationTime = GameController.instance.dayTime;
       float intoxicationDelta = (GameController.instance.dayTime - intoxicationTime) * 500f;
-      Debug.Log(intoxicationDelta);
+      if (intoxicationDelta > 400f)
+        intoxicationDelta -= 400f;
       if (intoxicationDelta > 0)
       {
         swirlMaterial.SetFloat("_time", intoxicationDelta * (1 + intoxication));
