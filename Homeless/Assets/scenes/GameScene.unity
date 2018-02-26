@@ -2955,7 +2955,7 @@ MonoBehaviour:
   repletion: 1
   health: 5
   sanity: 10
-  intoxication: 0.5
+  intoxication: 0.3
   consumable: 1
 --- !u!1001 &572959592
 Prefab:
