@@ -59,6 +59,7 @@ public class Character : PausableObject {
 
   public void adjustStats(float repletionAdjustment, float healthAdjustment, float sanityAdjustment, float intoxicationAdjustment) {
     if (alive) {
+      Debug.Log(name + " Repletion by " + repletionAdjustment + ", Health by " + healthAdjustment + ", Sanity by " + sanityAdjustment + ", Intoxication level by " + intoxicationAdjustment);
       adjustRepletion(repletionAdjustment);
       adjustHealth(healthAdjustment);
       adjustSanity(sanityAdjustment);
@@ -127,8 +128,7 @@ public class Character : PausableObject {
     float hourRef = accumulatedDeltaIntox * 24 / GameController.instance.dayLength;
     if (hourRef >= 1.0f) {
       accumulatedDeltaIntox = 0.0f;
-      float intoxicationDecrement = -0.1f;
-      adjustIntoxication(intoxicationDecrement);
+      adjustIntoxication(-0.1f);
     }
   }
 

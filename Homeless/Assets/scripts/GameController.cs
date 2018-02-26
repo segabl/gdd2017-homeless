@@ -84,6 +84,29 @@ public class GameController : PausableObject {
     }
 	}
 
+  public void sleep(SleepingSpot spot) {
+    pauseAll();
+
+    Character character = player.GetComponent<Character>();
+    //NOTE: Sleeping for 6h. Intox loss per hour = 0.1 -> -0.6 intox
+    character.adjustStats(0.0f, spot.healthGain, spot.sanityGain, -0.6f);
+    float inGameHour = dayLength / 24.0f;
+    float hoursToWait = 6;
+
+    accumulatedDelta += hoursToWait * inGameHour;
+    dayTime = accumulatedDelta / dayLength;
+    if (dayTime > 1) {
+      dayTime = dayTime - 1.0f;
+      day++;
+      accumulatedDelta = dayTime * dayLength;
+      Debug.Log("Day " + day + " started");
+    }
+
+    //TODO artificial wait time -> slowly progress sleeping time
+
+    unpauseAll();
+  }
+
   public void saveGame() {
     BinaryFormatter bf = new BinaryFormatter();
     FileStream file = File.Open("savefile.dat", FileMode.Create);
