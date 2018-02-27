@@ -13,7 +13,6 @@ public class Collectible : MonoBehaviour{
   public bool consumable;
 
   void Start () {
-    this.name = name;
     this.sprite = sprite;
     this.inventoryIndex = -1;
     SpriteRenderer spriteRenderer = this.GetComponent<SpriteRenderer>();

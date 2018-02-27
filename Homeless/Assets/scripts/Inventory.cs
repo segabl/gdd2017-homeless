@@ -26,8 +26,7 @@ public class Inventory : MonoBehaviour {
       return;
     }
 
-    int currentItemIndex = items.Count;
-    item.inventoryIndex = currentItemIndex + 1;
+    item.inventoryIndex = findEmptySlotIndex();
     items.Add(item);
     if (!this.name.Equals(mainCharacterName)) {
       showInventoryInfoDebug();
@@ -49,6 +48,16 @@ public class Inventory : MonoBehaviour {
     Debug.Log("Added item instances to " + button.name);
 
     showInventoryInfoDebug();
+  }
+
+  private int findEmptySlotIndex() {
+    for(int i = 1; i <= nrOfSlots; i++) {
+      var match = items.Find(item => item.inventoryIndex == i);
+      if(match == null) {
+        return i;
+      }
+    }
+    return 0;
   }
 
   public void useItem(InventoryButton button) {

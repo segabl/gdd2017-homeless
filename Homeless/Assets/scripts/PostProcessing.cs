@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class PostProcessing : MonoBehaviour {
 
+  public Texture daylightTexture;
   public Shader daylightCycleShader;
   public Shader blurShader;
   public Shader redRadiationShader;
-  //public Shader swirlShader;
+  public Shader swirlShader;
 
   private Material daylightCycleMaterial;
   private Material blurMaterial;
   private Material redRadiationMaterial;
-  //private Material swirlMaterial;
+  private Material swirlMaterial;
+  private float intoxicationTime;
 
   void Awake() {
     daylightCycleMaterial = new Material(daylightCycleShader);
     blurMaterial = new Material(blurShader);
     redRadiationMaterial = new Material(redRadiationShader);
-    //swirlMaterial = new Material(swirlShader);
+    swirlMaterial = new Material(swirlShader);
+    intoxicationTime = 0;
   }
 
   // Postprocess the image
@@ -34,7 +37,7 @@ public class PostProcessing : MonoBehaviour {
 
     ProcessPlayerHealth(source, source);
     ProcessPlayerSanity(source, source);
-    //ProcessPlayerIntoxication(source, source);
+    ProcessPlayerIntoxication(source, source);
 
     Graphics.Blit(source, destination);
 
@@ -45,6 +48,7 @@ public class PostProcessing : MonoBehaviour {
 
   internal void ProcessDaylight(RenderTexture source, RenderTexture destination)
   {
+    daylightCycleMaterial.SetTexture("_daylight", daylightTexture);
     daylightCycleMaterial.SetFloat("_time", GameController.instance.dayTime);
     Graphics.Blit(source, destination, daylightCycleMaterial);
   }
@@ -78,13 +82,29 @@ public class PostProcessing : MonoBehaviour {
       Graphics.Blit(source, destination, blurMaterial);
     }
   }
-  /*internal void ProcessPlayerIntoxication(RenderTexture source, RenderTexture destination)
+  internal void ProcessPlayerIntoxication(RenderTexture source, RenderTexture destination)
   {
     float intoxication = GameController.instance.player.GetComponent<Character>().intoxication;
-    if (intoxication > 0.0f)
+    if (intoxication > 0.2f)
     {
-      
+      if (intoxication > 2.5f)
+        intoxication = 2.5f;
+      if (intoxicationTime == 0)
+        intoxicationTime = GameController.instance.dayTime;
+      float intoxicationDelta = (GameController.instance.dayTime - intoxicationTime) * 500f;
+      if (intoxicationDelta > 400f)
+        intoxicationDelta -= 400f;
+      if (intoxicationDelta > 0)
+      {
+        swirlMaterial.SetFloat("_time", intoxicationDelta * (1 + intoxication));
+        swirlMaterial.SetFloat("_strength", intoxication + (float)System.Math.Pow(4, intoxication >= 0.7 ? intoxication - 0.7 : 0) - 1);
+        Graphics.Blit(source, destination, swirlMaterial);
+      }
     }
-  }*/
+    else
+    {
+      intoxicationTime = 0;
+    }
+  }
 
 }
