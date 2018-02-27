@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class CharacterInteraction : InteractionHandler {
 
-  const String DECISION_YES = "Y";
-  const String DECISION_NO = "N";
-
   [SerializeField]
   Dialogues npc;
 
-  string nextTree = "";
-  int interactions = 0;
+  protected string nextTree = "";
+  protected int interactions = 0;
+  protected const String DECISION_YES = "Y";
+  protected const String DECISION_NO = "N";
+  protected ModalPanel modalPanel;
 
   public override void interact() {
+    if (!modalPanel) {
+      modalPanel = ModalPanel.Instance();
+    }
+
     Debug.Log("Character Interaction");
     onCharacterInteractionStart();
 
@@ -22,9 +26,7 @@ public class CharacterInteraction : InteractionHandler {
     } else if (nextTree != "") {
       npc.SetTree(nextTree);
       nextTree = "";
-    } else if (npc.GetChoices().Length > 0) {
-      npc.NextChoice(npc.GetChoices()[0]);
-    } else {
+    }  else {
       npc.Next();
     }
 
@@ -34,7 +36,11 @@ public class CharacterInteraction : InteractionHandler {
   }
 
   public void Choice(int index) {
-    npc.NextChoice(npc.GetChoices()[index]); 
+    Choice(npc.GetChoices()[index]); 
+  }
+
+  public void Choice(String choice) {
+    npc.NextChoice(choice);
     Display();
   }
 
@@ -52,7 +58,11 @@ public class CharacterInteraction : InteractionHandler {
 
   public void Display() {
     handleTrigger();
-    text.text = npc.GetCurrentDialogue();
+    if (npc.GetChoices().Length > 0) {
+      modalPanel.MessageBox(npc.GetCurrentDialogue(), Choice, npc.GetChoices());
+    } else {
+      text.text = npc.GetCurrentDialogue();
+    }
   }
 
   protected void onCharacterInteractionStart() {
