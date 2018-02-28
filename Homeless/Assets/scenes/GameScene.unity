@@ -3744,7 +3744,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 0}
-  dropSound: {fileID: 0}
 --- !u!114 &629656160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8893,6 +8892,7 @@ GameObject:
   - component: {fileID: 1302206909}
   - component: {fileID: 1302206912}
   - component: {fileID: 1302206913}
+  - component: {fileID: 1302206914}
   m_Layer: 0
   m_Name: MainCharacter
   m_TagString: SocialCharacter
@@ -8937,7 +8937,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  dropSound: {fileID: 1302206913}
 --- !u!114 &1302206911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9048,6 +9047,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1302206914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1302206907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a028365de5d7540860eb82419c1413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walks: []
+  audioSource: {fileID: 0}
 --- !u!4 &1308407703 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4584315652141140, guid: 6a18b9d856e548c468ce590e5b05c3ad,

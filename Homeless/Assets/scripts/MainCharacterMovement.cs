@@ -21,7 +21,6 @@ public class MainCharacterMovement : PausableObject {
     bool keyPressed = handleKeyboardMovementInput(step);
 
     updatePosition(step);
-    Debug.Log(Vector3.Distance(this.transform.position, targetPosition));
     if (Vector3.Distance(this.transform.position, targetPosition) >= 10.01f || keyPressed) {
       walking = true;
     } else {
