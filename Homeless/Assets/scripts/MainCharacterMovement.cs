@@ -7,17 +7,27 @@ public class MainCharacterMovement : PausableObject {
   private enum MouseButton { LEFT, RIGHT, MIDDLE };
   private Vector3 targetPosition;
   public float movementSpeed;
+  public bool walking { get; set; }
 
   void Start() {
     targetPosition = this.transform.position;
+    walking = false;
   }
 
   protected override void updatePausable() {
     float step = movementSpeed * Time.deltaTime;
+    Vector3 oldPosition = targetPosition;
     handleMouseMovementInput();
-    handleKeyboardMovementInput(step);
+    bool keyPressed = handleKeyboardMovementInput(step);
 
     updatePosition(step);
+    Debug.Log(Vector3.Distance(this.transform.position, targetPosition));
+    if (Vector3.Distance(this.transform.position, targetPosition) >= 10.01f || keyPressed) {
+      walking = true;
+    } else {
+      walking = false;
+    } 
+
   }
 
   private void handleMouseMovementInput() {
@@ -28,9 +38,11 @@ public class MainCharacterMovement : PausableObject {
     }
   }
 
-  private void handleKeyboardMovementInput(float step) {
+  private bool handleKeyboardMovementInput(float step) {
+    bool keyPressed = false;
     if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) {
       targetPosition = this.transform.position;
+      keyPressed = true;
     }
 
     if (Input.GetKey("w")) {
@@ -45,6 +57,7 @@ public class MainCharacterMovement : PausableObject {
     if (Input.GetKey("d")) {
       targetPosition += new Vector3(step, 0);
     }
+    return keyPressed;
   }
 
   private void updatePosition(float step) {

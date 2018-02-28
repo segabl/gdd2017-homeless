@@ -12,11 +12,15 @@ public class Inventory : MonoBehaviour {
   private List<Collectible> items;
   InventoryButton[] buttons;
   public Sprite defaultSprite;
+  private AudioSource audioSource;
+  private AudioClip dropClip;
 
   void Start() {
     nrOfSlots = GameController.instance.panelInventory.GetComponentsInChildren<InventoryButton>().Length;
     buttons = GameController.instance.panelInventory.GetComponentsInChildren<InventoryButton>();
     items = new List<Collectible>();
+    audioSource = GetComponent<AudioSource>();
+    dropClip = (AudioClip)Resources.Load("sfx/scrunchpaper");
   }
 
   public void addItem(Collectible item) {
@@ -105,6 +109,8 @@ public class Inventory : MonoBehaviour {
     float x = r * Mathf.Cos(angle);
     float y = r * Mathf.Sin(angle);
     go.transform.position = new Vector3(this.transform.position.x + x, this.transform.position.y + y, go.transform.position.z);
+    audioSource.clip = dropClip;
+    audioSource.Play();
     go.SetActive(true);
   }
 
