@@ -19,6 +19,7 @@ public class Character : PausableObject {
   private float accumulatedDeltaSanity;
   private float accumulatedDeltaIntox;
   private bool alive;
+  public bool asleep { get; set;}
 
   void Start () {
     alive = true;
@@ -27,6 +28,7 @@ public class Character : PausableObject {
     accumulatedDeltaSanity = 0.0f;
     accumulatedDeltaIntox = 0.0f;
     intoxication = 0.0f;
+    asleep = false;
 	}
 
   protected override void updatePausable() {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using KarmaSystem;
 
-public class GameController : PausableObject {
+public class GameController : MonoBehaviour {
 
   public GameObject player;
   public GameObject menuCanvas;
@@ -20,9 +20,15 @@ public class GameController : PausableObject {
   public GameObject panelInventory;
   public float dayLength;
 
+  public bool paused { get; private set;  }
   private float accumulatedDelta;
   public int day { get; private set; }
   public float dayTime { get; private set; }
+  public float inGameHour { get; private set; }
+  private float hoursToWait;
+  private float sleepScale;
+  private float sleepIncrement;
+  private float sleepAccPlusSixHours;
 
   public KarmaController karmaController = null;
 
@@ -46,6 +52,12 @@ public class GameController : PausableObject {
       Debug.Log("Controller exists, only taking new editor params");
       controllerInstance.player = player;
       controllerInstance.dayLength = dayLength;
+      controllerInstance.inGameHour = inGameHour;
+      controllerInstance.hoursToWait = hoursToWait;
+      controllerInstance.sleepScale = sleepScale;
+      controllerInstance.sleepIncrement = sleepIncrement;
+      controllerInstance.sleepAccPlusSixHours = sleepAccPlusSixHours;
+      controllerInstance.paused = paused;
       controllerInstance.menuCanvas = menuCanvas;
       controllerInstance.panelInGameMenu = panelInGameMenu;
       controllerInstance.panelInventory = panelInventory;
@@ -61,20 +73,28 @@ public class GameController : PausableObject {
       karmaController = new KarmaController();
       day = 0;
       accumulatedDelta = 0;
+      inGameHour = dayLength / 24.0f;
+      hoursToWait = 6;
+      sleepScale = 1.0f;
+      sleepIncrement = 0.0f;
+      sleepAccPlusSixHours = 0.0f;
+      paused = false;
     }
   }
 
-  private void Start() {
+  void Start() {
     if (backgroundAudioLoop) {
       backgroundAudioLoop.play();
     }
   }
 
-  protected override void updatePausable() {
+  void Update() {
     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "GameScene") {
       return;
     }
-    accumulatedDelta += Time.deltaTime;
+    float scaledDeltaTime = sleepScale * Time.deltaTime;
+    bool asleep = player.GetComponent<Character>().asleep;
+    accumulatedDelta += scaledDeltaTime;
     dayTime = accumulatedDelta / dayLength;
     if (dayTime > 1) {
       dayTime = 0;
@@ -82,29 +102,28 @@ public class GameController : PausableObject {
       accumulatedDelta = 0;
       Debug.Log("Day " + day + " started");
     }
-	}
+    if (asleep) {
+      sleepIncrement += scaledDeltaTime;
+      if (sleepIncrement >= sleepAccPlusSixHours) {
+        Debug.Log("Wake up");
+        player.GetComponent<Character>().asleep = false;
+        sleepScale = 1.0f;
+        unpauseAll();
+      }
+    }
+  }
 
   public void sleep(SleepingSpot spot) {
     pauseAll();
-
+    Debug.Log("Go to sleep");
     Character character = player.GetComponent<Character>();
+    character.asleep = true;
     //NOTE: Sleeping for 6h. Intox loss per hour = 0.1 -> -0.6 intox
-    character.adjustStats(0.0f, spot.healthGain, spot.sanityGain, -0.6f);
-    float inGameHour = dayLength / 24.0f;
-    float hoursToWait = 6;
-
-    accumulatedDelta += hoursToWait * inGameHour;
-    dayTime = accumulatedDelta / dayLength;
-    if (dayTime > 1) {
-      dayTime = dayTime - 1.0f;
-      day++;
-      accumulatedDelta = dayTime * dayLength;
-      Debug.Log("Day " + day + " started");
-    }
-
-    //TODO artificial wait time -> slowly progress sleeping time
-
-    unpauseAll();
+    //                       Repletion loss per hour while asleep = 3.0 -> -18.0 repletion
+    character.adjustStats(-18.0f, spot.healthGain, spot.sanityGain, -0.6f);
+    sleepScale = 30.0f;
+    sleepIncrement = accumulatedDelta;
+    sleepAccPlusSixHours = accumulatedDelta + hoursToWait * inGameHour;
   }
 
   public void saveGame() {
@@ -125,6 +144,7 @@ public class GameController : PausableObject {
   }
 
   public void pauseAll() {
+    paused = true;
     Object[] objects = FindObjectsOfType(typeof(PausableObject));
     foreach (PausableObject pausableObject in objects) {
       pausableObject.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
@@ -132,10 +152,13 @@ public class GameController : PausableObject {
   }
 
   public void unpauseAll() {
-    Debug.Log("Unpause all PausableObjects");
-    Object[] objects = FindObjectsOfType(typeof(PausableObject));
-    foreach (PausableObject pausableObject in objects) {
-      pausableObject.SendMessage("OnUnpauseGame", SendMessageOptions.DontRequireReceiver);
+    if (!player.GetComponent<Character>().asleep) {
+      paused = false;
+      Debug.Log("Unpause all PausableObjects");
+      Object[] objects = FindObjectsOfType(typeof(PausableObject));
+      foreach (PausableObject pausableObject in objects) {
+        pausableObject.SendMessage("OnUnpauseGame", SendMessageOptions.DontRequireReceiver);
+      }
     }
   }
 
