@@ -72,6 +72,7 @@ public class GameController : MonoBehaviour {
       backgroundAudioLoop = gameObject.GetComponent<BackgroundAudioLoop>();
       karmaController = new KarmaController();
       day = 0;
+      dayTime = 0.5f;
       accumulatedDelta = 0;
       inGameHour = dayLength / 24.0f;
       hoursToWait = 6;
@@ -95,7 +96,7 @@ public class GameController : MonoBehaviour {
     float scaledDeltaTime = sleepScale * Time.deltaTime;
     bool asleep = player.GetComponent<Character>().asleep;
     accumulatedDelta += scaledDeltaTime;
-    dayTime = accumulatedDelta / dayLength;
+    dayTime += scaledDeltaTime / dayLength;
     if (dayTime > 1) {
       dayTime = 0;
       day++;
