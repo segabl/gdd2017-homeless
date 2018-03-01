@@ -18,8 +18,14 @@ public class NPCMovement : MonoBehaviour {
 
 	private SpriteRenderer[] sprites;
 
+
+	private Vector2 minWalkArea;
+	private Vector2 maxWalkArea;
+	public Collider2D walkArea;
+	private bool inWalkArea=false;
 	// Use this for initialization
 	void Start () {
+
 
 		myRigidBody = GetComponent<Rigidbody2D> ();
 		waitCounter = waitTime;
@@ -31,6 +37,15 @@ public class NPCMovement : MonoBehaviour {
 		for (int i = 0; i <= sprites.Length; i++) {
 
 			sprites [i].color = new Color (Random.Range (0, 255)*Time.deltaTime, Random.Range (0, 255)*Time.deltaTime, Random.Range (0, 255)*Time.deltaTime);
+		}
+
+		if (walkArea != null) {
+		
+			minWalkArea = walkArea.bounds.min;
+			maxWalkArea = walkArea.bounds.max;
+			inWalkArea = true;
+
+		
 		}
 
 		
@@ -49,18 +64,38 @@ public class NPCMovement : MonoBehaviour {
 
 			case 0:
 				myRigidBody.velocity = new Vector2 (0, NPCspeed);
+				if (inWalkArea==true && transform.position.y > maxWalkArea.y) {
+				
+					waitCounter = waitTime;
+					isWalking = false;
+				}
 				break;
 
 			case 1:
 				myRigidBody.velocity = new Vector2 (NPCspeed, 0);
+				if (inWalkArea==true && transform.position.x > maxWalkArea.x) {
+
+					waitCounter = waitTime;
+					isWalking = false;
+				}
 				break;
 
 			case 2:
 				myRigidBody.velocity = new Vector2 (0, -NPCspeed);
+				if (inWalkArea==true && transform.position.y < minWalkArea.y) {
+
+					waitCounter = waitTime;
+					isWalking = false;
+				}
 				break;
 
 			case 3:
 				myRigidBody.velocity = new Vector2 (-NPCspeed, 0);
+				if (inWalkArea==true && transform.position.x < minWalkArea.y) {
+
+					waitCounter = waitTime;
+					isWalking = false;
+				}
 				break;
 
 			}

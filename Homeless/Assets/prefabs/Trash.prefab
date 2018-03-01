@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 58977846908372962}
   - component: {fileID: 114863774919639738}
   m_Layer: 0
-  m_Name: New Prefab
+  m_Name: Trash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
