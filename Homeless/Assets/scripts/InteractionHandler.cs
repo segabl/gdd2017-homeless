@@ -19,39 +19,33 @@ public abstract class InteractionHandler : PausableObject {
     GameObject canvas = GameController.instance.menuCanvas;
     text = canvas.GetComponentInChildren<Text>();
 
-    if(!canvas || !text) {
+    if (!canvas || !text) {
       Debug.Log("Screen canvas or text is null");
       return;
     }
 
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
-      //TODO: set the value of text offset to something reasonable
-      float textOffset = 0.5f;
-      text.transform.position = this.transform.position + new Vector3(0.0f, textOffset, 0.0f);
+      text.transform.position = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, 50, 0);
       if (interactObject != this) {
         if (this is ItemInteraction) {
           text.text = "Press 'E' to pick up " + this.name;
-        }
-				if (this is Thrascans) {
-					text.text="Press E to searh the trash";
-				}
-			
-			
-		else {
+        } else if (this is Thrascans) {
+          text.text = "Press E to searh the trash";
+        } else {
           text.text = defaultText;
         }
       }
       text.enabled = true;
       interactObject = this;
       playerCanInteract = true;
-    } else if(interactObject == this) {
+    }
+    else if (interactObject == this) {
       endInteraction();
     }
   }
 
   public abstract void interact();
-  protected void endInteraction()
-  {
+  protected void endInteraction() {
     text.enabled = false;
     interactObject = null;
     playerCanInteract = false;
