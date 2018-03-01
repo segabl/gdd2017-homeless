@@ -2572,33 +2572,33 @@ MonoBehaviour:
   FileEntries:
   - FolderId: 0
     FileId: 0
-    Sprite: {fileID: 21300000, guid: 9fa989372e29ecd4c80fddd62a885763, type: 3}
+    Sprite: {fileID: 0}
     Sound: {fileID: 0}
   - FolderId: 0
     FileId: 1
-    Sprite: {fileID: 21300000, guid: 57ef656a46d5a944d8b29546f196d8e5, type: 3}
+    Sprite: {fileID: 0}
     Sound: {fileID: 0}
   - FolderId: 0
     FileId: 2
-    Sprite: {fileID: 21300000, guid: 0446eaad3441a644e8e91a3f4e27bc8c, type: 3}
+    Sprite: {fileID: 0}
     Sound: {fileID: 0}
   - FolderId: 0
     FileId: 3
-    Sprite: {fileID: 21300000, guid: b0b5ee64198e6024aacab754612db1dd, type: 3}
+    Sprite: {fileID: 0}
     Sound: {fileID: 0}
   - FolderId: 0
     FileId: 4
-    Sprite: {fileID: 21300000, guid: a886d092ee711c94caaff436dba69c4b, type: 3}
+    Sprite: {fileID: 0}
     Sound: {fileID: 0}
   - FolderId: 0
     FileId: 5
-    Sprite: {fileID: 21300000, guid: 2803832b7452c974b92f025240df8a26, type: 3}
+    Sprite: {fileID: 0}
     Sound: {fileID: 0}
   - FolderId: 0
     FileId: 6
-    Sprite: {fileID: 21300000, guid: af89387367d920d4bbbc0cdba85a590c, type: 3}
+    Sprite: {fileID: 0}
     Sound: {fileID: 0}
   - FolderId: 0
     FileId: 7
-    Sprite: {fileID: 21300000, guid: ac8c6ec3f4cf0474b904366e35a661e7, type: 3}
+    Sprite: {fileID: 0}
     Sound: {fileID: 0}

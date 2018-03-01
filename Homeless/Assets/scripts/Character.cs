@@ -14,6 +14,7 @@ public class Character : PausableObject {
   public float health;
   public float sanity;
   public float intoxication { get; set; }
+  public bool permisionToSleepInBox { get; set; }
   private float accumulatedDeltaRepletion;
   private float accumulatedDeltaHealth;
   private float accumulatedDeltaSanity;
@@ -28,6 +29,7 @@ public class Character : PausableObject {
     accumulatedDeltaSanity = 0.0f;
     accumulatedDeltaIntox = 0.0f;
     intoxication = 0.0f;
+    permisionToSleepInBox = false;
     asleep = false;
 	}
 

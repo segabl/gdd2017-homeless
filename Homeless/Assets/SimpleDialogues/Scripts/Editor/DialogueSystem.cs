@@ -785,7 +785,7 @@ public class DialogueSystem : EditorWindow {
 
             if (new Rect(0, 0, position.width, position.height).Contains(Event.current.mousePosition))
             {
-                if (Event.current.button == 2 && Event.current.type == EventType.mouseDrag)
+                if (Event.current.button == 2 && Event.current.type == EventType.MouseDrag)
                 {
                     Vector2 CurrentPos = Event.current.mousePosition;
 
