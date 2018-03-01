@@ -11,6 +11,7 @@ public class Collectible : MonoBehaviour{
   public float sanity;
   public float intoxication;
   public bool consumable;
+  public AudioClip useSound;
 
   void Start () {
     this.sprite = sprite;
@@ -29,6 +30,13 @@ public class Collectible : MonoBehaviour{
       character.adjustStats(this.repletion, this.health, this.sanity, this.intoxication);
       Debug.Log("Increase " + character.name + "'s Repletion by " + repletion + ", Health by " + health + ", Sanity by " + sanity + ", Intoxication level by " + intoxication);
       Debug.Log(character.name + "'s Repletion is " + character.repletion + ", Health is " + character.health + ", Sanity is " + character.sanity + ", Intoxication level is " + character.intoxication);
+      if (useSound) {
+        AudioSource audioSource = character.gameObject.GetComponent<AudioSource>();
+        if (audioSource) {
+          audioSource.clip = useSound;
+          audioSource.Play();
+        }
+      }
       return true;
     }
 
