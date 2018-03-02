@@ -19,6 +19,12 @@ public class MainCharacterMovement : PausableObject {
     handleMouseMovementInput();
     handleKeyboardMovementInput(step);
     updatePosition(step);
+    if (walking) {
+      //TODO: differentiate between walking directions
+      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+    } else {
+      this.GetComponent<CharacterAnimation>().setAnimation = "idle";
+    }
   }
 
   private void handleMouseMovementInput() {
@@ -77,17 +83,14 @@ public class MainCharacterMovement : PausableObject {
     }
     if (direction_vector != Vector3.zero) {
       walking = true;
-      //TODO: differentiate between walking directions
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
       this.transform.position += direction_vector * Mathf.Min(step, dis);
-    } else {
-      this.GetComponent<CharacterAnimation>().setAnimation = "idle";
     }
   }
 
   public void stopMovement() {
     walking = false;
     this.GetComponent<CharacterAnimation>().setAnimation = "idle";
+    this.GetComponent<CharacterAnimation>().playCurrentAnimation();
     targetPosition = this.transform.position;
   }
 

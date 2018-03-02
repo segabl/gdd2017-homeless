@@ -19,6 +19,10 @@ public class CharacterAnimation : PausableObject {
   }
 	
   protected override void updatePausable() {
+    playCurrentAnimation();
+  }
+
+  public void playCurrentAnimation() {
     if (!currentAnimation.Equals(setAnimation)) {
       spriterAnimator.Play(setAnimation);
       currentAnimation = setAnimation;
