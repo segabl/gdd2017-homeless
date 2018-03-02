@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class ItemInteraction : InteractionHandler {
 
+  private void Start() {
+    interactClip = (AudioClip)Resources.Load("sfx/grab-item");
+  }
+
   public override void interact() {
     Debug.Log("Item interaction");
     Inventory inventory = GameController.instance.player.GetComponent<Inventory>();
@@ -13,7 +17,13 @@ public class ItemInteraction : InteractionHandler {
       Debug.Log("No Collectible script attached to: " + this.name);
       return;
     }
-    inventory.addItem(c);
+    if (inventory.addItem(c) && interactClip) {
+      AudioSource audioSource = GameController.instance.player.gameObject.GetComponent<AudioSource>();
+      if (audioSource) {
+        audioSource.clip = interactClip;
+        audioSource.Play();
+      }
+    }
     this.gameObject.SetActive(false);
     text.enabled = false;
     endInteraction();
