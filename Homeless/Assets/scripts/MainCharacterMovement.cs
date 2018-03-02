@@ -15,7 +15,7 @@ public class MainCharacterMovement : PausableObject {
   }
 
   protected override void updatePausable() {
-    float step = movementSpeed * Time.deltaTime;
+    float step = movementSpeed * Time.deltaTime; 
     handleMouseMovementInput();
     handleKeyboardMovementInput(step);
     updatePosition(step);
@@ -79,4 +79,10 @@ public class MainCharacterMovement : PausableObject {
       this.transform.position += direction_vector * Mathf.Min(step, dis);
     }
   }
+
+  public void stopMovement() {
+    walking = false;
+    targetPosition = this.transform.position;
+  }
+
 }
