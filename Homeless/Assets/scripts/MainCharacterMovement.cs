@@ -53,6 +53,7 @@ public class MainCharacterMovement : PausableObject {
     walking = false;
     float dis = Mathf.Sqrt(Mathf.Pow(this.transform.position.x - targetPosition.x, 2) + Mathf.Pow(this.transform.position.y - targetPosition.y, 2));
     if (dis <= 0) {
+      this.GetComponent<CharacterAnimation>().setAnimation = "idle";
       return;
     }
     float direction = Mathf.Atan2(this.transform.position.x - targetPosition.x, this.transform.position.y - targetPosition.y);
@@ -76,12 +77,17 @@ public class MainCharacterMovement : PausableObject {
     }
     if (direction_vector != Vector3.zero) {
       walking = true;
+      //TODO: differentiate between walking directions
+      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
       this.transform.position += direction_vector * Mathf.Min(step, dis);
+    } else {
+      this.GetComponent<CharacterAnimation>().setAnimation = "idle";
     }
   }
 
   public void stopMovement() {
     walking = false;
+    this.GetComponent<CharacterAnimation>().setAnimation = "idle";
     targetPosition = this.transform.position;
   }
 
