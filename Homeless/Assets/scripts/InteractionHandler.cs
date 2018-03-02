@@ -11,6 +11,8 @@ public abstract class InteractionHandler : PausableObject {
   public static InteractionHandler interactObject;
   public static bool playerCanInteract;
 
+  protected AudioClip interactClip;
+
   void Start() {
   }
 

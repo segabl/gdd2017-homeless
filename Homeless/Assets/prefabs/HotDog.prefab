@@ -81,7 +81,8 @@ MonoBehaviour:
   health: 6
   sanity: 3
   intoxication: 0
-  consumable: 1
+  type: 0
+  useSound: {fileID: 8300000, guid: 49956aa1b0c6d3249af4b1a16a6131d7, type: 3}
 --- !u!212 &212669484366210518
 SpriteRenderer:
   m_ObjectHideFlags: 1

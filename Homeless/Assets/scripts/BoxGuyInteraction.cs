@@ -13,7 +13,7 @@ namespace Assets.scripts
         {
             Inventory player_inventory = GameController.instance.player.GetComponent<Inventory>();
             Inventory this_inventory = gameObject.GetComponent<Inventory>();
-            if (player_inventory.giveItem("Food", this_inventory))
+            if (player_inventory.giveItem(player_inventory.findMatch(Collectible.Type.FOOD), this_inventory))
             {
                 //GameController.instance.karmaController.SocialAction(GameController.instance.player, SocialConstants.sharingBeer, gameObject);
                 GameController.instance.player.GetComponent<Character>().permisionToSleepInBox = true;

@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour{
 
+  public enum Type {
+    FOOD, DRINK, OTHER
+  };
+
   public Sprite sprite { get; set; }
   public int inventoryIndex { get; set; }
   public float repletion;
   public float health;
   public float sanity;
   public float intoxication;
-  public bool consumable;
+  public Type type;
   public AudioClip useSound;
 
   void Start () {
@@ -26,7 +30,7 @@ public class Collectible : MonoBehaviour{
   }
 
   public bool use(Character character) {
-    if (this.consumable) {
+    if (type == Type.FOOD || type == Type.DRINK) {
       character.adjustStats(this.repletion, this.health, this.sanity, this.intoxication);
       Debug.Log("Increase " + character.name + "'s Repletion by " + repletion + ", Health by " + health + ", Sanity by " + sanity + ", Intoxication level by " + intoxication);
       Debug.Log(character.name + "'s Repletion is " + character.repletion + ", Health is " + character.health + ", Sanity is " + character.sanity + ", Intoxication level is " + character.intoxication);

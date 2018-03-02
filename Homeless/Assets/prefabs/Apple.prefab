@@ -57,7 +57,8 @@ MonoBehaviour:
   health: 3
   sanity: 1
   intoxication: 0
-  consumable: 1
+  type: 0
+  useSound: {fileID: 8300000, guid: 49956aa1b0c6d3249af4b1a16a6131d7, type: 3}
 --- !u!114 &114953360362339718
 MonoBehaviour:
   m_ObjectHideFlags: 1
