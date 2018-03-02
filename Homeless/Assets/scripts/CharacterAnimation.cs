@@ -25,6 +25,8 @@ public class CharacterAnimation : PausableObject {
   public void playCurrentAnimation() {
     if (!currentAnimation.Equals(setAnimation)) {
       spriterAnimator.Play(setAnimation);
+      //TODO: adjust speed for animations in a more sophisticated way
+      spriterAnimator.Speed = 1.6f;
       currentAnimation = setAnimation;
     }
   }
