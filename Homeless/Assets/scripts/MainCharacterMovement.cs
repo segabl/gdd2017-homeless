@@ -22,7 +22,7 @@ public class MainCharacterMovement : PausableObject {
     if (walking) {
       //TODO: differentiate between walking directions
       this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
-    } else {
+    } else if (!walking && this.GetComponent<CharacterAnimation>().setAnimation.Equals("walking_front")){
       this.GetComponent<CharacterAnimation>().setAnimation = "idle";
     }
   }
@@ -59,7 +59,6 @@ public class MainCharacterMovement : PausableObject {
     walking = false;
     float dis = Mathf.Sqrt(Mathf.Pow(this.transform.position.x - targetPosition.x, 2) + Mathf.Pow(this.transform.position.y - targetPosition.y, 2));
     if (dis <= 0) {
-      this.GetComponent<CharacterAnimation>().setAnimation = "idle";
       return;
     }
     float direction = Mathf.Atan2(this.transform.position.x - targetPosition.x, this.transform.position.y - targetPosition.y);
