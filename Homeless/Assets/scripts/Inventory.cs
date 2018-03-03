@@ -149,7 +149,7 @@ public class Inventory : MonoBehaviour {
       Debug.Log("Cannot give item: Count = 0");
       return false;
     }
-    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("give_front");
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("give_front", "idle");
     removeItemFromInventory(collectible);
     other.addItem(collectible);
     return true;

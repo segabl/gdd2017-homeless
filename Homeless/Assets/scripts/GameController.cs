@@ -125,6 +125,7 @@ public class GameController : MonoBehaviour {
     sleepScale = 30.0f;
     sleepIncrement = accumulatedDelta;
     sleepAccPlusSixHours = accumulatedDelta + hoursToWait * inGameHour;
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("liedown", "NONE");
   }
 
   public void saveGame() {

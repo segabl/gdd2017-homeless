@@ -23,7 +23,7 @@ public class ItemInteraction : InteractionHandler {
         audioSource.clip = interactClip;
         audioSource.Play();
       }
-      GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("pickup_front");
+      GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("pickup_front", "idle");
     }
     this.gameObject.SetActive(false);
     text.enabled = false;
