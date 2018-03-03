@@ -10,14 +10,18 @@ public class PostProcessing : MonoBehaviour {
   public Shader redRadiationShader;
   public Shader swirlShader;
   public Shader pulseShader;
+  public Shader blackFadeShader;
 
   private Material daylightCycleMaterial;
   private Material blurMaterial;
   private Material redRadiationMaterial;
   private Material swirlMaterial;
   private Material pulseMaterial;
+  private Material blackFadeMaterial;
+
   private float intoxicationTime;
   private float lowHealthTime;
+  private float fadeTime;
 
   void Awake() {
     daylightCycleMaterial = new Material(daylightCycleShader);
@@ -25,8 +29,11 @@ public class PostProcessing : MonoBehaviour {
     redRadiationMaterial = new Material(redRadiationShader);
     swirlMaterial = new Material(swirlShader);
     pulseMaterial = new Material(pulseShader);
+    blackFadeMaterial = new Material(blackFadeShader);
+
     intoxicationTime = 0;
     lowHealthTime = 0;
+    fadeTime = 0;
   }
 
   // Postprocess the image
@@ -43,6 +50,7 @@ public class PostProcessing : MonoBehaviour {
     ProcessPlayerHealth(source, source);
     ProcessPlayerSanity(source, source);
     ProcessPlayerIntoxication(source, source);
+    //Fade(source, source);
 
     Graphics.Blit(source, destination);
 
@@ -74,6 +82,10 @@ public class PostProcessing : MonoBehaviour {
         pulseMaterial.SetFloat("_strength", (50.0f - health)/ 100.0f + 0.5f);
         pulseMaterial.SetFloat("_speed", (50.0f - health) / 100.0f + 0.5f);
         Graphics.Blit(source, destination, pulseMaterial);
+      }
+      else
+      {
+        lowHealthTime = 0;
       }
       
       Graphics.Blit(source, destination, redRadiationMaterial);
@@ -113,6 +125,21 @@ public class PostProcessing : MonoBehaviour {
     else
     {
       intoxicationTime = 0;
+    }
+  }
+
+  internal void Fade(RenderTexture source, RenderTexture destination)
+  {
+    if (fadeTime == 0)
+    {
+      fadeTime = GameController.instance.dayTime;
+    }
+    float deltaTime = (GameController.instance.dayTime - fadeTime) * 200;
+    if (deltaTime > 0)
+    {
+      Debug.Log(deltaTime);
+      blackFadeMaterial.SetFloat("_factor", System.Math.Min(deltaTime, 1.0f));
+      Graphics.Blit(source, destination, blackFadeMaterial);
     }
   }
 
