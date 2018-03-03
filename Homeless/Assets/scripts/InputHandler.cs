@@ -48,7 +48,33 @@ public class InputHandler : MonoBehaviour {
       {
         InteractionHandler.interactObject.interact();
       }
-    }    
+    }
+    if (Input.GetKeyDown(KeyCode.F))
+      Debug.Log("F Key pressed");
+
+    if (Input.GetKey(KeyCode.F))
+    {
+      
+      //controller.player.GetComponent<MainCharacterMovement>().stopMovement();
+      if (TheftHandler.playerCanSteal)
+      {
+        TheftHandler.playerIsStealing = true;
+      }
+    }
+    /*
+    if (Input.GetKey(KeyCode.F))
+    {
+      if (TheftHandler.playerCanSteal && TheftHandler.playerIsStealing)
+      {
+        TheftHandler.theftObject.pickPocket();
+      }
+    }
+    */
+    if (Input.GetKeyUp(KeyCode.F))
+    {
+      TheftHandler.playerIsStealing = false;
+    }
+
   }
 
 }
