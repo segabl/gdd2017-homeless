@@ -9,19 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1188412113700110}
+  m_RootGameObject: {fileID: 1903788293247078}
   m_IsPrefabParent: 1
---- !u!1 &1188412113700110
+--- !u!1 &1903788293247078
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4705872733387016}
-  - component: {fileID: 212441439599486810}
-  - component: {fileID: 114914978156253604}
-  - component: {fileID: 114424946009284204}
+  - component: {fileID: 4368196247684260}
+  - component: {fileID: 212797525214477146}
+  - component: {fileID: 114601927521315156}
+  - component: {fileID: 114634004207185710}
   m_Layer: 0
   m_Name: Money
   m_TagString: Untagged
@@ -29,25 +29,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4705872733387016
+--- !u!4 &4368196247684260
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1188412113700110}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.27, y: 0.01, z: 0.09765625}
+  m_GameObject: {fileID: 1903788293247078}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.6357548, y: -1.9166023, z: 0.060546875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114424946009284204
+--- !u!114 &114601927521315156
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1188412113700110}
+  m_GameObject: {fileID: 1903788293247078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cbfba1c62e84fe479af675afa4c9837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerDistance: 1
+--- !u!114 &114634004207185710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1903788293247078}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5683fb39863ebea4996822f0c9f3afdb, type: 3}
@@ -59,24 +71,12 @@ MonoBehaviour:
   intoxication: 0
   type: 2
   useSound: {fileID: 0}
---- !u!114 &114914978156253604
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1188412113700110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cbfba1c62e84fe479af675afa4c9837, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerDistance: 1
---- !u!212 &212441439599486810
+--- !u!212 &212797525214477146
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1188412113700110}
+  m_GameObject: {fileID: 1903788293247078}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

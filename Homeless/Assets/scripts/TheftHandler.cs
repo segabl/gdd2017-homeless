@@ -10,7 +10,8 @@ public class TheftHandler : PausableObject {
   public float stealDistance = 3;
   public float detectionDistance = 1;
   public bool targetWasAlreadyRobbed = false;
-  
+  public GameObject reward;
+
   public static TheftHandler theftObject;
   public static bool playerCanSteal;
   public static bool playerIsStealing;
@@ -25,7 +26,7 @@ public class TheftHandler : PausableObject {
   private float width;
   private float theftDuration = 3.0f;
 
-  private List<Collectible> rewards;
+  
 
 
   void Start() {
@@ -157,12 +158,17 @@ public class TheftHandler : PausableObject {
   {
     Debug.Log("Player has successfully stolen!");
     targetWasAlreadyRobbed = true;
-    reward();
+    giveReward();
     endTheft();
   }
-  private void reward()
+  private void giveReward()
   {
-
+    GameObject rewardInstance = Instantiate(reward);
+    rewardInstance.name = rewardInstance.name.Replace("(Clone)", "");
+    
+    rewardInstance.GetComponent<Collectible>().sprite = reward.GetComponent<SpriteRenderer>().sprite;
+    GameController.instance.player.GetComponent<Inventory>().addItem(rewardInstance.GetComponent<Collectible>());
+    rewardInstance.SetActive(false);
   }
 
 }
