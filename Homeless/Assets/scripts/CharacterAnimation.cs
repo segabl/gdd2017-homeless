@@ -27,7 +27,7 @@ public class CharacterAnimation : MonoBehaviour {
   }
 
   public void playCurrentAnimation() {
-    if (!currentAnimation.Equals(setAnimation)) {
+    if (!currentAnimation.Equals(setAnimation) && !setAnimation.Equals("NONE")) {
       //delete Actions from Animation Finished which are possibly added earlier
       spriterAnimator.AnimationFinished -= animFinishedSetCurrent;
       spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
@@ -36,15 +36,22 @@ public class CharacterAnimation : MonoBehaviour {
       //TODO: adjust speed for animations in a more sophisticated way
       spriterAnimator.Speed = 1.6f;
       currentAnimation = setAnimation;
+    } else if (currentAnimation.Equals("NONE") && setAnimation.Equals("NONE")) {
+      //delete Actions from Animation Finished which are possibly added earlier
+      spriterAnimator.AnimationFinished -= animFinishedSetCurrent;
+      spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
+      spriterAnimator.Speed = 0;
     }
   }
 
-  public void playOnce(String animation) {
+  public void playOnce(String animation, String nextAnimation) {
     //delete Actions from Animation Finished which are possibly added earlier
     spriterAnimator.AnimationFinished -= animFinishedSetCurrent;
     spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
     spriterAnimator.Play(animation);
     //add Actions to Animation Finished
+    animFinishedSetCurrent = f => currentAnimation = "NONE";
+    animFinishedSetSetAnim = f => setAnimation = nextAnimation;
     spriterAnimator.AnimationFinished += animFinishedSetCurrent;
     spriterAnimator.AnimationFinished += animFinishedSetSetAnim;
   }
