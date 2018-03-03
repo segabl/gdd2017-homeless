@@ -149,7 +149,7 @@ MonoBehaviour:
             Name: 
             ParentId: -1
             TimelineId: 0
-            KeyId: 0
+            KeyId: 1
             ZIndex: 0
           - Id: 1
             Name: 
@@ -167,13 +167,13 @@ MonoBehaviour:
             Name: 
             ParentId: -1
             TimelineId: 1
-            KeyId: 0
+            KeyId: 1
             ZIndex: 3
           - Id: 4
             Name: 
             ParentId: -1
             TimelineId: 2
-            KeyId: 0
+            KeyId: 1
             ZIndex: 4
         - Id: 3
           Name: 
@@ -189,7 +189,7 @@ MonoBehaviour:
             Name: 
             ParentId: -1
             TimelineId: 0
-            KeyId: 0
+            KeyId: 1
             ZIndex: 0
           - Id: 1
             Name: 
@@ -207,13 +207,13 @@ MonoBehaviour:
             Name: 
             ParentId: -1
             TimelineId: 1
-            KeyId: 0
+            KeyId: 1
             ZIndex: 3
           - Id: 4
             Name: 
             ParentId: -1
             TimelineId: 2
-            KeyId: 0
+            KeyId: 1
             ZIndex: 4
         Timelines:
         - Id: 0
@@ -239,7 +239,37 @@ MonoBehaviour:
               Alpha: 1
             ObjectInfo:
               X: 0
-              Y: -30
+              Y: -20
+              Angle: 0
+              ScaleX: 1
+              ScaleY: 1
+              Alpha: 1
+              AnimationId: 0
+              EntityId: 0
+              FolderId: 0
+              FileId: 0
+              PivotX: 0.5
+              PivotY: 0.5
+              T: 0
+          - Id: 1
+            Name: 
+            Time: 50
+            CurveType: 0
+            C1: 0
+            C2: 0
+            C3: 0
+            C4: 0
+            Spin: 0
+            BoneInfo:
+              X: 0
+              Y: 0
+              Angle: 0
+              ScaleX: 1
+              ScaleY: 1
+              Alpha: 1
+            ObjectInfo:
+              X: 0
+              Y: -22
               Angle: 0
               ScaleX: 1
               ScaleY: 1
@@ -290,6 +320,36 @@ MonoBehaviour:
               PivotX: 0.5
               PivotY: 0.5
               T: 0
+          - Id: 1
+            Name: 
+            Time: 50
+            CurveType: 0
+            C1: 0
+            C2: 0
+            C3: 0
+            C4: 0
+            Spin: 0
+            BoneInfo:
+              X: 0
+              Y: 0
+              Angle: 0
+              ScaleX: 1
+              ScaleY: 1
+              Alpha: 1
+            ObjectInfo:
+              X: 0
+              Y: -2
+              Angle: 0
+              ScaleX: 1
+              ScaleY: 1
+              Alpha: 1
+              AnimationId: 0
+              EntityId: 0
+              FolderId: 0
+              FileId: 1
+              PivotX: 0.5
+              PivotY: 0.5
+              T: 0
           Meta:
             Varlines: []
             Tagline:
@@ -329,6 +389,36 @@ MonoBehaviour:
               PivotX: 0.5
               PivotY: 0.5
               T: 0
+          - Id: 1
+            Name: 
+            Time: 50
+            CurveType: 0
+            C1: 0
+            C2: 0
+            C3: 0
+            C4: 0
+            Spin: 0
+            BoneInfo:
+              X: 0
+              Y: 0
+              Angle: 0
+              ScaleX: 1
+              ScaleY: 1
+              Alpha: 1
+            ObjectInfo:
+              X: 0
+              Y: -2
+              Angle: 0
+              ScaleX: 1
+              ScaleY: 1
+              Alpha: 1
+              AnimationId: 0
+              EntityId: 0
+              FolderId: 0
+              FileId: 2
+              PivotX: 0.5
+              PivotY: 0.5
+              T: 0
           Meta:
             Varlines: []
             Tagline:
@@ -355,8 +445,8 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: -245
-              Y: -100
+              X: -185
+              Y: -80
               Angle: 0
               ScaleX: 1
               ScaleY: 1
@@ -385,8 +475,8 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: -245
-              Y: -100
+              X: -185
+              Y: -80
               Angle: 90
               ScaleX: 1
               ScaleY: 1
@@ -415,8 +505,8 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: -245
-              Y: -100
+              X: -185
+              Y: -80
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -445,8 +535,8 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: -245
-              Y: -100
+              X: -185
+              Y: -80
               Angle: 270
               ScaleX: 1
               ScaleY: 1
@@ -484,8 +574,8 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: 235
-              Y: -100
+              X: 175
+              Y: -80
               Angle: 0
               ScaleX: 1
               ScaleY: 1
@@ -514,8 +604,8 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: 235
-              Y: -100
+              X: 175
+              Y: -80
               Angle: 90
               ScaleX: 1
               ScaleY: 1
@@ -544,8 +634,8 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: 235
-              Y: -100
+              X: 175
+              Y: -80
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -574,8 +664,8 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: 235
-              Y: -100
+              X: 175
+              Y: -80
               Angle: 270
               ScaleX: 1
               ScaleY: 1
