@@ -9,19 +9,24 @@ public class PostProcessing : MonoBehaviour {
   public Shader blurShader;
   public Shader redRadiationShader;
   public Shader swirlShader;
+  public Shader pulseShader;
 
   private Material daylightCycleMaterial;
   private Material blurMaterial;
   private Material redRadiationMaterial;
   private Material swirlMaterial;
+  private Material pulseMaterial;
   private float intoxicationTime;
+  private float lowHealthTime;
 
   void Awake() {
     daylightCycleMaterial = new Material(daylightCycleShader);
     blurMaterial = new Material(blurShader);
     redRadiationMaterial = new Material(redRadiationShader);
     swirlMaterial = new Material(swirlShader);
+    pulseMaterial = new Material(pulseShader);
     intoxicationTime = 0;
+    lowHealthTime = 0;
   }
 
   // Postprocess the image
@@ -62,9 +67,13 @@ public class PostProcessing : MonoBehaviour {
       redRadiationMaterial.SetFloat("_delta", (80 - health) / 160f);
       if (health < 50.0f)
       {
-        blurMaterial.SetFloat("hstep", 1.3f / health);
-        blurMaterial.SetFloat("vstep", 1.0f / health);
-        Graphics.Blit(source, source, blurMaterial);
+        if (lowHealthTime == 0)
+          lowHealthTime = GameController.instance.dayTime;
+        float timeDiff = GameController.instance.dayTime - lowHealthTime;
+        pulseMaterial.SetFloat("_time", timeDiff);
+        pulseMaterial.SetFloat("_strength", (50.0f - health)/ 100.0f + 0.5f);
+        pulseMaterial.SetFloat("_speed", (50.0f - health) / 100.0f + 0.5f);
+        Graphics.Blit(source, destination, pulseMaterial);
       }
       
       Graphics.Blit(source, destination, redRadiationMaterial);
@@ -85,7 +94,7 @@ public class PostProcessing : MonoBehaviour {
   internal void ProcessPlayerIntoxication(RenderTexture source, RenderTexture destination)
   {
     float intoxication = GameController.instance.player.GetComponent<Character>().intoxication;
-    if (intoxication > 0.2f)
+    if (intoxication > 0.3f)
     {
       if (intoxication > 2.5f)
         intoxication = 2.5f;
