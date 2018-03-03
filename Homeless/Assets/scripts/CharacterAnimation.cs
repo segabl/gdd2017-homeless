@@ -11,6 +11,7 @@ public class CharacterAnimation : MonoBehaviour {
   private UnityAnimator spriterAnimator;
   private Action<string> animFinishedSetCurrent = null;
   private Action<string> animFinishedSetSetAnim = null;
+  private Action<string> stopAnimation = null;
 
   // Use this for initialization
   void Start () {
@@ -28,31 +29,37 @@ public class CharacterAnimation : MonoBehaviour {
 
   public void playCurrentAnimation() {
     if (!currentAnimation.Equals(setAnimation) && !setAnimation.Equals("NONE")) {
-      //delete Actions from Animation Finished which are possibly added earlier
-      spriterAnimator.AnimationFinished -= animFinishedSetCurrent;
-      spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
+      detachAnimationFinishedActions();
       Debug.Log("Starting new animation: " + setAnimation +  " " + currentAnimation);
       spriterAnimator.Play(setAnimation);
       //TODO: adjust speed for animations in a more sophisticated way
       spriterAnimator.Speed = 1.6f;
       currentAnimation = setAnimation;
     } else if (currentAnimation.Equals("NONE") && setAnimation.Equals("NONE")) {
-      //delete Actions from Animation Finished which are possibly added earlier
-      spriterAnimator.AnimationFinished -= animFinishedSetCurrent;
-      spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
-      spriterAnimator.Speed = 0;
+      detachAnimationFinishedActions();
     }
   }
 
   public void playOnce(String animation, String nextAnimation) {
-    //delete Actions from Animation Finished which are possibly added earlier
-    spriterAnimator.AnimationFinished -= animFinishedSetCurrent;
-    spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
+    detachAnimationFinishedActions();
     spriterAnimator.Play(animation);
-    //add Actions to Animation Finished
     animFinishedSetCurrent = f => currentAnimation = "NONE";
     animFinishedSetSetAnim = f => setAnimation = nextAnimation;
+    stopAnimation = f => spriterAnimator.Speed = 0;
+    attachAnimationFinishedActions();
+  }
+
+  //attach Actions to Animation Finished
+  private void attachAnimationFinishedActions() {
     spriterAnimator.AnimationFinished += animFinishedSetCurrent;
     spriterAnimator.AnimationFinished += animFinishedSetSetAnim;
+    spriterAnimator.AnimationFinished += stopAnimation;
+  }
+
+  //delete Actions from Animation Finished which are possibly added earlier
+  private void detachAnimationFinishedActions() {
+    spriterAnimator.AnimationFinished -= animFinishedSetCurrent;
+    spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
+    spriterAnimator.AnimationFinished -= stopAnimation;
   }
 }
