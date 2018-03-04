@@ -75,7 +75,7 @@ public class Character : PausableObject {
     this.repletion += repletionAdjustment;
     this.repletion = this.repletion > this.maxRepletion ? this.maxRepletion : this.repletion;
     if(this.repletion <= 0.0f) {
-      die("Starvation");
+      die("starvation");
     }
   }
 
@@ -83,7 +83,7 @@ public class Character : PausableObject {
     this.health += healthAdjustment;
     this.health = this.health > this.maxHealth ? this.maxHealth : this.health;
     if (this.health <= 0.0f) {
-      die("Bad health condition");
+      die("a bad health condition");
     }
   }
 
@@ -96,7 +96,7 @@ public class Character : PausableObject {
     this.intoxication += intoxicationAdjustment;
     this.intoxication = this.intoxication < 0.0f ? 0.0f : this.intoxication;
     if(this.intoxication >= this.maxIntoxication) {
-      die("Too high intoxication level");
+      die("too high intoxication level");
     }
   }
 
@@ -137,9 +137,9 @@ public class Character : PausableObject {
   }
 
   private void die(String reason) {
-    //TODO: switch to game over scene
     this.alive = false;
-    Debug.Log("Player died because of: " + reason);
     GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("die", "NONE");
+    GameController.instance.panelDead.SetActive(true);
+    GameController.instance.panelDead.GetComponentInChildren<Text>().text = "Your character died due to " + reason;
   }
 }

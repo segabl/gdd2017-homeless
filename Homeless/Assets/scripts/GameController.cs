@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
   */
   public GameObject panelInGameMenu;
   public GameObject panelInventory;
+  public GameObject panelDead;
   public float dayLength;
 
   public bool paused { get; private set;  }
