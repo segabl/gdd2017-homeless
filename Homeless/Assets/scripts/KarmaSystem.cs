@@ -64,9 +64,37 @@ namespace KarmaSystem
     public bool aTrustsB(GameObject A, GameObject B, int requiredTrust=4)
     {
       if (SocialStatusDict[A].relationships[B].trust >= requiredTrust)
-      {
         return true;
-      }
+      return false;
+    }
+    public bool aLikesB(GameObject A, GameObject B, int requiredAffection=4)
+    {
+      if (SocialStatusDict[A].relationships[B].affection >= requiredAffection)
+        return true;
+      return false;
+    }
+    public bool isCharitable(GameObject A, int requiredCharity=4)
+    {
+      if (SocialStatusDict[A].reputation.charity >= requiredCharity)
+        return true;
+      return false;
+    }
+    public bool isReliable(GameObject A, int requiredReliability=4)
+    {
+      if (SocialStatusDict[A].reputation.reliability >= requiredReliability)
+        return true;
+      return false;
+    }
+    public bool isCriminal(GameObject A, int requiredCriminality=4)
+    {
+      if (SocialStatusDict[A].reputation.criminality >= requiredCriminality)
+        return true;
+      return false;
+    }
+    public bool isCruel(GameObject A, int requiredCruelty=4)
+    {
+      if (SocialStatusDict[A].reputation.cruelty >= requiredCruelty)
+        return true;
       return false;
     }
   }

@@ -73,6 +73,39 @@ public class CharacterInteraction : InteractionHandler {
     }
     return DECISION_NO;
   }
+  public String isPlayerLikedBy(String npc_name)
+  {
+    GameObject npc = GameObject.Find(npc_name);
+    if (GameController.instance.karmaController.aLikesB(npc, GameController.instance.player))
+    {
+      return DECISION_YES;
+    }
+    return DECISION_NO;
+  }
+  public String isPlayerCharitable()
+  {
+    if (GameController.instance.karmaController.isCharitable(GameController.instance.player))
+      return DECISION_YES;
+    return DECISION_NO;
+  }
+  public String isPlayerReliable()
+  {
+    if (GameController.instance.karmaController.isReliable(GameController.instance.player))
+      return DECISION_YES;
+    return DECISION_NO;
+  }
+  public String isPlayerCriminal()
+  {
+    if (GameController.instance.karmaController.isCriminal(GameController.instance.player))
+      return DECISION_YES;
+    return DECISION_NO;
+  }
+  public String isPlayerCruel()
+  {
+    if (GameController.instance.karmaController.isCruel(GameController.instance.player))
+      return DECISION_YES;
+    return DECISION_NO;
+  }
 
   public void Display() {
     handleTrigger();
