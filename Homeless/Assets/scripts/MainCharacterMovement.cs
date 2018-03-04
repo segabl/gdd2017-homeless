@@ -8,6 +8,7 @@ public class MainCharacterMovement : PausableObject {
   private Vector3 targetPosition;
   public float movementSpeed;
   public bool walking { get; set; }
+  private float walkingDirection;
 
   void Start() {
     targetPosition = this.transform.position;
@@ -22,10 +23,28 @@ public class MainCharacterMovement : PausableObject {
     handleMouseMovementInput();
     handleKeyboardMovementInput(step);
     updatePosition(step);
+    float corr = 0.01f;
     if (walking) {
-      //TODO: differentiate between walking directions
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
-    } else if (!walking && this.GetComponent<CharacterAnimation>().setAnimation.Equals("walking_front")){
+      if (walkingDirection >= Mathf.PI * 0.25f + corr && walkingDirection < Mathf.PI * 0.75f) {
+        //RIGHT
+        if (this.transform.localScale.x < 0.0f) {
+          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+        }
+        this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
+      } else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
+        //UP
+        this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+      } else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * - 0.75) {
+        //LEFT
+        if (this.transform.localScale.x > 0.0f) {
+          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+        }
+        this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
+      } else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr) {
+        //DOWN
+        this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+      }
+    } else if (!walking && this.GetComponent<CharacterAnimation>().setAnimation.Contains("walking_")){
       this.GetComponent<CharacterAnimation>().setAnimation = "idle";
     }
   }
@@ -74,10 +93,10 @@ public class MainCharacterMovement : PausableObject {
       direction_left.y = -Mathf.Cos(direction + a);
       direction_right.x = -Mathf.Sin(direction - a);
       direction_right.y = -Mathf.Cos(direction - a);
-      if (!Physics2D.Raycast(this.transform.position, direction_left, step,0)) {
+      if (!Physics2D.Raycast(this.transform.position, direction_left, step, 1 << 0)) {
         direction_vector = direction_left;
         break;
-      } else if (!Physics2D.Raycast(this.transform.position, direction_right, step,0)) {
+      } else if (!Physics2D.Raycast(this.transform.position, direction_right, step, 1 << 0)) {
         direction_vector = direction_right;
         break;
       }
@@ -85,6 +104,7 @@ public class MainCharacterMovement : PausableObject {
     }
     if (direction_vector != Vector3.zero) {
       walking = true;
+      walkingDirection = Mathf.Atan2(direction_vector.x, direction_vector.y);
       this.transform.position += direction_vector * Mathf.Min(step, dis);
     }
   }
