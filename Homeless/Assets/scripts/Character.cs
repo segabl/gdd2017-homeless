@@ -19,7 +19,7 @@ public class Character : PausableObject {
   private float accumulatedDeltaHealth;
   private float accumulatedDeltaSanity;
   private float accumulatedDeltaIntox;
-  private bool alive;
+  public bool alive { get; private set; }
   public bool asleep { get; set;}
 
   void Start () {
@@ -140,5 +140,6 @@ public class Character : PausableObject {
     //TODO: switch to game over scene
     this.alive = false;
     Debug.Log("Player died because of: " + reason);
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("die", "NONE");
   }
 }

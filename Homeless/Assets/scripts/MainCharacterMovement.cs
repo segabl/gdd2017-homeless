@@ -15,7 +15,10 @@ public class MainCharacterMovement : PausableObject {
   }
 
   protected override void updatePausable() {
-    float step = movementSpeed * Time.deltaTime; 
+    float step = movementSpeed * Time.deltaTime;
+    if (!GetComponent<Character>().alive) {
+      return;
+    }
     handleMouseMovementInput();
     handleKeyboardMovementInput(step);
     updatePosition(step);
