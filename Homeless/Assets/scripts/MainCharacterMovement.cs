@@ -93,10 +93,10 @@ public class MainCharacterMovement : PausableObject {
       direction_left.y = -Mathf.Cos(direction + a);
       direction_right.x = -Mathf.Sin(direction - a);
       direction_right.y = -Mathf.Cos(direction - a);
-      if (!Physics2D.Raycast(this.transform.position, direction_left, step,0)) {
+      if (!Physics2D.Raycast(this.transform.position, direction_left, step, 1 << 0)) {
         direction_vector = direction_left;
         break;
-      } else if (!Physics2D.Raycast(this.transform.position, direction_right, step,0)) {
+      } else if (!Physics2D.Raycast(this.transform.position, direction_right, step, 1 << 0)) {
         direction_vector = direction_right;
         break;
       }
