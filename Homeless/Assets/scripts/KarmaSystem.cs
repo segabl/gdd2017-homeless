@@ -61,6 +61,14 @@ namespace KarmaSystem
       copied_action.setTarget(actor);
       copied_action.Apply(SocialStatusDict[actor],SocialStatusDict[reactor]);
     }
+    public bool aTrustsB(GameObject A, GameObject B, int requiredTrust=4)
+    {
+      if (SocialStatusDict[A].relationships[B].trust >= requiredTrust)
+      {
+        return true;
+      }
+      return false;
+    }
   }
   internal class SocialStatus //Links relationships and reputation to a character
   {
