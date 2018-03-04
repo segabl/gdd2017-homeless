@@ -24,7 +24,7 @@ public class Car : PausableObject {
   }
 
   protected override void updatePausable() {
-    spriterAnimator.Speed = speed / 20;
+    spriterAnimator.Speed = -speed / 20;
     gameObject.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
     // Todo: reset when outside world
   }

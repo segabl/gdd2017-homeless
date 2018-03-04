@@ -69,7 +69,7 @@ public class CharacterInteraction : InteractionHandler {
     if (npc.GetChoices().Length > 0) {
       modalPanel.MessageBox(npc.GetCurrentDialogue(), Choice, npc.GetChoices());
     } else {
-      text.text = npc.GetCurrentDialogue();
+      interactionText.text = npc.GetCurrentDialogue();
     }
   }
 
