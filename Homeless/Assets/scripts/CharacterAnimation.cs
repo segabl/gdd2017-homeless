@@ -22,14 +22,14 @@ public class CharacterAnimation : MonoBehaviour {
   }
 	
   void Update() {
-    if (spriterAnimator == null) {
-      spriterAnimator = gameObject.GetComponentInChildren<SpriterDotNetBehaviour>().Animator;
-      spriterAnimator.Play("idle");
-    }
     playCurrentAnimation();
   }
 
   public void playCurrentAnimation() {
+    if (spriterAnimator == null) {
+      spriterAnimator = gameObject.GetComponentInChildren<SpriterDotNetBehaviour>().Animator;
+      spriterAnimator.Play("idle");
+    }
     if (!currentAnimation.Equals(setAnimation) && !setAnimation.Equals("NONE")) {
       detachAnimationFinishedActions();
       spriterAnimator.Play(setAnimation);
