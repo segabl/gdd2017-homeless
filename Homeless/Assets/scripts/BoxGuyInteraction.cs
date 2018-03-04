@@ -32,5 +32,13 @@ namespace Assets.scripts
         {
             GameController.instance.player.GetComponent<Character>().permisionToSleepInBox = false;
         }
+        public String hasPermission()
+        {
+            if (GameController.instance.player.GetComponent<Character>().permisionToSleepInBox)
+            {
+                return "Y";
+            }
+            return "N";
+        }
     }
 }

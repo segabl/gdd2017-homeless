@@ -6,7 +6,8 @@ using UnityEngine;
 namespace Assets.scripts {
     public class SleepingBoxInteraction : CharacterInteraction
     {
-
+        public float healthGain;
+        public float sanityGain;
         public String hasPermission()
         {
             if(GameController.instance.player.GetComponent<Character>().permisionToSleepInBox)
@@ -19,9 +20,13 @@ namespace Assets.scripts {
         {
             GameController.instance.player.GetComponent<Character>().permisionToSleepInBox = false;
             SetNextTree("default");
-            
+            SleepingSpot spot = new SleepingSpot();
+            spot.healthGain = 5;
+            spot.sanityGain = 5;
+            var gc = GameController.instance;
+            gc.sleep(spot);
             Debug.Log("Slept in the box");
-            //TODO implement sleeping functionality
+            
 
         }
     }
