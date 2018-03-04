@@ -110,6 +110,7 @@ public class GameController : MonoBehaviour {
         Debug.Log("Wake up");
         player.GetComponent<Character>().asleep = false;
         sleepScale = 1.0f;
+        player.GetComponent<CharacterAnimation>().setAnimation = "idle";
         unpauseAll();
         Camera.main.GetComponent<PostProcessing>().sleep = false;
       }
