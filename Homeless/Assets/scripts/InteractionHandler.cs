@@ -14,21 +14,24 @@ public abstract class InteractionHandler : PausableObject {
   protected AudioClip interactClip;
 
   void Start() {
-    GameObject canvas = GameController.instance.menuCanvas;
-    Text[] texts = canvas.GetComponentsInChildren<Text>();
-    foreach (Text t in texts) {
-      if (t.name == "InteractionText") {
-        interactionText = t;
-        break;
-      }
-    }
+    
   }
 
   protected override void updatePausable() {
 
     if (!interactionText) {
-      Debug.Log("interactionText is null");
-      return;
+      GameObject canvas = GameController.instance.menuCanvas;
+      Text[] texts = canvas.GetComponentsInChildren<Text>();
+      foreach (Text t in texts) {
+        if (t.name.Equals("InteractionText")) {
+          interactionText = t;
+          break;
+        }
+      }
+      if (!interactionText) {
+        Debug.Log("interactionText is null");
+        return;
+      }
     }
 
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
