@@ -491,6 +491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 1, b: 1, a: 0}
+  moveToX: 0
+  speed: 0
 --- !u!114 &114785220066750364
 MonoBehaviour:
   m_ObjectHideFlags: 1
