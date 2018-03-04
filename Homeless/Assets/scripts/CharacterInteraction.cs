@@ -64,8 +64,9 @@ public class CharacterInteraction : InteractionHandler {
     return DECISION_NO;
   }
 
-  public String isPlayerTrustedBy(GameObject npc)
+  public String isPlayerTrustedBy(String npc_name)
   {
+    GameObject npc = GameObject.Find(npc_name);
     if (GameController.instance.karmaController.aTrustsB(npc, GameController.instance.player))
     {
       return DECISION_YES;
