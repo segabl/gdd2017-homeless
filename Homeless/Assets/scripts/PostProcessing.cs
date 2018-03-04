@@ -76,8 +76,8 @@ public class PostProcessing : MonoBehaviour {
       if (health < 50.0f)
       {
         if (lowHealthTime == 0)
-          lowHealthTime = GameController.instance.dayTime;
-        float timeDiff = GameController.instance.dayTime - lowHealthTime;
+          lowHealthTime = Time.fixedTime;
+        float timeDiff = (Time.fixedTime - lowHealthTime) / 1440f;
         pulseMaterial.SetFloat("_time", timeDiff);
         pulseMaterial.SetFloat("_strength", (50.0f - health)/ 100.0f + 0.5f);
         pulseMaterial.SetFloat("_speed", (50.0f - health) / 100.0f + 0.5f);
@@ -111,8 +111,8 @@ public class PostProcessing : MonoBehaviour {
       if (intoxication > 2.5f)
         intoxication = 2.5f;
       if (intoxicationTime == 0)
-        intoxicationTime = GameController.instance.dayTime;
-      float intoxicationDelta = (GameController.instance.dayTime - intoxicationTime) * 500f;
+        intoxicationTime = Time.fixedTime;
+      float intoxicationDelta = (Time.fixedTime - intoxicationTime) / 1440f * 500f;
       if (intoxicationDelta > 400f)
         intoxicationDelta -= 400f;
       if (intoxicationDelta > 0)
@@ -132,9 +132,9 @@ public class PostProcessing : MonoBehaviour {
   {
     if (fadeTime == 0)
     {
-      fadeTime = GameController.instance.dayTime;
+      fadeTime = Time.fixedTime;
     }
-    float deltaTime = (GameController.instance.dayTime - fadeTime) * 200;
+    float deltaTime = (Time.fixedTime - fadeTime) / 1440f* 200f;
     if (deltaTime > 0)
     {
       Debug.Log(deltaTime);

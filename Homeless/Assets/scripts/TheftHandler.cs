@@ -137,9 +137,9 @@ public class TheftHandler : PausableObject {
   {
     if (theftStart == 0)
     {
-      theftStart = GameController.instance.dayTime;
+      theftStart = Time.fixedTime;
     }
-    theftDeltaTime = GameController.instance.dayTime - theftStart;
+    theftDeltaTime = (Time.fixedTime - theftStart) / 1440f;
   }
 
   private void drawTheftCircle()
