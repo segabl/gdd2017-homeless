@@ -22,14 +22,11 @@ public class GameController : MonoBehaviour {
   public float dayLength;
 
   public bool paused { get; private set;  }
-  private float accumulatedDelta;
   public int day { get; private set; }
   public float dayTime { get; private set; }
   public float inGameHour { get; private set; }
   private float hoursToWait;
-  public float sleepScale { get; private set; }
-  private float sleepIncrement;
-  private float sleepAccPlusSixHours;
+  private float sleepUntil;
 
   public KarmaController karmaController = null;
 
@@ -55,9 +52,6 @@ public class GameController : MonoBehaviour {
       controllerInstance.dayLength = dayLength;
       controllerInstance.inGameHour = inGameHour;
       controllerInstance.hoursToWait = hoursToWait;
-      controllerInstance.sleepScale = sleepScale;
-      controllerInstance.sleepIncrement = sleepIncrement;
-      controllerInstance.sleepAccPlusSixHours = sleepAccPlusSixHours;
       controllerInstance.paused = paused;
       controllerInstance.menuCanvas = menuCanvas;
       controllerInstance.panelInGameMenu = panelInGameMenu;
@@ -74,12 +68,8 @@ public class GameController : MonoBehaviour {
       karmaController = new KarmaController();
       day = 0;
       dayTime = 0.5f;
-      accumulatedDelta = 0;
       inGameHour = dayLength / 24.0f;
       hoursToWait = 6;
-      sleepScale = 1.0f;
-      sleepIncrement = 0.0f;
-      sleepAccPlusSixHours = 0.0f;
       paused = false;
     }
   }
@@ -94,22 +84,17 @@ public class GameController : MonoBehaviour {
     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "GameScene") {
       return;
     }
-    float scaledDeltaTime = sleepScale * Time.deltaTime;
+    float deltaTime = Time.deltaTime;
     bool asleep = player.GetComponent<Character>().asleep;
-    accumulatedDelta += scaledDeltaTime;
-    dayTime += scaledDeltaTime / dayLength;
+    dayTime += deltaTime / dayLength;
     if (dayTime > 1) {
       dayTime = 0;
       day++;
-      accumulatedDelta = 0;
       Debug.Log("Day " + day + " started");
     }
     if (asleep) {
-      sleepIncrement += scaledDeltaTime;
-      if (sleepIncrement >= sleepAccPlusSixHours) {
-        Debug.Log("Wake up");
+      if (Time.time >= sleepUntil) {
         player.GetComponent<Character>().asleep = false;
-        sleepScale = 1.0f;
         player.GetComponent<CharacterAnimation>().setAnimation = "idle";
         unpauseAll();
         Camera.main.GetComponent<PostProcessing>().sleep = false;
@@ -119,17 +104,14 @@ public class GameController : MonoBehaviour {
 
   public void sleep(SleepingSpot spot) {
     pauseAll();
-    Debug.Log("Go to sleep");
     Character character = player.GetComponent<Character>();
     character.asleep = true;
     //NOTE: Sleeping for 6h. Intox loss per hour = 0.1 -> -0.6 intox
     //                       Repletion loss per hour while asleep = 3.0 -> -18.0 repletion
     character.adjustStats(-18.0f, spot.healthGain, spot.sanityGain, -0.6f);
-    sleepScale = 30.0f;
-    sleepIncrement = accumulatedDelta;
-    sleepAccPlusSixHours = accumulatedDelta + hoursToWait * inGameHour;
+    sleepUntil = Time.time + 3;
     Camera.main.GetComponent<PostProcessing>().sleep = true;
-    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("liedown", "NONE");
+    player.GetComponent<CharacterAnimation>().playOnce("liedown", "NONE");
   }
 
   public void saveGame() {

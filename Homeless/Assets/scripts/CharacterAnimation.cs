@@ -15,8 +15,6 @@ public class CharacterAnimation : MonoBehaviour {
 
   // Use this for initialization
   void Start () {
-    spriterAnimator = gameObject.GetComponentInChildren<SpriterDotNetBehaviour>().Animator;
-    spriterAnimator.Play("idle");
     currentAnimation = "idle";
     setAnimation = "idle";
     animFinishedSetCurrent = f => currentAnimation = "NONE";
@@ -28,6 +26,10 @@ public class CharacterAnimation : MonoBehaviour {
   }
 
   public void playCurrentAnimation() {
+    if (spriterAnimator == null) {
+      spriterAnimator = gameObject.GetComponentInChildren<SpriterDotNetBehaviour>().Animator;
+      spriterAnimator.Play("idle");
+    }
     if (!currentAnimation.Equals(setAnimation) && !setAnimation.Equals("NONE")) {
       detachAnimationFinishedActions();
       spriterAnimator.Play(setAnimation);

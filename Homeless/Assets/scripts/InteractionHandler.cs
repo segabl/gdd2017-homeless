@@ -14,7 +14,7 @@ public abstract class InteractionHandler : PausableObject {
   protected AudioClip interactClip;
 
   void Start() {
-    
+
   }
 
   protected override void updatePausable() {
@@ -39,11 +39,17 @@ public abstract class InteractionHandler : PausableObject {
       if (interactObject != this) {
         if (this is ItemInteraction) {
           interactionText.text = "Press 'E' to pick up " + this.name;
-        } else if (this is TrashcanInteraction) {
-					interactionText.text = "Press 'E' to search the trash";
-        } else if (this is CharacterInteraction) {
+        }
+        else if (this is TrashcanInteraction) {
+          interactionText.text = "Press 'E' to search the trash";
+        }
+        else if (this is CharacterInteraction) {
           interactionText.text = "Press 'E' to talk to " + this.name;
-        } else {
+        }
+        else if (this is SleepingSpotInteraction) {
+          interactionText.text = "Press 'E' to sleep";
+        }
+        else {
           interactionText.text = defaultText;
         }
       }

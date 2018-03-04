@@ -33,7 +33,10 @@ public class MainCharacterMovement : PausableObject {
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
       } else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
         //UP
-        this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+        if (this.transform.localScale.x < 0.0f) {
+          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+        }
+        this.GetComponent<CharacterAnimation>().setAnimation = "walking_back";
       } else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * - 0.75) {
         //LEFT
         if (this.transform.localScale.x > 0.0f) {
@@ -42,6 +45,9 @@ public class MainCharacterMovement : PausableObject {
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
       } else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr) {
         //DOWN
+        if (this.transform.localScale.x < 0.0f) {
+          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+        }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
       }
     } else if (!walking && this.GetComponent<CharacterAnimation>().setAnimation.Contains("walking_")){
