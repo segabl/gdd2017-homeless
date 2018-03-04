@@ -26,7 +26,7 @@ public class ItemInteraction : InteractionHandler {
       GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("pickup_front", "idle");
     }
     this.gameObject.SetActive(false);
-    text.enabled = false;
+    interactionText.enabled = false;
     endInteraction();
   }
 }

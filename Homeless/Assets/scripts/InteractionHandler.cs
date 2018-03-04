@@ -7,44 +7,52 @@ public abstract class InteractionHandler : PausableObject {
 
   public float triggerDistance;
   private string defaultText = "Press 'E' to interact";
-  protected Text text;
+  protected Text interactionText;
   public static InteractionHandler interactObject;
   public static bool playerCanInteract;
 
   protected AudioClip interactClip;
 
   void Start() {
+    
   }
 
   protected override void updatePausable() {
 
-    GameObject canvas = GameController.instance.menuCanvas;
-    text = canvas.GetComponentInChildren<Text>();
-
-    if (!canvas || !text) {
-      Debug.Log("Screen canvas or text is null");
-      return;
+    if (!interactionText) {
+      GameObject canvas = GameController.instance.menuCanvas;
+      Text[] texts = canvas.GetComponentsInChildren<Text>();
+      foreach (Text t in texts) {
+        if (t.name.Equals("InteractionText")) {
+          interactionText = t;
+          break;
+        }
+      }
+      if (!interactionText) {
+        Debug.Log("interactionText is null");
+        return;
+      }
     }
 
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
-      text.transform.position = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, 50, 0);
+      interactionText.transform.position = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, 50, 0);
       if (interactObject != this) {
         if (this is ItemInteraction) {
-          text.text = "Press 'E' to pick up " + this.name;
+          interactionText.text = "Press 'E' to pick up " + this.name;
         } else if (this is Thrascans) {
 					var trashcan = (Thrascans)this;
 					if (trashcan.isEmpty ()) {
-						text.text = "Trashcan is empty";
+						interactionText.text = "Trashcan is empty";
 					} else {
-						text.text = "Press 'E' to search the trash";
+						interactionText.text = "Press 'E' to search the trash";
 					}
         } else if (this is CharacterInteraction) {
-          text.text = "Press 'E' to talk to " + this.name;
+          interactionText.text = "Press 'E' to talk to " + this.name;
         } else {
-          text.text = defaultText;
+          interactionText.text = defaultText;
         }
       }
-      text.enabled = true;
+      interactionText.enabled = true;
       interactObject = this;
       playerCanInteract = true;
     }
@@ -55,7 +63,7 @@ public abstract class InteractionHandler : PausableObject {
 
   public abstract void interact();
   protected void endInteraction() {
-    text.enabled = false;
+    interactionText.enabled = false;
     interactObject = null;
     playerCanInteract = false;
   }
