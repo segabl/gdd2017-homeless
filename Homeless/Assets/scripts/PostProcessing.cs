@@ -12,6 +12,8 @@ public class PostProcessing : MonoBehaviour {
   public Shader pulseShader;
   public Shader blackFadeShader;
 
+  public bool sleep = false;
+
   private Material daylightCycleMaterial;
   private Material blurMaterial;
   private Material redRadiationMaterial;
@@ -50,7 +52,8 @@ public class PostProcessing : MonoBehaviour {
     ProcessPlayerHealth(source, source);
     ProcessPlayerSanity(source, source);
     ProcessPlayerIntoxication(source, source);
-    //Fade(source, source);
+    ProcessSleep(source, source);
+
 
     Graphics.Blit(source, destination);
 
@@ -128,18 +131,25 @@ public class PostProcessing : MonoBehaviour {
     }
   }
 
-  internal void Fade(RenderTexture source, RenderTexture destination)
+  internal void ProcessSleep(RenderTexture source, RenderTexture destination)
   {
-    if (fadeTime == 0)
+    if (sleep)
     {
-      fadeTime = Time.fixedTime;
+      if (fadeTime == 0)
+      {
+        fadeTime = GameController.instance.dayTime;
+      }
+      float deltaTime = (GameController.instance.dayTime - fadeTime) / GameController.instance.sleepScale * 150f;
+      if (deltaTime > 0)
+      {
+        Debug.Log(deltaTime);
+        blackFadeMaterial.SetFloat("_factor", System.Math.Min(deltaTime, 1.0f));
+        Graphics.Blit(source, destination, blackFadeMaterial);
+      }
     }
-    float deltaTime = (Time.fixedTime - fadeTime) / 1440f* 200f;
-    if (deltaTime > 0)
+    else
     {
-      Debug.Log(deltaTime);
-      blackFadeMaterial.SetFloat("_factor", System.Math.Min(deltaTime, 1.0f));
-      Graphics.Blit(source, destination, blackFadeMaterial);
+      fadeTime = 0;
     }
   }
 

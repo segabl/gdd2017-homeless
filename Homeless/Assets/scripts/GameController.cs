@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour {
   public float dayTime { get; private set; }
   public float inGameHour { get; private set; }
   private float hoursToWait;
-  private float sleepScale;
+  public float sleepScale { get; private set; }
   private float sleepIncrement;
   private float sleepAccPlusSixHours;
 
@@ -110,6 +110,7 @@ public class GameController : MonoBehaviour {
         player.GetComponent<Character>().asleep = false;
         sleepScale = 1.0f;
         unpauseAll();
+        Camera.main.GetComponent<PostProcessing>().sleep = false;
       }
     }
   }
@@ -125,6 +126,7 @@ public class GameController : MonoBehaviour {
     sleepScale = 30.0f;
     sleepIncrement = accumulatedDelta;
     sleepAccPlusSixHours = accumulatedDelta + hoursToWait * inGameHour;
+    Camera.main.GetComponent<PostProcessing>().sleep = true;
     GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("liedown", "NONE");
   }
 
