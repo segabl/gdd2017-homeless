@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000742644390648}
   - component: {fileID: 61041040715070042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WalkArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

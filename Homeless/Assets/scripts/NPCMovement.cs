@@ -22,33 +22,42 @@ public class NPCMovement : MonoBehaviour {
 	private Vector2 minWalkArea;
 	private Vector2 maxWalkArea;
 	public Collider2D walkArea;
-	private bool inWalkArea=false;
+	private bool inWalkArea;
 	// Use this for initialization
 	void Start () {
-
+		Debug.Log ("start");
 
 		myRigidBody = GetComponent<Rigidbody2D> ();
+
 		waitCounter = waitTime;
 		walkCounter = walkTime;
 		ChooseDirection ();
 
+
+
 		sprites = GetComponentsInChildren<SpriteRenderer> ();
 
-		for (int i = 0; i <= sprites.Length; i++) {
+		for (int i = 0; i < sprites.Length; i++) {
 
-			sprites [i].color = new Color (Random.Range (0, 255)*Time.deltaTime, Random.Range (0, 255)*Time.deltaTime, Random.Range (0, 255)*Time.deltaTime);
+			sprites[i].color = new Color (Random.Range (0, 255)*Time.deltaTime, Random.Range (0, 255)*Time.deltaTime, Random.Range (0, 255)*Time.deltaTime);
 		}
+
 
 		if (walkArea != null) {
-		
+			Debug.Log ("walk area not null");
+			Debug.Log (walkArea.bounds);
 			minWalkArea = walkArea.bounds.min;
+			Debug.Log ("min");
+			Debug.Log (minWalkArea);
 			maxWalkArea = walkArea.bounds.max;
+			Debug.Log ("max");
+			Debug.Log (maxWalkArea);
 			inWalkArea = true;
-
-		
 		}
-
 		
+		
+
+
 	}
 
 
@@ -64,7 +73,7 @@ public class NPCMovement : MonoBehaviour {
 
 			case 0:
 				myRigidBody.velocity = new Vector2 (0, NPCspeed);
-				if (inWalkArea==true && transform.position.y > maxWalkArea.y) {
+				if (inWalkArea && transform.position.y > maxWalkArea.y) {
 				
 					waitCounter = waitTime;
 					isWalking = false;
@@ -73,7 +82,7 @@ public class NPCMovement : MonoBehaviour {
 
 			case 1:
 				myRigidBody.velocity = new Vector2 (NPCspeed, 0);
-				if (inWalkArea==true && transform.position.x > maxWalkArea.x) {
+				if (inWalkArea && transform.position.x > maxWalkArea.x) {
 
 					waitCounter = waitTime;
 					isWalking = false;
@@ -82,7 +91,7 @@ public class NPCMovement : MonoBehaviour {
 
 			case 2:
 				myRigidBody.velocity = new Vector2 (0, -NPCspeed);
-				if (inWalkArea==true && transform.position.y < minWalkArea.y) {
+				if (inWalkArea && transform.position.y < minWalkArea.y) {
 
 					waitCounter = waitTime;
 					isWalking = false;
@@ -91,7 +100,7 @@ public class NPCMovement : MonoBehaviour {
 
 			case 3:
 				myRigidBody.velocity = new Vector2 (-NPCspeed, 0);
-				if (inWalkArea==true && transform.position.x < minWalkArea.y) {
+				if (inWalkArea && transform.position.x < minWalkArea.x) {
 
 					waitCounter = waitTime;
 					isWalking = false;

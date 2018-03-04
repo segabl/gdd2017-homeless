@@ -53,4 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   civilianPrefab: {fileID: 1712563148949130, guid: 67cc093ffbaf6724aa69d73294967ac9,
     type: 2}
-  spawnRate: 2
+  spawnRate: 1
