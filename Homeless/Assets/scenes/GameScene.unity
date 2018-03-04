@@ -4797,7 +4797,7 @@ MonoBehaviour:
       NodeType: 1
       Parent: 0
       Trigger: 1
-      TriggerText: HasItem,Alcohol
+      TriggerText: HasItemOfType,DRINK
       Connections: 0700000008000000
     - ID: 7
       Size:
@@ -6483,7 +6483,7 @@ MonoBehaviour:
       NodeType: 1
       Parent: 0
       Trigger: 1
-      TriggerText: HasItem,Food
+      TriggerText: HasItemOfType,FOOD
       Connections: 0700000008000000
     - ID: 7
       Size:
@@ -6534,7 +6534,7 @@ MonoBehaviour:
         y: 213
         width: 150
         height: 125
-      Text: Share somee food and youi can sleep here.
+      Text: Share some food and you can sleep here.
       Type: 0
       NodeType: 1
       Parent: 0
