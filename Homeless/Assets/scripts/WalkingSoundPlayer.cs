@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkingSoundPlayer : MonoBehaviour {
+public class WalkingSoundPlayer : PausableObject {
 
   public AudioClip[] walks;
   private int currentSound;
@@ -19,9 +20,8 @@ public class WalkingSoundPlayer : MonoBehaviour {
                                      (AudioClip)Resources.Load("sfx/walking/footstep6")};
     currentSound = 0;
   }
-	
-	// Update is called once per frame
-	void Update () {
+
+  protected override void updatePausable() {
     bool walking = GetComponent<MainCharacterMovement>().walking;
     if (walking && !audioSource.isPlaying) {
       System.Random rnd = new System.Random();
@@ -29,5 +29,5 @@ public class WalkingSoundPlayer : MonoBehaviour {
       audioSource.clip = walks[clip];
       audioSource.Play();
     }
-	}
+  }
 }

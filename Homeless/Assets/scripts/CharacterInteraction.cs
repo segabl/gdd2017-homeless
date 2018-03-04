@@ -48,9 +48,17 @@ public class CharacterInteraction : InteractionHandler {
     nextTree = treeName;
   }
 
-  public String HasItem(String itemName) {
+  public String HasItemOfName(String itemName) {
     Inventory player_inventory = GameController.instance.player.GetComponent<Inventory>();
-    if (player_inventory.containsItem(itemName)) {
+    if (player_inventory.findMatch(itemName)) {
+      return DECISION_YES;
+    }
+    return DECISION_NO;
+  }
+
+  public String HasItemOfType(String itemType) {
+    Inventory player_inventory = GameController.instance.player.GetComponent<Inventory>();
+    if (player_inventory.findMatch((Collectible.Type)Enum.Parse(typeof(Collectible.Type), itemType))) {
       return DECISION_YES;
     }
     return DECISION_NO;

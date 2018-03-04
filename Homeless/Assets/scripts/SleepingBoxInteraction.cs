@@ -18,6 +18,8 @@ namespace Assets.scripts {
         public void Sleep()
         {
             GameController.instance.player.GetComponent<Character>().permisionToSleepInBox = false;
+            SetNextTree("default");
+            
             Debug.Log("Slept in the box");
             //TODO implement sleeping functionality
 

@@ -16,24 +16,23 @@ public class MainCharacterMovement : PausableObject {
 
   protected override void updatePausable() {
     float step = movementSpeed * Time.deltaTime;
-    Vector3 oldPosition = targetPosition;
+    if (!GetComponent<Character>().alive) {
+      return;
+    }
     handleMouseMovementInput();
-    bool keyPressed = handleKeyboardMovementInput(step);
-
+    handleKeyboardMovementInput(step);
     updatePosition(step);
-    if (Vector3.Distance(this.transform.position, targetPosition) >= 10.01f || keyPressed) {
-      walking = true;
-    } else {
-      walking = false;
-    } 
-
+    if (walking) {
+      //TODO: differentiate between walking directions
+      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+    } else if (!walking && this.GetComponent<CharacterAnimation>().setAnimation.Equals("walking_front")){
+      this.GetComponent<CharacterAnimation>().setAnimation = "idle";
+    }
   }
 
   private void handleMouseMovementInput() {
     if (Input.GetMouseButton((int)MouseButton.LEFT)) {
-      //Debug.Log("LMB");
       targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-      //Debug.Log("Mouse clicked position in world is: " + targetPosition);
     }
   }
 
@@ -60,6 +59,7 @@ public class MainCharacterMovement : PausableObject {
   }
 
   private void updatePosition(float step) {
+    walking = false;
     float dis = Mathf.Sqrt(Mathf.Pow(this.transform.position.x - targetPosition.x, 2) + Mathf.Pow(this.transform.position.y - targetPosition.y, 2));
     if (dis <= 0) {
       return;
@@ -83,6 +83,17 @@ public class MainCharacterMovement : PausableObject {
       }
       a += Mathf.Deg2Rad;
     }
-    this.transform.position += direction_vector * Mathf.Min(step, dis);
+    if (direction_vector != Vector3.zero) {
+      walking = true;
+      this.transform.position += direction_vector * Mathf.Min(step, dis);
+    }
   }
+
+  public void stopMovement() {
+    walking = false;
+    this.GetComponent<CharacterAnimation>().setAnimation = "idle";
+    this.GetComponent<CharacterAnimation>().playCurrentAnimation();
+    targetPosition = this.transform.position;
+  }
+
 }
