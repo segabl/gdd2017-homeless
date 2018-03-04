@@ -55,7 +55,8 @@ public class Character : PausableObject {
       Text[] texts = GameController.instance.menuCanvas.GetComponentsInChildren<Text>();
       foreach (Text text in texts) {
         if (text.name.Equals("StatsDebugText")) {
-          text.text = "Repletion is " + this.repletion + ", Health is " + this.health + ", Sanity is " + this.sanity + ", Intoxication level is " + this.intoxication;
+          text.text = "Repletion is " + roundDebug(repletion) + ", Health is " + roundDebug(health) + ", Sanity is " + roundDebug(sanity)
+            + ", Intoxication level is " + roundDebug(intoxication);
         }
       }
     }
@@ -141,5 +142,9 @@ public class Character : PausableObject {
     GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("die", "NONE");
     GameController.instance.panelDead.SetActive(true);
     GameController.instance.panelDead.GetComponentInChildren<Text>().text = "Your character died due to " + reason;
+  }
+  private Decimal roundDebug(float f)
+  {
+    return System.Math.Round((Decimal)f, 1, MidpointRounding.AwayFromZero);
   }
 }
