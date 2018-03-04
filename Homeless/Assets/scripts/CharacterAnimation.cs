@@ -30,7 +30,6 @@ public class CharacterAnimation : MonoBehaviour {
   public void playCurrentAnimation() {
     if (!currentAnimation.Equals(setAnimation) && !setAnimation.Equals("NONE")) {
       detachAnimationFinishedActions();
-      Debug.Log("Starting new animation: " + setAnimation +  " " + currentAnimation);
       spriterAnimator.Play(setAnimation);
       //TODO: adjust speed for animations in a more sophisticated way
       spriterAnimator.Speed = 1.6f;

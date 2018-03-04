@@ -25,7 +25,6 @@ public class MainCharacterMovement : PausableObject {
     updatePosition(step);
     float corr = 0.01f;
     if (walking) {
-      Debug.Log(walkingDirection);
       if (walkingDirection >= Mathf.PI * 0.25f + corr && walkingDirection < Mathf.PI * 0.75f) {
         //RIGHT
         if (this.transform.localScale.x < 0.0f) {
