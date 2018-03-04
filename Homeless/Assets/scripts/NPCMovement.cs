@@ -89,7 +89,7 @@ public class NPCMovement : PausableObject {
     }
     else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
       //UP
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+      this.GetComponent<CharacterAnimation>().setAnimation = "walking_back";
     }
     else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * -0.75) {
       //LEFT

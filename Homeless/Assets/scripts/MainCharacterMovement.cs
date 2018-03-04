@@ -33,7 +33,7 @@ public class MainCharacterMovement : PausableObject {
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
       } else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
         //UP
-        this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+        this.GetComponent<CharacterAnimation>().setAnimation = "walking_back";
       } else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * - 0.75) {
         //LEFT
         if (this.transform.localScale.x > 0.0f) {
