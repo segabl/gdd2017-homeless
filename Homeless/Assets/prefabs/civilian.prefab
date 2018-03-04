@@ -1079,6 +1079,7 @@ MonoBehaviour:
   waitTime: 0
   walkTime: 3
   NPCspeed: 3
+  walkArea: {fileID: 61041040715070042, guid: c584f9e0c032ccc40be89678fb0f018a, type: 2}
 --- !u!114 &114967725212957490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1090,6 +1091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c213a4cf9b73b547a67e2f8bfdf8d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSprite: {fileID: 0}
 --- !u!212 &212004817499314906
 SpriteRenderer:
   m_ObjectHideFlags: 1
