@@ -1,47 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NPCMovement : MonoBehaviour {
+public class NPCMovement : PausableObject {
 
 	private Rigidbody2D myRigidBody;
 	public bool isWalking;
 	public bool isWaiting;
-	public float waitTime;
-	public float walkTime;
+	private System.Func<float> waitTime;
+  private System.Func<float> walkDirectionChangeTime;
+  private System.Func<float> randomColorRange;
+  private System.Func<float> randVel;
 	private float walkCounter;
 	private float waitCounter;
-	public float NPCspeed;
 	private int walkDirection;
-
 	private Vector3 targetPosition;
-
 	private SpriteRenderer[] sprites;
-
-
 	private Vector2 minWalkArea;
 	private Vector2 maxWalkArea;
 	public Collider2D walkArea;
 	private bool inWalkArea;
-	// Use this for initialization
-	void Start () {
-		Debug.Log ("start");
+  public float movementSpeed;
+  private Vector3 direction_vector;
 
+  void Start () {
 		myRigidBody = GetComponent<Rigidbody2D> ();
 
-		waitCounter = waitTime;
-		walkCounter = walkTime;
-		ChooseDirection ();
-
-
+    waitTime = () => Random.Range(1.0f, 3.0f);
+    walkDirectionChangeTime = () => Random.Range(1.0f, 5.0f);
+    randomColorRange = () => Random.Range(0, 255);
+    randVel = () => Random.Range(0.0f, 2.0f*Mathf.PI);
+    direction_vector = Vector3.zero;
+    waitCounter = waitTime();
+		walkCounter = walkDirectionChangeTime();
 
 		sprites = GetComponentsInChildren<SpriteRenderer> ();
 
 		for (int i = 0; i < sprites.Length; i++) {
-
-			sprites[i].color = new Color (Random.Range (0, 255)*Time.deltaTime, Random.Range (0, 255)*Time.deltaTime, Random.Range (0, 255)*Time.deltaTime);
+			sprites[i].color = new Color (randomColorRange(), randomColorRange(), randomColorRange());
 		}
-
 
 		if (walkArea != null) {
 			Debug.Log ("walk area not null");
@@ -54,96 +49,60 @@ public class NPCMovement : MonoBehaviour {
 			Debug.Log (maxWalkArea);
 			inWalkArea = true;
 		}
-		
-		
-
-
 	}
 
+  protected override void updatePausable() {
+    float step = movementSpeed * Time.deltaTime;
+    if (walkCounter < 0) {
+      waitCounter = waitTime();
+      walkCounter = walkDirectionChangeTime();
+      isWalking = false;
+    }
+    if (waitCounter < 0) {
+      waitCounter = waitTime();
+      walkCounter = walkDirectionChangeTime();
+      float rand = randVel();
+      direction_vector.x = -Mathf.Sin(rand);
+      direction_vector.y = -Mathf.Cos(rand);
+      isWalking = true;
+      if (inWalkArea && transform.position.x < minWalkArea.x) {
+        isWalking = false;
+      }
+    }
 
-	
-	// Update is called once per frame
-	void Update () {
+    if (!isWalking) {
+      waitCounter -= Time.deltaTime;
+      this.GetComponent<CharacterAnimation>().setAnimation = "idle";
+      return;
+    }
+    walkCounter -= Time.deltaTime;
+    this.transform.position += direction_vector * step;
 
-		if (isWalking) {
-
-			walkCounter -= Time.deltaTime;
-		
-			switch (walkDirection) {
-
-			case 0:
-				myRigidBody.velocity = new Vector2 (0, NPCspeed);
-				if (inWalkArea && transform.position.y > maxWalkArea.y) {
-				
-					waitCounter = waitTime;
-					isWalking = false;
-				}
-				break;
-
-			case 1:
-				myRigidBody.velocity = new Vector2 (NPCspeed, 0);
-				if (inWalkArea && transform.position.x > maxWalkArea.x) {
-
-					waitCounter = waitTime;
-					isWalking = false;
-				}
-				break;
-
-			case 2:
-				myRigidBody.velocity = new Vector2 (0, -NPCspeed);
-				if (inWalkArea && transform.position.y < minWalkArea.y) {
-
-					waitCounter = waitTime;
-					isWalking = false;
-				}
-				break;
-
-			case 3:
-				myRigidBody.velocity = new Vector2 (-NPCspeed, 0);
-				if (inWalkArea && transform.position.x < minWalkArea.x) {
-
-					waitCounter = waitTime;
-					isWalking = false;
-				}
-				break;
-
-			}
-
-
-
-
-			if (walkCounter < 0) {
-				waitCounter = waitTime;
-				isWalking = false;
-			} 
-		}
-			else {
-				waitCounter -= Time.deltaTime;
-				myRigidBody.velocity = Vector2.zero;
-				if (waitCounter < 0) {
-					
-					ChooseDirection ();
-
-				}
-			
-			}
-		
-		}
-
-
-		
-
-		
-
-
-	void ChooseDirection(){
-
-		walkDirection = Random.Range (0, 4);
-		isWalking = true;
-		walkCounter = walkTime;
-	
-	}
-
+    float walkingDirection = Mathf.Atan2(direction_vector.x, direction_vector.y);
+    float corr = 0.01f;
+    if (walkingDirection >= Mathf.PI * 0.25f + corr && walkingDirection < Mathf.PI * 0.75f) {
+      //RIGHT
+      if (this.transform.localScale.x < 0.0f) {
+        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+      }
+      this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
+    }
+    else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
+      //UP
+      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+    }
+    else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * -0.75) {
+      //LEFT
+      if (this.transform.localScale.x > 0.0f) {
+        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+      }
+      this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
+    }
+    else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr) {
+      //DOWN
+      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+    }
+  }
 
 }
 
