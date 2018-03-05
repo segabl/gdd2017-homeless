@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Car : PausableObject {
+public class Car : PausableAnimatedObject {
 
   public Color color = Color.white;
   public float speed;
   public float oldSpeed;
 
-  private UnityAnimator spriterAnimator;
 
   void Start() {
     Vector3 scale = gameObject.transform.localScale;
@@ -30,22 +29,5 @@ public class Car : PausableObject {
     gameObject.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
     // Todo: reset when outside world
   }
-  public override void OnPauseGame()
-  {
-    if (ignoreOnPause)
-      return;
-    base.OnPauseGame();
-    oldSpeed = spriterAnimator.Speed;
-    spriterAnimator.Speed = 0;
-  }
-  public override void OnUnpauseGame()
-  {
-    if (ignoreOnPause)
-    {
-      ignoreOnPause = false;
-      return;
-    }
-    base.OnUnpauseGame();
-    spriterAnimator.Speed = oldSpeed;
-  }
+  
 }

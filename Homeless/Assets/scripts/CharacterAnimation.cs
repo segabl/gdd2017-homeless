@@ -4,11 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAnimation : PausableObject {
+public class CharacterAnimation : PausableAnimatedObject {
 
   private String currentAnimation;
   public String setAnimation { get; set; }
-  private UnityAnimator spriterAnimator;
+
   private Action<string> animFinishedSetCurrent = null;
   private Action<string> animFinishedSetSetAnim = null;
   private Action<string> stopAnimation = null;
@@ -65,24 +65,6 @@ public class CharacterAnimation : PausableObject {
     spriterAnimator.AnimationFinished -= stopAnimation;
   }
 
-  public override void OnPauseGame()
-  {
-    if (ignoreOnPause)
-      return;
-    base.OnPauseGame();
-    animationSpeed = spriterAnimator.Speed;
-    spriterAnimator.Speed = 0f;
-  }
-
-  public override void OnUnpauseGame()
-  {
-    if (ignoreOnPause)
-    {
-      ignoreOnPause = false;
-      return;
-    }
-    base.OnUnpauseGame();
-    spriterAnimator.Speed = animationSpeed;
-  }
+ 
 
 }
