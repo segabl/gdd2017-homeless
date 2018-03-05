@@ -8,7 +8,8 @@ public class TheftHandler : PausableObject {
 
   public float triggerDistance = 5;
   public float stealDistance = 3;
-  public float detectionDistance = 1;
+  [Range(0.9f,1.3f)]
+  public float detectionDistance = 0.9f;
   public bool targetWasAlreadyRobbed = false;
   public GameObject reward;
 
@@ -31,6 +32,7 @@ public class TheftHandler : PausableObject {
 
   void Start() {
     playerWasCaught = false;
+    interactClip = (AudioClip)Resources.Load("sfx/grab-item");
     //CreatePoints();
   }
 
@@ -73,7 +75,8 @@ public class TheftHandler : PausableObject {
 
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
      
-      if (theftObject != this) {
+      if (theftObject != this && playerCanSteal) {
+        return;
       }
      
       theftObject = this;
@@ -88,7 +91,7 @@ public class TheftHandler : PausableObject {
 
         if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < stealDistance)
         {
-          if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < detectionDistance)
+          if (theftDeltaTime < 0.0013f && Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < detectionDistance)
           {
             playerCaught();
             endTheft();
@@ -96,15 +99,22 @@ public class TheftHandler : PausableObject {
 
           updateTheftTimer();
 
-          if (theftDeltaTime > 0.002)
+          if (theftDeltaTime > 0.002f)
           {
-            theftSuccess();
+            if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) <= detectionDistance)
+              theftSuccess();
+            else
+            {
+              theftDeltaTime = 0;
+              theftStart = 0;
+            }
           }
         }
         else
         {
           theftDeltaTime = 0;
           theftStart = 0;
+          gameObject.GetComponent<LineRenderer>().enabled = false;
         }
       }
       else
@@ -153,11 +163,21 @@ public class TheftHandler : PausableObject {
   {
     Debug.Log("Player was caught!");
     playerWasCaught = true;
+    playerIsStealing = false;
   }
   private void theftSuccess()
   {
     Debug.Log("Player has successfully stolen!");
     targetWasAlreadyRobbed = true;
+
+    AudioSource audioSource = GameController.instance.player.gameObject.GetComponent<AudioSource>();
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("give_front", "idle");
+    if (audioSource)
+    {
+      audioSource.clip = interactClip;
+      audioSource.Play();
+    }
+
     giveReward();
     endTheft();
   }
