@@ -17,11 +17,13 @@ public class TrashcanInteraction : InteractionHandler {
 
   public override void interact() {
     if (yieldChance < 0.1) {
+      interactionText.text = "Nothing of use here...";
       return;
     }
     if (Random.Range(0.0f, 1.0f) < yieldChance) {
       int num = Random.Range(0, items.Count);
-      Instantiate(items[num], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
+      GameObject drop =  Instantiate(items[num], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
+      drop.name = drop.name.Replace("(Clone)", "");
     }
     else {
       interactionText.text = "Nothing of use here...";
