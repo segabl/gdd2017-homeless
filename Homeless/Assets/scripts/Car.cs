@@ -7,6 +7,7 @@ public class Car : PausableObject {
 
   public Color color = Color.white;
   public float speed;
+  public float oldSpeed;
 
   private UnityAnimator spriterAnimator;
 
@@ -28,5 +29,23 @@ public class Car : PausableObject {
     spriterAnimator.Speed = -speed / 20;
     gameObject.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
     // Todo: reset when outside world
+  }
+  public override void OnPauseGame()
+  {
+    if (ignoreOnPause)
+      return;
+    base.OnPauseGame();
+    oldSpeed = spriterAnimator.Speed;
+    spriterAnimator.Speed = 0;
+  }
+  public override void OnUnpauseGame()
+  {
+    if (ignoreOnPause)
+    {
+      ignoreOnPause = false;
+      return;
+    }
+    base.OnUnpauseGame();
+    spriterAnimator.Speed = oldSpeed;
   }
 }

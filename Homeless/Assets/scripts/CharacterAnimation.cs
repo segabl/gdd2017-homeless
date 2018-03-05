@@ -67,16 +67,20 @@ public class CharacterAnimation : PausableObject {
 
   public override void OnPauseGame()
   {
+    if (ignoreOnPause)
+      return;
     base.OnPauseGame();
     animationSpeed = spriterAnimator.Speed;
     spriterAnimator.Speed = 0f;
-    
-
-
   }
 
   public override void OnUnpauseGame()
   {
+    if (ignoreOnPause)
+    {
+      ignoreOnPause = false;
+      return;
+    }
     base.OnUnpauseGame();
     spriterAnimator.Speed = animationSpeed;
   }

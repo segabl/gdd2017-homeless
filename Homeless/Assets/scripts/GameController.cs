@@ -104,6 +104,7 @@ public class GameController : MonoBehaviour {
   }
 
   public void sleep(SleepingSpot spot) {
+    player.GetComponent<CharacterAnimation>().ignoreNextOnPause();
     pauseAll();
     Character character = player.GetComponent<Character>();
     character.asleep = true;

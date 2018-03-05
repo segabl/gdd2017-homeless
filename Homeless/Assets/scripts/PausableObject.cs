@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class PausableObject : MonoBehaviour {
 
   public bool paused { get; protected set; }
+  public bool ignoreOnPause { get; protected set; }
 
   void Update() {
     if (paused) {
@@ -18,6 +19,10 @@ public abstract class PausableObject : MonoBehaviour {
   }
   public virtual void OnUnpauseGame() {
     paused = false;
+  }
+  public void ignoreNextOnPause()
+  {
+    ignoreOnPause = true;
   }
 
   /// <summary>
