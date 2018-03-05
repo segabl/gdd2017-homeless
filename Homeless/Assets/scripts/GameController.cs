@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using KarmaSystem;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
@@ -134,8 +135,14 @@ public class GameController : MonoBehaviour {
   public void pauseAll() {
     paused = true;
     Object[] objects = FindObjectsOfType(typeof(PausableObject));
+    List<string> alreadyPausedObjects = new List<string>();
+
     foreach (PausableObject pausableObject in objects) {
-      pausableObject.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
+      if (!alreadyPausedObjects.Contains(pausableObject.name)) {
+        Debug.Log("pausing " + pausableObject.name);
+        pausableObject.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
+        alreadyPausedObjects.Add(pausableObject.name);
+      }
     }
   }
 
