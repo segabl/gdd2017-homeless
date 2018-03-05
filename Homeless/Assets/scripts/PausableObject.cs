@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class PausableObject : MonoBehaviour {
 
-  public bool paused { get; private set; }
+  public bool paused { get; protected set; }
 
   void Update() {
     if (paused) {
@@ -13,10 +13,10 @@ public abstract class PausableObject : MonoBehaviour {
     updatePausable();
   }
 
-  public void OnPauseGame() {
+  public virtual void OnPauseGame() {
     paused = true;
   }
-  public void OnUnpauseGame() {
+  public virtual void OnUnpauseGame() {
     paused = false;
   }
 

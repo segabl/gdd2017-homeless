@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAnimation : MonoBehaviour {
+public class CharacterAnimation : PausableObject {
 
   private String currentAnimation;
   public String setAnimation { get; set; }
@@ -21,7 +21,7 @@ public class CharacterAnimation : MonoBehaviour {
     animFinishedSetSetAnim = f => setAnimation = "idle";
   }
 	
-  void Update() {
+  protected override void updatePausable() {
     playCurrentAnimation();
   }
 
@@ -63,4 +63,23 @@ public class CharacterAnimation : MonoBehaviour {
     spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
     spriterAnimator.AnimationFinished -= stopAnimation;
   }
+
+  public override void OnPauseGame()
+  {
+    base.OnPauseGame();
+    //spriterAnimator.Speed = 2f;
+    Debug.Log("Speed before: " + spriterAnimator.Speed);
+    spriterAnimator.Speed = 0f;
+    
+
+
+  }
+
+  public override void OnUnpauseGame()
+  {
+    base.OnUnpauseGame();
+    spriterAnimator.Speed = 1.6f;
+    Debug.Log("Speed after: " + spriterAnimator.Speed);
+  }
+
 }
