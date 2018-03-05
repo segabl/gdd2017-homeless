@@ -12,6 +12,7 @@ public class CharacterAnimation : PausableObject {
   private Action<string> animFinishedSetCurrent = null;
   private Action<string> animFinishedSetSetAnim = null;
   private Action<string> stopAnimation = null;
+  private float animationSpeed;
 
   // Use this for initialization
   void Start () {
@@ -67,8 +68,7 @@ public class CharacterAnimation : PausableObject {
   public override void OnPauseGame()
   {
     base.OnPauseGame();
-    //spriterAnimator.Speed = 2f;
-    Debug.Log("Speed before: " + spriterAnimator.Speed);
+    animationSpeed = spriterAnimator.Speed;
     spriterAnimator.Speed = 0f;
     
 
@@ -78,8 +78,7 @@ public class CharacterAnimation : PausableObject {
   public override void OnUnpauseGame()
   {
     base.OnUnpauseGame();
-    spriterAnimator.Speed = 1.6f;
-    Debug.Log("Speed after: " + spriterAnimator.Speed);
+    spriterAnimator.Speed = animationSpeed;
   }
 
 }
