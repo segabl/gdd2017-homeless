@@ -4,14 +4,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAnimation : PausableObject {
+public class CharacterAnimation : PausableAnimatedObject {
 
   private String currentAnimation;
   public String setAnimation { get; set; }
-  private UnityAnimator spriterAnimator;
+
   private Action<string> animFinishedSetCurrent = null;
   private Action<string> animFinishedSetSetAnim = null;
   private Action<string> stopAnimation = null;
+  private float animationSpeed;
 
   // Use this for initialization
   void Start () {
@@ -64,22 +65,6 @@ public class CharacterAnimation : PausableObject {
     spriterAnimator.AnimationFinished -= stopAnimation;
   }
 
-  public override void OnPauseGame()
-  {
-    base.OnPauseGame();
-    //spriterAnimator.Speed = 2f;
-    Debug.Log("Speed before: " + spriterAnimator.Speed);
-    spriterAnimator.Speed = 0f;
-    
-
-
-  }
-
-  public override void OnUnpauseGame()
-  {
-    base.OnUnpauseGame();
-    spriterAnimator.Speed = 1.6f;
-    Debug.Log("Speed after: " + spriterAnimator.Speed);
-  }
+ 
 
 }
