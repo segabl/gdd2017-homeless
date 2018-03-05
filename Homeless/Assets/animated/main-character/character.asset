@@ -1587,7 +1587,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -1617,7 +1617,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -1746,7 +1746,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -1776,7 +1776,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -6657,7 +6657,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -6687,7 +6687,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -6717,7 +6717,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -6747,7 +6747,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -6777,7 +6777,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -9050,7 +9050,7 @@ MonoBehaviour:
             ObjectInfo:
               X: -30.084745
               Y: 67.79661
-              Angle: 360
+              Angle: 0
               ScaleX: 1
               ScaleY: 1
               Alpha: 1
@@ -9080,7 +9080,7 @@ MonoBehaviour:
             ObjectInfo:
               X: -30.084745
               Y: 67.79661
-              Angle: 360
+              Angle: 0
               ScaleX: 1
               ScaleY: 1
               Alpha: 1
@@ -9110,7 +9110,7 @@ MonoBehaviour:
             ObjectInfo:
               X: -30.084745
               Y: 67.79661
-              Angle: 360
+              Angle: 0
               ScaleX: 1
               ScaleY: 1
               Alpha: 1
@@ -9140,7 +9140,7 @@ MonoBehaviour:
             ObjectInfo:
               X: -30.084745
               Y: 67.79661
-              Angle: 360
+              Angle: 0
               ScaleX: 1
               ScaleY: 1
               Alpha: 1
@@ -9170,7 +9170,7 @@ MonoBehaviour:
             ObjectInfo:
               X: -30.084745
               Y: 67.79661
-              Angle: 360
+              Angle: 0
               ScaleX: 1
               ScaleY: 1
               Alpha: 1
@@ -10932,7 +10932,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -10962,7 +10962,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -10992,7 +10992,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -11022,7 +11022,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -11052,7 +11052,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
