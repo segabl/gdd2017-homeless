@@ -114,7 +114,7 @@ public class TheftHandler : PausableObject {
         {
           theftDeltaTime = 0;
           theftStart = 0;
-          gameObject.GetComponent<LineRenderer>().enabled = false;
+          //gameObject.GetComponent<LineRenderer>().enabled = false;
         }
       }
       else
