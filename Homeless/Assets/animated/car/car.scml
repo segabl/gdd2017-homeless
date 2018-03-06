@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
     <folder id="0">
-        <file id="0" name="back.png" width="1024" height="512" pivot_x="0.5" pivot_y="0.5"/>
-        <file id="1" name="color.png" width="1024" height="512" pivot_x="0.5" pivot_y="0.5"/>
-        <file id="2" name="front.png" width="1024" height="512" pivot_x="0.5" pivot_y="0.5"/>
-        <file id="3" name="wheel.png" width="192" height="192" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="0" name="back.png" width="768" height="384" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="1" name="color.png" width="768" height="384" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="2" name="front.png" width="768" height="384" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="3" name="wheel.png" width="160" height="160" pivot_x="0.5" pivot_y="0.5"/>
     </folder>
     <entity id="0" name="car">
         <animation id="0" name="drive" length="100" interval="100">
@@ -88,6 +88,86 @@
                 </key>
                 <key id="3" time="75">
                     <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="270"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="break" length="200" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="3" key="0" z_index="2"/>
+                    <object_ref id="3" timeline="1" key="0" z_index="3"/>
+                    <object_ref id="4" timeline="2" key="0" z_index="4"/>
+                </key>
+                <key id="1" time="100">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="3" key="1" z_index="2"/>
+                    <object_ref id="3" timeline="1" key="1" z_index="3"/>
+                    <object_ref id="4" timeline="2" key="1" z_index="4"/>
+                </key>
+                <key id="2" time="200">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="2" z_index="1"/>
+                    <object_ref id="2" timeline="3" key="2" z_index="2"/>
+                    <object_ref id="3" timeline="1" key="2" z_index="3"/>
+                    <object_ref id="4" timeline="2" key="2" z_index="4"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="back">
+                <key id="0">
+                    <object folder="0" file="0" y="-20" angle="0"/>
+                </key>
+                <key id="1" time="100" spin="-1">
+                    <object folder="0" file="0" y="-20" angle="2"/>
+                </key>
+                <key id="2" time="200" spin="0">
+                    <object folder="0" file="0" y="-20" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="color">
+                <key id="0">
+                    <object folder="0" file="1" angle="0"/>
+                </key>
+                <key id="1" time="100" spin="-1">
+                    <object folder="0" file="1" angle="2"/>
+                </key>
+                <key id="2" time="200" spin="0">
+                    <object folder="0" file="1" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="front">
+                <key id="0">
+                    <object folder="0" file="2" angle="0"/>
+                </key>
+                <key id="1" time="100" spin="-1">
+                    <object folder="0" file="2" angle="2"/>
+                </key>
+                <key id="2" time="200" spin="0">
+                    <object folder="0" file="2" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="wheel1">
+                <key id="0" spin="0">
+                    <object folder="0" file="3" x="-185" y="-80" pivot_x="0.5" pivot_y="0.5" angle="0"/>
+                </key>
+                <key id="1" time="100" spin="0">
+                    <object folder="0" file="3" x="-182" y="-79" pivot_x="0.5" pivot_y="0.5" angle="0"/>
+                </key>
+                <key id="2" time="200" spin="0">
+                    <object folder="0" file="3" x="-185" y="-80" pivot_x="0.5" pivot_y="0.5" angle="0"/>
+                </key>
+            </timeline>
+            <timeline id="4" name="wheel2">
+                <key id="0" spin="0">
+                    <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="0"/>
+                </key>
+                <key id="1" time="100" spin="0">
+                    <object folder="0" file="3" x="180" y="-77" pivot_x="0.505749" pivot_y="0.499207" angle="0"/>
+                </key>
+                <key id="2" time="200" spin="0">
+                    <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="0"/>
                 </key>
             </timeline>
         </animation>

@@ -7,8 +7,9 @@ public class Car : PausableAnimatedObject {
 
   public Color color = Color.white;
   public float speed;
-  public float oldSpeed;
-
+  private float oldSpeed;
+  private bool stop;
+  private bool emergencyStop;
 
   void Start() {
     Vector3 scale = gameObject.transform.localScale;
@@ -24,10 +25,41 @@ public class Car : PausableAnimatedObject {
   protected override void updatePausable() {
     if (spriterAnimator == null) {
       spriterAnimator = gameObject.GetComponentInChildren<SpriterDotNetBehaviour>().Animator;
+      spriterAnimator.AnimationFinished += onAnimationFinished;
+      spriterAnimator.Play("drive");
     }
-    spriterAnimator.Speed = -speed / 20;
-    gameObject.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+    float deltaTime = Time.deltaTime;
+    if (stop) {
+      if (Mathf.Abs(speed) >= deltaTime * 20.0f) {
+        speed -= Mathf.Sign(speed) * deltaTime * 20.0f;
+      } else {
+        speed = 0.0f;
+      }
+    }
+    if (stop && emergencyStop) {
+
+    } else {
+      spriterAnimator.Speed = -speed / 20;
+    }
+    gameObject.transform.position += new Vector3(speed * deltaTime, 0, 0);
     // Todo: reset when outside world
   }
-  
+
+  private void onAnimationFinished(string animation) {
+    if (animation == "break") {
+      spriterAnimator.Speed = 0;
+    }
+  }
+
+  public void stopMoving(bool emergency = false) {
+    if (!stop) {
+      oldSpeed = speed;
+      stop = true;
+      emergencyStop = emergency;
+      if (emergencyStop) {
+        spriterAnimator.Speed = 0.5f;
+        spriterAnimator.Play("break");
+      }
+    }
+  }
 }
