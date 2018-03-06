@@ -42,7 +42,10 @@ public abstract class InteractionHandler : PausableObject {
         }
         else if (this is TrashcanInteraction) {
           interactionText.text = "Press 'E' to search the trash";
-        }
+        } 
+        else if (this is LootableCarInteraction) {
+          interactionText.text = "Press 'E' to loot";
+        } 
         else if (this is CharacterInteraction) {
           interactionText.text = "Press 'E' to talk to " + this.name;
         }
