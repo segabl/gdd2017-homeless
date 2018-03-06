@@ -52,6 +52,9 @@ public class NPCMovement : PausableObject {
 	}
 
   protected override void updatePausable() {
+    if(movementSpeed == 0) {
+      return;
+    }
     float step = movementSpeed * Time.deltaTime;
     if (GetComponent<CarHit>().hit) {
       waitCounter = waitTime();
