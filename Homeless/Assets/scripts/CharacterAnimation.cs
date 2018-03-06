@@ -44,6 +44,7 @@ public class CharacterAnimation : PausableAnimatedObject {
 
   public void playOnce(String animation, String nextAnimation) {
     detachAnimationFinishedActions();
+    spriterAnimator.Speed = 1.6f;
     spriterAnimator.Play(animation);
     animFinishedSetCurrent = f => currentAnimation = "NONE";
     animFinishedSetSetAnim = f => setAnimation = nextAnimation;

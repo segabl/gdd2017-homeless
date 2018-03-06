@@ -95,9 +95,10 @@ public class GameController : MonoBehaviour {
     }
     if (asleep) {
       if (Time.time >= sleepUntil) {
+        dayTime += 0.25f;
         player.GetComponent<Character>().asleep = false;
-        player.GetComponent<CharacterAnimation>().setAnimation = "idle";
         unpauseAll();
+        player.GetComponent<CharacterAnimation>().playOnce("standup_sleep", "NONE");
         Camera.main.GetComponent<PostProcessing>().sleep = false;
       }
     }
@@ -111,7 +112,7 @@ public class GameController : MonoBehaviour {
     //NOTE: Sleeping for 6h. Intox loss per hour = 0.1 -> -0.6 intox
     //                       Repletion loss per hour while asleep = 3.0 -> -18.0 repletion
     character.adjustStats(-18.0f, spot.healthGain, spot.sanityGain, -0.6f);
-    sleepUntil = Time.time + 3;
+    sleepUntil = Time.time + 2;
     Camera.main.GetComponent<PostProcessing>().sleep = true;
     player.GetComponent<CharacterAnimation>().playOnce("liedown", "NONE");
   }
