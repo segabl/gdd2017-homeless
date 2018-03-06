@@ -17,7 +17,8 @@ public class MainCharacterMovement : PausableObject {
 
   protected override void updatePausable() {
     float step = movementSpeed * Time.deltaTime;
-    if (!GetComponent<Character>().alive) {
+    if (!GetComponent<Character>().alive || GetComponent<CarHit>().hit) {
+      targetPosition = this.transform.position;
       return;
     }
     handleMouseMovementInput();
@@ -28,25 +29,25 @@ public class MainCharacterMovement : PausableObject {
       if (walkingDirection >= Mathf.PI * 0.25f + corr && walkingDirection < Mathf.PI * 0.75f) {
         //RIGHT
         if (this.transform.localScale.x < 0.0f) {
-          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
         }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
       } else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
         //UP
         if (this.transform.localScale.x < 0.0f) {
-          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
         }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_back";
       } else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * - 0.75) {
         //LEFT
         if (this.transform.localScale.x > 0.0f) {
-          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
         }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
       } else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr) {
         //DOWN
         if (this.transform.localScale.x < 0.0f) {
-          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
         }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
       }
