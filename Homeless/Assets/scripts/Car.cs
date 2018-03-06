@@ -57,7 +57,7 @@ public class Car : PausableAnimatedObject {
       stop = true;
       emergencyStop = emergency;
       if (emergencyStop) {
-        spriterAnimator.Speed = 0.5f;
+        spriterAnimator.Speed = 0.25f;
         spriterAnimator.Play("break");
       }
     }

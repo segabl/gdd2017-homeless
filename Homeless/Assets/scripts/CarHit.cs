@@ -38,7 +38,7 @@ public class CarHit : MonoBehaviour {
 
   void OnTriggerEnter2D(Collider2D col) {
     Car car = col.gameObject.GetComponent<Car>();
-    if (Mathf.Abs(car.speed) > 0.1f && !hit) {
+    if (car && Mathf.Abs(car.speed) > 0.1f && !hit) {
       Debug.Log("Collision with: " + col.gameObject.name);
       hitSpeed = Mathf.Abs(car.speed) * 0.75f;
       car.stopMoving(true);
