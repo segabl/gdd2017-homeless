@@ -8542,7 +8542,7 @@ MonoBehaviour:
   health: 0
   sanity: 0
   intoxication: 0
-  type: 0
+  type: 2
   useSound: {fileID: 0}
 --- !u!1 &850986006
 GameObject:
