@@ -23,6 +23,7 @@ public class CarHit : MonoBehaviour {
     if(immobilityCount <= 0.0f) {
       immobilityCount = immobilityTime;
       hit = false;
+      GetComponent<CharacterAnimation>().playOnce("standup_ground", "idle");
       return;
     }
     // 0.5 of immobilityTime is gliding, 0.5 is lying 

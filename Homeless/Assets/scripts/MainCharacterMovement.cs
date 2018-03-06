@@ -18,6 +18,7 @@ public class MainCharacterMovement : PausableObject {
   protected override void updatePausable() {
     float step = movementSpeed * Time.deltaTime;
     if (!GetComponent<Character>().alive || GetComponent<CarHit>().hit) {
+      walking = false;
       targetPosition = this.transform.position;
       return;
     }

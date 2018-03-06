@@ -12,7 +12,9 @@ public class CharacterAnimation : PausableAnimatedObject {
   private Action<string> animFinishedSetCurrent = null;
   private Action<string> animFinishedSetSetAnim = null;
   private Action<string> stopAnimation = null;
+  private Action<string> oncePlayingStopped = null;
   private float animationSpeed;
+  private bool oncePlaying;
 
   // Use this for initialization
   void Start () {
@@ -20,6 +22,7 @@ public class CharacterAnimation : PausableAnimatedObject {
     setAnimation = "idle";
     animFinishedSetCurrent = f => currentAnimation = "NONE";
     animFinishedSetSetAnim = f => setAnimation = "idle";
+    oncePlaying = false;
   }
 	
   protected override void updatePausable() {
@@ -31,23 +34,36 @@ public class CharacterAnimation : PausableAnimatedObject {
       spriterAnimator = gameObject.GetComponentInChildren<SpriterDotNetBehaviour>().Animator;
       spriterAnimator.Play("idle");
     }
-    if (!currentAnimation.Equals(setAnimation) && !setAnimation.Equals("NONE")) {
-      detachAnimationFinishedActions();
-      spriterAnimator.Play(setAnimation);
-      //TODO: adjust speed for animations in a more sophisticated way
-      spriterAnimator.Speed = 1.6f;
-      currentAnimation = setAnimation;
-    } else if (currentAnimation.Equals("NONE") && setAnimation.Equals("NONE")) {
-      detachAnimationFinishedActions();
+    if (oncePlaying || currentAnimation.Equals(setAnimation)) {
+      return;
     }
+    else if (currentAnimation.Equals("NONE") && setAnimation.Equals("NONE")) {
+      detachAnimationFinishedActions();
+      return;
+    }
+    detachAnimationFinishedActions();
+    //TODO: adjust speed for animations in a more sophisticated way
+    spriterAnimator.Speed = 1.6f;
+    spriterAnimator.Play(setAnimation);
+    detachAnimationFinishedActions();
+    currentAnimation = setAnimation;
   }
 
   public void playOnce(String animation, String nextAnimation) {
     detachAnimationFinishedActions();
+
+    currentAnimation = animation;
+    setAnimation = animation;
+    oncePlaying = true;
+    spriterAnimator.Speed = 1.6f;
+
     spriterAnimator.Play(animation);
+
     animFinishedSetCurrent = f => currentAnimation = "NONE";
     animFinishedSetSetAnim = f => setAnimation = nextAnimation;
     stopAnimation = f => spriterAnimator.Speed = 0;
+    oncePlayingStopped = f => oncePlaying = false;
+
     attachAnimationFinishedActions();
   }
 
@@ -56,6 +72,7 @@ public class CharacterAnimation : PausableAnimatedObject {
     spriterAnimator.AnimationFinished += animFinishedSetCurrent;
     spriterAnimator.AnimationFinished += animFinishedSetSetAnim;
     spriterAnimator.AnimationFinished += stopAnimation;
+    spriterAnimator.AnimationFinished += oncePlayingStopped;
   }
 
   //delete Actions from Animation Finished which are possibly added earlier
@@ -63,8 +80,9 @@ public class CharacterAnimation : PausableAnimatedObject {
     spriterAnimator.AnimationFinished -= animFinishedSetCurrent;
     spriterAnimator.AnimationFinished -= animFinishedSetSetAnim;
     spriterAnimator.AnimationFinished -= stopAnimation;
+    spriterAnimator.AnimationFinished -= oncePlayingStopped;
   }
 
- 
+
 
 }
