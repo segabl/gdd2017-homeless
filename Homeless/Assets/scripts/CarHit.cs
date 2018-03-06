@@ -39,11 +39,13 @@ public class CarHit : MonoBehaviour {
 
   void OnTriggerEnter2D(Collider2D col) {
     Car car = col.gameObject.GetComponent<Car>();
-    if (Mathf.Abs(car.speed) > 0.1f && !hit) {
+    if (car != null && Mathf.Abs(car.speed) > 0.1f && !hit) {
       Debug.Log("Collision with: " + col.gameObject.name);
       hitSpeed = Mathf.Abs(car.speed) * 0.75f;
       car.stopMoving(true);
-      GetComponent<Character>().adjustStats(0.0f, -hitSpeed * 5.0f, 0.0f, 0.0f);
+      if (name.Equals("MainCharacter")) {
+        GetComponent<Character>().adjustStats(0.0f, -hitSpeed * 5.0f, 0.0f, 0.0f);
+      }
       hitDirection = Mathf.Atan2(this.transform.position.x - car.transform.position.x, this.transform.position.y - car.transform.position.y);
       if(hitDirection > 0 && hitDirection <= Mathf.PI) {
           this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
