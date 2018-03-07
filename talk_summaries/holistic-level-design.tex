@@ -1,0 +1,174 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\providecommand{\keywords}[1]{\textbf{\textit{Tags:}} #1}
+\providecommand{\talkurl}[1]{\textbf{\textit{Url:}} #1}
+\providecommand{\track}[1]{\textbf{\textit{Track:}} #1}
+\providecommand{\speaker}[1]{\textbf{\textit{Speaker:}} #1}
+
+
+
+\title{Level Design Workshop: An Approach to Holistic Level Design by Steve Lee}
+\author{Author: Christian Huber}
+
+\begin{document}
+\maketitle
+\begin{keywords} GDC 2017, Steve Lee, Arkane, free content , Design\end{keywords}
+
+\begin{track} GDC 2017 in San Francisco - Design  \end{track}
+
+\begin{talkurl}  \url{https://www.gdcvault.com/play/1024301/Level-Design-Workshop-An-Approach} \end{talkurl}
+
+\begin{speaker}Steve Lee, Arkane\end{speaker}
+
+
+\begin{abstract}
+
+The talk \textit{Level Design Workshop: An Approach to Holistic Level Design} by Steve Lee shows, as the title says, an holistic approach of designing levels. Holism means that a system shouldn't be viewed by its parts, but rather as a whole. The idea it suggests is, that a system in its entirety can be more than just a collection of its fragments. So the interconnectedness of the single components of a system increases the quality and importance of said system as a whole. Steve Lee shows a diagram consisting of three big headings, namely: Gameplay, Presentation and Story. These are the three parts of the system we examine in more detail viz. \textit{game} respectively the design of a level. Each of this sections is fundamental for level design on its own. But what really makes great level design, is a well engineered connection between all of these subparts. A personal metaphor for holism which shows the power of interconnectedness could be a soical network. Sure there are many people, companies and organizations on social networks but without a connection between them (like, love, abo, friend, comments, chat etc.) a social network wouldn't work. It would just be a huge unfunctional and unfunny blob of random strangers.
+
+\end{abstract}
+
+\section{Summary of Talk}
+
+The interconnectedness between Gameplay, Presentation and Story are the main subjects of Steve Lee's talk and therefore I will divide the summary in three subsections, which characterize the links between the, beforehand mentioned, three big components of a game.
+
+\subsection{Affordances \& Intentionality: Gameplay - Presentation} \label{sssec:num1}
+
+It is quite hard to describe the word \textbf{Affordance}, the creator of this strange word, J. J. Gibson, describes it as follows: 
+\begin{quote}
+The affordances of the environment are what it offers the animal, what it provides or furnishes, either for good or ill. The verb to afford is found in the dictionary, the noun affordance is not. I have made it up. I mean by it something that refers to both the environment and the animal in a way that no existing term does. It implies the complementarity of the animal and the environment.\cite{gibson79}
+\end{quote}
+Steve Lee introduces us to the first of the major points between Gameplay and Presentation, by a classic and rather simple example, which illustrates the term affordance extremly well and also leads directly to the second point, intentionality. Lee shows pictures of doors. 
+\subsubsection{Example 1: Bad affordances}
+On the left you can see a double door with handles and above each handle a label saying \textit{push}.\\
+On the right you can see exactly the same double door, but this time the labels say \textit{pull}.\\ \\
+The problem with the left door is, that it offers something which isn't even necessary. In fact the sheer presence of handles on this double door is not only unnecessary, but even misleading to the point that it provokes the user to choose exactly the wrong action to open this door. This is a classic example of a bad affordance.
+\subsubsection{Example 2: Good affordances}
+He now improves the design of the doors.
+On the left you can now see a double door which has some plaques mounted instead of  handles. Above each, again, the labels stating \textit{push}.
+This is a huge improvement as now the affordance of the door is clear, because there is only one way to interact with this door. Now no one will awkwardly pull instead of pushing the door.
+\subsubsection{Example 3: Less \& still good}
+There is still room for improvment. Lee shows that one can even remove the labels. The affordances are still clear.\\ \\
+Lee states that 
+\begin{quote}
+Affordances are about communicating how things work, intuitively.
+\end{quote}
+He then refers to modern games' affordances, which are mostly visual and are conveyed by things like lighting or layout. More precisely he talks about how he built in affordances in one of his levels in \textit{Dishonored 2}.\\ \\
+If affordances are clear and consistent throughout a game or level they will facilitate \textbf{Intentionality}.
+Lee describes it as 
+\begin{quote}
+Making conscious choices with specific goals and expectations in mind. 
+\end{quote}
+He mentions three characteristics for weak intentionality in games, which are:
+
+\begin{enumerate}
+\item Being lost, trying to find something to do
+\item Doing something without knowing why (for instance, because the UI told you to do it)
+\item Twitch-reacting to a sudden surprise
+\end{enumerate}
+The player should be able to understand their options with relation to their goals and formulate a plan and then act with intentionality. To make the player act and react with intentionality and avoid the characteristics for weak intentionality a player needs:
+\begin{enumerate}
+\item Choice
+\item Motivation (higher level and longer-term goals)
+\item Information (from clear and consistent affordances)
+\item Time to process the information (player driven pacing)
+\end{enumerate}
+Steve Lee mentions that there is an often mentioned gameplay cycle, consisting of
+\begin{center}\textrightarrow \ Observing \ \textrightarrow \ Planing \ \textrightarrow \  Executing \ \textrightarrow \ Reacting \ \textrightarrow\end{center}
+Wandering from node to node in this cycle is highly driven by the, beforehand mentioned, four aspects one has to consider when trying to make the player act with intentionality. For instance to get from Observing to Planing the player uses the information which is presented to them and combines it with their motivations to puzzle out a plan.
+\\
+Lee further theorizes that an effect of letting players act with intentionality is that linearity isn't perceived very strongly. A well designed linear level is designed in a way such that the player does what you want them to do, without them recognizing it.
+
+\subsection{World Building: Presentation - Story} \label{sssec:num2}
+
+Some examples for games which are praised for there world building are \textit{Dishonored 2}, \textit{Bioshock; Infinite} and \textit{Half Life 2}. In big companies a lot of world building is done by art direction staff and higher level story design staff, so one as a lead developer might not be able influence the higher level world building as much as they want to. But one can add a lot to this link on a lower level.
+The goal one should want to reach with solid world building is
+\begin{quote}A world that feels unique, cohesive and meaningful\end{quote}
+Lee gives tips to reach this goal, they are
+\begin{enumerate}
+\item \textit{World building must be specific. (in terms of detail, and also specific to your world)}\\
+Thinking about the setting and main theme of a level or even the whole game, one should not only build their world according to a heading, like SciFi war. It should be more specific and unique, to be rememberable and likeable.
+\item \textit{Always be world building. (Every little fragment of the game is an opportunity to be world building.)}\\
+Take in mind that every piece of loot, every interaction with an NPC and every little side quest is a chance to tell more about your world.
+\item \textit{Say things about people. (world building is storytelling)}\\
+World building is storytelling and storytelling is always about people. Think about ways to tell stories of people when building your world.
+\end{enumerate}
+
+\subsection{Interactive Storytelling: Story - Gameplay} \label{sssec:num3}
+
+An often mentioned short guideline for interactive storytelling is \textit{"Show don't tell"}. Lee states that this is way to superficial. The phrase emerges from the mediums films and novels. The speaker says that we shouldn't get hung up on the guideline, but rather focus on what it means to the mediums.\\ \\
+In films \textit{"Show don't tell"} is about telling the story by showing the audience moving pictures. So the thing it contributes to the phrase is \begin{quote}Making use of the unique strength of this medium.\end{quote}
+Contrary literature's take in \textit{"Show don't tell"} is \begin{quote}Evoking drama and ideas of the story in the readers mind\end{quote} Information about the protagonists current situation or the description of the current scene shouldn't just be blatantly thrown in the readers face. Situations should rather be described in a way that evokes the ideas about them. \\
+In games we should harness the strengths of both contributions to the phrase \textit{"Show don't tell"}.
+\begin{enumerate}
+\item \textit{Making use of the unique strength of this medium.}\\
+The biggest strength that games have is interactivity. Now the combination of narrative and interactivity leads toward the idea of narrative intentionality. \\ In \ref{sssec:num1} Lee already mentioned intentionality referring to gameplay goals, whereas now narrative intentionality refers to narrative goals. Narrative intentionality should make the player act with the knowledge that (and more importantly how) their choices influence or progress the story.
+\item \textit{Evoking drama and ideas of the story in the reader's mind}\\
+Cutscenes are often used when the story in a game should be progressed and told to the player. Very often cutscenes effectuate the opposite of what they should. Normally the creators of said cutscene want the player to tell and feel with the game's protagonist, but very often players perceive cutscenes as the chance to lean back and just let the story progress. \\
+A better way to approach evoking drama would be to throw the player into a gameplay situation which they don't expect. This could be for instance the escape from a collapsing building like in \textit{Uncharted 2}. In this scene not only the protagonist is swamped by the situation, but also the player. It makes the player feel what the protagonist is feeling.
+\end{enumerate}
+The three things about narrative intentionality which Lee offers for takeaway are
+\begin{enumerate}
+\item Strive to do more than just show and tell
+\item Empower the player to act with narrative intentionality
+\item Evoke drama, story and ideas in the players mind, and not just on-screen.
+\end{enumerate}
+
+\section{Overview and Relevance}
+Holistic approaches to level design and especially the links between the three big components of a level are indispensable in modern games. 
+
+\subsection{Qualities of good level design practice by means of Gameplay}
+
+In \cite{kayalischuh11} in the section \textit{Qualities of good level design practice} a lot of qualities for good level design are also mentioned in Lee's talk. In fact \cite{kayalischuh11} analyzes different approaches for level design based on game mechanics.
+They mention the possibility to recombine game elements and actions and to achieve elusive mastery of the game. Lee also mentions the possibility of the combination of several skills in \textit{Dishonored 2} giving players the opportunity to take on challenges in their own style. As mentioned in \ref{sssec:num1} this is one of the factors, namely Choice, to improve intentionality.
+Another plus factor for great level design they mention is guiding the player. Kayali and Schuh refer to \textit{Mirror's Edge}, which utilizes the color red to highlight objects which the player can hold on to in the game. This is kind of an affordance which also drives the intentionality of the player. It is a major factor to avoid being lost or stuck, which would be a sign for weak intentionality in level design like mentioned in \ref{sssec:num1}. In fact the red color of objects correlates to one of the points to avoid weak intentionality, namely information.
+
+\subsection{World building and its connections to cinematography}
+
+Another interesting reference is \cite{logasmuller05} which tries to compare the film \textit{The Shining} with \textit{Silent Hill 4: The room} by focussing on the cinematographic technique Mise-en-scène (which translates to \textit{put in the scene}). The principle proposes to consider the placement of items, use of lighting or blockage of persons and elements in every frame of a movie. So it utilizes the idea of holism in the sense of the importance of every frame's scene design, whereby the director didn't focus on single elements in the scene but rather the picture the collection of all elements draws. This strongly connects to all mentioned goals of world building mentioned by Steve Lee as one can read in \ref{sssec:num2}. Kubrik naturally also used one contribution to the phrase \textit{"Show don't tell"} namely, unsurprisingly, \textit{Making use of the unique strength of the medium}. Logas and Muller emphasize the stronger usage of said techniques in future games.
+
+\subsection{Interactive storytelling: A good read}
+During my research I stumbled upong \cite{lebowitzklug11}, which is a very good book about interactive storytelling. They show principles of interactive storytelling and also emphasize the connection to film and literature. In many ways they agree with Lee and also mention, among other things, the mentioned takeaways Lee mentioned as listed in \ref{sssec:num3}.
+
+\renewcommand{\refname}{\section{References and Further Sources}}
+\begin{thebibliography}{1}
+
+\bibitem{gibson79}
+  Gibson J. J.,
+  \emph{The Ecological Approach to Visual Perception. pp. 127},
+  Houghton Mifflin Harcourt (HMH), Boston.
+  1979.
+\bibitem{kayalischuh11}
+  Kayali Fares and Schuh Joseph,
+  \emph{Retro Evolved: Level Design Practice exemplified by the Contemporary Retro Game}
+  DiGRA '11 - Proceedings of the 2011 DiGRA International Conference: Think Design Play, DiGRA/Utrecht School of the Arts.
+  2011.
+\bibitem{logasmuller05}
+  Logas Heather and Muller Daniel,
+  \emph{Mise-en-scène Applied to Level Design: Adapting a Holistic Approach to Level Design}
+  DiGRA '05 - Proceedings of the 2005 DiGRA International Conference: Changing Views: Worlds in Play, DiGRA/Utrecht School of the Arts.
+  2005.
+\bibitem{lebowitzklug11}
+  Lebowitz Josiah and Klug Chris,
+  \emph{Interactive storytelling for video games: A player-centered approach to creating memorable characters and stories}
+  Taylor \& Francis.
+  2011.
+  
+
+\end{thebibliography}
+
+\end{document}
