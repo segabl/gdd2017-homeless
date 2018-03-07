@@ -57,9 +57,22 @@ namespace KarmaSystem
 
     public void SocialAction(GameObject actor, SocialEffector action, GameObject reactor)
     {
+      if (actor == null)
+      {
+        Debug.Log("Social status actor cannot be null");
+        return;
+      }
       SocialEffector copied_action = new SocialEffector(action);
-      copied_action.setTarget(actor);
-      copied_action.Apply(SocialStatusDict[actor],SocialStatusDict[reactor]);
+
+      if (reactor != null)
+      {
+        copied_action.setTarget(actor);
+        copied_action.Apply(SocialStatusDict[actor], SocialStatusDict[reactor]);
+      }
+      else
+      {
+        copied_action.Apply(SocialStatusDict[actor], null);
+      }
     }
     public bool aTrustsB(GameObject A, GameObject B, int requiredTrust=4)
     {
@@ -230,10 +243,14 @@ namespace KarmaSystem
 
 
     //Some exemplar actions
+    
+    //the first of the relationship effector is always null in this class
     internal static readonly SocialEffector sharingBeer = new SocialEffector(new ReputationEffector(1,0,0,0),
       new RelationshipEffector(null,1,1));
+
+    //if an action has no target other than the player, make sure that the relationshipeffector is null
     internal static readonly SocialEffector stealingBeerFromShop = new SocialEffector(new ReputationEffector(-1, -1, 1, 0),
-      new RelationshipEffector(null, -5, -5));
+      null);
   }
 
 }
