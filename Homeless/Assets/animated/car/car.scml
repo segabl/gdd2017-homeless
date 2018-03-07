@@ -64,30 +64,30 @@
             </timeline>
             <timeline id="3" name="wheel1">
                 <key id="0">
-                    <object folder="0" file="3" x="-185" y="-80" pivot_x="0.5" pivot_y="0.5" angle="0"/>
+                    <object folder="0" file="3" x="-185" y="-80" angle="0"/>
                 </key>
                 <key id="1" time="25">
-                    <object folder="0" file="3" x="-185" y="-80" pivot_x="0.5" pivot_y="0.5" angle="90"/>
+                    <object folder="0" file="3" x="-185" y="-80" angle="90"/>
                 </key>
                 <key id="2" time="50">
-                    <object folder="0" file="3" x="-185" y="-80" pivot_x="0.5" pivot_y="0.5" angle="180"/>
+                    <object folder="0" file="3" x="-185" y="-80" angle="180"/>
                 </key>
                 <key id="3" time="75">
-                    <object folder="0" file="3" x="-185" y="-80" pivot_x="0.5" pivot_y="0.5" angle="270"/>
+                    <object folder="0" file="3" x="-185" y="-80" angle="270"/>
                 </key>
             </timeline>
             <timeline id="4" name="wheel2">
                 <key id="0">
-                    <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="0"/>
+                    <object folder="0" file="3" x="175" y="-80" angle="0"/>
                 </key>
                 <key id="1" time="25">
-                    <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="90"/>
+                    <object folder="0" file="3" x="175" y="-80" angle="90"/>
                 </key>
                 <key id="2" time="50">
-                    <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="180"/>
+                    <object folder="0" file="3" x="175" y="-80" angle="180"/>
                 </key>
                 <key id="3" time="75">
-                    <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="270"/>
+                    <object folder="0" file="3" x="175" y="-80" angle="270"/>
                 </key>
             </timeline>
         </animation>
@@ -150,24 +150,24 @@
             </timeline>
             <timeline id="3" name="wheel1">
                 <key id="0" spin="0">
-                    <object folder="0" file="3" x="-185" y="-80" pivot_x="0.5" pivot_y="0.5" angle="0"/>
+                    <object folder="0" file="3" x="-185" y="-80" angle="0"/>
                 </key>
                 <key id="1" time="100" spin="0">
-                    <object folder="0" file="3" x="-182" y="-79" pivot_x="0.5" pivot_y="0.5" angle="0"/>
+                    <object folder="0" file="3" x="-182" y="-79" angle="0"/>
                 </key>
                 <key id="2" time="200" spin="0">
-                    <object folder="0" file="3" x="-185" y="-80" pivot_x="0.5" pivot_y="0.5" angle="0"/>
+                    <object folder="0" file="3" x="-185" y="-80" angle="0"/>
                 </key>
             </timeline>
             <timeline id="4" name="wheel2">
                 <key id="0" spin="0">
-                    <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="0"/>
+                    <object folder="0" file="3" x="175" y="-80" angle="0"/>
                 </key>
                 <key id="1" time="100" spin="0">
-                    <object folder="0" file="3" x="180" y="-77" pivot_x="0.505749" pivot_y="0.499207" angle="0"/>
+                    <object folder="0" file="3" x="178" y="-77" angle="0"/>
                 </key>
                 <key id="2" time="200" spin="0">
-                    <object folder="0" file="3" x="175" y="-80" pivot_x="0.505749" pivot_y="0.499207" angle="0"/>
+                    <object folder="0" file="3" x="175" y="-80" angle="0"/>
                 </key>
             </timeline>
         </animation>

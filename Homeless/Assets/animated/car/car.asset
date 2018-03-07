@@ -584,8 +584,8 @@ MonoBehaviour:
               EntityId: 0
               FolderId: 0
               FileId: 3
-              PivotX: 0.505749
-              PivotY: 0.499207
+              PivotX: 0.5
+              PivotY: 0.5
               T: 0
           - Id: 1
             Name: 
@@ -614,8 +614,8 @@ MonoBehaviour:
               EntityId: 0
               FolderId: 0
               FileId: 3
-              PivotX: 0.505749
-              PivotY: 0.499207
+              PivotX: 0.5
+              PivotY: 0.5
               T: 0
           - Id: 2
             Name: 
@@ -644,8 +644,8 @@ MonoBehaviour:
               EntityId: 0
               FolderId: 0
               FileId: 3
-              PivotX: 0.505749
-              PivotY: 0.499207
+              PivotX: 0.5
+              PivotY: 0.5
               T: 0
           - Id: 3
             Name: 
@@ -674,8 +674,8 @@ MonoBehaviour:
               EntityId: 0
               FolderId: 0
               FileId: 3
-              PivotX: 0.505749
-              PivotY: 0.499207
+              PivotX: 0.5
+              PivotY: 0.5
               T: 0
           Meta:
             Varlines: []
@@ -1241,8 +1241,8 @@ MonoBehaviour:
               EntityId: 0
               FolderId: 0
               FileId: 3
-              PivotX: 0.505749
-              PivotY: 0.499207
+              PivotX: 0.5
+              PivotY: 0.5
               T: 0
           - Id: 1
             Name: 
@@ -1261,7 +1261,7 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: 180
+              X: 178
               Y: -77
               Angle: 0
               ScaleX: 1
@@ -1271,8 +1271,8 @@ MonoBehaviour:
               EntityId: 0
               FolderId: 0
               FileId: 3
-              PivotX: 0.505749
-              PivotY: 0.499207
+              PivotX: 0.5
+              PivotY: 0.5
               T: 0
           - Id: 2
             Name: 
@@ -1301,8 +1301,8 @@ MonoBehaviour:
               EntityId: 0
               FolderId: 0
               FileId: 3
-              PivotX: 0.505749
-              PivotY: 0.499207
+              PivotX: 0.5
+              PivotY: 0.5
               T: 0
           Meta:
             Varlines: []
