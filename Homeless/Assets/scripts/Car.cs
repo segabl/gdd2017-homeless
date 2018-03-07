@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Car : PausableAnimatedObject {
 
-  public Color color = Color.white;
+  public Color color;
+  public bool randomColor;
   public float speed;
   private float oldSpeed;
   private bool stop;
@@ -16,8 +17,11 @@ public class Car : PausableAnimatedObject {
     Vector3 scale = gameObject.transform.localScale;
     scale.x = speed > 0 ? 1 : -1;
     gameObject.transform.localScale = scale;
+    if (randomColor) {
+      color = Color.HSVToRGB(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 0.8f), Random.Range(0.5f, 1.0f));
+    }
     foreach (SpriteRenderer renderer in gameObject.GetComponentsInChildren<SpriteRenderer>()) {
-      if (renderer.sprite.name == "color") {
+      if (renderer.sprite.name.Equals("color")) {
         renderer.color = color;
       }
     }
@@ -25,6 +29,7 @@ public class Car : PausableAnimatedObject {
 
   protected override void updatePausable() {
     if (spriterAnimator == null) {
+      Debug.Log(name);
       spriterAnimator = gameObject.GetComponentInChildren<SpriterDotNetBehaviour>().Animator;
       spriterAnimator.AnimationFinished += onAnimationFinished;
       spriterAnimator.Play("drive");
