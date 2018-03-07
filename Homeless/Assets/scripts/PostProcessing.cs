@@ -96,9 +96,23 @@ public class PostProcessing : MonoBehaviour {
         if (lowHealthTime == 0)
           lowHealthTime = Time.fixedTime;
         float timeDiff = (Time.fixedTime - lowHealthTime) / 1440f;
+
+        float strength, speed, repletion;
+        repletion = GameController.instance.player.GetComponent<Character>().repletion;
+        if (repletion <= 50)
+        {
+          speed = 0.9f;
+          strength = 0.9f;
+        }
+        else
+        {
+          speed = (50.0f - health) / 100.0f + 0.5f;
+          strength = speed;
+        }
+        
         pulseMaterial.SetFloat("_time", timeDiff);
-        pulseMaterial.SetFloat("_strength", (50.0f - health) / 100.0f + 0.5f);
-        pulseMaterial.SetFloat("_speed", (50.0f - health) / 100.0f + 0.5f);
+        pulseMaterial.SetFloat("_strength", strength);
+        pulseMaterial.SetFloat("_speed", speed);
         Graphics.Blit(source, destination, pulseMaterial);
       }
       else {
@@ -116,7 +130,9 @@ public class PostProcessing : MonoBehaviour {
         sanity = 5f;
       if (insanityTime == 0f)
         insanityTime = Time.fixedTime;
-      float timeDiff = (Time.fixedTime - insanityTime) / 1440f * 2000f * (80f-sanity) / 80f;
+      float timeDiff = (Time.fixedTime - insanityTime) / 1440f * 2000f;
+      if (GameController.instance.player.GetComponent<Character>().repletion >= 50f)
+        timeDiff *= (80f-sanity) / 80f;
       strangeMaterial.SetFloat("_time", timeDiff);
       strangeMaterial.SetFloat("_strength", (80f - sanity)/80f);
       Graphics.Blit(source, destination, strangeMaterial);
