@@ -11,12 +11,13 @@ public class TheftHandler : PausableObject {
   [Range(0.9f,1.3f)]
   public float detectionDistance = 0.9f;
   public bool targetWasAlreadyRobbed = false;
+  public bool playerWasCaught = false;
   public GameObject reward;
 
   public static TheftHandler theftObject;
   public static bool playerCanSteal;
   public static bool playerIsStealing;
-  public static bool playerWasCaught;
+  
 
   protected AudioClip interactClip;
 
@@ -68,7 +69,7 @@ public class TheftHandler : PausableObject {
   protected override void updatePausable() {
 
 
-    if (targetWasAlreadyRobbed)
+    if (targetWasAlreadyRobbed || playerWasCaught)
     {
       return;
     }
