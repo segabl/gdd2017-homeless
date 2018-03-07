@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CharacterAnimation : PausableAnimatedObject {
 
-  private String currentAnimation;
+  public String currentAnimation { get; private set; }
   public String setAnimation { get; set; }
 
   private Action<string> animFinishedSetCurrent = null;

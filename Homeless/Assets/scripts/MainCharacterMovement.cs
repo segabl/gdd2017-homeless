@@ -113,7 +113,9 @@ public class MainCharacterMovement : PausableObject {
     if (direction_vector != Vector3.zero) {
       walking = true;
       walkingDirection = Mathf.Atan2(direction_vector.x, direction_vector.y);
-      this.transform.position += direction_vector * Mathf.Min(step, dis);
+      if (this.GetComponent<CharacterAnimation>().currentAnimation.Contains("walking")) {
+        this.transform.position += direction_vector * Mathf.Min(step, dis);
+      }
     }
   }
 
