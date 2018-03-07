@@ -91,6 +91,10 @@ public class Character : PausableObject {
   private void adjustSanity(float sanityAdjustment) {
     this.sanity += sanityAdjustment;
     this.sanity = this.sanity > this.maxSanity ? this.maxSanity : this.sanity;
+    if (sanity <= 0.0f)
+    {
+      die("lack of sanity");
+    }
   }
 
   private void adjustIntoxication(float intoxicationAdjustment) {
