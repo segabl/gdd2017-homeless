@@ -12353,7 +12353,7 @@ Prefab:
     - target: {fileID: 212347014472718098, guid: cb198bcdbfdf766478aeb0a076ba377a,
         type: 2}
       propertyPath: m_SortingLayerID
-      value: 997167323
+      value: -55076973
       objectReference: {fileID: 0}
     - target: {fileID: 212347014472718098, guid: cb198bcdbfdf766478aeb0a076ba377a,
         type: 2}
@@ -72374,7 +72374,7 @@ Prefab:
     - target: {fileID: 212347014472718098, guid: cb198bcdbfdf766478aeb0a076ba377a,
         type: 2}
       propertyPath: m_SortingLayerID
-      value: 997167323
+      value: -55076973
       objectReference: {fileID: 0}
     - target: {fileID: 212347014472718098, guid: cb198bcdbfdf766478aeb0a076ba377a,
         type: 2}
