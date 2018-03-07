@@ -12,6 +12,7 @@ public class PostProcessing : MonoBehaviour {
   public Shader swirlShader;
   public Shader pulseShader;
   public Shader blackFadeShader;
+  public Shader strangeShader;
 
   public bool sleep = false;
 
@@ -21,10 +22,12 @@ public class PostProcessing : MonoBehaviour {
   private Material swirlMaterial;
   private Material pulseMaterial;
   private Material blackFadeMaterial;
+  private Material strangeMaterial;
 
   private float intoxicationTime;
   private float lowHealthTime;
   private float fadeTime;
+  private float insanityTime;
 
   void Awake() {
     daylightCycleMaterial = new Material(daylightCycleShader);
@@ -33,10 +36,12 @@ public class PostProcessing : MonoBehaviour {
     swirlMaterial = new Material(swirlShader);
     pulseMaterial = new Material(pulseShader);
     blackFadeMaterial = new Material(blackFadeShader);
+    strangeMaterial = new Material(strangeShader);
 
     intoxicationTime = 0;
     lowHealthTime = 0;
     fadeTime = 0;
+    insanityTime = 0;
   }
 
   // Postprocess the image
@@ -104,7 +109,24 @@ public class PostProcessing : MonoBehaviour {
     }
   }
   internal void ProcessPlayerSanity(RenderTexture source, RenderTexture destination) {
-    //float sanity = GameController.instance.player.GetComponent<Character>().sanity;
+    float sanity = GameController.instance.player.GetComponent<Character>().sanity;
+    if (sanity <= 80f)
+    {
+      if (sanity <= 5f)
+        sanity = 5f;
+      if (insanityTime == 0f)
+        insanityTime = Time.fixedTime;
+      float timeDiff = (Time.fixedTime - insanityTime) / 1440f * 2000f * (80f-sanity) / 80f;
+      strangeMaterial.SetFloat("_time", timeDiff);
+      strangeMaterial.SetFloat("_strength", (80f - sanity)/80f);
+      Graphics.Blit(source, destination, strangeMaterial);
+      //strangeMaterial.SetFloat("")
+    }
+    else
+    {
+      insanityTime = 0;
+    }
+
   }
   internal void ProcessPlayerIntoxication(RenderTexture source, RenderTexture destination) {
     float intoxication = GameController.instance.player.GetComponent<Character>().intoxication;
