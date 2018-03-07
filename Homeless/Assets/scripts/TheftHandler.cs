@@ -165,6 +165,7 @@ public class TheftHandler : PausableObject {
     Debug.Log("Player was caught!");
     playerWasCaught = true;
     playerIsStealing = false;
+    GameController.instance.karmaController.SocialAction(GameController.instance.player, KarmaSystem.SocialConstants.gettingCaughtStealing);
   }
   private void theftSuccess()
   {

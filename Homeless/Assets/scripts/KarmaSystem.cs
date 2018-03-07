@@ -55,7 +55,7 @@ namespace KarmaSystem
       }
     }
 
-    public void SocialAction(GameObject actor, SocialEffector action, GameObject reactor)
+    public void SocialAction(GameObject actor, SocialEffector action, GameObject reactor=null)
     {
       if (actor == null)
       {
@@ -249,8 +249,11 @@ namespace KarmaSystem
       new RelationshipEffector(null,1,1));
 
     //if an action has no target other than the player, make sure that the relationshipeffector is null
-    internal static readonly SocialEffector stealingBeerFromShop = new SocialEffector(new ReputationEffector(-1, -1, 1, 0),
-      null);
+    internal static readonly SocialEffector stealingBeerFromShop = new SocialEffector(new ReputationEffector(-1, -1, 1, 0));
+
+    internal static readonly SocialEffector gettingCaughtStealing = new SocialEffector(new ReputationEffector(0, -1, 1, 0));
+    internal static readonly SocialEffector gettingCaughtStealingFromFriend = new SocialEffector(new ReputationEffector(0, -1, 2, 0),
+      new RelationshipEffector(null, -3, -3));
   }
 
 }
