@@ -5,7 +5,7 @@ using UnityEngine;
 public class Collectible : MonoBehaviour{
 
   public enum Type {
-    FOOD, DRINK, OTHER
+    FOOD, DRINK, MEDICINE, OTHER
   };
 
   public Sprite sprite { get; set; }
@@ -30,7 +30,7 @@ public class Collectible : MonoBehaviour{
   }
 
   public bool use(Character character) {
-    if (type == Type.FOOD || type == Type.DRINK) {
+    if (type != Type.OTHER) {
       character.adjustStats(this.repletion, this.health, this.sanity, this.intoxication);
       Debug.Log("Increase " + character.name + "'s Repletion by " + repletion + ", Health by " + health + ", Sanity by " + sanity + ", Intoxication level by " + intoxication);
       Debug.Log(character.name + "'s Repletion is " + character.repletion + ", Health is " + character.health + ", Sanity is " + character.sanity + ", Intoxication level is " + character.intoxication);
