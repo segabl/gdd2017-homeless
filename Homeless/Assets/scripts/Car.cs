@@ -10,6 +10,7 @@ public class Car : PausableAnimatedObject {
   private float oldSpeed;
   private bool stop;
   private bool emergencyStop;
+  private AudioSource audioSource;
 
   void Start() {
     Vector3 scale = gameObject.transform.localScale;
@@ -28,6 +29,9 @@ public class Car : PausableAnimatedObject {
       spriterAnimator.AnimationFinished += onAnimationFinished;
       spriterAnimator.Play("drive");
     }
+    if (audioSource == null) {
+      audioSource = gameObject.GetComponent<AudioSource>();
+    }
     float deltaTime = Time.deltaTime;
     if (stop) {
       if (Mathf.Abs(speed) >= deltaTime * 20.0f) {
@@ -42,6 +46,15 @@ public class Car : PausableAnimatedObject {
       spriterAnimator.Speed = -speed / 20;
     }
     gameObject.transform.position += new Vector3(speed * deltaTime, 0, 0);
+    if (Mathf.Abs(speed) > 0) {
+      if (!audioSource.isPlaying) {
+        audioSource.Play();
+      }
+      audioSource.pitch = 0.75f + Mathf.Abs(speed) * 0.05f;
+      audioSource.volume = Mathf.Abs(speed) * 0.1f;
+    } else if (audioSource.isPlaying) {
+      audioSource.Stop();
+    }
     // Todo: reset when outside world
   }
 

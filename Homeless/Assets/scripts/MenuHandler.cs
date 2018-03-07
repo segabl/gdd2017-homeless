@@ -10,7 +10,7 @@ public class MenuHandler : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     if (continueButton && System.IO.File.Exists("savefile.dat")) {
-      continueButton.interactable = true;
+      //continueButton.interactable = true;
     }
     if (exitButton && Application.platform == RuntimePlatform.WebGLPlayer) {
       exitButton.interactable = false;
