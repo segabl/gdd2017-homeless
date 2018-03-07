@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +49,7 @@ public class PostProcessing : MonoBehaviour {
 
 
     ProcessDaylight(source, source);
-
+    ProcessPlayerRepletion(source, source);
     ProcessPlayerHealth(source, source);
     ProcessPlayerSanity(source, source);
     ProcessPlayerIntoxication(source, source);
@@ -60,6 +61,19 @@ public class PostProcessing : MonoBehaviour {
 
 
 
+  }
+
+  internal void ProcessPlayerRepletion(RenderTexture source, RenderTexture destination)
+  {
+    float repletion = GameController.instance.player.GetComponent<Character>().repletion;
+    if (repletion <= 3f)
+      repletion = 3f;
+    if (repletion < 80.0f)
+    {
+      blurMaterial.SetFloat("hstep", 3.20f / repletion);
+      blurMaterial.SetFloat("vstep", 1.80f / repletion);
+      Graphics.Blit(source, destination, blurMaterial);
+    }
   }
 
   internal void ProcessDaylight(RenderTexture source, RenderTexture destination) {
@@ -90,14 +104,7 @@ public class PostProcessing : MonoBehaviour {
     }
   }
   internal void ProcessPlayerSanity(RenderTexture source, RenderTexture destination) {
-    float sanity = GameController.instance.player.GetComponent<Character>().sanity;
-    if (sanity <= 3f)
-      sanity = 3f;
-    if (sanity < 80.0f) {
-      blurMaterial.SetFloat("hstep", 3.20f / sanity);
-      blurMaterial.SetFloat("vstep", 1.80f / sanity);
-      Graphics.Blit(source, destination, blurMaterial);
-    }
+    //float sanity = GameController.instance.player.GetComponent<Character>().sanity;
   }
   internal void ProcessPlayerIntoxication(RenderTexture source, RenderTexture destination) {
     float intoxication = GameController.instance.player.GetComponent<Character>().intoxication;
