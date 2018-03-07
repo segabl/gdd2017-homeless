@@ -50,6 +50,10 @@ public abstract class InteractionHandler : PausableObject {
           interactionText.text = "Press 'E' to talk to " + this.name;
         }
         else if (this is SleepingSpotInteraction) {
+          float direction = Mathf.Atan2(this.transform.position.x - GameController.instance.player.transform.position.x, this.transform.position.y - GameController.instance.player.transform.position.y);
+          if (!(direction > -Mathf.PI / 10.0f && direction < Mathf.PI / 10.0f)) {
+            return;
+          }
           interactionText.text = "Press 'E' to sleep";
         }
         else {
