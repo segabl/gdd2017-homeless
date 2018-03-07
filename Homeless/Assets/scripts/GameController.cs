@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour {
   public KarmaController karmaController = null;
 
   public BackgroundAudioLoop backgroundAudioLoop { get; private set; }
+  public ModalPanel modalPanel { get; private set; }
 
   private static GameController controllerInstance;
 
@@ -57,6 +58,8 @@ public class GameController : MonoBehaviour {
       controllerInstance.menuCanvas = menuCanvas;
       controllerInstance.panelInGameMenu = panelInGameMenu;
       controllerInstance.panelInventory = panelInventory;
+      controllerInstance.panelDead = panelDead;
+      controllerInstance.modalPanel = modalPanel;
       BackgroundAudioLoop loop = gameObject.GetComponent<BackgroundAudioLoop>();
       controllerInstance.backgroundAudioLoop.fadeToAudioClip(loop.audioClip, 1);
       controllerInstance.backgroundAudioLoop.loopStart = loop.loopStart;

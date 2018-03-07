@@ -10,8 +10,11 @@ public class Character : PausableObject {
   public float maxHealth;
   public float maxSanity;
   public float maxIntoxication;
+  [Range(0f,100f)]
   public float repletion;
+  [Range(0f, 100f)]
   public float health;
+  [Range(0f, 100f)]
   public float sanity;
   public float intoxication { get; set; }
   public bool permisionToSleepInBox { get; set; }
