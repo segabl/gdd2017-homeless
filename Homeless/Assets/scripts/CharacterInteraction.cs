@@ -11,13 +11,8 @@ public class CharacterInteraction : InteractionHandler {
   protected int interactions = 0;
   protected const String DECISION_YES = "Y";
   protected const String DECISION_NO = "N";
-  protected ModalPanel modalPanel;
 
   public override void interact() {
-    if (!modalPanel) {
-      modalPanel = ModalPanel.Instance();
-    }
-
     Debug.Log("Character Interaction");
     onCharacterInteractionStart();
 
@@ -104,7 +99,7 @@ public class CharacterInteraction : InteractionHandler {
   public void Display() {
     handleTrigger();
     if (npc.GetChoices().Length > 0) {
-      modalPanel.MessageBox(npc.GetCurrentDialogue(), Choice, npc.GetChoices());
+      GameController.instance.modalPanel.MessageBox(npc.GetCurrentDialogue(), Choice, npc.GetChoices());
     }
     else {
       interactionText.text = npc.GetCurrentDialogue();

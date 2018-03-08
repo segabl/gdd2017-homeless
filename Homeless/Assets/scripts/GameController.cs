@@ -50,24 +50,28 @@ public class GameController : MonoBehaviour {
       controllerInstance.panelInGameMenu = panelInGameMenu;
       controllerInstance.panelInventory = panelInventory;
       controllerInstance.panelDead = panelDead;
-      controllerInstance.modalPanel = modalPanel;
       BackgroundAudioLoop loop = gameObject.GetComponent<BackgroundAudioLoop>();
       controllerInstance.backgroundAudioLoop.fadeToAudioClip(loop.audioClip, 1);
       controllerInstance.backgroundAudioLoop.loopStart = loop.loopStart;
       controllerInstance.backgroundAudioLoop.loopEnd = loop.loopEnd;
+      ModalPanel panel = gameObject.GetComponent<ModalPanel>();
+      controllerInstance.modalPanel.Question = panel.Question;
+      controllerInstance.modalPanel.buttons = panel.buttons;
+      controllerInstance.modalPanel.ModalPanelObject = panel.ModalPanelObject;
       Destroy(gameObject);
     }
     else {
       Debug.Log("Controller created");
       controllerInstance = this;
       backgroundAudioLoop = gameObject.GetComponent<BackgroundAudioLoop>();
+      modalPanel = gameObject.GetComponent<ModalPanel>();
       karmaController = new KarmaController();
-      day = 0;
-      dayTime = 0.5f;
       inGameHour = dayLength / 24.0f;
       hoursToWait = 6;
       paused = false;
     }
+    day = 0;
+    dayTime = 0.5f;
   }
 
   void Start() {

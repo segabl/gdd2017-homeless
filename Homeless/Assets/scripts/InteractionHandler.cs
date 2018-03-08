@@ -14,10 +14,6 @@ public abstract class InteractionHandler : PausableObject {
   private float suspendLength = 0;
   private GameObject suspendTarget = null;
 
-  void Start() {
-
-  }
-
   protected override void updatePausable() {
 
     if (!interactionText) {
