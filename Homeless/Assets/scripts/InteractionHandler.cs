@@ -12,6 +12,8 @@ public abstract class InteractionHandler : PausableObject {
   public static bool playerCanInteract;
 
   protected AudioClip interactClip;
+  private float suspendStart = 0;
+  private float suspendLength = 0;
 
   void Start() {
 
@@ -33,7 +35,19 @@ public abstract class InteractionHandler : PausableObject {
         return;
       }
     }
-
+    if (suspendStart != 0f)
+    {
+      Debug.Log("Elapsed time: " + (GameController.instance.dayTime - suspendStart));
+      Debug.Log("Day length: " + GameController.instance.dayLength);
+      if (GameController.instance.dayTime - suspendStart >= suspendLength)
+      {
+        suspendStart = 0f;
+        suspendLength = 0f;
+      }
+      if (interactObject == this)
+        endInteraction();
+      return;
+    }
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
       interactionText.transform.position = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, 50, 0);
       if (interactObject != this) {
@@ -74,5 +88,10 @@ public abstract class InteractionHandler : PausableObject {
     interactionText.enabled = false;
     interactObject = null;
     playerCanInteract = false;
+  }
+  protected void suspend(float time)
+  {
+    suspendStart = GameController.instance.dayTime;
+    suspendLength = time / GameController.instance.dayLength;
   }
 }

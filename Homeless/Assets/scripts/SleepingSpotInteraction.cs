@@ -13,6 +13,7 @@ public class SleepingSpotInteraction : InteractionHandler {
     }
     gc.sleep(spot);
     endInteraction();
+    suspend(5.0f);
   }
 
 }

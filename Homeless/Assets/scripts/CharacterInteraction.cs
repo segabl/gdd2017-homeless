@@ -33,6 +33,7 @@ public class CharacterInteraction : InteractionHandler {
     Display();
     onCharacterInteractionEnd();
     interactions++;
+    suspend(1.0f);
   }
 
   public void Choice(int index) {
