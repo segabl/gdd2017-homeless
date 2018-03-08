@@ -91,7 +91,12 @@ public class Car : PausableAnimatedObject {
 
   private void onAnimationFinished(string animation) {
     if (animation == "break") {
-      spriterAnimator.Speed = 0;
+      if (spriterAnimator.Speed > 0) {
+        spriterAnimator.Speed = -spriterAnimator.Speed * 0.5f;
+        spriterAnimator.Play("break");
+      } else {
+        spriterAnimator.Speed = 0;
+      }
     }
   }
 
@@ -100,7 +105,7 @@ public class Car : PausableAnimatedObject {
       emergencyStop = emergency;
       stopForObject = stopFor;
       if (emergency) {
-        spriterAnimator.Speed = 0.5f;
+        spriterAnimator.Speed = 0.25f;
         spriterAnimator.Play("break");
       }
     }
