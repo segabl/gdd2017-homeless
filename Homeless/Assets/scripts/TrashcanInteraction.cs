@@ -25,6 +25,7 @@ public class TrashcanInteraction : InteractionHandler {
       GameObject drop =  Instantiate(items[num], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
       drop.name = drop.name.Replace("(Clone)", "");
       suspend(3.5f);
+      suspendWhileActive(drop);
     }
     else {
       interactionText.text = "Nothing of use here...";
