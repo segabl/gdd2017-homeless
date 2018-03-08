@@ -9,48 +9,49 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1744313630001974}
+  m_RootGameObject: {fileID: 1928980528707226}
   m_IsPrefabParent: 1
---- !u!1 &1744313630001974
+--- !u!1 &1928980528707226
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4127098039033972}
-  - component: {fileID: 114329352097099184}
+  - component: {fileID: 4974959662458682}
+  - component: {fileID: 114635478141650220}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Car Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4127098039033972
+--- !u!4 &4974959662458682
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744313630001974}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.74, y: 4.43, z: -0.140625}
+  m_GameObject: {fileID: 1928980528707226}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114329352097099184
+--- !u!114 &114635478141650220
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744313630001974}
+  m_GameObject: {fileID: 1928980528707226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6baaca904ad70c4ea62dc542c9551b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d201d4a7bce5aa409a0433a5fbb9735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  civilianPrefab: {fileID: 1712563148949130, guid: 67cc093ffbaf6724aa69d73294967ac9,
-    type: 2}
-  spawnRate: 1
+  minWaitTime: 10
+  maxWaitTime: 20
+  carSpeed: -10
+  carPrefab: {fileID: 1077818419905568, guid: c91f9771b85c0c641bbb9e37431dfdf2, type: 2}

@@ -42,7 +42,7 @@ public class CarHit : MonoBehaviour {
     if (car != null && Mathf.Abs(car.speed) > 0.1f && !hit) {
       Debug.Log("Collision with: " + col.gameObject.name);
       hitSpeed = Mathf.Abs(car.speed) * 0.75f;
-      car.stopMoving(true);
+      car.stopMoving(gameObject);
       if (name.Equals("MainCharacter")) {
         GetComponent<Character>().adjustStats(0.0f, -hitSpeed * 5.0f, 0.0f, 0.0f);
       }
