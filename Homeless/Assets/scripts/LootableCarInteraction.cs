@@ -11,8 +11,9 @@ class LootableCarInteraction : CharacterInteraction {
     GameController.instance.karmaController.SocialAction(GameController.instance.player, SocialConstants.stealingBeerFromShop, null);
     SetNextTree("hasStolen");
   }
-  protected override void displayInteractionText()
+  protected override bool displayInteractionText()
   {
     interactionText.text = "Press 'E' to loot";
+    return true;
   }
 }

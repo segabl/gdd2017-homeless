@@ -39,9 +39,10 @@ public class TrashcanInteraction : InteractionHandler {
     }
   }
 
-  protected override void displayInteractionText()
+  protected override bool displayInteractionText()
   {
     interactionText.text = "Press 'E' to search the trash";
+    return true;
   }
 }
 

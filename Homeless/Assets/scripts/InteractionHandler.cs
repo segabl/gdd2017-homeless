@@ -52,7 +52,8 @@ public abstract class InteractionHandler : PausableObject {
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
       interactionText.transform.position = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, 50, 0);
       if (interactObject != this) {
-        displayInteractionText();
+        if (!displayInteractionText())
+          return;
       }
       interactionText.enabled = true;
       interactObject = this;
@@ -76,5 +77,5 @@ public abstract class InteractionHandler : PausableObject {
   protected void suspendWhileActive(GameObject target) {
     suspendTarget = target;
   }
-  protected abstract void displayInteractionText();
+  protected abstract bool displayInteractionText();
 }

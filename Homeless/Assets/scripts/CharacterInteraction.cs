@@ -134,8 +134,9 @@ public class CharacterInteraction : InteractionHandler {
     return (string)method.Invoke(this, parameters);
   }
 
-  protected override void displayInteractionText()
+  protected override bool displayInteractionText()
   {
     interactionText.text = "Press 'E' to talk to " + this.name;
+    return true;
   }
 }
