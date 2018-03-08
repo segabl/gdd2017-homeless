@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public abstract class InteractionHandler : PausableObject {
 
   public float triggerDistance;
-  private string defaultText = "Press 'E' to interact";
+  //private string defaultText = "Press 'E' to interact";
   protected Text interactionText;
   public static InteractionHandler interactObject;
   public static bool playerCanInteract;
@@ -45,8 +45,6 @@ public abstract class InteractionHandler : PausableObject {
       }
     }
     if (suspendStart != 0f) {
-      Debug.Log("Elapsed time: " + (GameController.instance.dayTime - suspendStart));
-      Debug.Log("Day length: " + GameController.instance.dayLength);
       if (GameController.instance.dayTime - suspendStart >= suspendLength) {
         suspendStart = 0f;
         suspendLength = 0f;
