@@ -14,6 +14,7 @@ public abstract class InteractionHandler : PausableObject {
   protected AudioClip interactClip;
   private float suspendStart = 0;
   private float suspendLength = 0;
+  private GameObject suspendTarget = null;
 
   void Start() {
 
@@ -33,6 +34,19 @@ public abstract class InteractionHandler : PausableObject {
       if (!interactionText) {
         Debug.Log("interactionText is null");
         return;
+      }
+    }
+    if (suspendTarget != null)
+    {
+      if (suspendTarget.activeSelf)
+      {
+        if (interactObject == this)
+          endInteraction();
+        return;
+      }
+      else
+      {
+        suspendTarget = null;
       }
     }
     if (suspendStart != 0f)
@@ -93,5 +107,9 @@ public abstract class InteractionHandler : PausableObject {
   {
     suspendStart = GameController.instance.dayTime;
     suspendLength = time / GameController.instance.dayLength;
+  }
+  protected void suspendWhileActive(GameObject target)
+  {
+    suspendTarget = target;
   }
 }
