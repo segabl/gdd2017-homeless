@@ -149,7 +149,7 @@ public class Character : PausableObject {
     GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("die", "NONE");
     GameController.instance.panelDead.SetActive(true);
     int days = GameController.instance.day;
-    GameController.instance.panelDead.GetComponentInChildren<Text>().text = "You survived " + days + (days > 1 ? " days" : " day") + " before dying due to " + reason;
+    GameController.instance.panelDead.GetComponentInChildren<Text>().text = "You survived " + days + (days != 1 ? " days" : " day") + " before dying due to " + reason;
   }
   private Decimal roundDebug(float f)
   {
