@@ -1,4 +1,5 @@
-﻿using KarmaSystem;
+﻿using System;
+using KarmaSystem;
 
 class LootableCarInteraction : CharacterInteraction {
   public Collectible loot;
@@ -9,5 +10,9 @@ class LootableCarInteraction : CharacterInteraction {
     player_inventory.addItem(loot);
     GameController.instance.karmaController.SocialAction(GameController.instance.player, SocialConstants.stealingBeerFromShop, null);
     SetNextTree("hasStolen");
+  }
+  protected override void displayInteractionText()
+  {
+    interactionText.text = "Press 'E' to loot";
   }
 }

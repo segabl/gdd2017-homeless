@@ -138,4 +138,9 @@ public class CharacterInteraction : InteractionHandler {
     MethodInfo method = thisType.GetMethod(split[0]);
     return (string)method.Invoke(this, parameters);
   }
+
+  protected override void displayInteractionText()
+  {
+    interactionText.text = "Press 'E' to talk to " + this.name;
+  }
 }

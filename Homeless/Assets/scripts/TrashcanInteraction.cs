@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -18,8 +19,8 @@ public class TrashcanInteraction : InteractionHandler {
       interactionText.text = "Nothing of use here...";
       return;
     }
-    if (Random.Range(0.0f, 1.0f) < yieldChance) {
-      int num = Random.Range(0, items.Count);
+    if (UnityEngine.Random.Range(0.0f, 1.0f) < yieldChance) {
+      int num = UnityEngine.Random.Range(0, items.Count);
       GameObject drop = Instantiate(items[num], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
       drop.name = drop.name.Replace("(Clone)", "");
       suspend(3.5f);
@@ -36,6 +37,11 @@ public class TrashcanInteraction : InteractionHandler {
     if (yieldChance < 1) {
       yieldChance += Time.deltaTime * chanceIncrement;
     }
+  }
+
+  protected override void displayInteractionText()
+  {
+    interactionText.text = "Press 'E' to search the trash";
   }
 }
 

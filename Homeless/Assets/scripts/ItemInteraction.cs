@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ItemInteraction : InteractionHandler {
 
+  protected bool canPickUp = true;
   private void Start() {
     interactClip = (AudioClip)Resources.Load("sfx/grab-item");
   }
@@ -21,9 +23,23 @@ public class ItemInteraction : InteractionHandler {
         audioSource.Play();
       }
       GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("pickup_front", "idle");
+      this.gameObject.SetActive(false);
+      interactionText.enabled = false;
+      endInteraction();
     }
-    this.gameObject.SetActive(false);
-    interactionText.enabled = false;
-    endInteraction();
+    else
+    {
+      canPickUp = false;
+      displayInteractionText();
+    }
+    
+  }
+
+  protected override void displayInteractionText()
+  {
+    if (canPickUp)
+      interactionText.text = "Press 'E' to pick up " + this.name;
+    else
+      interactionText.text = "Inventory is full";
   }
 }
