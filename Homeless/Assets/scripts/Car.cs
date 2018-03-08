@@ -10,6 +10,7 @@ public class Car : PausableAnimatedObject {
   private bool emergencyStop;
   private AudioSource audioSource;
   private GameObject stopForObject;
+  public bool spawned;
 
   void Start() {
     Vector3 scale = gameObject.transform.localScale;
@@ -78,7 +79,7 @@ public class Car : PausableAnimatedObject {
     else if (audioSource.isPlaying) {
       audioSource.Stop();
     }
-    if (Vector3.Distance(gameObject.transform.position, GameController.instance.player.transform.position) > 500) {
+    if (spawned && Vector3.Distance(gameObject.transform.position, GameController.instance.player.transform.position) > 400) {
       Destroy(gameObject);
     }
   }

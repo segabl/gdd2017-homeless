@@ -20,6 +20,7 @@ public class CarSpawner : PausableObject {
       if (!hit.collider) {
         GameObject car = Instantiate(carPrefab, transform.position, Quaternion.identity);
         car.GetComponent<Car>().setSpeed(carSpeed);
+        car.GetComponent<Car>().spawned = true;
         nextSpawnTime = time + Random.Range(minWaitTime, maxWaitTime);
       }
     }

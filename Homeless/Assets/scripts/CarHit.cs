@@ -20,7 +20,7 @@ public class CarHit : MonoBehaviour {
     if (immobilityCount <= 0.0f) {
       immobilityCount = immobilityTime;
       hit = false;
-      if (GetComponent<Character>().alive) {
+      if (GetComponent<Character>() && GetComponent<Character>().alive) {
         GetComponent<CharacterAnimation>().playOnce("standup_ground", "idle");
       }
       return;
