@@ -1,28 +1,19 @@
-﻿using UnityEngine;
+﻿using KarmaSystem;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using KarmaSystem;
-using System.Collections.Generic;
+using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
   public GameObject player;
   public GameObject menuCanvas;
-  /*
-  Menu Canvas contains panels which need to be independently activated/deactivated.
-  It is somehow not possible to access a Panel from the canvas without using its name.
-  Using GameObject.Find(<Game objects name>) is a bad idea, because if the GameObjects
-  name changes in Unity this wouldn't be recognized in the code.
-  To avoid this effect we store a reference to the Panels as a GameObject right here
-  in the game handler. 
-  TODO: think of a better solution (Possibly get inspired by other peoples experiences.)
-  */
   public GameObject panelInGameMenu;
   public GameObject panelInventory;
   public GameObject panelDead;
   public float dayLength;
 
-  public bool paused { get; private set;  }
+  public bool paused { get; private set; }
   public int day { get; private set; }
   public float dayTime { get; private set; }
   public float inGameHour { get; private set; }
@@ -65,7 +56,8 @@ public class GameController : MonoBehaviour {
       controllerInstance.backgroundAudioLoop.loopStart = loop.loopStart;
       controllerInstance.backgroundAudioLoop.loopEnd = loop.loopEnd;
       Destroy(gameObject);
-    } else {
+    }
+    else {
       Debug.Log("Controller created");
       controllerInstance = this;
       backgroundAudioLoop = gameObject.GetComponent<BackgroundAudioLoop>();
@@ -131,7 +123,7 @@ public class GameController : MonoBehaviour {
   public void loadGame() {
     BinaryFormatter bf = new BinaryFormatter();
     FileStream file = File.Open("savefile.dat", FileMode.Open);
-    SaveData data = (SaveData) bf.Deserialize(file);
+    SaveData data = (SaveData)bf.Deserialize(file);
     data.apply(this);
     file.Close();
     Debug.Log("Loaded game");
@@ -167,8 +159,8 @@ public class GameController : MonoBehaviour {
   }
 
   public void deactivateChildsOfMenuPanels(GameObject panel) {
-    foreach(GameObject itPanel in GameObject.FindGameObjectsWithTag("MenuPanel")) {
-      if(itPanel != panel) {
+    foreach (GameObject itPanel in GameObject.FindGameObjectsWithTag("MenuPanel")) {
+      if (itPanel != panel) {
         Debug.Log("MenuPanel " + itPanel.name + " deactivated");
         itPanel.SetActive(false);
       }

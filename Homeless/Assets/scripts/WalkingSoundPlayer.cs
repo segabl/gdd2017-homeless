@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WalkingSoundPlayer : PausableObject {
 
@@ -10,7 +7,7 @@ public class WalkingSoundPlayer : PausableObject {
   public AudioSource audioSource;
 
   // Use this for initialization
-  void Start () {
+  void Start() {
     audioSource = GetComponent<AudioSource>();
     walks = new AudioClip[]{(AudioClip)Resources.Load("sfx/walking/footstep1"),
                                      (AudioClip)Resources.Load("sfx/walking/footstep2"),

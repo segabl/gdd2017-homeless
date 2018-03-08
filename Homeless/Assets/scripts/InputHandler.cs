@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InputHandler : MonoBehaviour {
 
-  void Update () {
+  void Update() {
     GameController controller = GameController.instance;
-    if (Input.GetKeyDown(KeyCode.Escape)) { 
+    if (Input.GetKeyDown(KeyCode.Escape)) {
       Debug.Log("ESC Key pressed");
       controller.player.GetComponent<MainCharacterMovement>().stopMovement();
       if (!controller.panelInGameMenu.activeSelf && !controller.panelInventory.activeSelf) {
@@ -15,7 +12,8 @@ public class InputHandler : MonoBehaviour {
         controller.deactivateChildsOfMenuPanels(controller.panelInGameMenu);
         controller.saveGame();
         controller.panelInGameMenu.SetActive(!controller.panelInGameMenu.activeSelf);
-      } else if (!controller.panelInGameMenu.activeSelf) {
+      }
+      else if (!controller.panelInGameMenu.activeSelf) {
         controller.panelInventory.SetActive(false);
         controller.unpauseAll();
       }
@@ -32,7 +30,8 @@ public class InputHandler : MonoBehaviour {
       controller.panelInventory.SetActive(!controller.panelInventory.activeSelf);
       if (controller.panelInventory.activeSelf) {
         controller.pauseAll();
-      } else {
+      }
+      else {
         controller.unpauseAll();
       }
     }
@@ -41,23 +40,20 @@ public class InputHandler : MonoBehaviour {
       return;
     }
 
-    if(Input.GetKeyDown(KeyCode.E)) {
+    if (Input.GetKeyDown(KeyCode.E)) {
       Debug.Log("E Key pressed");
       controller.player.GetComponent<MainCharacterMovement>().stopMovement();
-      if (InteractionHandler.playerCanInteract)
-      {
+      if (InteractionHandler.playerCanInteract) {
         InteractionHandler.interactObject.interact();
       }
     }
     if (Input.GetKeyDown(KeyCode.F))
       Debug.Log("F Key pressed");
 
-    if (Input.GetKey(KeyCode.F))
-    {
-      
+    if (Input.GetKey(KeyCode.F)) {
+
       //controller.player.GetComponent<MainCharacterMovement>().stopMovement();
-      if (TheftHandler.playerCanSteal)
-      {
+      if (TheftHandler.playerCanSteal) {
         TheftHandler.playerIsStealing = true;
       }
     }
@@ -70,8 +66,7 @@ public class InputHandler : MonoBehaviour {
       }
     }
     */
-    if (Input.GetKeyUp(KeyCode.F))
-    {
+    if (Input.GetKeyUp(KeyCode.F)) {
       TheftHandler.playerIsStealing = false;
     }
 

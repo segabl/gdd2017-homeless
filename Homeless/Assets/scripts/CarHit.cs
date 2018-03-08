@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CarHit : MonoBehaviour {
 
   public bool hit { get; private set; }
-  public float immobilityTime; 
+  public float immobilityTime;
   private float immobilityCount;
   private float hitDirection;
   private float hitSpeed;
@@ -17,10 +14,10 @@ public class CarHit : MonoBehaviour {
   }
 
   void Update() {
-    if(!hit) {
+    if (!hit) {
       return;
     }
-    if(immobilityCount <= 0.0f) {
+    if (immobilityCount <= 0.0f) {
       immobilityCount = immobilityTime;
       hit = false;
       if (GetComponent<Character>().alive) {
@@ -49,8 +46,8 @@ public class CarHit : MonoBehaviour {
         GetComponent<Character>().adjustStats(0.0f, -hitSpeed * 5.0f, 0.0f, 0.0f);
       }
       hitDirection = Mathf.Atan2(this.transform.position.x - car.transform.position.x, this.transform.position.y - car.transform.position.y);
-      if(hitDirection > 0 && hitDirection <= Mathf.PI) {
-          this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
+      if (hitDirection > 0 && hitDirection <= Mathf.PI) {
+        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
       }
       GetComponent<CharacterAnimation>().playOnce("carhit", "NONE");
       hit = true;

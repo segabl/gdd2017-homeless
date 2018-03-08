@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class InteractionHandler : PausableObject {
@@ -36,25 +34,20 @@ public abstract class InteractionHandler : PausableObject {
         return;
       }
     }
-    if (suspendTarget != null)
-    {
-      if (suspendTarget.activeSelf)
-      {
+    if (suspendTarget != null) {
+      if (suspendTarget.activeSelf) {
         if (interactObject == this)
           endInteraction();
         return;
       }
-      else
-      {
+      else {
         suspendTarget = null;
       }
     }
-    if (suspendStart != 0f)
-    {
+    if (suspendStart != 0f) {
       Debug.Log("Elapsed time: " + (GameController.instance.dayTime - suspendStart));
       Debug.Log("Day length: " + GameController.instance.dayLength);
-      if (GameController.instance.dayTime - suspendStart >= suspendLength)
-      {
+      if (GameController.instance.dayTime - suspendStart >= suspendLength) {
         suspendStart = 0f;
         suspendLength = 0f;
       }
@@ -70,10 +63,10 @@ public abstract class InteractionHandler : PausableObject {
         }
         else if (this is TrashcanInteraction) {
           interactionText.text = "Press 'E' to search the trash";
-        } 
+        }
         else if (this is LootableCarInteraction) {
           interactionText.text = "Press 'E' to loot";
-        } 
+        }
         else if (this is CharacterInteraction) {
           interactionText.text = "Press 'E' to talk to " + this.name;
         }
@@ -103,13 +96,11 @@ public abstract class InteractionHandler : PausableObject {
     interactObject = null;
     playerCanInteract = false;
   }
-  protected void suspend(float time)
-  {
+  protected void suspend(float time) {
     suspendStart = GameController.instance.dayTime;
     suspendLength = time / GameController.instance.dayLength;
   }
-  protected void suspendWhileActive(GameObject target)
-  {
+  protected void suspendWhileActive(GameObject target) {
     suspendTarget = target;
   }
 }

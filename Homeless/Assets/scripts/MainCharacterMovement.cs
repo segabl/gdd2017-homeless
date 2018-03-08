@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MainCharacterMovement : PausableObject {
 
@@ -33,26 +31,30 @@ public class MainCharacterMovement : PausableObject {
           this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
         }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
-      } else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
+      }
+      else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
         //UP
         if (this.transform.localScale.x < 0.0f) {
           this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
         }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_back";
-      } else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * - 0.75) {
+      }
+      else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * -0.75) {
         //LEFT
         if (this.transform.localScale.x > 0.0f) {
           this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
         }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
-      } else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr) {
+      }
+      else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr) {
         //DOWN
         if (this.transform.localScale.x < 0.0f) {
           this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
         }
         this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
       }
-    } else if (!walking && this.GetComponent<CharacterAnimation>().setAnimation.Contains("walking_")){
+    }
+    else if (!walking && this.GetComponent<CharacterAnimation>().setAnimation.Contains("walking_")) {
       this.GetComponent<CharacterAnimation>().setAnimation = "idle";
     }
   }
@@ -104,7 +106,8 @@ public class MainCharacterMovement : PausableObject {
       if (!Physics2D.Raycast(this.transform.position, direction_left, step, 1 << 0)) {
         direction_vector = direction_left;
         break;
-      } else if (!Physics2D.Raycast(this.transform.position, direction_right, step, 1 << 0)) {
+      }
+      else if (!Physics2D.Raycast(this.transform.position, direction_right, step, 1 << 0)) {
         direction_vector = direction_right;
         break;
       }

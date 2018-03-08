@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SleepingBoxInteraction : CharacterInteraction
-{
+public class SleepingBoxInteraction : CharacterInteraction {
   public float healthGain;
   public float sanityGain;
-  public String hasPermission()
-  {
-    if(GameController.instance.player.GetComponent<Character>().permisionToSleepInBox)
-    {
+  public String hasPermission() {
+    if (GameController.instance.player.GetComponent<Character>().permisionToSleepInBox) {
       return "Y";
     }
     return "N";
   }
-  public void Sleep()
-  {
+  public void Sleep() {
     GameController.instance.player.GetComponent<Character>().permisionToSleepInBox = false;
     SetNextTree("default");
     GameController.instance.player.GetComponent<CharacterAnimation>().SendMessage("OnUnpauseGame", SendMessageOptions.RequireReceiver);

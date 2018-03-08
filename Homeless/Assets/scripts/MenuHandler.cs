@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuHandler : MonoBehaviour {
 
   public Button continueButton;
   public Button exitButton;
 
-	// Use this for initialization
-	void Start () {
+  // Use this for initialization
+  void Start() {
     if (continueButton && System.IO.File.Exists("savefile.dat")) {
       //continueButton.interactable = true;
     }
@@ -16,18 +16,18 @@ public class MenuHandler : MonoBehaviour {
       exitButton.interactable = false;
     }
   }
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
+  // Update is called once per frame
+  void Update() {
+
+  }
 
   public void gameStart() {
     SceneManager.LoadScene("GameScene");
     Debug.Log("Start game");
   }
 
-  void OnGameSceneLoaded(Scene scene , LoadSceneMode mode) { 
+  void OnGameSceneLoaded(Scene scene, LoadSceneMode mode) {
     GameController.instance.loadGame();
     SceneManager.sceneLoaded -= OnGameSceneLoaded;
   }
@@ -40,9 +40,9 @@ public class MenuHandler : MonoBehaviour {
 
   public void gameEnd() {
     Debug.Log("End game");
-    #if UNITY_EDITOR
-      UnityEditor.EditorApplication.isPlaying = false;
-    #endif
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false;
+#endif
     Application.Quit();
   }
 

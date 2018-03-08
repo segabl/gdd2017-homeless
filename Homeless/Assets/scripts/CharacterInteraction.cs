@@ -23,10 +23,12 @@ public class CharacterInteraction : InteractionHandler {
 
     if (interactions == 0) {
       npc.SetTree(npc.TabList[0]);
-    } else if (nextTree != "") {
+    }
+    else if (nextTree != "") {
       npc.SetTree(nextTree);
       nextTree = "";
-    }  else {
+    }
+    else {
       npc.Next();
     }
 
@@ -36,7 +38,7 @@ public class CharacterInteraction : InteractionHandler {
   }
 
   public void Choice(int index) {
-    Choice(npc.GetChoices()[index]); 
+    Choice(npc.GetChoices()[index]);
   }
 
   public void Choice(String choice) {
@@ -64,44 +66,36 @@ public class CharacterInteraction : InteractionHandler {
     return DECISION_NO;
   }
 
-  public String isPlayerTrustedBy(String npc_name)
-  {
+  public String isPlayerTrustedBy(String npc_name) {
     GameObject npc = GameObject.Find(npc_name);
-    if (GameController.instance.karmaController.aTrustsB(npc, GameController.instance.player))
-    {
+    if (GameController.instance.karmaController.aTrustsB(npc, GameController.instance.player)) {
       return DECISION_YES;
     }
     return DECISION_NO;
   }
-  public String isPlayerLikedBy(String npc_name)
-  {
+  public String isPlayerLikedBy(String npc_name) {
     GameObject npc = GameObject.Find(npc_name);
-    if (GameController.instance.karmaController.aLikesB(npc, GameController.instance.player))
-    {
+    if (GameController.instance.karmaController.aLikesB(npc, GameController.instance.player)) {
       return DECISION_YES;
     }
     return DECISION_NO;
   }
-  public String isPlayerCharitable()
-  {
+  public String isPlayerCharitable() {
     if (GameController.instance.karmaController.isCharitable(GameController.instance.player))
       return DECISION_YES;
     return DECISION_NO;
   }
-  public String isPlayerReliable()
-  {
+  public String isPlayerReliable() {
     if (GameController.instance.karmaController.isReliable(GameController.instance.player))
       return DECISION_YES;
     return DECISION_NO;
   }
-  public String isPlayerCriminal()
-  {
+  public String isPlayerCriminal() {
     if (GameController.instance.karmaController.isCriminal(GameController.instance.player))
       return DECISION_YES;
     return DECISION_NO;
   }
-  public String isPlayerCruel()
-  {
+  public String isPlayerCruel() {
     if (GameController.instance.karmaController.isCruel(GameController.instance.player))
       return DECISION_YES;
     return DECISION_NO;
@@ -111,7 +105,8 @@ public class CharacterInteraction : InteractionHandler {
     handleTrigger();
     if (npc.GetChoices().Length > 0) {
       modalPanel.MessageBox(npc.GetCurrentDialogue(), Choice, npc.GetChoices());
-    } else {
+    }
+    else {
       interactionText.text = npc.GetCurrentDialogue();
     }
   }
@@ -141,6 +136,6 @@ public class CharacterInteraction : InteractionHandler {
     Array.Copy(split, 1, parameters, 0, parameters.Length);
     Type thisType = this.GetType();
     MethodInfo method = thisType.GetMethod(split[0]);
-    return (string) method.Invoke(this, parameters);
+    return (string)method.Invoke(this, parameters);
   }
 }

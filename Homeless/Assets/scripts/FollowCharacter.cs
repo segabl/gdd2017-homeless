@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FollowCharacter : MonoBehaviour {
 
@@ -8,11 +6,11 @@ public class FollowCharacter : MonoBehaviour {
   public float movementSpeed;
   public GameObject mainCharacter;
 
-  void Start () {
+  void Start() {
     targetPosition = this.transform.position;
-	}
-	
-	void Update () {
+  }
+
+  void Update() {
     targetPosition = mainCharacter.transform.position;
     targetPosition.z = this.transform.position.z;
     if (this.transform.position != targetPosition) {

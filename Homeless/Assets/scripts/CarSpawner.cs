@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CarSpawner : PausableObject {
 
@@ -12,10 +10,10 @@ public class CarSpawner : PausableObject {
 
   private float nextSpawnTime;
 
-  void Start () {
+  void Start() {
     nextSpawnTime = time + Random.Range(minWaitTime, maxWaitTime) * 0.5f;
-	}
-	
+  }
+
   protected override void updatePausable() {
     if (time > nextSpawnTime) {
       RaycastHit2D hit = Physics2D.Raycast(this.transform.position, new Vector3(Mathf.Sign(carSpeed), 0, 0), 5);

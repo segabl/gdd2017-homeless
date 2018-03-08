@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PostProcessing : MonoBehaviour {
 
@@ -68,13 +65,11 @@ public class PostProcessing : MonoBehaviour {
 
   }
 
-  internal void ProcessPlayerRepletion(RenderTexture source, RenderTexture destination)
-  {
+  internal void ProcessPlayerRepletion(RenderTexture source, RenderTexture destination) {
     float repletion = GameController.instance.player.GetComponent<Character>().repletion;
     if (repletion <= 3f)
       repletion = 3f;
-    if (repletion < 80.0f)
-    {
+    if (repletion < 80.0f) {
       blurMaterial.SetFloat("hstep", 3.20f / repletion);
       blurMaterial.SetFloat("vstep", 1.80f / repletion);
       Graphics.Blit(source, destination, blurMaterial);
@@ -99,17 +94,15 @@ public class PostProcessing : MonoBehaviour {
 
         float strength, speed, repletion;
         repletion = GameController.instance.player.GetComponent<Character>().repletion;
-        if (repletion <= 50)
-        {
+        if (repletion <= 50) {
           speed = 0.9f;
           strength = 0.9f;
         }
-        else
-        {
+        else {
           speed = (50.0f - health) / 100.0f + 0.5f;
           strength = speed;
         }
-        
+
         pulseMaterial.SetFloat("_time", timeDiff);
         pulseMaterial.SetFloat("_strength", strength);
         pulseMaterial.SetFloat("_speed", speed);
@@ -124,22 +117,20 @@ public class PostProcessing : MonoBehaviour {
   }
   internal void ProcessPlayerSanity(RenderTexture source, RenderTexture destination) {
     float sanity = GameController.instance.player.GetComponent<Character>().sanity;
-    if (sanity <= 80f)
-    {
+    if (sanity <= 80f) {
       if (sanity <= 5f)
         sanity = 5f;
       if (insanityTime == 0f)
         insanityTime = Time.fixedTime;
       float timeDiff = (Time.fixedTime - insanityTime) / 1440f * 2000f;
       if (GameController.instance.player.GetComponent<Character>().repletion >= 50f)
-        timeDiff *= (80f-sanity) / 80f;
+        timeDiff *= (80f - sanity) / 80f;
       strangeMaterial.SetFloat("_time", timeDiff);
-      strangeMaterial.SetFloat("_strength", (80f - sanity)/80f);
+      strangeMaterial.SetFloat("_strength", (80f - sanity) / 80f);
       Graphics.Blit(source, destination, strangeMaterial);
       //strangeMaterial.SetFloat("")
     }
-    else
-    {
+    else {
       insanityTime = 0;
     }
 
