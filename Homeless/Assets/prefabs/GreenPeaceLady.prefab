@@ -1,0 +1,449 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1166656861094372}
+  m_IsPrefabParent: 1
+--- !u!1 &1166656861094372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4658448494525336}
+  - component: {fileID: 212566751502899854}
+  - component: {fileID: 114963600345885104}
+  - component: {fileID: 114967189290597090}
+  - component: {fileID: 114484857826644262}
+  - component: {fileID: 114528235965839796}
+  - component: {fileID: 114808376618908794}
+  m_Layer: 0
+  m_Name: GreenPeaceLady
+  m_TagString: SocialCharacter
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4658448494525336
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166656861094372}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 27.74, y: 27.29, z: 0}
+  m_LocalScale: {x: 2, y: 8, z: 2}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114484857826644262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166656861094372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3a44bb3b5a08e489f7a5c60994d749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerDistance: 2
+  npc: {fileID: 114528235965839796}
+  Reward: {fileID: 1840668056442712, guid: fc3d0e801a98bc94aa875fcd97f462a7, type: 2}
+--- !u!114 &114528235965839796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166656861094372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10fe5d6867c1b5449b4bf163fcd72ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Set:
+  - CurrentId: 12
+    NewWindowOpen: 0
+    FirstWindow: 0
+    Windows:
+    - ID: 0
+      Size:
+        serializedVersion: 2
+        x: 25
+        y: 350
+        width: 150
+        height: 125
+      Text: Hello upstanding citizen! Do you care about the environment?
+      Type: 0
+      NodeType: 0
+      Parent: -1
+      Trigger: 0
+      TriggerText: 
+      Connections: 01000000
+    - ID: 1
+      Size:
+        serializedVersion: 2
+        x: 204
+        y: 352
+        width: 150
+        height: 125
+      Text: Do you care?
+      Type: 1
+      NodeType: 1
+      Parent: 0
+      Trigger: 0
+      TriggerText: 
+      Connections: 0200000003000000
+    - ID: 2
+      Size:
+        serializedVersion: 2
+        x: 388
+        y: 190
+        width: 150
+        height: 125
+      Text: Yes, Kinda
+      Type: 2
+      NodeType: 1
+      Parent: 1
+      Trigger: 0
+      TriggerText: 
+      Connections: 04000000
+    - ID: 3
+      Size:
+        serializedVersion: 2
+        x: 377
+        y: 518
+        width: 150
+        height: 125
+      Text: I'don't care
+      Type: 2
+      NodeType: 1
+      Parent: 1
+      Trigger: 0
+      TriggerText: 
+      Connections: 08000000
+    - ID: 4
+      Size:
+        serializedVersion: 2
+        x: 565
+        y: 192
+        width: 150
+        height: 125
+      Text: Help me to recycle the garbage of the city!
+      Type: 0
+      NodeType: 2
+      Parent: 2
+      Trigger: 1
+      TriggerText: SetNextTree,hasTrash
+      Connections: 
+    - ID: 8
+      Size:
+        serializedVersion: 2
+        x: 557
+        y: 520
+        width: 150
+        height: 125
+      Text: That's really sad!
+      Type: 0
+      NodeType: 2
+      Parent: 3
+      Trigger: 1
+      TriggerText: SetNextTree,changeMind
+      Connections: 
+  - CurrentId: 9
+    NewWindowOpen: 0
+    FirstWindow: 0
+    Windows:
+    - ID: 0
+      Size:
+        serializedVersion: 2
+        x: 36
+        y: 283
+        width: 150
+        height: 125
+      Text: Do you have something to recycle?
+      Type: 1
+      NodeType: 0
+      Parent: -1
+      Trigger: 0
+      TriggerText: 
+      Connections: 0100000002000000
+    - ID: 1
+      Size:
+        serializedVersion: 2
+        x: 217
+        y: 135
+        width: 150
+        height: 125
+      Text: Yes
+      Type: 2
+      NodeType: 1
+      Parent: 0
+      Trigger: 0
+      TriggerText: 
+      Connections: 03000000
+    - ID: 2
+      Size:
+        serializedVersion: 2
+        x: 204
+        y: 450
+        width: 150
+        height: 125
+      Text: No
+      Type: 2
+      NodeType: 1
+      Parent: 0
+      Trigger: 0
+      TriggerText: 
+      Connections: 07000000
+    - ID: 3
+      Size:
+        serializedVersion: 2
+        x: 414
+        y: 138
+        width: 150
+        height: 125
+      Text: 
+      Type: 1
+      NodeType: 1
+      Parent: 1
+      Trigger: 1
+      TriggerText: HasItemOfType,TRASH
+      Connections: 0400000005000000
+    - ID: 4
+      Size:
+        serializedVersion: 2
+        x: 626
+        y: 54
+        width: 150
+        height: 125
+      Text: Y
+      Type: 2
+      NodeType: 1
+      Parent: 3
+      Trigger: 0
+      TriggerText: 
+      Connections: 08000000
+    - ID: 5
+      Size:
+        serializedVersion: 2
+        x: 607
+        y: 326
+        width: 150
+        height: 125
+      Text: N
+      Type: 2
+      NodeType: 1
+      Parent: 3
+      Trigger: 0
+      TriggerText: 
+      Connections: 06000000
+    - ID: 6
+      Size:
+        serializedVersion: 2
+        x: 831
+        y: 327
+        width: 150
+        height: 125
+      Text: You have nothing I can use
+      Type: 0
+      NodeType: 2
+      Parent: 5
+      Trigger: 1
+      TriggerText: SetNextTree,hasTrash
+      Connections: 
+    - ID: 7
+      Size:
+        serializedVersion: 2
+        x: 425
+        y: 478
+        width: 150
+        height: 125
+      Text: If you find something bring it to me
+      Type: 0
+      NodeType: 2
+      Parent: 2
+      Trigger: 1
+      TriggerText: SetNextTree,hasTrash
+      Connections: 
+    - ID: 8
+      Size:
+        serializedVersion: 2
+        x: 856
+        y: 53
+        width: 150
+        height: 125
+      Text: You did good for the environment. Here have this
+      Type: 0
+      NodeType: 2
+      Parent: 4
+      Trigger: 1
+      TriggerText: TradeTrash
+      Connections: 
+  - CurrentId: 5
+    NewWindowOpen: 0
+    FirstWindow: 0
+    Windows:
+    - ID: 0
+      Size:
+        serializedVersion: 2
+        x: 26
+        y: 277
+        width: 150
+        height: 125
+      Text: Did you change your mind?
+      Type: 1
+      NodeType: 0
+      Parent: -1
+      Trigger: 0
+      TriggerText: 
+      Connections: 0100000002000000
+    - ID: 1
+      Size:
+        serializedVersion: 2
+        x: 239
+        y: 117
+        width: 150
+        height: 125
+      Text: Yes
+      Type: 2
+      NodeType: 1
+      Parent: 0
+      Trigger: 0
+      TriggerText: 
+      Connections: 04000000
+    - ID: 2
+      Size:
+        serializedVersion: 2
+        x: 237
+        y: 466
+        width: 150
+        height: 125
+      Text: No
+      Type: 2
+      NodeType: 1
+      Parent: 0
+      Trigger: 0
+      TriggerText: 
+      Connections: 03000000
+    - ID: 3
+      Size:
+        serializedVersion: 2
+        x: 435
+        y: 466
+        width: 150
+        height: 125
+      Text: Thats sad!
+      Type: 0
+      NodeType: 2
+      Parent: 2
+      Trigger: 1
+      TriggerText: SetNextTree,changeMind
+      Connections: 
+    - ID: 4
+      Size:
+        serializedVersion: 2
+        x: 469
+        y: 119
+        width: 150
+        height: 125
+      Text: Nice to hear
+      Type: 0
+      NodeType: 2
+      Parent: 1
+      Trigger: 1
+      TriggerText: SetNextTree,hasTrash
+      Connections: 
+  CurrentSet: 0
+  TabList:
+  - default
+  - hasTrash
+  - changeMind
+--- !u!114 &114808376618908794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166656861094372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c213a4cf9b73b547a67e2f8bfdf8d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSprite: {fileID: 0}
+--- !u!114 &114963600345885104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166656861094372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05830439b5ec332498b49bd3ec983688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114967189290597090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166656861094372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c213a4cf9b73b547a67e2f8bfdf8d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSprite: {fileID: 0}
+--- !u!212 &212566751502899854
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1166656861094372}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -499047127
+  m_SortingLayer: 1
+  m_SortingOrder: -1364
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

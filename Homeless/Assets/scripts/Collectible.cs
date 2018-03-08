@@ -3,7 +3,7 @@
 public class Collectible : MonoBehaviour {
 
   public enum Type {
-    FOOD, DRINK, MEDICINE, OTHER
+    FOOD, DRINK, MEDICINE, OTHER, TRASH
   };
 
   public Sprite sprite { get; set; }
