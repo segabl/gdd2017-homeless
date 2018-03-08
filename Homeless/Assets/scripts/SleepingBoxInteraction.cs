@@ -18,5 +18,10 @@ public class SleepingBoxInteraction : CharacterInteraction {
     GameController.instance.sleep(GetComponent<SleepingSpot>());
     Debug.Log("Slept in the box");
   }
+  protected override bool displayInteractionText()
+  {
+    interactionText.text = "Press 'E' to interact";
+    return true;
+  }
 }
 

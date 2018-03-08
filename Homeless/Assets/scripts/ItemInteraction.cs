@@ -35,11 +35,12 @@ public class ItemInteraction : InteractionHandler {
     
   }
 
-  protected override void displayInteractionText()
+  protected override bool displayInteractionText()
   {
     if (canPickUp)
       interactionText.text = "Press 'E' to pick up " + this.name;
     else
       interactionText.text = "Inventory is full";
+    return true;
   }
 }

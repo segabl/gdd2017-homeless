@@ -13,14 +13,17 @@ public class SleepingSpotInteraction : InteractionHandler {
     endInteraction();
     suspend(5.0f);
   }
-  protected override void displayInteractionText()
+  protected override bool displayInteractionText()
   {
-    float direction = Mathf.Atan2(this.transform.position.x - GameController.instance.player.transform.position.x, this.transform.position.y - GameController.instance.player.transform.position.y);
+    float direction = Mathf.Atan2(this.transform.position.x - GameController.instance.player.transform.position.x,
+      this.transform.position.y - GameController.instance.player.transform.position.y);
     if (!(direction > -Mathf.PI / 10.0f && direction < Mathf.PI / 10.0f))
     {
-      return;
+      Debug.Log("Direction: " + direction);
+      return false;
     }
     interactionText.text = "Press 'E' to sleep";
+    return true;
   }
 
 }
