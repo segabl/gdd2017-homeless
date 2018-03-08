@@ -1,15 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class PausableObject : MonoBehaviour {
 
   public bool paused { get; protected set; }
+  protected float time = 0;
+
+  void Start() {
+    time = Time.time;
+  }
 
   void Update() {
     if (paused) {
       return;
     }
+    time += Time.deltaTime;
     updatePausable();
   }
 

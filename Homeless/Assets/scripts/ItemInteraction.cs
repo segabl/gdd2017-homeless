@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemInteraction : InteractionHandler {
 
@@ -13,7 +10,7 @@ public class ItemInteraction : InteractionHandler {
     Debug.Log("Item interaction");
     Inventory inventory = GameController.instance.player.GetComponent<Inventory>();
     Collectible c = this.GetComponent<Collectible>();
-    if(c == null) {
+    if (c == null) {
       Debug.Log("No Collectible script attached to: " + this.name);
       return;
     }

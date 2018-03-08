@@ -1,10 +1,4 @@
 ﻿using KarmaSystem;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEditor;
-using UnityEngine;
 
 class LootableCarInteraction : CharacterInteraction {
   public Collectible loot;

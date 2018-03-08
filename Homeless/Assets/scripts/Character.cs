@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +8,7 @@ public class Character : PausableObject {
   public float maxHealth;
   public float maxSanity;
   public float maxIntoxication;
-  [Range(0f,100f)]
+  [Range(0f, 100f)]
   public float repletion;
   [Range(0f, 100f)]
   public float health;
@@ -23,9 +21,9 @@ public class Character : PausableObject {
   private float accumulatedDeltaSanity;
   private float accumulatedDeltaIntox;
   public bool alive { get; private set; }
-  public bool asleep { get; set;}
+  public bool asleep { get; set; }
 
-  void Start () {
+  void Start() {
     alive = true;
     accumulatedDeltaRepletion = 0.0f;
     accumulatedDeltaHealth = 0.0f;
@@ -34,7 +32,7 @@ public class Character : PausableObject {
     intoxication = 0.0f;
     permisionToSleepInBox = false;
     asleep = false;
-	}
+  }
 
   protected override void updatePausable() {
     if (alive) {
@@ -48,9 +46,9 @@ public class Character : PausableObject {
       updateSanity();
       updateIntoxication();
     }
-    #if UNITY_EDITOR
-      updateStatsDebugText();
-    #endif
+#if UNITY_EDITOR
+    updateStatsDebugText();
+#endif
   }
 
   private void updateStatsDebugText() {
@@ -78,7 +76,7 @@ public class Character : PausableObject {
   private void adjustRepletion(float repletionAdjustment) {
     this.repletion += repletionAdjustment;
     this.repletion = this.repletion > this.maxRepletion ? this.maxRepletion : this.repletion;
-    if(this.repletion <= 0.0f) {
+    if (this.repletion <= 0.0f) {
       die("starvation");
     }
   }
@@ -94,8 +92,7 @@ public class Character : PausableObject {
   private void adjustSanity(float sanityAdjustment) {
     this.sanity += sanityAdjustment;
     this.sanity = this.sanity > this.maxSanity ? this.maxSanity : this.sanity;
-    if (sanity <= 0.0f)
-    {
+    if (sanity <= 0.0f) {
       die("lack of sanity");
     }
   }
@@ -103,7 +100,7 @@ public class Character : PausableObject {
   private void adjustIntoxication(float intoxicationAdjustment) {
     this.intoxication += intoxicationAdjustment;
     this.intoxication = this.intoxication < 0.0f ? 0.0f : this.intoxication;
-    if(this.intoxication >= this.maxIntoxication) {
+    if (this.intoxication >= this.maxIntoxication) {
       die("too high intoxication level");
     }
   }
@@ -151,8 +148,7 @@ public class Character : PausableObject {
     int days = GameController.instance.day;
     GameController.instance.panelDead.GetComponentInChildren<Text>().text = "You survived " + days + (days != 1 ? " days" : " day") + " before dying due to " + reason;
   }
-  private Decimal roundDebug(float f)
-  {
+  private Decimal roundDebug(float f) {
     return System.Math.Round((Decimal)f, 1, MidpointRounding.AwayFromZero);
   }
 }

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 public class TrashcanInteraction : InteractionHandler {
@@ -22,7 +20,7 @@ public class TrashcanInteraction : InteractionHandler {
     }
     if (Random.Range(0.0f, 1.0f) < yieldChance) {
       int num = Random.Range(0, items.Count);
-      GameObject drop =  Instantiate(items[num], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
+      GameObject drop = Instantiate(items[num], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
       drop.name = drop.name.Replace("(Clone)", "");
       suspend(3.5f);
       suspendWhileActive(drop);

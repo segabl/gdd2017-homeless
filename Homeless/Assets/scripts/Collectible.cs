@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Collectible : MonoBehaviour{
+public class Collectible : MonoBehaviour {
 
   public enum Type {
     FOOD, DRINK, MEDICINE, OTHER
@@ -17,7 +15,7 @@ public class Collectible : MonoBehaviour{
   public Type type;
   public AudioClip useSound;
 
-  public void Start () {
+  public void Start() {
     this.sprite = sprite;
     this.inventoryIndex = -1;
     SpriteRenderer spriteRenderer = this.GetComponent<SpriteRenderer>();

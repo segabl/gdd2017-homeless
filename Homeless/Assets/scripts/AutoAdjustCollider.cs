@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 public class AutoAdjustCollider : MonoBehaviour {
@@ -8,15 +6,15 @@ public class AutoAdjustCollider : MonoBehaviour {
   public float widthAdjustment;
   public float heightAdjustment;
 
-	// Use this for initialization
-	void Start () {
-    
+  // Use this for initialization
+  void Start() {
+
   }
-	
-	// Update is called once per frame
-	void Update () {
+
+  // Update is called once per frame
+  void Update() {
     SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
     BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
     boxCollider.size = spriteRenderer.size + new Vector2(widthAdjustment, heightAdjustment);
-	}
+  }
 }

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using SpriterDotNetUnity;
 using UnityEngine;
-using SpriterDotNetUnity;
 
 [ExecuteInEditMode]
 public class DynamicDepthSorting : MonoBehaviour {
@@ -10,7 +8,7 @@ public class DynamicDepthSorting : MonoBehaviour {
   private SpriterDotNetBehaviour spriterBehaviour;
 
   // Use this for initialization
-  void Start () {
+  void Start() {
     spriterBehaviour = GetComponentInChildren<SpriterDotNetBehaviour>();
     if (spriterBehaviour) {
       spriterBehaviour.SortingLayer = "Dynamic";
@@ -21,13 +19,14 @@ public class DynamicDepthSorting : MonoBehaviour {
         spriteRenderer.sortingLayerName = "Dynamic";
       }
     }
-	}
-	
-	// Update is called once per frame
-	void Update () {
+  }
+
+  // Update is called once per frame
+  void Update() {
     if (spriterBehaviour) {
       spriterBehaviour.SortingOrder = (int)(transform.position.y * (-50));
-    } else {
+    }
+    else {
       foreach (var spriteRenderer in spriteRenderers) {
         spriteRenderer.sortingOrder = (int)(transform.position.y * (-50));
       }

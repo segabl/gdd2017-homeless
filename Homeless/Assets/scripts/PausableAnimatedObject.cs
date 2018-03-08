@@ -1,7 +1,4 @@
 ﻿using SpriterDotNetUnity;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public abstract class PausableAnimatedObject : PausableObject {
 
@@ -17,16 +14,14 @@ public abstract class PausableAnimatedObject : PausableObject {
     spriterAnimator.Speed = 0;
   }
   public override void OnUnpauseGame() {
-    if (ignoreOnPause)
-    {
+    if (ignoreOnPause) {
       ignoreOnPause = false;
       return;
     }
     base.OnUnpauseGame();
     spriterAnimator.Speed = oldAnimationSpeed;
   }
-  public void ignoreNextOnPause()
-  {
+  public void ignoreNextOnPause() {
     ignoreOnPause = true;
   }
 

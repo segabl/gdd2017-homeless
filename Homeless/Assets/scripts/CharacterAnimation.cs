@@ -1,8 +1,5 @@
 ﻿using SpriterDotNetUnity;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class CharacterAnimation : PausableAnimatedObject {
 
@@ -17,14 +14,14 @@ public class CharacterAnimation : PausableAnimatedObject {
   private bool oncePlaying;
 
   // Use this for initialization
-  void Start () {
+  void Start() {
     currentAnimation = "idle";
     setAnimation = "idle";
     animFinishedSetCurrent = f => currentAnimation = "NONE";
     animFinishedSetSetAnim = f => setAnimation = "idle";
     oncePlaying = false;
   }
-	
+
   protected override void updatePausable() {
     playCurrentAnimation();
   }

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class BackgroundAudioLoop : MonoBehaviour {
 
@@ -17,7 +14,7 @@ public class BackgroundAudioLoop : MonoBehaviour {
   private float fadeTime = -1;
 
   // Use this for initialization
-  void Awake () {
+  void Awake() {
     audioSource = gameObject.AddComponent<AudioSource>();
     audioSource.clip = audioClip;
     audioSource.playOnAwake = false;
@@ -28,7 +25,7 @@ public class BackgroundAudioLoop : MonoBehaviour {
   }
 
   // Update is called once per frame
-  void Update () {
+  void Update() {
     if (audioSource.time >= loopEnd) {
       audioSource.time = loopStart + audioSource.time - loopEnd;
       if (!audioSource.isPlaying) {
@@ -37,7 +34,8 @@ public class BackgroundAudioLoop : MonoBehaviour {
     }
     if (Time.time <= fadeTime + fadeDelay) {
       audioSource.volume = Mathf.Lerp(fadeFrom, fadeTo, (Time.time - fadeTime) / fadeDelay);
-    } else if (audioSource.volume != fadeTo) {
+    }
+    else if (audioSource.volume != fadeTo) {
       audioSource.volume = fadeTo;
     }
     if (audioSource.clip != audioClip && Time.time > fadeTime + fadeDelay) {
@@ -65,7 +63,7 @@ public class BackgroundAudioLoop : MonoBehaviour {
   }
 
   public void play() {
-     audioSource.Play();
+    audioSource.Play();
   }
 
   public void stop() {

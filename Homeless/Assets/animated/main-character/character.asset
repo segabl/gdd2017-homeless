@@ -10962,7 +10962,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -14913,7 +14913,7 @@ MonoBehaviour:
             Name: 
             ParentId: 1
             TimelineId: 11
-            KeyId: 0
+            KeyId: 1
           - Id: 3
             Name: 
             ParentId: 1
@@ -15066,7 +15066,7 @@ MonoBehaviour:
             Name: 
             ParentId: 1
             TimelineId: 11
-            KeyId: 1
+            KeyId: 2
           - Id: 3
             Name: 
             ParentId: 1
@@ -16043,9 +16043,9 @@ MonoBehaviour:
             C4: 0
             Spin: 1
             BoneInfo:
-              X: -54.48706
-              Y: 21.600416
-              Angle: 350.12878
+              X: -52.420097
+              Y: 25.941105
+              Angle: 346.76465
               ScaleX: 1
               ScaleY: 1
               Alpha: 1
@@ -16179,7 +16179,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 0
+            Spin: -1
             BoneInfo:
               X: 0
               Y: 0
@@ -16203,17 +16203,47 @@ MonoBehaviour:
               T: 0
           - Id: 1
             Name: 
+            Time: 738
+            CurveType: 0
+            C1: 0
+            C2: 0
+            C3: 0
+            C4: 0
+            Spin: -1
+            BoneInfo:
+              X: 0
+              Y: 0
+              Angle: 164.78342
+              ScaleX: 1
+              ScaleY: 1
+              Alpha: 1
+            ObjectInfo:
+              X: 0
+              Y: 0
+              Angle: 0
+              ScaleX: 1
+              ScaleY: 1
+              Alpha: 1
+              AnimationId: 0
+              EntityId: 0
+              FolderId: 0
+              FileId: 0
+              PivotX: NaN
+              PivotY: NaN
+              T: 0
+          - Id: 2
+            Name: 
             Time: 1000
             CurveType: 0
             C1: 0
             C2: 0
             C3: 0
             C4: 0
-            Spin: 0
+            Spin: 1
             BoneInfo:
               X: 0
               Y: 0
-              Angle: 180
+              Angle: 153.40857
               ScaleX: 1
               ScaleY: 1
               Alpha: 1
@@ -16342,7 +16372,7 @@ MonoBehaviour:
             BoneInfo:
               X: 31
               Y: -12
-              Angle: 318.85443
+              Angle: 329.42035
               ScaleX: 1
               ScaleY: 1
               Alpha: 1
@@ -16980,7 +17010,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 0
+            Spin: 1
             BoneInfo:
               X: 31
               Y: 12
@@ -17014,7 +17044,7 @@ MonoBehaviour:
             BoneInfo:
               X: 31
               Y: 12
-              Angle: 316.60428
+              Angle: 324.77667
               ScaleX: 1
               ScaleY: -1
               Alpha: 1
@@ -18237,7 +18267,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -18297,7 +18327,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -18465,7 +18495,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -18525,7 +18555,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -18564,7 +18594,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -18594,7 +18624,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -21888,7 +21918,7 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: -0
+              X: 0
               Y: 0
               Angle: 180
               ScaleX: 1
@@ -21918,7 +21948,7 @@ MonoBehaviour:
               ScaleY: 1
               Alpha: 1
             ObjectInfo:
-              X: -0
+              X: 0
               Y: 0
               Angle: 180
               ScaleX: 1
@@ -23631,7 +23661,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -23661,7 +23691,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -35646,7 +35676,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
@@ -35676,7 +35706,7 @@ MonoBehaviour:
             C2: 0
             C3: 0
             C4: 0
-            Spin: 1
+            Spin: 0
             BoneInfo:
               X: 0
               Y: 0
