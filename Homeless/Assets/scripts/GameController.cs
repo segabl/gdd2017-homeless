@@ -172,6 +172,15 @@ public class GameController : MonoBehaviour {
       }
     }
   }
+  public static GameObject createItemInstance(GameObject prefab)
+  {
+    GameObject item = Instantiate(prefab);
+    item.name = item.name.Replace("(Clone)", "");
+
+    item.GetComponent<Collectible>().sprite = prefab.GetComponent<SpriteRenderer>().sprite;
+    return item;
+    
+  }
 
   /* 
   Serializeable save data class that contains data to be saved

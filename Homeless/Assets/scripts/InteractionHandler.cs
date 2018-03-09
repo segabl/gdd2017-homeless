@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class InteractionHandler : PausableObject {
@@ -12,7 +13,11 @@ public abstract class InteractionHandler : PausableObject {
   protected AudioClip interactClip;
   private float suspendStart = 0;
   private float suspendLength = 0;
+  private Action callAfterSuspend = null;
   private GameObject suspendTarget = null;
+  private float delayStart = 0;
+  private float delayLength = 0;
+  private Action callAfterDelay = null;
 
   protected override void updatePausable() {
 
@@ -44,10 +49,30 @@ public abstract class InteractionHandler : PausableObject {
       if (GameController.instance.dayTime - suspendStart >= suspendLength) {
         suspendStart = 0f;
         suspendLength = 0f;
+        if (callAfterSuspend != null)
+        {
+          callAfterSuspend();
+          callAfterSuspend = null;
+        }
+        
       }
+      
       if (interactObject == this)
         endInteraction();
       return;
+    }
+    if (delayStart != 0)
+    {
+      if (GameController.instance.dayTime - delayStart >= delayLength)
+      {
+        delayStart = 0;
+        delayLength = 0;
+        if (callAfterDelay != null)
+        {
+          callAfterDelay();
+          callAfterDelay = null;
+        }
+      }
     }
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
       interactionText.transform.position = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, 50, 0);
@@ -76,6 +101,17 @@ public abstract class InteractionHandler : PausableObject {
   }
   protected void suspendWhileActive(GameObject target) {
     suspendTarget = target;
+  }
+  protected void suspendThenCall(float time, Action function)
+  {
+    suspend(time);
+    callAfterSuspend = function;
+  }
+  protected void waitThenCall(float time, Action call)
+  {
+    delayStart = GameController.instance.dayTime;
+    delayLength = time / GameController.instance.dayLength;
+    callAfterDelay = call;
   }
   protected abstract bool displayInteractionText();
 }
