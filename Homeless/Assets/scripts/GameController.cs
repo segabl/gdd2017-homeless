@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour {
       controllerInstance = this;
       backgroundAudioLoop = gameObject.GetComponent<BackgroundAudioLoop>();
       modalPanel = gameObject.GetComponent<ModalPanel>();
-      karmaController = new KarmaController();
+      //karmaController = new KarmaController();
       inGameHour = dayLength / 24.0f;
       hoursToWait = 6;
       paused = false;
@@ -84,6 +84,8 @@ public class GameController : MonoBehaviour {
     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "GameScene") {
       return;
     }
+    if (karmaController == null)
+      karmaController = new KarmaController();
     float deltaTime = Time.deltaTime;
     bool asleep = player.GetComponent<Character>().asleep;
     dayTime += deltaTime / dayLength;
