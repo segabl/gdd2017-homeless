@@ -29604,7 +29604,7 @@ MonoBehaviour:
         MainlineKeys:
         - Id: 0
           Name: 
-          Time: 225
+          Time: 0
           CurveType: 0
           C1: 0
           C2: 0
@@ -29757,7 +29757,7 @@ MonoBehaviour:
             ZIndex: 12
         - Id: 1
           Name: 
-          Time: 602
+          Time: 500
           CurveType: 0
           C1: 0
           C2: 0
@@ -29773,7 +29773,7 @@ MonoBehaviour:
             Name: 
             ParentId: 0
             TimelineId: 9
-            KeyId: 0
+            KeyId: 1
           - Id: 2
             Name: 
             ParentId: 1
@@ -29783,22 +29783,22 @@ MonoBehaviour:
             Name: 
             ParentId: 1
             TimelineId: 10
-            KeyId: 0
+            KeyId: 1
           - Id: 4
             Name: 
             ParentId: 3
             TimelineId: 14
-            KeyId: 1
+            KeyId: 0
           - Id: 5
             Name: 
             ParentId: 1
             TimelineId: 16
-            KeyId: 0
+            KeyId: 1
           - Id: 6
             Name: 
             ParentId: 5
             TimelineId: 17
-            KeyId: 1
+            KeyId: 0
           - Id: 7
             Name: 
             ParentId: 0
@@ -29882,13 +29882,13 @@ MonoBehaviour:
             Name: 
             ParentId: 5
             TimelineId: 18
-            KeyId: 1
+            KeyId: 0
             ZIndex: 8
           - Id: 9
             Name: 
             ParentId: 3
             TimelineId: 6
-            KeyId: 1
+            KeyId: 0
             ZIndex: 9
           - Id: 10
             Name: 
@@ -29900,166 +29900,13 @@ MonoBehaviour:
             Name: 
             ParentId: 1
             TimelineId: 1
-            KeyId: 1
+            KeyId: 0
             ZIndex: 11
           - Id: 12
             Name: 
             ParentId: 2
             TimelineId: 0
             KeyId: 0
-            ZIndex: 12
-        - Id: 2
-          Name: 
-          Time: 998
-          CurveType: 0
-          C1: 0
-          C2: 0
-          C3: 0
-          C4: 0
-          BoneRefs:
-          - Id: 0
-            Name: 
-            ParentId: -1
-            TimelineId: 8
-            KeyId: 1
-          - Id: 1
-            Name: 
-            ParentId: 0
-            TimelineId: 9
-            KeyId: 1
-          - Id: 2
-            Name: 
-            ParentId: 1
-            TimelineId: 11
-            KeyId: 1
-          - Id: 3
-            Name: 
-            ParentId: 1
-            TimelineId: 10
-            KeyId: 1
-          - Id: 4
-            Name: 
-            ParentId: 3
-            TimelineId: 14
-            KeyId: 2
-          - Id: 5
-            Name: 
-            ParentId: 1
-            TimelineId: 16
-            KeyId: 1
-          - Id: 6
-            Name: 
-            ParentId: 5
-            TimelineId: 17
-            KeyId: 2
-          - Id: 7
-            Name: 
-            ParentId: 0
-            TimelineId: 12
-            KeyId: 1
-          - Id: 8
-            Name: 
-            ParentId: 7
-            TimelineId: 15
-            KeyId: 1
-          - Id: 9
-            Name: 
-            ParentId: 8
-            TimelineId: 13
-            KeyId: 1
-          - Id: 10
-            Name: 
-            ParentId: 0
-            TimelineId: 20
-            KeyId: 1
-          - Id: 11
-            Name: 
-            ParentId: 10
-            TimelineId: 22
-            KeyId: 1
-          - Id: 12
-            Name: 
-            ParentId: 11
-            TimelineId: 24
-            KeyId: 1
-          ObjectRefs:
-          - Id: 0
-            Name: 
-            ParentId: 12
-            TimelineId: 25
-            KeyId: 1
-            ZIndex: 0
-          - Id: 1
-            Name: 
-            ParentId: 9
-            TimelineId: 5
-            KeyId: 1
-            ZIndex: 1
-          - Id: 2
-            Name: 
-            ParentId: 11
-            TimelineId: 23
-            KeyId: 1
-            ZIndex: 2
-          - Id: 3
-            Name: 
-            ParentId: 8
-            TimelineId: 4
-            KeyId: 1
-            ZIndex: 3
-          - Id: 4
-            Name: 
-            ParentId: 10
-            TimelineId: 21
-            KeyId: 1
-            ZIndex: 4
-          - Id: 5
-            Name: 
-            ParentId: 7
-            TimelineId: 3
-            KeyId: 1
-            ZIndex: 5
-          - Id: 6
-            Name: 
-            ParentId: 6
-            TimelineId: 19
-            KeyId: 1
-            ZIndex: 6
-          - Id: 7
-            Name: 
-            ParentId: 4
-            TimelineId: 7
-            KeyId: 1
-            ZIndex: 7
-          - Id: 8
-            Name: 
-            ParentId: 5
-            TimelineId: 18
-            KeyId: 2
-            ZIndex: 8
-          - Id: 9
-            Name: 
-            ParentId: 3
-            TimelineId: 6
-            KeyId: 2
-            ZIndex: 9
-          - Id: 10
-            Name: 
-            ParentId: 0
-            TimelineId: 2
-            KeyId: 1
-            ZIndex: 10
-          - Id: 11
-            Name: 
-            ParentId: 1
-            TimelineId: 1
-            KeyId: 2
-            ZIndex: 11
-          - Id: 12
-            Name: 
-            ParentId: 2
-            TimelineId: 0
-            KeyId: 1
             ZIndex: 12
         Timelines:
         - Id: 0
@@ -30069,37 +29916,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 180
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: 0.546875
-              PivotY: 0.512999
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30138,67 +29955,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 27.477633
-              Y: 2.322266
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 1
-              PivotX: 0.452747
-              PivotY: 0.47447
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 602
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 25.073786
-              Y: 2.322266
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 1
-              PivotX: 0.452747
-              PivotY: 0.47447
-              T: 0
-          - Id: 2
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30237,37 +29994,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: -2.115647
-              Y: 2
-              Angle: 0
-              ScaleX: 0.999992
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 2
-              PivotX: 0.463748
-              PivotY: 0.48098
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30306,37 +30033,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 1.514277
-              Y: -0.094573
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 3
-              PivotX: 0.365034
-              PivotY: 0.456642
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30375,37 +30072,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0.861652
-              Y: 0.573998
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 4
-              PivotX: 0.328004
-              PivotY: 0.477726
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30444,37 +30111,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 2.173104
-              Y: -0.484957
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 5
-              PivotX: 0.395861
-              PivotY: 0.467716
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30513,67 +30150,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 1.69649
-              Y: -1.626951
-              Angle: 15
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 6
-              PivotX: 0.37101
-              PivotY: 0.548573
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 602
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: -2.018609
-              Y: -2.622409
-              Angle: 15
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 6
-              PivotX: 0.37101
-              PivotY: 0.548573
-              T: 0
-          - Id: 2
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30612,37 +30189,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: -0.123055
-              Y: 0.07776
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 7
-              PivotX: 0.344574
-              PivotY: 0.49819
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30681,37 +30228,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 120
-              Angle: 270
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30750,7 +30267,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30758,7 +30275,7 @@ MonoBehaviour:
             C4: 0
             Spin: 0
             BoneInfo:
-              X: -54.996
+              X: -56.992035
               Y: 0
               Angle: 0
               ScaleX: 1
@@ -30780,7 +30297,7 @@ MonoBehaviour:
               T: 0
           - Id: 1
             Name: 
-            Time: 998
+            Time: 500
             CurveType: 0
             C1: 0
             C2: 0
@@ -30788,7 +30305,7 @@ MonoBehaviour:
             C4: 0
             Spin: 0
             BoneInfo:
-              X: -54.992
+              X: -54.992035
               Y: 0
               Angle: 0
               ScaleX: 1
@@ -30819,7 +30336,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30827,8 +30344,8 @@ MonoBehaviour:
             C4: 0
             Spin: 0
             BoneInfo:
-              X: 16.002
-              Y: -23
+              X: 18.003983
+              Y: -21
               Angle: 345
               ScaleX: 1
               ScaleY: 1
@@ -30849,7 +30366,7 @@ MonoBehaviour:
               T: 0
           - Id: 1
             Name: 
-            Time: 998
+            Time: 500
             CurveType: 0
             C1: 0
             C2: 0
@@ -30857,8 +30374,8 @@ MonoBehaviour:
             C4: 0
             Spin: 0
             BoneInfo:
-              X: 16.004
-              Y: -23
+              X: 15.003982
+              Y: -21
               Angle: 345
               ScaleX: 1
               ScaleY: 1
@@ -30888,37 +30405,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 180
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -30957,37 +30444,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 31
-              Y: -12
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31026,37 +30483,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 36
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31095,67 +30522,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 36.136776
-              Y: 0.365334
-              Angle: 15
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 602
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 31.957289
-              Y: -0.754556
-              Angle: 15
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 2
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31194,37 +30561,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 31
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31263,7 +30600,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31271,8 +30608,8 @@ MonoBehaviour:
             C4: 0
             Spin: 0
             BoneInfo:
-              X: 16.002
-              Y: 23
+              X: 18.003983
+              Y: 21
               Angle: 15
               ScaleX: 1
               ScaleY: -1
@@ -31293,7 +30630,7 @@ MonoBehaviour:
               T: 0
           - Id: 1
             Name: 
-            Time: 998
+            Time: 500
             CurveType: 0
             C1: 0
             C2: 0
@@ -31301,8 +30638,8 @@ MonoBehaviour:
             C4: 0
             Spin: 0
             BoneInfo:
-              X: 16.004
-              Y: 23
+              X: 15.003982
+              Y: 21
               Angle: 15
               ScaleX: 1
               ScaleY: -1
@@ -31332,67 +30669,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 36.136776
-              Y: -0.134666
-              Angle: 15
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 602
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 32.54611
-              Y: -1.594511
-              Angle: 15
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 2
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31431,67 +30708,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 1.69649
-              Y: -2.126951
-              Angle: 15
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 6
-              PivotX: 0.37101
-              PivotY: 0.548573
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 602
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: -1.089834
-              Y: -2.873544
-              Angle: 15
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 6
-              PivotX: 0.37101
-              PivotY: 0.548573
-              T: 0
-          - Id: 2
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31530,37 +30747,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: -0.252465
-              Y: -0.405203
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 7
-              PivotX: 0.344574
-              PivotY: 0.49819
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31599,37 +30786,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 31
-              Y: 12
-              Angle: 0
-              ScaleX: 1
-              ScaleY: -1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31668,37 +30825,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 1.514277
-              Y: -0.094573
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 3
-              PivotX: 0.365034
-              PivotY: 0.456642
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31737,37 +30864,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 31
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31806,37 +30903,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0.861652
-              Y: 0.573998
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 4
-              PivotX: 0.328004
-              PivotY: 0.477726
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31875,37 +30942,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 36
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 0
-              PivotX: NaN
-              PivotY: NaN
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -31944,37 +30981,7 @@ MonoBehaviour:
           Keys:
           - Id: 0
             Name: 
-            Time: 225
-            CurveType: 0
-            C1: 0
-            C2: 0
-            C3: 0
-            C4: 0
-            Spin: 0
-            BoneInfo:
-              X: 0
-              Y: 0
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-            ObjectInfo:
-              X: 2.173104
-              Y: -0.484957
-              Angle: 0
-              ScaleX: 1
-              ScaleY: 1
-              Alpha: 1
-              AnimationId: 0
-              EntityId: 0
-              FolderId: 0
-              FileId: 5
-              PivotX: 0.395861
-              PivotY: 0.467716
-              T: 0
-          - Id: 1
-            Name: 
-            Time: 998
+            Time: 0
             CurveType: 0
             C1: 0
             C2: 0
@@ -42852,7 +41859,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
@@ -44274,7 +43281,7 @@ MonoBehaviour:
             Spin: 0
             BoneInfo:
               X: 0
-              Y: -0
+              Y: 0
               Angle: 180
               ScaleX: 1
               ScaleY: 1
