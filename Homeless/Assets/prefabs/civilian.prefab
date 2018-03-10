@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4852019127694774}
   - component: {fileID: 114583538894589602}
   - component: {fileID: 114157402686490180}
-  - component: {fileID: 50483820978143884}
   - component: {fileID: 114472663894188706}
   - component: {fileID: 114896538341496872}
   - component: {fileID: 120743468751610104}
@@ -932,26 +931,6 @@ Transform:
   m_Father: {fileID: 4792353067553924}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50483820978143884
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1064966806957532}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!58 &58845250120194582
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -1019,7 +998,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWalking: 0
   isWaiting: 0
-  walkArea: {fileID: 0}
   movementSpeed: 2
 --- !u!114 &114583538894589602
 MonoBehaviour:
