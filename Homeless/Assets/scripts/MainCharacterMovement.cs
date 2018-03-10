@@ -7,6 +7,7 @@ public class MainCharacterMovement : PausableObject {
   public float movementSpeed;
   public bool walking { get; set; }
   private float walkingDirection;
+  public bool up { get; set; }
 
   void Start() {
     targetPosition = this.transform.position;
@@ -15,7 +16,8 @@ public class MainCharacterMovement : PausableObject {
 
   protected override void updatePausable() {
     float step = movementSpeed * Time.deltaTime;
-    if (!GetComponent<Character>().alive || GetComponent<CarHit>().hit) {
+    if (!GetComponent<Character>().alive || GetComponent<CarHit>().hit || up) {
+      up = false;
       walking = false;
       targetPosition = this.transform.position;
       return;
