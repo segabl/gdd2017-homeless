@@ -89,10 +89,7 @@ public class TheftHandler : PausableObject {
     {
       if (caughtText.enabled)
       {
-        Debug.Log("DayTime: " + GameController.instance.dayTime);
-        Debug.Log("Caught time: " + caughtTime);
-        Debug.Log("Elapsed time: " + (GameController.instance.dayTime - caughtTime));
-        Debug.Log("Other: " + (2.5f));
+
         if ((GameController.instance.dayTime - caughtTime) > (1.5f) / GameController.instance.dayLength)
         {
 
@@ -146,14 +143,14 @@ public class TheftHandler : PausableObject {
         drawTheftCircle();
 
         if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < stealDistance) {
-          if (theftDeltaTime < 0.0013f && Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < detectionDistance) {
+          if (theftDeltaTime < 0.001f && Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < detectionDistance) {
             playerCaught();
             endTheft();
           }
 
           updateTheftTimer();
 
-          if (theftDeltaTime > 0.002f) {
+          if (theftDeltaTime > 0.00115f) {
             if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) <= detectionDistance)
               theftSuccess();
             else {
@@ -201,9 +198,11 @@ public class TheftHandler : PausableObject {
   }
 
   private void drawTheftCircle() {
-    radius = Mathf.Max(stealDistance - theftDuration * theftDeltaTime * 500f, 0);
+    if (theftDeltaTime < 0.0005f)
+      radius = Mathf.Max(stealDistance - theftDuration * theftDeltaTime * 500f, 0);
+    else
+      radius = Mathf.Max(stealDistance - theftDuration * theftDeltaTime * 500f - (theftDeltaTime - 0.0005f) * 2000, 0);
     width = Mathf.Max(stealDistance / 30f - theftDuration * theftDeltaTime * 18f, 0);
-
     CreatePoints();
   }
   private void playerCaught() {
