@@ -223,6 +223,11 @@ public class TheftHandler : PausableObject {
     caughtText.text = "Fuck you!";
     caughtText.enabled = true;
     caughtTime = GameController.instance.dayTime;
+    //GameController.instance.karmaController.DebugKarmaList();
+    if (GameController.instance.karmaController.isCriminal(GameController.instance.player))
+    {
+      GameController.instance.player.GetComponent<Character>().arrest("stealing");
+    }
   }
   private void theftSuccess() {
     Debug.Log("Player has successfully stolen!");

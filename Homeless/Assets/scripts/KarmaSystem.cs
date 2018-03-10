@@ -29,7 +29,12 @@ namespace KarmaSystem {
     public void DebugKarmaList() {
       foreach (GameObject g1 in SocialStatusDict.Keys) {
         SocialStatus k = SocialStatusDict[g1];
-        Debug.Log("Charater: " + g1.name);
+        if (k == null)
+        {
+          Debug.Log("Karma error");
+          return;
+        }
+        Debug.Log("Character: " + g1.name);
         Debug.Log("Reputation: Charity: " + k.reputation.charity);
         Debug.Log("Reputation: Reliability: " + k.reputation.reliability);
         Debug.Log("Reputation: Criminality: " + k.reputation.criminality);
@@ -48,8 +53,8 @@ namespace KarmaSystem {
         Debug.Log("Social status actor cannot be null");
         return;
       }
-      SocialEffector copied_action = new SocialEffector(action);
 
+      SocialEffector copied_action = new SocialEffector(action);
       if (reactor != null) {
         copied_action.setTarget(actor);
         copied_action.Apply(SocialStatusDict[actor], SocialStatusDict[reactor]);
@@ -58,32 +63,32 @@ namespace KarmaSystem {
         copied_action.Apply(SocialStatusDict[actor], null);
       }
     }
-    public bool aTrustsB(GameObject A, GameObject B, int requiredTrust = 4) {
+    public bool aTrustsB(GameObject A, GameObject B, int requiredTrust = 15) {
       if (SocialStatusDict[A].relationships[B].trust >= requiredTrust)
         return true;
       return false;
     }
-    public bool aLikesB(GameObject A, GameObject B, int requiredAffection = 4) {
+    public bool aLikesB(GameObject A, GameObject B, int requiredAffection = 15) {
       if (SocialStatusDict[A].relationships[B].affection >= requiredAffection)
         return true;
       return false;
     }
-    public bool isCharitable(GameObject A, int requiredCharity = 4) {
+    public bool isCharitable(GameObject A, int requiredCharity = 15) {
       if (SocialStatusDict[A].reputation.charity >= requiredCharity)
         return true;
       return false;
     }
-    public bool isReliable(GameObject A, int requiredReliability = 4) {
+    public bool isReliable(GameObject A, int requiredReliability = 15) {
       if (SocialStatusDict[A].reputation.reliability >= requiredReliability)
         return true;
       return false;
     }
-    public bool isCriminal(GameObject A, int requiredCriminality = 4) {
+    public bool isCriminal(GameObject A, int requiredCriminality = 15) {
       if (SocialStatusDict[A].reputation.criminality >= requiredCriminality)
         return true;
       return false;
     }
-    public bool isCruel(GameObject A, int requiredCruelty = 4) {
+    public bool isCruel(GameObject A, int requiredCruelty = 15) {
       if (SocialStatusDict[A].reputation.cruelty >= requiredCruelty)
         return true;
       return false;
@@ -148,6 +153,15 @@ namespace KarmaSystem {
     internal void setTarget(GameObject target) {
       relationshipEffector.target = target;
     }
+    internal void debug()
+    {
+      Debug.Log("Reputation Effector:");
+      reputationEffector.debug();
+      if (relationshipEffector == null)
+        return;
+      Debug.Log("Relationship Effector:");
+      relationshipEffector.debug();
+    }
 
   }
   public class ReputationEffector {
@@ -155,10 +169,14 @@ namespace KarmaSystem {
     public ReputationEffector(int charityEffector_ = 0, int reliabilityEffector_ = 0,
       int criminalityEffector_ = 0, int crueltyEffector_ = 0) {
       charityEffector = charityEffector_;
+      reliabilityEffector = reliabilityEffector_;
+      criminalityEffector = criminalityEffector_;
+      crueltyEffector = crueltyEffector_;
     }
     internal void Apply(Reputation reputation) {
       reputation.charity += charityEffector; //no overflow protection
       reputation.reliability += reliabilityEffector;
+      Debug.Log("Criminality: " + reputation.criminality + " + " + criminalityEffector + " = " + (reputation.criminality + criminalityEffector));
       reputation.criminality += criminalityEffector;
       reputation.cruelty += crueltyEffector;
 
@@ -170,6 +188,13 @@ namespace KarmaSystem {
           property.SetValue(reputation, 99, null);
       }
 
+    }
+    internal void debug()
+    {
+      Debug.Log("Charity: " + charityEffector);
+      Debug.Log("Reliability: " + reliabilityEffector);
+      Debug.Log("Criminality: " + criminalityEffector);
+      Debug.Log("Cruelty: " + crueltyEffector);
     }
   }
   public class RelationshipEffector {
@@ -193,6 +218,12 @@ namespace KarmaSystem {
       }
 
     }
+    internal void debug()
+    {
+      Debug.Log("Target: " + target);
+      Debug.Log("Trust: " + trustEffector);
+      Debug.Log("Affection: " + affectionEffector);
+    }
   }
   internal static class SocialConstants //defines constants, social actions and decisions
   {
@@ -213,7 +244,7 @@ namespace KarmaSystem {
     //if an action has no target other than the player, make sure that the relationshipeffector is null
     internal static readonly SocialEffector stealingBeerFromShop = new SocialEffector(new ReputationEffector(-1, -1, 1, 0));
 
-    internal static readonly SocialEffector gettingCaughtStealing = new SocialEffector(new ReputationEffector(0, -1, 1, 0));
+    internal static readonly SocialEffector gettingCaughtStealing = new SocialEffector(new ReputationEffector(0, -1, 2, 0));
     internal static readonly SocialEffector gettingCaughtStealingFromFriend = new SocialEffector(new ReputationEffector(0, -1, 2, 0),
       new RelationshipEffector(null, -3, -3));
   }

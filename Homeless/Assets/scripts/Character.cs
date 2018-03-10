@@ -151,4 +151,13 @@ public class Character : PausableObject {
   private Decimal roundDebug(float f) {
     return System.Math.Round((Decimal)f, 1, MidpointRounding.AwayFromZero);
   }
+  public void arrest(String reason)
+  {
+    this.alive = false;
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "NONE");
+    GameController.instance.panelDead.SetActive(true);
+    int days = GameController.instance.day;
+    GameController.instance.panelDead.GetComponentInChildren<Text>().text = "You survived " + days + (days != 1 ? " days" : " day") + " before being arrested for "
+      + reason + ". The death penalty is pending";
+  }
 }
