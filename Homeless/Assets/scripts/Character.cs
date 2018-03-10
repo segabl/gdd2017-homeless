@@ -117,7 +117,7 @@ public class Character : PausableObject {
     float healthDecrement = 0.0f;
     float minRef = accumulatedDeltaHealth * 24.0f * 60.0f / GameController.instance.dayLength;
     if (this.repletion <= 50.0f && minRef >= 1.0f) {
-      healthDecrement -= (this.maxRepletion - this.repletion) / this.maxRepletion + (this.maxSanity - this.sanity) / this.maxSanity + this.intoxication / this.maxIntoxication;
+      healthDecrement -= ((this.maxRepletion - this.repletion) / this.maxRepletion + (this.maxSanity - this.sanity) / this.maxSanity + this.intoxication / this.maxIntoxication)*0.1f;
       accumulatedDeltaHealth = 0.0f;
     }
     adjustHealth(healthDecrement);
@@ -127,7 +127,7 @@ public class Character : PausableObject {
     float sanityDecrement = 0.0f;
     float minRef = accumulatedDeltaSanity * 24.0f * 60.0f / GameController.instance.dayLength;
     if ((this.health <= 20.0f || this.repletion <= 50.0f) && minRef >= 1.0f) {
-      sanityDecrement -= (this.maxHealth - this.health) / this.maxHealth + (this.maxRepletion - this.repletion) / this.maxRepletion - this.intoxication / this.maxIntoxication;
+      sanityDecrement -= ((this.maxHealth - this.health) / this.maxHealth + (this.maxRepletion - this.repletion) / this.maxRepletion - this.intoxication / this.maxIntoxication)*0.1f;
       accumulatedDeltaSanity = 0.0f;
     }
     adjustSanity(sanityDecrement);
