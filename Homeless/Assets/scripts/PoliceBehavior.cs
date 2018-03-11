@@ -34,6 +34,10 @@ public class PoliceBehavior : NPCMovement
       base.updatePausable();
       return;
     }
+    if (GameController.instance.karmaController.isCriminal(target,1))
+    {
+      catchRange = 4f;
+    }
     if (targetInRange())
     {
       targetCaptured();
@@ -48,7 +52,6 @@ public class PoliceBehavior : NPCMovement
     movementSpeed = chasingSpeed;
     Vector3 targetPosition = target.transform.position;
     Vector3 direction = targetPosition - transform.position;
-    Debug.Log(Vector3.Distance(targetPosition, transform.position));
     if (Vector3.Distance(targetPosition, transform.position) > 12)
     {
       stopChasing();
@@ -115,8 +118,11 @@ public class PoliceBehavior : NPCMovement
   protected void targetCaptured()
   {
     gameObject.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
-    if (GameController.instance.karmaController.isCriminal(target))
-      target.GetComponent<Character>().arrest("Stealing");
+    if (GameController.instance.karmaController.isCriminal(target,1))
+    {
+      shootTarget();
+    }
+      //target.GetComponent<Character>().arrest("Stealing");
     else
     {
       GameController.instance.karmaController.SocialAction(target, KarmaSystem.SocialConstants.gettingCaughtByPolice);
@@ -135,5 +141,19 @@ public class PoliceBehavior : NPCMovement
   {
     movementSpeed = 3f;
     chasing = false;
+  }
+  protected void shootTarget()
+  {
+    Debug.Log("Shooting the player");
+    Vector3 direction = targetPosition - transform.position;
+    float shootDirection = Mathf.Atan2(direction.x, direction.y);
+    if (shootDirection >= 0f && shootDirection <= Mathf.PI / 2f)
+    {
+      if (transform.localScale.x < 0.0f)
+      {
+        transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+      }
+      gameObject.GetComponent<CharacterAnimation>().playOnce("draw_gun","shoot");
+    }
   }
 }
