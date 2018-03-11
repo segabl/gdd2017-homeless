@@ -6,7 +6,7 @@ namespace KarmaSystem {
   public class KarmaController {
     private Dictionary<GameObject, SocialStatus> SocialStatusDict;
 
-
+    public bool initialized = false;
     /*protected override void updatePausable()
     {
 
@@ -24,6 +24,7 @@ namespace KarmaSystem {
         }
         SocialStatusDict.Add(character, new SocialStatus(current_relationships, new Reputation()));
       }
+      initialized = true;
     }
 
     public void DebugKarmaList() {

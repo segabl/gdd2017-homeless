@@ -90,9 +90,13 @@ public class GameController : MonoBehaviour {
 
   void Update() {
     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "GameScene") {
+      if (karmaController != null)
+      {
+        karmaController.initialized = false;
+      }
       return;
     }
-    if (karmaController == null)
+    if (karmaController == null || !karmaController.initialized)
       karmaController = new KarmaController();
     float deltaTime = Time.deltaTime;
     bool asleep = player.GetComponent<Character>().asleep;
