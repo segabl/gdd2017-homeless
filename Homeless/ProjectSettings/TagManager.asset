@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MenuPanel
   - SocialCharacter
+  - Police
   layers:
   - Default
   - TransparentFX

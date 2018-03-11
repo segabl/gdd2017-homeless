@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 114874008926752372}
   m_Layer: 0
   m_Name: Police
-  m_TagString: Untagged
+  m_TagString: Police
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -966,6 +966,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136aa41697cfb424d814ff81814dae0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAnimation: 
+  previousAnimation: 
 --- !u!114 &114671101621612856
 MonoBehaviour:
   m_ObjectHideFlags: 1

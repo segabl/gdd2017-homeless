@@ -250,6 +250,15 @@ public class TheftHandler : PausableObject {
     Debug.Log("X: " + stealingText.transform.position.x + " Y:" + stealingText.transform.position.y);
     caughtTime = GameController.instance.dayTime;
     //GameController.instance.karmaController.DebugKarmaList();
+    GameObject[] officers = GameObject.FindGameObjectsWithTag("Police");
+    foreach (GameObject officer in officers)
+    {
+      if (Vector3.Distance(GameController.instance.player.transform.position, officer.transform.position) < 8f)
+      {
+        officer.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 8f);
+      }
+    }
+    
     if (GameController.instance.karmaController.isCriminal(GameController.instance.player, 4))
     {
       GameObject police1 = Instantiate(policePrefab);
