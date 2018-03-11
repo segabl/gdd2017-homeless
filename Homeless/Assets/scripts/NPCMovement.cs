@@ -33,7 +33,8 @@ public class NPCMovement : PausableObject {
       return;
     }
     float step = movementSpeed * Time.deltaTime;
-    if (GetComponent<CarHit>().hit) {
+    CarHit carHit = GetComponent<CarHit>();
+    if (carHit && carHit.hit) {
       waitCounter = waitTime();
       walkCounter = walkDirectionChangeTime();
       isWalking = false;

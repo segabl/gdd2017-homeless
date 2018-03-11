@@ -224,7 +224,6 @@ GameObject:
   - component: {fileID: 58390826886611410}
   - component: {fileID: 114441677555071260}
   - component: {fileID: 114671101621612856}
-  - component: {fileID: 114366585163486650}
   - component: {fileID: 114874008926752372}
   m_Layer: 8
   m_Name: Police
@@ -1148,18 +1147,6 @@ MonoBehaviour:
   EntityIndex: 0
   SpriterData: {fileID: 11400000, guid: c03d1b034c61ca5498321a4fcb8080b1, type: 2}
   UseNativeTags: 1
---- !u!114 &114366585163486650
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1349272342165842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc23d01090fd91f4bac0c409f7bda4cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  immobilityTime: 0
 --- !u!114 &114441677555071260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1171,6 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136aa41697cfb424d814ff81814dae0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultAnimation: idle
 --- !u!114 &114671101621612856
 MonoBehaviour:
   m_ObjectHideFlags: 1

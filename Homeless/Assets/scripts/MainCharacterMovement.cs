@@ -127,6 +127,9 @@ public class MainCharacterMovement : PausableObject {
 
   public void stopMovement() {
     walking = false;
+    if (this.GetComponent<CharacterAnimation>().currentAnimation.Contains("walking")) {
+      this.GetComponent<CharacterAnimation>().currentAnimation = "idle";
+    }
     targetPosition = this.transform.position;
   }
 

@@ -78,11 +78,7 @@ public class GameController : MonoBehaviour {
     }
     day = 0;
     dayTime = 0.5f;
-    if (player) {
-      Vector3 targetPosition = player.transform.position;
-      targetPosition.z = Camera.main.transform.position.z;
-      Camera.main.transform.position = targetPosition;
-    }
+    centerCameraOnPlayer();
   }
 
   void Start() {
@@ -116,6 +112,14 @@ public class GameController : MonoBehaviour {
     }
   }
 
+  public void centerCameraOnPlayer() {
+    if (player) {
+      Vector3 targetPosition = player.transform.position;
+      targetPosition.z = Camera.main.transform.position.z;
+      Camera.main.transform.position = targetPosition;
+    }
+  }
+
   public void unpauseGame() {
     var character = player.GetComponent<Character>();
     switch (pauseReason) {
@@ -142,7 +146,8 @@ public class GameController : MonoBehaviour {
         }
       case PauseReason.ARRESTED: {
           arrested = false;
-          player.transform.position = new Vector3(0, 0);
+          player.transform.position = new Vector3(62, 36);
+          centerCameraOnPlayer();
           player.GetComponent<MainCharacterMovement>().stopMovement();
           break;
         }
