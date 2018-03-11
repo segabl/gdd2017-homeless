@@ -58,12 +58,19 @@ public class ClaraCharacterInteraction : CharacterInteraction {
   }
 
   public void disappear() {
-    Destroy(this);
+    GameController.instance.pauseGameAndBlend(GameController.PauseReason.RUNAWAY);
+    Destroy(gameObject);
   }
 
   public void resetTalkative() {
     GameController.instance.karmaController.SocialAction(GameController.instance.player, new KarmaSystem.SocialEffector(null, new KarmaSystem.RelationshipEffector(gameObject, -1, -1)), gameObject);
     GetComponent<Dialogues>().Reset();
+  }
+
+  public void stillHasGuitar() {
+    if (HasItemOfName("Guitar") == "N") {
+      GetComponent<Dialogues>().SetTree("LostGuitar");
+    }
   }
 
 }
