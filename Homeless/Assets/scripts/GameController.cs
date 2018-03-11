@@ -18,9 +18,11 @@ public class GameController : MonoBehaviour {
   public float dayTime { get; private set; }
   public float inGameHour { get; private set; }
   private float hoursToWait;
-  private float sleepUntil;
   private float pauseUntil;
+  private bool gamePaused;
+  private PauseReason pauseReason;
   public bool trainInteraction { get; private set; }
+  public enum PauseReason { SLEEPING, TRAIN, RUNAWAY, ARRESTED }
 
   public KarmaController karmaController = null;
 
@@ -107,86 +109,87 @@ public class GameController : MonoBehaviour {
       day++;
       Debug.Log("Day " + day + " started");
     }
-    if (asleep) {
-      if (Time.time >= sleepUntil) {
-        dayTime += 0.25f;
-        player.GetComponent<Character>().asleep = false;
-        unpauseAll();
-        player.GetComponent<CharacterAnimation>().playOnce("standup_sleep", "idle");
-        Camera.main.GetComponent<PostProcessing>().sleep = false;
-      }
-    }
-    if(trainInteraction) {
-      if(Time.time >= pauseUntil) {
-        trainInteraction = false;
-        var clara = GameObject.Find("Clara");
-        if (trainHit) {
-          Destroy(clara);
-        }
-        else {
-          clara.transform.position = new Vector3(clara.transform.position.x, -25.6f, clara.transform.position.z);
-          clara.GetComponent<Dialogues>().SetTree("ClaraAfterTrain");
-        }
-
-        player.transform.position = new Vector3(player.transform.position.x, -25.6f, player.transform.position.z);
-        player.GetComponent<MainCharacterMovement>().up = true;
-        unpauseAll();
-        Camera.main.GetComponent<PostProcessing>().trainHit = false;
-      }
-    }
-    if (arrested)
-    {
-      if (Time.time >= pauseUntil)
-      {
-        arrested = false;
-        player.transform.position = new Vector3(0, 0);
-        player.GetComponent<MainCharacterMovement>().stopMovement();
-
-        Camera.main.GetComponent<PostProcessing>().arrested = false;
-        unpauseAll();
+    if (gamePaused) {
+      if (Time.time >= pauseUntil) {
+        unpauseGame();
       }
     }
   }
 
-  public void sleep(SleepingSpot spot) {
+  public void unpauseGame() {
+    switch (pauseReason) {
+      case PauseReason.SLEEPING: { 
+          dayTime += 0.25f;
+          player.GetComponent<Character>().asleep = false;
+          player.GetComponent<CharacterAnimation>().playOnce("standup_sleep", "idle");
+          break;
+        }
+      case PauseReason.TRAIN: {
+          var clara = GameObject.Find("Clara");
+          if (trainHit) {
+            Destroy(clara);
+          }
+          else {
+            clara.transform.position = new Vector3(clara.transform.position.x, -25.6f, clara.transform.position.z);
+            clara.GetComponent<Dialogues>().SetTree("ClaraAfterTrain");
+          }
+
+          player.transform.position = new Vector3(player.transform.position.x, -25.6f, player.transform.position.z);
+          player.GetComponent<MainCharacterMovement>().up = true;
+          break;
+        }
+      case PauseReason.ARRESTED: {
+          arrested = false;
+          player.transform.position = new Vector3(0, 0);
+          player.GetComponent<MainCharacterMovement>().stopMovement();
+          break;
+        }
+      case PauseReason.RUNAWAY: {
+          var clara = GameObject.Find("Clara");
+          clara.transform.position = new Vector3(77.0f, -20.0f, clara.transform.position.z);
+          player.GetComponent<MainCharacterMovement>().up = true;
+          break;
+        }
+    }
+    unpauseAll();
+    gamePaused = false;
+    Camera.main.GetComponent<PostProcessing>().paused = false;
+  }
+
+  public void pauseGameAndBlend(PauseReason reason, bool flag1 = false, GameObject other = null) {
     player.GetComponent<CharacterAnimation>().ignoreNextOnPause();
     pauseAll();
+    pauseReason = reason;
     Character character = player.GetComponent<Character>();
-    character.asleep = true;
-    //NOTE: Sleeping for 6h. Intox loss per hour = 0.1 -> -0.6 intox
-    //                       Repletion loss per hour while asleep = 3.0 -> -18.0 repletion
-    character.adjustStats(-18.0f, spot.healthGain, spot.sanityGain, -0.6f);
-    sleepUntil = Time.time + 2;
-    Camera.main.GetComponent<PostProcessing>().sleep = true;
-    player.GetComponent<CharacterAnimation>().playOnce("liedown");
-  }
 
-  public void arrestPlayer(GameObject officer)
-  {
-    pauseAll();
-    Character character = player.GetComponent<Character>();
-    character.adjustStats(-15.0f, 0.0f, -30.0f, 0.0f);
-    officer.GetComponent<PoliceBehavior>().stopChasing();
-    arrested = true;
-    pauseUntil = Time.time + 2;
-    player.GetComponent<MainCharacterMovement>().stopMovement();
-    Camera.main.GetComponent<PostProcessing>().arrested = true;
-  }
-
-  public void train(bool hit) {
-    pauseAll();
-    Character character = player.GetComponent<Character>();
-    if (hit) {
+    if (reason == PauseReason.SLEEPING) {
+      character.asleep = true;
+      //NOTE: Sleeping for 6h. Intox loss per hour = 0.1 -> -0.6 intox
+      //                       Repletion loss per hour while asleep = 3.0 -> -18.0 repletion
+      SleepingSpot spot = other.GetComponent<SleepingSpot>();
+      character.adjustStats(-18.0f, spot.healthGain, spot.sanityGain, -0.6f);
+      player.GetComponent<CharacterAnimation>().playOnce("liedown");
+    } else if (reason == PauseReason.TRAIN) {
       character.adjustStats(0.0f, 0.0f, -20.0f, 0.0f);
+      trainHit = flag1;
+      AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+      AudioClip train = Resources.Load("sfx/train") as AudioClip;
+      audioSource.clip = train;
+      audioSource.Play();
+    } else if (reason == PauseReason.RUNAWAY) {
+      //Momentarilly no behaviour needed
+    } else if (reason == PauseReason.ARRESTED) {
+      character.adjustStats(-15.0f, 0.0f, -30.0f, 0.0f);
+      other.GetComponent<PoliceBehavior>().stopChasing();
+      pauseUntil = Time.time + 2;
     }
-    pauseUntil =  Time.time + 2;
-    trainInteraction = true;
-    trainHit = hit;
-    AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-    AudioClip train = Resources.Load("sfx/train") as AudioClip;
-    audioSource.clip = train;
-    audioSource.Play();
-    Camera.main.GetComponent<PostProcessing>().trainHit = true;
+
+
+    pauseUntil = Time.time + 2;
+    gamePaused = true;
+    Camera.main.GetComponent<PostProcessing>().paused = true;
+    Camera.main.GetComponent<PostProcessing>().pauseReason = reason;
+    player.GetComponent<MainCharacterMovement>().stopMovement();
   }
 
   public void saveGame() {

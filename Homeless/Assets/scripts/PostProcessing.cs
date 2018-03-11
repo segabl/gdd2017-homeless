@@ -11,9 +11,8 @@ public class PostProcessing : MonoBehaviour {
   public Shader blackFadeShader;
   public Shader strangeShader;
 
-  public bool sleep = false;
-  public bool trainHit = false;
-  public bool arrested = false;
+  public bool paused = false;
+  public GameController.PauseReason pauseReason;
 
   private Material daylightCycleMaterial;
   private Material blurMaterial;
@@ -159,11 +158,16 @@ public class PostProcessing : MonoBehaviour {
   }
 
   internal void ProcessSleep(RenderTexture source, RenderTexture destination) {
-    if (sleep || trainHit || arrested) {
+    if (paused) {
       if (fadeTime == 0) {
         fadeTime = Time.time;
       }
-      float deltaTime = (Time.time - fadeTime) / (trainHit ? 1.0f : 2.0f);
+      float deltaTime;
+      if (pauseReason == GameController.PauseReason.TRAIN || pauseReason == GameController.PauseReason.RUNAWAY) {
+        deltaTime = (Time.time - fadeTime) / 1.0f;
+      } else {
+        deltaTime = (Time.time - fadeTime) /2.0f;
+      }
       if (deltaTime > 0) {
         blackFadeMaterial.SetFloat("_factor", System.Math.Min(deltaTime, 1.0f));
         Graphics.Blit(source, destination, blackFadeMaterial);
