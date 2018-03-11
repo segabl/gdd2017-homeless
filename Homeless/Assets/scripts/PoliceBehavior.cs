@@ -127,7 +127,7 @@ public class PoliceBehavior : NPCMovement
     else
     {
       GameController.instance.karmaController.SocialAction(target, KarmaSystem.SocialConstants.gettingCaughtByPolice);
-      GameController.instance.arrestPlayer(gameObject);
+      GameController.instance.pauseGameAndBlend(GameController.PauseReason.ARRESTED, false, gameObject);
     }
   }
 

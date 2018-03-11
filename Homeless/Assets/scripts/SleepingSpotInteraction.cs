@@ -9,7 +9,7 @@ public class SleepingSpotInteraction : InteractionHandler {
     if (spot == null) {
       Debug.Log("No SleepingSpot script attached to " + name);
     }
-    gc.sleep(spot);
+    gc.pauseGameAndBlend(GameController.PauseReason.SLEEPING, false, gameObject);
     endInteraction();
     suspend(5.0f);
   }

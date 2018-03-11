@@ -15,7 +15,7 @@ public class SleepingBoxInteraction : CharacterInteraction {
     GameController.instance.player.GetComponent<Character>().permisionToSleepInBox = false;
     SetNextTree("default");
     GameController.instance.player.GetComponent<CharacterAnimation>().SendMessage("OnUnpauseGame", SendMessageOptions.RequireReceiver);
-    GameController.instance.sleep(GetComponent<SleepingSpot>());
+    GameController.instance.pauseGameAndBlend(GameController.PauseReason.SLEEPING, false, gameObject);
     Debug.Log("Slept in the box");
   }
   protected override bool displayInteractionText()
