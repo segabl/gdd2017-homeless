@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4500359488417474}
   - component: {fileID: 212604768651115110}
-  - component: {fileID: 114486190488151886}
   m_Layer: 0
   m_Name: roof_colored
   m_TagString: Untagged
@@ -41,17 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114486190488151886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1414538948315798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05830439b5ec332498b49bd3ec983688, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212604768651115110
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -83,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1855043527
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8df6435977fe17643bbb0762c94395fa, type: 3}
   m_Color: {r: 0.9137255, g: 0.6313726, b: 0.6313726, a: 1}
