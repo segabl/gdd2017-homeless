@@ -29,7 +29,7 @@ public class NPCMovement : PausableObject {
   }
 
   protected override void updatePausable() {
-    if (movementSpeed == 0) {
+    if (movementSpeed == 0 || this.GetComponent<CharacterAnimation>().oncePlaying) {
       return;
     }
     float step = movementSpeed * Time.deltaTime;
@@ -61,7 +61,9 @@ public class NPCMovement : PausableObject {
 
     if (!isWalking) {
       waitCounter -= Time.deltaTime;
-      this.GetComponent<CharacterAnimation>().currentAnimation = "idle";
+      if (this.GetComponent<CharacterAnimation>().currentAnimation.Contains("walking")) {
+        this.GetComponent<CharacterAnimation>().currentAnimation = "idle";
+      }
       return;
     } else {
       walkCounter -= Time.deltaTime;

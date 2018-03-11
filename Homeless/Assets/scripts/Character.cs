@@ -22,6 +22,10 @@ public class Character : PausableObject {
   private float accumulatedDeltaIntox;
   public bool alive { get; private set; }
   public bool asleep { get; set; }
+  private bool shot = false;
+  private string shotReason;
+  private float shotTime;
+  private bool playedShotAnimation = false;
 
   void Start() {
     alive = true;
@@ -45,6 +49,23 @@ public class Character : PausableObject {
       updateHealth();
       updateSanity();
       updateIntoxication();
+    }
+    if (shot)
+    {
+      float diff = GameController.instance.dayTime - shotTime;
+      if (diff > 0.8f / GameController.instance.dayLength && !playedShotAnimation)
+      {
+        this.alive = false;
+        GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("die");
+      }
+      if (diff > 1.4f / GameController.instance.dayLength)
+      {
+        GameController.instance.panelDead.SetActive(true);
+        int days = GameController.instance.day;
+        GameController.instance.panelDead.GetComponentInChildren<Text>().text = "You survived " + days + (days != 1 ? " days" : " day") + " before being shot for "
+          + shotReason + ".";
+      }
+        
     }
 #if UNITY_EDITOR
     updateStatsDebugText();
@@ -151,13 +172,11 @@ public class Character : PausableObject {
   private Decimal roundDebug(float f) {
     return System.Math.Round((Decimal)f, 1, MidpointRounding.AwayFromZero);
   }
-  public void arrest(String reason)
+  public void shoot(String reason)
   {
-    this.alive = false;
-    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle");
-    GameController.instance.panelDead.SetActive(true);
-    int days = GameController.instance.day;
-    GameController.instance.panelDead.GetComponentInChildren<Text>().text = "You survived " + days + (days != 1 ? " days" : " day") + " before being arrested for "
-      + reason + ". The death penalty is pending";
+    shot = true;
+    shotReason = reason;
+    shotTime = GameController.instance.dayTime;
+    
   }
 }

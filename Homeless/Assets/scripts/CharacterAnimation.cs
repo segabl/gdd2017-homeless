@@ -6,7 +6,7 @@ public class CharacterAnimation : PausableAnimatedObject {
   public String currentAnimation { get; set; }
   public String followUpAnimation { get; protected set; }
 
-  private bool oncePlaying;
+  public bool oncePlaying { get; private set; }
 
   // Use this for initialization
   void Start() {
@@ -42,11 +42,21 @@ public class CharacterAnimation : PausableAnimatedObject {
   }
 
   private void onAnimationFinished(string animation) {
-    if (oncePlaying) {
+    if (oncePlaying)
+    {
       oncePlaying = false;
-      if (followUpAnimation == null) {
+      if (followUpAnimation == null)
+      {
         spriterAnimator.Speed = 0;
-      } else {
+      }
+      else if (currentAnimation == "draw_gun")
+      {
+        currentAnimation = "shoot";
+        followUpAnimation = "idle";
+        oncePlaying = true;
+      }
+      else
+      {
         currentAnimation = followUpAnimation;
       }
     }

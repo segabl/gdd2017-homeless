@@ -228,12 +228,13 @@ public class TheftHandler : PausableObject {
     playerIsStealing = false;
     
     GameController.instance.karmaController.SocialAction(GameController.instance.player, KarmaSystem.SocialConstants.gettingCaughtStealing);
-    float direction = Mathf.Atan2(this.transform.position.x - GameController.instance.player.transform.position.x,
-      this.transform.position.y - GameController.instance.player.transform.position.y);
-    pushDirection = direction;
+    Vector3 relativeTargetPosition = Camera.main.WorldToScreenPoint(GameController.instance.player.transform.position);
+    Vector3 relativeThisPosition = Camera.main.WorldToScreenPoint(transform.position);
+    Vector3 direction = relativeTargetPosition - relativeThisPosition;
+    float shootDirection = Mathf.Sign(direction.x);
     pushStart = GameController.instance.dayTime;
     pushAway = true;
-    if (!(direction > 0f && direction < Mathf.PI))
+    if (!(direction.x > 0f))
     {
       GetComponent<CharacterAnimation>().playOnce("push_away_right", "idle");
       GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
@@ -247,7 +248,6 @@ public class TheftHandler : PausableObject {
     stealingText.text = "What the fuck?!";
     stealingText.enabled = true;
     stealingText.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-    Debug.Log("X: " + stealingText.transform.position.x + " Y:" + stealingText.transform.position.y);
     caughtTime = GameController.instance.dayTime;
     //GameController.instance.karmaController.DebugKarmaList();
     GameObject[] officers = GameObject.FindGameObjectsWithTag("Police");
@@ -259,7 +259,7 @@ public class TheftHandler : PausableObject {
       }
     }
     
-    if (GameController.instance.karmaController.isCriminal(GameController.instance.player, 15))
+    if (GameController.instance.karmaController.isCriminal(GameController.instance.player))
     {
       GameObject police1 = Instantiate(policePrefab);
       GameObject police2 = Instantiate(policePrefab);
