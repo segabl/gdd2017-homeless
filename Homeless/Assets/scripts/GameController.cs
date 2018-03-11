@@ -221,12 +221,12 @@ public class GameController : MonoBehaviour {
   public void pauseAll() {
     paused = true;
     Object[] objects = FindObjectsOfType(typeof(PausableObject));
-    List<string> alreadyPausedObjects = new List<string>();
+    List<int> alreadyPausedObjects = new List<int>();
 
     foreach (PausableObject pausableObject in objects) {
-      if (!alreadyPausedObjects.Contains(pausableObject.name)) {
+      if (!alreadyPausedObjects.Contains(pausableObject.GetInstanceID())) {
         pausableObject.SendMessage("OnPauseGame", SendMessageOptions.DontRequireReceiver);
-        alreadyPausedObjects.Add(pausableObject.name);
+        alreadyPausedObjects.Add(pausableObject.GetInstanceID());
       }
     }
   }
@@ -236,12 +236,13 @@ public class GameController : MonoBehaviour {
       paused = false;
       Debug.Log("Unpause all PausableObjects");
       Object[] objects = FindObjectsOfType(typeof(PausableObject));
-      List<string> alreadyUnPausedObjects = new List<string>();
+      List<int> alreadyUnPausedObjects = new List<int>();
 
       foreach (PausableObject pausableObject in objects) {
-        if (!alreadyUnPausedObjects.Contains(pausableObject.name)) {
+        
+        if (!alreadyUnPausedObjects.Contains(pausableObject.GetInstanceID())) {
           pausableObject.SendMessage("OnUnpauseGame", SendMessageOptions.DontRequireReceiver);
-          alreadyUnPausedObjects.Add(pausableObject.name);
+          alreadyUnPausedObjects.Add(pausableObject.GetInstanceID());
         }
       }
     }

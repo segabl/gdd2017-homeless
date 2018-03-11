@@ -4,13 +4,13 @@ public abstract class PausableAnimatedObject : PausableObject {
 
   public bool ignoreOnPause { get; protected set; }
   protected UnityAnimator spriterAnimator;
-  float oldAnimationSpeed;
+  float oldAnimationSpeed = 0;
 
   public override void OnPauseGame() {
     if (ignoreOnPause)
       return;
     base.OnPauseGame();
-    oldAnimationSpeed = spriterAnimator.Speed;
+    oldAnimationSpeed = spriterAnimator.Speed != 0 ? spriterAnimator.Speed : oldAnimationSpeed;
     spriterAnimator.Speed = 0;
   }
   public override void OnUnpauseGame() {
