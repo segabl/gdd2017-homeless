@@ -21,7 +21,7 @@ public class CharacterAnimation : PausableAnimatedObject {
       spriterAnimator.AnimationFinished += onAnimationFinished;
       spriterAnimator.Play(currentAnimation);
     }
-    if (spriterAnimator.Name == currentAnimation) {
+    if (spriterAnimator.Name.Equals(currentAnimation)) {
       return;
     }
 
@@ -44,20 +44,15 @@ public class CharacterAnimation : PausableAnimatedObject {
   private void onAnimationFinished(string animation) {
     if (oncePlaying)
     {
-      oncePlaying = false;
       if (followUpAnimation == null)
       {
         spriterAnimator.Speed = 0;
-      }
-      else if (currentAnimation == "draw_gun")
-      {
-        currentAnimation = "shoot";
-        followUpAnimation = "idle";
-        oncePlaying = true;
+        spriterAnimator.Progress = 0.99f;
       }
       else
       {
         currentAnimation = followUpAnimation;
+        oncePlaying = false;
       }
     }
   }

@@ -162,7 +162,7 @@ public class Character : PausableObject {
     }
   }
 
-  private void die(String reason) {
+  public void die(String reason) {
     this.alive = false;
     GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("die");
     GameController.instance.panelDead.SetActive(true);
