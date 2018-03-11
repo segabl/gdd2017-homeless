@@ -117,16 +117,18 @@ public class GameController : MonoBehaviour {
   }
 
   public void unpauseGame() {
+    var character = player.GetComponent<Character>();
     switch (pauseReason) {
       case PauseReason.SLEEPING: { 
           dayTime += 0.25f;
-          player.GetComponent<Character>().asleep = false;
+          character.asleep = false;
           player.GetComponent<CharacterAnimation>().playOnce("standup_sleep", "idle");
           break;
         }
       case PauseReason.TRAIN: {
           var clara = GameObject.Find("Clara");
           if (trainHit) {
+            character.adjustStats(0.0f, 0.0f, -50.0f, 0.0f);
             Destroy(clara);
           }
           else {
@@ -171,7 +173,6 @@ public class GameController : MonoBehaviour {
       character.adjustStats(-18.0f, spot.healthGain, spot.sanityGain, -0.6f);
       player.GetComponent<CharacterAnimation>().playOnce("liedown");
     } else if (reason == PauseReason.TRAIN) {
-      character.adjustStats(0.0f, 0.0f, -20.0f, 0.0f);
       trainHit = flag1;
       AudioSource audioSource = gameObject.AddComponent<AudioSource>();
       AudioClip train = Resources.Load("sfx/train") as AudioClip;

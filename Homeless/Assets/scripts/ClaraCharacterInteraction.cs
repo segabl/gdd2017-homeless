@@ -10,7 +10,7 @@ public class ClaraCharacterInteraction : CharacterInteraction {
   }
 
   public void runOverByTrainHalt() {
-    GameController.instance.pauseGameAndBlend(GameController.PauseReason.TRAIN);
+    GameController.instance.pauseGameAndBlend(GameController.PauseReason.TRAIN, true);
     GameController.instance.karmaController.SocialAction(GameController.instance.player, KarmaSystem.SocialConstants.letNpcDieNeutral);
   }
 
