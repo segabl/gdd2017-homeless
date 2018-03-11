@@ -4,7 +4,7 @@ using UnityEngine;
 public class ItemInteraction : InteractionHandler {
 
   protected bool canPickUp = true;
-  private void Start() {
+  public void Start() {
     interactClip = (AudioClip)Resources.Load("sfx/grab-item");
   }
 
@@ -24,7 +24,9 @@ public class ItemInteraction : InteractionHandler {
       }
       GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("pickup_front", "idle");
       this.gameObject.SetActive(false);
-      interactText.enabled = false;
+      if (interactText != null) {
+        interactText.enabled = false;
+      }
       endInteraction();
     }
     else
@@ -37,6 +39,8 @@ public class ItemInteraction : InteractionHandler {
 
   protected override bool displayInteractionText()
   {
+    if (interactText == null)
+      return true;
     if (canPickUp)
       interactText.text = "Press 'E' to pick up " + this.name;
     else

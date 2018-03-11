@@ -69,7 +69,7 @@ MonoBehaviour:
   health: 0
   sanity: 0
   intoxication: 0
-  type: 2
+  type: 3
   useSound: {fileID: 0}
 --- !u!212 &212797525214477146
 SpriteRenderer:

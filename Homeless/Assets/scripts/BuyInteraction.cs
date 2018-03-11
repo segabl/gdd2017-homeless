@@ -3,20 +3,21 @@ using UnityEngine;
 using System;
 
 namespace Assets.scripts {
-  class HotdogInteraction : InteractionHandler {
+  class BuyInteraction : InteractionHandler {
     protected bool noMoney;
     Action action;
-    public GameObject hotdog;
+    public GameObject item;
     public override void interact() {
       Inventory player_inventory = GameController.instance.player.GetComponent<Inventory>();
       Inventory this_inventory = gameObject.GetComponent<Inventory>();
       action = () => resetInteraction();
       if (player_inventory.findMatch("Money") && player_inventory.giveItem(player_inventory.findMatch("Money"), this_inventory))
       {
-        GameObject hotdog_instance = GameController.createItemInstance(hotdog);
-
-        player_inventory.addItem(hotdog_instance.GetComponent<Collectible>());
-        hotdog_instance.SetActive(false);
+        GameObject drop = Instantiate(item, transform.position + new Vector3(0, -0.8f, 0), Quaternion.identity);
+        drop.name = drop.name.Replace("(Clone)", "");
+        drop.GetComponent<Collectible>().Start();
+        drop.GetComponent<ItemInteraction>().Start();
+        drop.GetComponent<ItemInteraction>().interact();
         GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("give_front", "idle");
         endInteraction();
         
@@ -36,7 +37,7 @@ namespace Assets.scripts {
       if (noMoney)
         interactText.text = "Not enough money";
       else
-        interactText.text = "Press 'E' to buy a hotdog";
+        interactText.text = "Press 'E' to buy a " + item.name;
       return true;
     }
     protected void resetInteraction()

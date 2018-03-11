@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ClaraCharacterInteraction : CharacterInteraction {
 
-  public Collectible oldHotDog;
-  public Collectible hotDog;
+  public GameObject oldHotDog;
+  public GameObject hotDog;
 
   public void runOverByTrainN() {
     GameController.instance.pauseGameAndBlend(GameController.PauseReason.TRAIN, true);
@@ -48,13 +48,23 @@ public class ClaraCharacterInteraction : CharacterInteraction {
   public void receiveHotDog() {
     var inventory = GameController.instance.player.GetComponent<Inventory>();
     inventory.giveItem(inventory.findMatch("Guitar"), GetComponent<Inventory>());
-    GameController.instance.player.GetComponent<Inventory>().addItem(oldHotDog);
+    GameObject item = Instantiate(oldHotDog, transform.position + new Vector3(0, -0.8f, 0), Quaternion.identity);
+    item.name = item.name.Replace("(Clone)", "");
+    item.GetComponent<Collectible>().Start();
+    item.GetComponent<ItemInteraction>().Start();
+    item.GetComponent<ItemInteraction>().interact();
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
   }
 
   public void receiveGoodHotDog() {
     var inventory = GameController.instance.player.GetComponent<Inventory>();
     inventory.giveItem(inventory.findMatch("Guitar"), GetComponent<Inventory>());
-    GameController.instance.player.GetComponent<Inventory>().addItem(hotDog);
+    GameObject item = Instantiate(hotDog, transform.position + new Vector3(0, -0.8f, 0), Quaternion.identity);
+    item.name = item.name.Replace("(Clone)", "");
+    item.GetComponent<Collectible>().Start();
+    item.GetComponent<ItemInteraction>().Start();
+    item.GetComponent<ItemInteraction>().interact();
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
   }
 
   public void disappear() {

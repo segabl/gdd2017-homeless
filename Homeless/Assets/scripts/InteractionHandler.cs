@@ -91,7 +91,9 @@ public abstract class InteractionHandler : PausableObject {
 
   public abstract void interact();
   protected void endInteraction() {
-    interactText.enabled = false;
+    if (interactText != null) {
+      interactText.enabled = false;
+    }
     interactObject = null;
     playerCanInteract = false;
   }
