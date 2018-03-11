@@ -56,6 +56,7 @@ namespace KarmaSystem {
       }
 
       SocialEffector copied_action = new SocialEffector(action);
+
       if (reactor != null) {
         copied_action.setTarget(actor);
         copied_action.Apply(SocialStatusDict[actor], SocialStatusDict[reactor]);
@@ -254,6 +255,10 @@ namespace KarmaSystem {
     internal static readonly SocialEffector saveNpcFromDying = new SocialEffector(new ReputationEffector(0, 2, 0, -2));
 
     internal static readonly SocialEffector gettingCaughtByPolice = new SocialEffector(new ReputationEffector(0, -1, 4, 0));
+
+    internal static readonly SocialEffector wantsToHelp = new SocialEffector(new ReputationEffector(0, 2, 0, 0));
+    internal static readonly SocialEffector doesntWantToHelp = new SocialEffector(new ReputationEffector(0, -2, 0, 0));
+
   }
 
 }
