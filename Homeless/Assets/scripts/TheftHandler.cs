@@ -11,6 +11,7 @@ public class TheftHandler : PausableObject {
   public bool targetWasAlreadyRobbed = false;
   public bool playerWasCaught = false;
   public GameObject reward;
+  public GameObject policePrefab;
 
   public static TheftHandler theftObject;
   public static bool playerCanSteal;
@@ -249,9 +250,16 @@ public class TheftHandler : PausableObject {
     Debug.Log("X: " + stealingText.transform.position.x + " Y:" + stealingText.transform.position.y);
     caughtTime = GameController.instance.dayTime;
     //GameController.instance.karmaController.DebugKarmaList();
-    if (GameController.instance.karmaController.isCriminal(GameController.instance.player))
+    if (GameController.instance.karmaController.isCriminal(GameController.instance.player, 4))
     {
-      GameController.instance.player.GetComponent<Character>().arrest("stealing");
+      GameObject police1 = Instantiate(policePrefab);
+      GameObject police2 = Instantiate(policePrefab);
+
+      police1.transform.position = GameController.instance.player.transform.position + new Vector3(-10f, 0f);
+      police2.transform.position = GameController.instance.player.transform.position + new Vector3(10f, 0f);
+      police1.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 8f);
+      police2.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 8f);
+
     }
   }
   private void theftSuccess() {

@@ -4,17 +4,22 @@ public class NPCMovement : PausableObject {
 
   public bool isWalking;
   public bool isWaiting;
-  private System.Func<float> waitTime;
-  private System.Func<float> walkDirectionChangeTime;
-  private System.Func<float> randVel;
-  private float walkCounter;
-  private float waitCounter;
-  private int walkDirection;
-  private Vector3 targetPosition;
+  protected System.Func<float> waitTime;
+  protected System.Func<float> walkDirectionChangeTime;
+  protected System.Func<float> randVel;
+  protected float walkCounter;
+  protected float waitCounter;
+  protected int walkDirection;
+  protected Vector3 targetPosition;
   public float movementSpeed;
-  private Vector3 direction_vector;
+  protected Vector3 direction_vector;
 
-  void Start() {
+
+  void Start()
+  {
+    Init();
+  }
+  protected virtual void Init() {
     waitTime = () => Random.Range(1.0f, 3.0f);
     walkDirectionChangeTime = () => Random.Range(3.0f, 7.0f);
     randVel = () => Random.Range(0.0f, 2.0f * Mathf.PI);
