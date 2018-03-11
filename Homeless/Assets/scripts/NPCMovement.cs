@@ -50,9 +50,8 @@ public class NPCMovement : PausableObject {
     }
 
     if (isWalking) {
-      RaycastHit2D hit_default = Physics2D.Raycast(this.transform.position, direction_vector, step, 1 << 0);
-      RaycastHit2D hit_street = Physics2D.Raycast(this.transform.position, direction_vector, step, 1 << 9);
-      isWalking = hit_default.collider == null && hit_street.collider == null;
+      RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction_vector, step, (1 << 0) | (1 << 9));
+      isWalking = hit.collider == null;
     }
 
     if (!isWalking) {

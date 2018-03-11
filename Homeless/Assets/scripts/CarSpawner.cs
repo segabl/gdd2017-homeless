@@ -16,7 +16,7 @@ public class CarSpawner : PausableObject {
 
   protected override void updatePausable() {
     if (time > nextSpawnTime) {
-      RaycastHit2D hit = Physics2D.Raycast(this.transform.position, new Vector3(Mathf.Sign(carSpeed), 0, 0), 5);
+      RaycastHit2D hit = Physics2D.Raycast(this.transform.position, new Vector3(Mathf.Sign(carSpeed), 0, 0), 5, (1 << 0) | (1 << 8));
       if (!hit.collider) {
         GameObject car = Instantiate(carPrefab, transform.position, Quaternion.identity);
         car.GetComponent<Car>().setSpeed(carSpeed);

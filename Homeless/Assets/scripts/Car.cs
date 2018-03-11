@@ -57,7 +57,7 @@ public class Car : PausableAnimatedObject {
         else {
           speed = oldSpeed;
         }
-        RaycastHit2D hit = Physics2D.Raycast(this.transform.position + new Vector3(Mathf.Sign(speed) * 4, 0, 0), new Vector3(Mathf.Sign(speed), 0, 0), 2);
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position + new Vector3(Mathf.Sign(speed) * 4, 0, 0), new Vector3(Mathf.Sign(speed), 0, 0), 2, (1 << 0) | (1 << 8));
         if (hit.collider) {
           stopMoving(hit.collider.gameObject);
         }
