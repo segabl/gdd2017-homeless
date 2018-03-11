@@ -9,6 +9,7 @@ public class PoliceBehavior : NPCMovement
   public GameObject target;
   
   protected bool chasing = false;
+  protected bool shooting = false;
   protected string reason = "stealing";
   protected float chasingSpeed;
 
@@ -29,7 +30,7 @@ public class PoliceBehavior : NPCMovement
   }
   protected override void updatePausable()
   {
-    if (!chasing)
+    if (!chasing && !shooting)
     {
       base.updatePausable();
       return;
@@ -145,6 +146,7 @@ public class PoliceBehavior : NPCMovement
   protected void shootTarget()
   {
     Debug.Log("Shooting the player");
+    shooting = true;
     Vector3 direction = targetPosition - transform.position;
     float shootDirection = Mathf.Atan2(direction.x, direction.y);
     if (shootDirection >= 0f && shootDirection <= Mathf.PI / 2f)
@@ -153,7 +155,9 @@ public class PoliceBehavior : NPCMovement
       {
         transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
       }
-      gameObject.GetComponent<CharacterAnimation>().playOnce("draw_gun","shoot");
+      
     }
+    gameObject.GetComponent<CharacterAnimation>().playOnce("draw_gun", "idle");
+    stopChasing();
   }
 }
