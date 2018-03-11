@@ -94,7 +94,6 @@ public class PoliceBehavior : NPCMovement
       return;
     }
 
-
     transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
 
     float walkingDirection = Mathf.Atan2(direction.x, direction.y);
