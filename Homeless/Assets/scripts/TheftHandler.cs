@@ -220,7 +220,7 @@ public class TheftHandler : PausableObject {
     pushStart = GameController.instance.dayTime;
     pushAway = true;
     transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.y);
-    if ((direction.x >= 0f)) {
+    if ((direction.x < 0f)) {
       GetComponent<CharacterAnimation>().playOnce("push_away_right", "idle");
     }
     else {
