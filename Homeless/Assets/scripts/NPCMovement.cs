@@ -61,7 +61,7 @@ public class NPCMovement : PausableObject {
 
     if (!isWalking) {
       waitCounter -= Time.deltaTime;
-      this.GetComponent<CharacterAnimation>().setAnimation = "idle";
+      this.GetComponent<CharacterAnimation>().currentAnimation = "idle";
       return;
     } else {
       walkCounter -= Time.deltaTime;
@@ -76,28 +76,24 @@ public class NPCMovement : PausableObject {
       if (this.transform.localScale.x < 0.0f) {
         this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
       }
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
+      this.GetComponent<CharacterAnimation>().currentAnimation = "walking_side";
     }
     else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f) {
       //UP
-      if (this.transform.localScale.x < 0.0f) {
-        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
-      }
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_back";
+      this.transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.y);
+      this.GetComponent<CharacterAnimation>().currentAnimation = "walking_back";
     }
     else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * -0.75) {
       //LEFT
       if (this.transform.localScale.x > 0.0f) {
         this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
       }
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
+      this.GetComponent<CharacterAnimation>().currentAnimation = "walking_side";
     }
     else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr) {
       //DOWN
-      if (this.transform.localScale.x < 0.0f) {
-        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
-      }
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+      this.transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.y);
+      this.GetComponent<CharacterAnimation>().currentAnimation = "walking_front";
     }
   }
 

@@ -60,7 +60,7 @@ public class PoliceBehavior : NPCMovement
       {
         this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
       }
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
+      this.GetComponent<CharacterAnimation>().currentAnimation = "walking_side";
     }
     else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f)
     {
@@ -69,7 +69,7 @@ public class PoliceBehavior : NPCMovement
       {
         this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
       }
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_back";
+      this.GetComponent<CharacterAnimation>().currentAnimation = "walking_back";
     }
     else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * -0.75)
     {
@@ -78,7 +78,7 @@ public class PoliceBehavior : NPCMovement
       {
         this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
       }
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_side";
+      this.GetComponent<CharacterAnimation>().currentAnimation = "walking_side";
     }
     else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr)
     {
@@ -87,7 +87,7 @@ public class PoliceBehavior : NPCMovement
       {
         this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
       }
-      this.GetComponent<CharacterAnimation>().setAnimation = "walking_front";
+      this.GetComponent<CharacterAnimation>().currentAnimation = "walking_front";
     }
 
     
