@@ -158,7 +158,7 @@ public class PoliceBehavior : NPCMovement
     Vector3 relativeThisPosition = Camera.main.WorldToScreenPoint(transform.position);
     Vector3 direction = relativeTargetPosition - relativeThisPosition;
     float shootDirection = Mathf.Sign(direction.x);
-    if (shootDirection >= 0f)
+    if (shootDirection <= 0f)
     {
       if (transform.localScale.x < 0.0f)
       {

@@ -105,7 +105,6 @@ public class TheftHandler : PausableObject {
       }
       if (pushAway)
       {
-
         float delta = (GameController.instance.dayTime - pushStart);
         if (delta < 0.15f / GameController.instance.dayLength)
         {
@@ -230,21 +229,30 @@ public class TheftHandler : PausableObject {
     GameController.instance.karmaController.SocialAction(GameController.instance.player, KarmaSystem.SocialConstants.gettingCaughtStealing);
     Vector3 relativeTargetPosition = Camera.main.WorldToScreenPoint(GameController.instance.player.transform.position);
     Vector3 relativeThisPosition = Camera.main.WorldToScreenPoint(transform.position);
-    Vector3 direction = relativeTargetPosition - relativeThisPosition;
-    float shootDirection = Mathf.Sign(direction.x);
+    Vector3 direction = relativeThisPosition - relativeTargetPosition;
+    pushDirection = Mathf.Sign(direction.x);
+    
     pushStart = GameController.instance.dayTime;
     pushAway = true;
-    if (!(direction.x > 0f))
+    Debug.Log(direction.x);
+    if ((direction.x >= 0f))
     {
+      
       GetComponent<CharacterAnimation>().playOnce("push_away_right", "idle");
-      GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
     }
     else
     {
+      if (transform.localScale.x > 0.0f)
+      {
+        transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+      }
       GetComponent<CharacterAnimation>().playOnce("push_away_left", "idle");
-      GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
+      
     }
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
+
     Object.FindObjectOfType<InputHandler>().disableMovementFor(1f);
+
     stealingText.text = "What the fuck?!";
     stealingText.enabled = true;
     stealingText.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
