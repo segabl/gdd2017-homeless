@@ -31,7 +31,10 @@ public class CarHit : MonoBehaviour {
       Vector3 directionVector = new Vector3();
       directionVector.x = Mathf.Sin(hitDirection);
       directionVector.y = Mathf.Cos(hitDirection);
-      this.transform.position += directionVector * step;
+      RaycastHit2D hit = Physics2D.Raycast(this.transform.position, directionVector, step, 1 << 0);
+      if (hit.collider == null) {
+        this.transform.position += directionVector * step;
+      }
     }
     immobilityCount -= Time.deltaTime;
   }
