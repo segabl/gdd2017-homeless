@@ -6,7 +6,7 @@ public class CharacterAnimation : PausableAnimatedObject {
   public String currentAnimation { get; set; }
   public String followUpAnimation { get; protected set; }
 
-  private bool oncePlaying;
+  public bool oncePlaying { get; private set; }
 
   // Use this for initialization
   void Start() {
