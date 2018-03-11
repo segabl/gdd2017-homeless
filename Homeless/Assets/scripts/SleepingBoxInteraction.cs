@@ -20,7 +20,7 @@ public class SleepingBoxInteraction : CharacterInteraction {
   }
   protected override bool displayInteractionText()
   {
-    interactionText.text = "Press 'E' to interact";
+    interactText.text = "Press 'E' to interact";
     return true;
   }
 }

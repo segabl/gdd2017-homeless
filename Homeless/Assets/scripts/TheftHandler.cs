@@ -25,9 +25,13 @@ public class TheftHandler : PausableObject {
   private float theftDeltaTime;
   private float width;
   private float theftDuration = 3.0f;
-  private Text caughtText;
+  private Text  stealingText;
   private static float caughtTime;
   private bool secondTry = false;
+  private bool displayedSecondTry = false;
+  private bool pushAway = false;
+  private float pushStart = 0f;
+  private float pushDirection;
 
 
 
@@ -67,35 +71,50 @@ public class TheftHandler : PausableObject {
 
   protected override void updatePausable() {
 
-    if (!caughtText)
+    if (!stealingText)
     {
       GameObject canvas = GameController.instance.menuCanvas;
       Text[] texts = canvas.GetComponentsInChildren<Text>();
       foreach (Text t in texts)
       {
-        if (t.name.Equals("InteractionText"))
+        if (t.name.Equals("StealingText"))
         {
-          caughtText = t;
+          stealingText = t;
           break;
         }
       }
-      if (!caughtText)
+      if (!stealingText)
       {
-        Debug.Log("interactionText is null");
+        Debug.Log("stealingText is null");
         return;
       }
     }
     if (playerWasCaught)
     {
-      if (caughtText.enabled)
+      if (stealingText.enabled)
       {
 
-        if ((GameController.instance.dayTime - caughtTime) > (1.5f) / GameController.instance.dayLength)
+        if (((GameController.instance.dayTime - caughtTime) > (1.5f) / GameController.instance.dayLength) && caughtTime != 0f)
         {
 
           caughtTime = 0;
-          caughtText.enabled = false;
+          stealingText.enabled = false;
           secondTry = true;
+        }
+      }
+      if (pushAway)
+      {
+
+        float delta = (GameController.instance.dayTime - pushStart);
+        if (delta < 0.15f / GameController.instance.dayLength)
+        {
+          GameController.instance.player.transform.position += new Vector3(-Mathf.Sin(pushDirection), Mathf.Cos(pushDirection)) * (0.1f - delta);
+        }
+        else
+        {
+          pushAway = false;
+          pushDirection = 0;
+          pushStart = 0;
         }
       }
     }
@@ -119,17 +138,19 @@ public class TheftHandler : PausableObject {
       {
         if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < stealDistance)
         {
-          caughtText.enabled = true;
+          stealingText.enabled = true;
           if (caughtTime == 0f)
             caughtTime = GameController.instance.dayTime;
           if (GameController.instance.dayTime - caughtTime < 1f / GameController.instance.dayLength)
           {
-            caughtText.enabled = true;
-            caughtText.text = "Piss off, thief!";
+            displayedSecondTry = true;
+            stealingText.enabled = true;
+            stealingText.text = "Piss off, thief!";
           }
-          else
+          else if (!displayedSecondTry)
           {
-            caughtText.enabled = false;
+            stealingText.enabled = false;
+            displayedSecondTry = true;
           }
         }
         return;
@@ -185,11 +206,6 @@ public class TheftHandler : PausableObject {
     theftDeltaTime = 0;
     gameObject.GetComponent<LineRenderer>().enabled = false;
   }
-  /*public void pickPocket()
-  {
-    
-  }
-  */
   private void updateTheftTimer() {
     if (theftStart == 0) {
       theftStart = Time.fixedTime;
@@ -209,19 +225,28 @@ public class TheftHandler : PausableObject {
     Debug.Log("Player was caught!");
     playerWasCaught = true;
     playerIsStealing = false;
+    
     GameController.instance.karmaController.SocialAction(GameController.instance.player, KarmaSystem.SocialConstants.gettingCaughtStealing);
-
-    if (transform.position.x <= GameController.instance.player.transform.position.x)
+    float direction = Mathf.Atan2(this.transform.position.x - GameController.instance.player.transform.position.x,
+      this.transform.position.y - GameController.instance.player.transform.position.y);
+    pushDirection = direction;
+    pushStart = GameController.instance.dayTime;
+    pushAway = true;
+    if (!(direction > 0f && direction < Mathf.PI))
     {
       GetComponent<CharacterAnimation>().playOnce("push_away_right", "idle");
-      
+      GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
     }
     else
     {
       GetComponent<CharacterAnimation>().playOnce("push_away_left", "idle");
+      GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
     }
-    caughtText.text = "Fuck you!";
-    caughtText.enabled = true;
+    Object.FindObjectOfType<InputHandler>().disableMovementFor(1f);
+    stealingText.text = "What the fuck?!";
+    stealingText.enabled = true;
+    stealingText.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+    Debug.Log("X: " + stealingText.transform.position.x + " Y:" + stealingText.transform.position.y);
     caughtTime = GameController.instance.dayTime;
     //GameController.instance.karmaController.DebugKarmaList();
     if (GameController.instance.karmaController.isCriminal(GameController.instance.player))

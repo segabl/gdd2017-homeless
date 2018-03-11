@@ -6,7 +6,7 @@ public abstract class InteractionHandler : PausableObject {
 
   public float triggerDistance;
   //private string defaultText = "Press 'E' to interact";
-  protected Text interactionText;
+  protected Text interactText;
   public static InteractionHandler interactObject;
   public static bool playerCanInteract;
 
@@ -20,18 +20,17 @@ public abstract class InteractionHandler : PausableObject {
   private Action callAfterDelay = null;
 
   protected override void updatePausable() {
-
-    if (!interactionText) {
+    if (!interactText) {
       GameObject canvas = GameController.instance.menuCanvas;
       Text[] texts = canvas.GetComponentsInChildren<Text>();
       foreach (Text t in texts) {
         if (t.name.Equals("InteractionText")) {
-          interactionText = t;
+          interactText = t;
           break;
         }
       }
-      if (!interactionText) {
-        Debug.Log("interactionText is null");
+      if (!interactText) {
+        Debug.Log("interactText is null");
         return;
       }
     }
@@ -75,14 +74,15 @@ public abstract class InteractionHandler : PausableObject {
       }
     }
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
-      interactionText.transform.position = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, 50, 0);
+      interactText.transform.position = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, 50, 0);
       if (interactObject != this) {
         if (!displayInteractionText())
           return;
       }
-      interactionText.enabled = true;
+      interactText.enabled = true;
       interactObject = this;
       playerCanInteract = true;
+
     }
     else if (interactObject == this) {
       endInteraction();
@@ -91,7 +91,7 @@ public abstract class InteractionHandler : PausableObject {
 
   public abstract void interact();
   protected void endInteraction() {
-    interactionText.enabled = false;
+    interactText.enabled = false;
     interactObject = null;
     playerCanInteract = false;
   }

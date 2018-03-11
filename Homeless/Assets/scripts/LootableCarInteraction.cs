@@ -13,7 +13,7 @@ class LootableCarInteraction : CharacterInteraction {
   }
   protected override bool displayInteractionText()
   {
-    interactionText.text = "Press 'E' to loot";
+    interactText.text = "Press 'E' to loot";
     return true;
   }
 }

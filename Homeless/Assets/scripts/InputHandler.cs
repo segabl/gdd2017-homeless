@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
 public class InputHandler : MonoBehaviour {
+  protected bool movementEnabled = true;
+  protected float disableStart = 0f;
+  protected float disableDuration = 0f;
+  
 
   void Update() {
     GameController controller = GameController.instance;
@@ -40,6 +44,17 @@ public class InputHandler : MonoBehaviour {
       return;
     }
 
+    if (!movementEnabled)
+    {
+      if (controller.dayTime - disableStart < disableDuration)
+      {
+        return;
+      }
+      movementEnabled = true;
+      disableStart = 0f;
+      disableDuration = 0f;
+    }
+
     if (Input.GetKeyDown(KeyCode.E)) {
       Debug.Log("E Key pressed");
       controller.player.GetComponent<MainCharacterMovement>().stopMovement();
@@ -70,6 +85,13 @@ public class InputHandler : MonoBehaviour {
       TheftHandler.playerIsStealing = false;
     }
 
+  }
+  public void disableMovementFor(float time)
+  {
+    movementEnabled = false;
+    disableDuration += time / GameController.instance.dayLength;
+    if (disableStart == 0)
+      disableStart = GameController.instance.dayTime;
   }
 
 }

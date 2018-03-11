@@ -24,7 +24,7 @@ public class ItemInteraction : InteractionHandler {
       }
       GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("pickup_front", "idle");
       this.gameObject.SetActive(false);
-      interactionText.enabled = false;
+      interactText.enabled = false;
       endInteraction();
     }
     else
@@ -38,9 +38,9 @@ public class ItemInteraction : InteractionHandler {
   protected override bool displayInteractionText()
   {
     if (canPickUp)
-      interactionText.text = "Press 'E' to pick up " + this.name;
+      interactText.text = "Press 'E' to pick up " + this.name;
     else
-      interactionText.text = "Inventory is full";
+      interactText.text = "Inventory is full";
     return true;
   }
 }

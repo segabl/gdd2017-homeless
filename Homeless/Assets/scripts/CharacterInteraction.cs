@@ -102,7 +102,7 @@ public class CharacterInteraction : InteractionHandler {
       GameController.instance.modalPanel.MessageBox(npc.GetCurrentDialogue(), Choice, npc.GetChoices());
     }
     else {
-      interactionText.text = npc.GetCurrentDialogue();
+      interactText.text = npc.GetCurrentDialogue();
     }
   }
 
@@ -136,7 +136,7 @@ public class CharacterInteraction : InteractionHandler {
 
   protected override bool displayInteractionText()
   {
-    interactionText.text = "Press 'E' to talk to " + this.name;
+    interactText.text = "Press 'E' to talk to " + this.name;
     return true;
   }
 }

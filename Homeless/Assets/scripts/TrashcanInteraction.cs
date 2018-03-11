@@ -16,7 +16,7 @@ public class TrashcanInteraction : InteractionHandler {
 
   public override void interact() {
     if (yieldChance < 0.1) {
-      interactionText.text = "Nothing of use here...";
+      interactText.text = "Nothing of use here...";
       return;
     }
     if (UnityEngine.Random.Range(0.0f, 1.0f) < yieldChance) {
@@ -27,7 +27,7 @@ public class TrashcanInteraction : InteractionHandler {
       suspendWhileActive(drop);
     }
     else {
-      interactionText.text = "Nothing of use here...";
+      interactText.text = "Nothing of use here...";
     }
     yieldChance = 0;
   }
@@ -41,7 +41,7 @@ public class TrashcanInteraction : InteractionHandler {
 
   protected override bool displayInteractionText()
   {
-    interactionText.text = "Press 'E' to search the trash";
+    interactText.text = "Press 'E' to search the trash";
     return true;
   }
 }

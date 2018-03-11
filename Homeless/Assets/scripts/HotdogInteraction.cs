@@ -34,9 +34,9 @@ namespace Assets.scripts {
     protected override bool displayInteractionText()
     {
       if (noMoney)
-        interactionText.text = "Not enough money";
+        interactText.text = "Not enough money";
       else
-        interactionText.text = "Press 'E' to buy a hotdog";
+        interactText.text = "Press 'E' to buy a hotdog";
       return true;
     }
     protected void resetInteraction()

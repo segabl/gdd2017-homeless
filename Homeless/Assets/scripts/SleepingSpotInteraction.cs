@@ -22,7 +22,7 @@ public class SleepingSpotInteraction : InteractionHandler {
       Debug.Log("Direction: " + direction);
       return false;
     }
-    interactionText.text = "Press 'E' to sleep";
+    interactText.text = "Press 'E' to sleep";
     return true;
   }
 
