@@ -253,6 +253,7 @@ namespace KarmaSystem {
     internal static readonly SocialEffector letNpcDieNeutral = new SocialEffector(new ReputationEffector(0, -1, 0, 0));
     internal static readonly SocialEffector saveNpcFromDying = new SocialEffector(new ReputationEffector(0, 2, 0, -2));
 
+    internal static readonly SocialEffector gettingCaughtByPolice = new SocialEffector(new ReputationEffector(0, -1, 4, 0));
   }
 
 }

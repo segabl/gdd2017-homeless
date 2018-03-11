@@ -259,7 +259,7 @@ public class TheftHandler : PausableObject {
       }
     }
     
-    if (GameController.instance.karmaController.isCriminal(GameController.instance.player, 4))
+    if (GameController.instance.karmaController.isCriminal(GameController.instance.player, 15))
     {
       GameObject police1 = Instantiate(policePrefab);
       GameObject police2 = Instantiate(policePrefab);

@@ -9,6 +9,7 @@ public class PoliceBehavior : NPCMovement
   public GameObject target;
   
   protected bool chasing = false;
+  protected bool shooting = false;
   protected string reason = "stealing";
   protected float chasingSpeed;
 
@@ -29,10 +30,14 @@ public class PoliceBehavior : NPCMovement
   }
   protected override void updatePausable()
   {
-    if (!chasing)
+    if (!chasing && !shooting)
     {
       base.updatePausable();
       return;
+    }
+    if (GameController.instance.karmaController.isCriminal(target,1))
+    {
+      catchRange = 4f;
     }
     if (targetInRange())
     {
@@ -48,11 +53,10 @@ public class PoliceBehavior : NPCMovement
     movementSpeed = chasingSpeed;
     Vector3 targetPosition = target.transform.position;
     Vector3 direction = targetPosition - transform.position;
-    Debug.Log(Vector3.Distance(targetPosition, transform.position));
     if (Vector3.Distance(targetPosition, transform.position) > 12)
     {
-      movementSpeed = 3f;
-      chasing = false;
+      stopChasing();
+      return;
     }
 
 
@@ -115,7 +119,16 @@ public class PoliceBehavior : NPCMovement
   protected void targetCaptured()
   {
     gameObject.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
-    target.GetComponent<Character>().arrest("Stealing");
+    if (GameController.instance.karmaController.isCriminal(target,1))
+    {
+      shootTarget();
+    }
+      //target.GetComponent<Character>().arrest("Stealing");
+    else
+    {
+      GameController.instance.karmaController.SocialAction(target, KarmaSystem.SocialConstants.gettingCaughtByPolice);
+      GameController.instance.arrestPlayer(gameObject);
+    }
   }
 
   public void startChasing(GameObject target_, string reason_, float speed)
@@ -124,5 +137,27 @@ public class PoliceBehavior : NPCMovement
     target = target_;
     reason = reason_;
     chasingSpeed = speed;    
+  }
+  public void stopChasing()
+  {
+    movementSpeed = 3f;
+    chasing = false;
+  }
+  protected void shootTarget()
+  {
+    Debug.Log("Shooting the player");
+    shooting = true;
+    Vector3 direction = targetPosition - transform.position;
+    float shootDirection = Mathf.Atan2(direction.x, direction.y);
+    if (shootDirection >= 0f && shootDirection <= Mathf.PI / 2f)
+    {
+      if (transform.localScale.x < 0.0f)
+      {
+        transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+      }
+      
+    }
+    gameObject.GetComponent<CharacterAnimation>().playOnce("draw_gun", "idle");
+    stopChasing();
   }
 }
