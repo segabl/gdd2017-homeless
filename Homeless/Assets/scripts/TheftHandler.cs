@@ -255,7 +255,7 @@ public class TheftHandler : PausableObject {
     {
       if (Vector3.Distance(GameController.instance.player.transform.position, officer.transform.position) < 8f)
       {
-        officer.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 8f);
+        officer.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 4.5f);
       }
     }
     
@@ -266,8 +266,8 @@ public class TheftHandler : PausableObject {
 
       police1.transform.position = GameController.instance.player.transform.position + new Vector3(-10f, 0f);
       police2.transform.position = GameController.instance.player.transform.position + new Vector3(10f, 0f);
-      police1.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 8f);
-      police2.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 8f);
+      police1.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 6.5f);
+      police2.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 6.5f);
 
     }
   }

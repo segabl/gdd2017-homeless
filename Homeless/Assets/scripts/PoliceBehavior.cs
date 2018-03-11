@@ -10,6 +10,7 @@ public class PoliceBehavior : NPCMovement
   
   protected bool chasing = false;
   protected string reason = "stealing";
+  protected float chasingSpeed;
 
   void Start()
   {
@@ -44,7 +45,7 @@ public class PoliceBehavior : NPCMovement
   
   protected void chase()
   {
-    movementSpeed = 6.5f;
+    movementSpeed = chasingSpeed;
     Vector3 playerPosition = target.transform.position;
     Vector3 direction = playerPosition - transform.position;
 
@@ -113,6 +114,6 @@ public class PoliceBehavior : NPCMovement
     chasing = true;
     target = target_;
     reason = reason_;
-    movementSpeed = speed;    
+    chasingSpeed = speed;    
   }
 }
