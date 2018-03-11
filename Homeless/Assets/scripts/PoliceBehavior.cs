@@ -144,6 +144,7 @@ public class PoliceBehavior : NPCMovement
     {
       GameController.instance.karmaController.SocialAction(target, KarmaSystem.SocialConstants.gettingCaughtByPolice);
       GameController.instance.pauseGameAndBlend(GameController.PauseReason.ARRESTED, false, gameObject);
+      walkCounter = -1;
     }
   }
 
