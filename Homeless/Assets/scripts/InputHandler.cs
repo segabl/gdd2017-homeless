@@ -51,7 +51,7 @@ public class InputHandler : MonoBehaviour {
       movementEnabled = true;
       disableStart = 0f;
       disableDuration = 0f;
-      controller.player.GetComponent<MainCharacterMovement>().externalPause = false;
+      controller.player.GetComponent<MainCharacterMovement>().ridiculousHotFixWorkaround = false;
     }
 
     if (Input.GetKeyDown(KeyCode.E)) {
@@ -89,7 +89,7 @@ public class InputHandler : MonoBehaviour {
     if (disableStart == 0)
       disableStart = GameController.instance.dayTime;
     GameController.instance.player.GetComponent<MainCharacterMovement>().stopMovement();
-    GameController.instance.player.GetComponent<MainCharacterMovement>().externalPause = true;
+    GameController.instance.player.GetComponent<MainCharacterMovement>().ridiculousHotFixWorkaround = true;
   }
 
 }
