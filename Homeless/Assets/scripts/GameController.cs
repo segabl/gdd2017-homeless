@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour {
   public float inGameHour { get; private set; }
   private float hoursToWait;
   private float sleepUntil;
+  private float pauseUntil;
+  public bool trainInteraction { get; private set; }
 
   public KarmaController karmaController = null;
 
@@ -26,6 +28,7 @@ public class GameController : MonoBehaviour {
   public ModalPanel modalPanel { get; private set; }
 
   private static GameController controllerInstance;
+  private bool trainHit;
 
   public static GameController instance {
     get {
@@ -103,6 +106,19 @@ public class GameController : MonoBehaviour {
         Camera.main.GetComponent<PostProcessing>().sleep = false;
       }
     }
+    if(trainInteraction) {
+      if(Time.time >= pauseUntil) {
+        trainInteraction = false;
+        if (trainHit) {
+          Destroy(GameObject.Find("Clara"));
+        }
+        player.transform.position = new Vector3(player.transform.position.x, -25.6f, player.transform.position.z);
+        player.GetComponent<MainCharacterMovement>().up = true;
+        GameObject.Find("Clara").transform.position = new Vector3(GameObject.Find("Clara").transform.position.x, -25.6f, GameObject.Find("Clara").transform.position.z);
+        unpauseAll();
+        Camera.main.GetComponent<PostProcessing>().trainHit = false;
+      }
+    }
   }
 
   public void sleep(SleepingSpot spot) {
@@ -116,6 +132,22 @@ public class GameController : MonoBehaviour {
     sleepUntil = Time.time + 2;
     Camera.main.GetComponent<PostProcessing>().sleep = true;
     player.GetComponent<CharacterAnimation>().playOnce("liedown", "NONE");
+  }
+
+  public void train(bool hit) {
+    pauseAll();
+    Character character = player.GetComponent<Character>();
+    if (hit) {
+      character.adjustStats(0.0f, 0.0f, -20.0f, 0.0f);
+    }
+    pauseUntil =  Time.time + 2;
+    trainInteraction = true;
+    trainHit = hit;
+    AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+    AudioClip train = Resources.Load("sfx/train") as AudioClip;
+    audioSource.clip = train;
+    audioSource.Play();
+    Camera.main.GetComponent<PostProcessing>().trainHit = true;
   }
 
   public void saveGame() {

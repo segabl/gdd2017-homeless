@@ -7,6 +7,7 @@ public class MainCharacterMovement : PausableObject {
   public float movementSpeed;
   public bool walking { get; set; }
   private float walkingDirection;
+  public bool up { get; set; }
 
   void Start() {
     targetPosition = this.transform.position;
@@ -15,7 +16,8 @@ public class MainCharacterMovement : PausableObject {
 
   protected override void updatePausable() {
     float step = movementSpeed * Time.deltaTime;
-    if (!GetComponent<Character>().alive || GetComponent<CarHit>().hit) {
+    if (!GetComponent<Character>().alive || GetComponent<CarHit>().hit || up) {
+      up = false;
       walking = false;
       targetPosition = this.transform.position;
       return;
@@ -103,11 +105,13 @@ public class MainCharacterMovement : PausableObject {
       direction_left.y = -Mathf.Cos(direction + a);
       direction_right.x = -Mathf.Sin(direction - a);
       direction_right.y = -Mathf.Cos(direction - a);
-      if (!Physics2D.Raycast(this.transform.position, direction_left, step, 1 << 0)) {
+      RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction_left, step, 1 << 0);
+      if (hit.collider == null) {
         direction_vector = direction_left;
         break;
       }
-      else if (!Physics2D.Raycast(this.transform.position, direction_right, step, 1 << 0)) {
+      hit = Physics2D.Raycast(this.transform.position, direction_right, step, 1 << 0);
+      if (hit.collider == null) {
         direction_vector = direction_right;
         break;
       }

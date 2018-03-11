@@ -12,6 +12,7 @@ public class PostProcessing : MonoBehaviour {
   public Shader strangeShader;
 
   public bool sleep = false;
+  public bool trainHit = false;
 
   private Material daylightCycleMaterial;
   private Material blurMaterial;
@@ -157,11 +158,11 @@ public class PostProcessing : MonoBehaviour {
   }
 
   internal void ProcessSleep(RenderTexture source, RenderTexture destination) {
-    if (sleep) {
+    if (sleep || trainHit) {
       if (fadeTime == 0) {
         fadeTime = Time.time;
       }
-      float deltaTime = (Time.time - fadeTime) / 2.0f;
+      float deltaTime = (Time.time - fadeTime) / (trainHit ? 1.0f : 2.0f);
       if (deltaTime > 0) {
         blackFadeMaterial.SetFloat("_factor", System.Math.Min(deltaTime, 1.0f));
         Graphics.Blit(source, destination, blackFadeMaterial);

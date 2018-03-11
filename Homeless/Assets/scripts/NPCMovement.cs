@@ -2,53 +2,25 @@
 
 public class NPCMovement : PausableObject {
 
-  private Rigidbody2D myRigidBody;
   public bool isWalking;
   public bool isWaiting;
   private System.Func<float> waitTime;
   private System.Func<float> walkDirectionChangeTime;
-  private System.Func<float> randomColorRange;
   private System.Func<float> randVel;
   private float walkCounter;
   private float waitCounter;
   private int walkDirection;
   private Vector3 targetPosition;
-  private SpriteRenderer[] sprites;
-  private Vector2 minWalkArea;
-  private Vector2 maxWalkArea;
-  public Collider2D walkArea;
-  private bool inWalkArea;
   public float movementSpeed;
   private Vector3 direction_vector;
 
   void Start() {
-    myRigidBody = GetComponent<Rigidbody2D>();
-
     waitTime = () => Random.Range(1.0f, 3.0f);
-    walkDirectionChangeTime = () => Random.Range(1.0f, 5.0f);
-    randomColorRange = () => Random.Range(0, 255);
+    walkDirectionChangeTime = () => Random.Range(3.0f, 7.0f);
     randVel = () => Random.Range(0.0f, 2.0f * Mathf.PI);
     direction_vector = Vector3.zero;
     waitCounter = waitTime();
     walkCounter = walkDirectionChangeTime();
-
-    sprites = GetComponentsInChildren<SpriteRenderer>();
-
-    for (int i = 0; i < sprites.Length; i++) {
-      sprites[i].color = new Color(randomColorRange(), randomColorRange(), randomColorRange());
-    }
-
-    if (walkArea != null) {
-      Debug.Log("walk area not null");
-      Debug.Log(walkArea.bounds);
-      minWalkArea = walkArea.bounds.min;
-      Debug.Log("min");
-      Debug.Log(minWalkArea);
-      maxWalkArea = walkArea.bounds.max;
-      Debug.Log("max");
-      Debug.Log(maxWalkArea);
-      inWalkArea = true;
-    }
   }
 
   protected override void updatePausable() {
@@ -75,18 +47,23 @@ public class NPCMovement : PausableObject {
       direction_vector.x = -Mathf.Sin(rand);
       direction_vector.y = -Mathf.Cos(rand);
       isWalking = true;
-      if (inWalkArea && transform.position.x < minWalkArea.x) {
-        isWalking = false;
-      }
+    }
+
+    if (isWalking) {
+      RaycastHit2D hit_default = Physics2D.Raycast(this.transform.position, direction_vector, step, 1 << 0);
+      RaycastHit2D hit_street = Physics2D.Raycast(this.transform.position, direction_vector, step, 1 << 9);
+      isWalking = hit_default.collider == null && hit_street.collider == null;
     }
 
     if (!isWalking) {
       waitCounter -= Time.deltaTime;
       this.GetComponent<CharacterAnimation>().setAnimation = "idle";
       return;
+    } else {
+      walkCounter -= Time.deltaTime;
+      this.transform.position += direction_vector * step;
     }
-    walkCounter -= Time.deltaTime;
-    this.transform.position += direction_vector * step;
+    
 
     float walkingDirection = Mathf.Atan2(direction_vector.x, direction_vector.y);
     float corr = 0.01f;
