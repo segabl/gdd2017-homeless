@@ -37,7 +37,7 @@ namespace Assets.scripts {
       if (noMoney)
         interactText.text = "Not enough money";
       else
-        interactText.text = "Press 'E' to buy a " + item.name;
+        interactText.text = "Press 'E' to buy " + item.name;
       return true;
     }
     protected void resetInteraction()
