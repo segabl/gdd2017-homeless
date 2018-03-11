@@ -146,8 +146,9 @@ public class GameController : MonoBehaviour {
         }
       case PauseReason.RUNAWAY: {
           var clara = GameObject.Find("Clara");
-          clara.transform.position = new Vector3(77.0f, -20.0f, clara.transform.position.z);
-          player.GetComponent<MainCharacterMovement>().up = true;
+          clara.transform.position = new Vector3(75.0f, -16.5f, clara.transform.position.z);
+          clara.GetComponent<CharacterAnimation>().currentAnimation = "sitting";
+          clara.GetComponent<Dialogues>().SetTree("ClaraAfterRun");
           break;
         }
     }
@@ -177,7 +178,10 @@ public class GameController : MonoBehaviour {
       audioSource.clip = train;
       audioSource.Play();
     } else if (reason == PauseReason.RUNAWAY) {
-      //Momentarilly no behaviour needed
+      AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+      AudioClip run = Resources.Load("sfx/walk") as AudioClip;
+      audioSource.clip = run;
+      audioSource.Play();
     } else if (reason == PauseReason.ARRESTED) {
       character.adjustStats(-15.0f, 0.0f, -30.0f, 0.0f);
       other.GetComponent<PoliceBehavior>().stopChasing();

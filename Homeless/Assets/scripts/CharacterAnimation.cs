@@ -26,7 +26,7 @@ public class CharacterAnimation : PausableAnimatedObject {
     }
 
     spriterAnimator.Play(currentAnimation);
-    if (currentAnimation.Equals("idle")) {
+    if (currentAnimation.Equals("idle") || currentAnimation.Equals("sitting")) {
       spriterAnimator.Speed = 0.7f;
     } else {
       spriterAnimator.Speed = 1.6f;
