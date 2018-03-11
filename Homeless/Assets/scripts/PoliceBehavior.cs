@@ -9,9 +9,11 @@ public class PoliceBehavior : NPCMovement
   public GameObject target;
   
   protected bool chasing = false;
-  protected bool shooting = false;
+  public bool shooting = false;
   protected string reason = "stealing";
   protected float chasingSpeed;
+  protected AudioClip shootingClip;
+  public static bool audioTriggered = false;
 
   void Start()
   {
@@ -27,6 +29,7 @@ public class PoliceBehavior : NPCMovement
     {
       target = GameController.instance.player;
     }
+    shootingClip = (AudioClip)Resources.Load("sfx/gun-shot");
   }
   protected override void updatePausable()
   {
@@ -35,7 +38,11 @@ public class PoliceBehavior : NPCMovement
       base.updatePausable();
       return;
     }
-    if (GameController.instance.karmaController.isCriminal(target,1))
+    if (shooting)
+    {
+      return;
+    }
+    if (GameController.instance.karmaController.isCriminal(target))
     {
       catchRange = 4f;
     }
@@ -119,7 +126,7 @@ public class PoliceBehavior : NPCMovement
   protected void targetCaptured()
   {
     gameObject.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
-    if (GameController.instance.karmaController.isCriminal(target,1))
+    if (GameController.instance.karmaController.isCriminal(target))
     {
       shootTarget();
     }
@@ -147,9 +154,11 @@ public class PoliceBehavior : NPCMovement
   {
     Debug.Log("Shooting the player");
     shooting = true;
-    Vector3 direction = targetPosition - transform.position;
-    float shootDirection = Mathf.Atan2(direction.x, direction.y);
-    if (shootDirection >= 0f && shootDirection <= Mathf.PI / 2f)
+    Vector3 relativeTargetPosition = Camera.main.WorldToScreenPoint(target.transform.position);
+    Vector3 relativeThisPosition = Camera.main.WorldToScreenPoint(transform.position);
+    Vector3 direction = relativeTargetPosition - relativeThisPosition;
+    float shootDirection = Mathf.Sign(direction.x);
+    if (shootDirection >= 0f)
     {
       if (transform.localScale.x < 0.0f)
       {
@@ -157,7 +166,24 @@ public class PoliceBehavior : NPCMovement
       }
       
     }
-    gameObject.GetComponent<CharacterAnimation>().playOnce("draw_gun", "idle");
+    else
+    {
+      if (transform.localScale.x > 0.0f)
+      {
+        transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
+      }
+    }
+    gameObject.GetComponent<CharacterAnimation>().playOnce("draw_gun", "shoot");
+    if (audioTriggered)
+      return;
+    audioTriggered = true;
+    AudioSource audioSource = GameController.instance.player.gameObject.GetComponent<AudioSource>();
+    if (audioSource)
+    {
+      audioSource.clip = shootingClip;
+      audioSource.PlayScheduled(AudioSettings.dspTime + 0.7f);
+    }
     stopChasing();
+    target.GetComponent<Character>().shoot("stealing");
   }
 }

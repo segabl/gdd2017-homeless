@@ -42,11 +42,21 @@ public class CharacterAnimation : PausableAnimatedObject {
   }
 
   private void onAnimationFinished(string animation) {
-    if (oncePlaying) {
+    if (oncePlaying)
+    {
       oncePlaying = false;
-      if (followUpAnimation == null) {
+      if (followUpAnimation == null)
+      {
         spriterAnimator.Speed = 0;
-      } else {
+      }
+      else if (currentAnimation == "draw_gun")
+      {
+        currentAnimation = "shoot";
+        followUpAnimation = "idle";
+        oncePlaying = true;
+      }
+      else
+      {
         currentAnimation = followUpAnimation;
       }
     }
