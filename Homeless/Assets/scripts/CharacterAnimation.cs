@@ -3,6 +3,8 @@ using System;
 
 public class CharacterAnimation : PausableAnimatedObject {
 
+  public String defaultAnimation = "idle";
+
   public String currentAnimation { get; set; }
   public String followUpAnimation { get; protected set; }
 
@@ -10,8 +12,8 @@ public class CharacterAnimation : PausableAnimatedObject {
 
   // Use this for initialization
   void Start() {
-    currentAnimation = "idle";
-    followUpAnimation = "idle";
+    currentAnimation = defaultAnimation;
+    followUpAnimation = defaultAnimation;
     oncePlaying = false;
   }
 
