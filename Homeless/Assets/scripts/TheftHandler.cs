@@ -26,7 +26,7 @@ public class TheftHandler : PausableObject {
   private float theftDeltaTime;
   private float width;
   private float theftDuration = 3.0f;
-  private Text  stealingText;
+  private Text stealingText;
   private static float caughtTime;
   private bool secondTry = false;
   private bool displayedSecondTry = false;
@@ -72,46 +72,36 @@ public class TheftHandler : PausableObject {
 
   protected override void updatePausable() {
 
-    if (!stealingText)
-    {
+    if (!stealingText) {
       GameObject canvas = GameController.instance.menuCanvas;
       Text[] texts = canvas.GetComponentsInChildren<Text>();
-      foreach (Text t in texts)
-      {
-        if (t.name.Equals("StealingText"))
-        {
+      foreach (Text t in texts) {
+        if (t.name.Equals("StealingText")) {
           stealingText = t;
           break;
         }
       }
-      if (!stealingText)
-      {
+      if (!stealingText) {
         Debug.Log("stealingText is null");
         return;
       }
     }
-    if (playerWasCaught)
-    {
-      if (stealingText.enabled)
-      {
+    if (playerWasCaught) {
+      if (stealingText.enabled) {
 
-        if (((GameController.instance.dayTime - caughtTime) > (1.5f) / GameController.instance.dayLength) && caughtTime != 0f)
-        {
+        if (((GameController.instance.dayTime - caughtTime) > (1.5f) / GameController.instance.dayLength) && caughtTime != 0f) {
 
           caughtTime = 0;
           stealingText.enabled = false;
           secondTry = true;
         }
       }
-      if (pushAway)
-      {
+      if (pushAway) {
         float delta = (GameController.instance.dayTime - pushStart);
-        if (delta < 0.15f / GameController.instance.dayLength)
-        {
+        if (delta < 0.15f / GameController.instance.dayLength) {
           GameController.instance.player.transform.position += new Vector3(-Mathf.Sin(pushDirection), Mathf.Cos(pushDirection)) * (0.1f - delta);
         }
-        else
-        {
+        else {
           pushAway = false;
           pushDirection = 0;
           pushStart = 0;
@@ -122,9 +112,8 @@ public class TheftHandler : PausableObject {
     if (targetWasAlreadyRobbed) {
       return;
     }
-    if (playerWasCaught && !secondTry)
-    {
-      return;     
+    if (playerWasCaught && !secondTry) {
+      return;
     }
 
     if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < triggerDistance) {
@@ -134,21 +123,17 @@ public class TheftHandler : PausableObject {
       }
 
       theftObject = this;
-      if (secondTry)
-      {
-        if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < stealDistance)
-        {
+      if (secondTry) {
+        if (Vector3.Distance(this.transform.position, GameController.instance.player.transform.position) < stealDistance) {
           stealingText.enabled = true;
           if (caughtTime == 0f)
             caughtTime = GameController.instance.dayTime;
-          if (GameController.instance.dayTime - caughtTime < 1f / GameController.instance.dayLength)
-          {
+          if (GameController.instance.dayTime - caughtTime < 1f / GameController.instance.dayLength) {
             displayedSecondTry = true;
             stealingText.enabled = true;
             stealingText.text = "Piss off, thief!";
           }
-          else if (!displayedSecondTry)
-          {
+          else if (!displayedSecondTry) {
             stealingText.enabled = false;
             displayedSecondTry = true;
           }
@@ -225,33 +210,26 @@ public class TheftHandler : PausableObject {
     Debug.Log("Player was caught!");
     playerWasCaught = true;
     playerIsStealing = false;
-    
+
     GameController.instance.karmaController.SocialAction(GameController.instance.player, KarmaSystem.SocialConstants.gettingCaughtStealing);
     Vector3 relativeTargetPosition = Camera.main.WorldToScreenPoint(GameController.instance.player.transform.position);
     Vector3 relativeThisPosition = Camera.main.WorldToScreenPoint(transform.position);
     Vector3 direction = relativeThisPosition - relativeTargetPosition;
     pushDirection = Mathf.Sign(direction.x);
-    
+
     pushStart = GameController.instance.dayTime;
     pushAway = true;
-    Debug.Log(direction.x);
-    if ((direction.x >= 0f))
-    {
-      
+    transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.y);
+    if ((direction.x >= 0f)) {
       GetComponent<CharacterAnimation>().playOnce("push_away_right", "idle");
     }
-    else
-    {
-      if (transform.localScale.x > 0.0f)
-      {
-        transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
-      }
+    else {
       GetComponent<CharacterAnimation>().playOnce("push_away_left", "idle");
-      
+
     }
     GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
 
-    Object.FindObjectOfType<InputHandler>().disableMovementFor(1f);
+    FindObjectOfType<InputHandler>().disableMovementFor(0.5f);
 
     stealingText.text = "What the fuck?!";
     stealingText.enabled = true;
@@ -259,16 +237,13 @@ public class TheftHandler : PausableObject {
     caughtTime = GameController.instance.dayTime;
     //GameController.instance.karmaController.DebugKarmaList();
     GameObject[] officers = GameObject.FindGameObjectsWithTag("Police");
-    foreach (GameObject officer in officers)
-    {
-      if (Vector3.Distance(GameController.instance.player.transform.position, officer.transform.position) < 8f)
-      {
+    foreach (GameObject officer in officers) {
+      if (Vector3.Distance(GameController.instance.player.transform.position, officer.transform.position) < 8f) {
         officer.GetComponent<PoliceBehavior>().startChasing(GameController.instance.player, "stealing", 4.5f);
       }
     }
-    
-    if (GameController.instance.karmaController.isCriminal(GameController.instance.player))
-    {
+
+    if (GameController.instance.karmaController.isCriminal(GameController.instance.player)) {
       GameObject police1 = Instantiate(policePrefab);
       GameObject police2 = Instantiate(policePrefab);
 
