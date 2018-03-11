@@ -61,7 +61,6 @@ public class PoliceBehavior : NPCMovement
           audioSource.clip = shootingClip;
           audioSource.Play();
         }
-        //target.GetComponent<Character>().shoot("stealing");
         target.GetComponent<Character>().die("Police shooting you");
       }
     }
@@ -102,37 +101,25 @@ public class PoliceBehavior : NPCMovement
     if (walkingDirection >= Mathf.PI * 0.25f + corr && walkingDirection < Mathf.PI * 0.75f)
     {
       //RIGHT
-      if (this.transform.localScale.x < 0.0f)
-      {
-        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
-      }
+      transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.y);
       this.GetComponent<CharacterAnimation>().currentAnimation = "walking_side";
     }
     else if (walkingDirection < Mathf.PI * 0.25f && walkingDirection > Mathf.PI * -0.25f)
     {
       //UP
-      if (this.transform.localScale.x < 0.0f)
-      {
-        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
-      }
+      transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.y);
       this.GetComponent<CharacterAnimation>().currentAnimation = "walking_back";
     }
     else if (walkingDirection <= Mathf.PI * -0.25f - corr && walkingDirection > Mathf.PI * -0.75)
     {
       //LEFT
-      if (this.transform.localScale.x > 0.0f)
-      {
-        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
-      }
+      transform.localScale = new Vector3(-Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.y);
       this.GetComponent<CharacterAnimation>().currentAnimation = "walking_side";
     }
     else if (walkingDirection >= Mathf.PI * 0.75f + corr || walkingDirection <= Mathf.PI * -0.75 - corr)
     {
       //DOWN
-      if (this.transform.localScale.x < 0.0f)
-      {
-        this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.y);
-      }
+      transform.localScale = new Vector3(Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.y);
       this.GetComponent<CharacterAnimation>().currentAnimation = "walking_front";
     }
 
@@ -141,16 +128,11 @@ public class PoliceBehavior : NPCMovement
   }
   protected bool targetInRange()
   {
-    if (Vector3.Distance(transform.position, target.transform.position) <= catchRange)
-    {
-      return true;
-    }
-    return false;
+    return Vector3.Distance(transform.position, target.transform.position) <= catchRange;
   }
 
   protected void targetCaptured()
   {
-    gameObject.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
     if (GameController.instance.karmaController.isCriminal(target) && !aiming)
     {
       aiming = true;
@@ -158,7 +140,6 @@ public class PoliceBehavior : NPCMovement
       shootIn = time + UnityEngine.Random.Range(0.5f, 1f);
       stopChasing();
     }
-      //target.GetComponent<Character>().arrest("Stealing");
     else
     {
       GameController.instance.karmaController.SocialAction(target, KarmaSystem.SocialConstants.gettingCaughtByPolice);
