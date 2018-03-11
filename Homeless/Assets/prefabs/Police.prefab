@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 114671101621612856}
   - component: {fileID: 114366585163486650}
   - component: {fileID: 114874008926752372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Police
   m_TagString: Police
   m_Icon: {fileID: 0}
@@ -631,7 +631,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1349272342165842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.185282, y: 3.8814528, z: 0.090466864}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4821623862489430}
@@ -1072,8 +1072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b617a75f9270c5448895f933fefd8629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortingLayer: Default
-  SortingOrder: 0
+  SortingLayer: Dynamic
+  SortingOrder: -211
   ChildData:
     SpritePivots:
     - {fileID: 1004048510453734}
@@ -1186,6 +1186,7 @@ MonoBehaviour:
   isWaiting: 0
   movementSpeed: 0
   target: {fileID: 0}
+  shooting: 0
 --- !u!114 &114874008926752372
 MonoBehaviour:
   m_ObjectHideFlags: 1
