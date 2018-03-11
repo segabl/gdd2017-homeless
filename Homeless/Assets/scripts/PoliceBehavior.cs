@@ -46,10 +46,19 @@ public class PoliceBehavior : NPCMovement
   protected void chase()
   {
     movementSpeed = chasingSpeed;
-    Vector3 playerPosition = target.transform.position;
-    Vector3 direction = playerPosition - transform.position;
+    Vector3 targetPosition = target.transform.position;
+    Vector3 direction = targetPosition - transform.position;
+    Debug.Log(Vector3.Distance(targetPosition, transform.position));
+    if (Vector3.Distance(targetPosition, transform.position) > 12)
+    {
+      movementSpeed = 3f;
+      chasing = false;
+    }
 
-    transform.position = Vector3.MoveTowards(transform.position, playerPosition, movementSpeed * Time.deltaTime);
+
+
+
+    transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
 
     float walkingDirection = Mathf.Atan2(direction.x, direction.y);
     float corr = 0.01f;
