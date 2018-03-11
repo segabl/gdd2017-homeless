@@ -75,6 +75,11 @@ public class GameController : MonoBehaviour {
     }
     day = 0;
     dayTime = 0.5f;
+    if (player) {
+      Vector3 targetPosition = player.transform.position;
+      targetPosition.z = Camera.main.transform.position.z;
+      Camera.main.transform.position = targetPosition;
+    }
   }
 
   void Start() {
