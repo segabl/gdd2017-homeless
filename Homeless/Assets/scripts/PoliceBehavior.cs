@@ -51,8 +51,8 @@ public class PoliceBehavior : NPCMovement
     Debug.Log(Vector3.Distance(targetPosition, transform.position));
     if (Vector3.Distance(targetPosition, transform.position) > 12)
     {
-      movementSpeed = 3f;
-      chasing = false;
+      stopChasing();
+      return;
     }
 
 
@@ -115,7 +115,13 @@ public class PoliceBehavior : NPCMovement
   protected void targetCaptured()
   {
     gameObject.GetComponent<CharacterAnimation>().playOnce("idle", "idle");
-    target.GetComponent<Character>().arrest("Stealing");
+    if (GameController.instance.karmaController.isCriminal(target))
+      target.GetComponent<Character>().arrest("Stealing");
+    else
+    {
+      GameController.instance.karmaController.SocialAction(target, KarmaSystem.SocialConstants.gettingCaughtByPolice);
+      GameController.instance.arrestPlayer(gameObject);
+    }
   }
 
   public void startChasing(GameObject target_, string reason_, float speed)
@@ -124,5 +130,10 @@ public class PoliceBehavior : NPCMovement
     target = target_;
     reason = reason_;
     chasingSpeed = speed;    
+  }
+  public void stopChasing()
+  {
+    movementSpeed = 3f;
+    chasing = false;
   }
 }

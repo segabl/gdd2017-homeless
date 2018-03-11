@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour {
 
   private static GameController controllerInstance;
   private bool trainHit;
+  private bool arrested = false;
 
   public static GameController instance {
     get {
@@ -128,6 +129,18 @@ public class GameController : MonoBehaviour {
         Camera.main.GetComponent<PostProcessing>().trainHit = false;
       }
     }
+    if (arrested)
+    {
+      if (Time.time >= pauseUntil)
+      {
+        arrested = false;
+        player.transform.position = new Vector3(0, 0);
+        player.GetComponent<MainCharacterMovement>().stopMovement();
+
+        Camera.main.GetComponent<PostProcessing>().arrested = false;
+        unpauseAll();
+      }
+    }
   }
 
   public void sleep(SleepingSpot spot) {
@@ -141,6 +154,18 @@ public class GameController : MonoBehaviour {
     sleepUntil = Time.time + 2;
     Camera.main.GetComponent<PostProcessing>().sleep = true;
     player.GetComponent<CharacterAnimation>().playOnce("liedown");
+  }
+
+  public void arrestPlayer(GameObject officer)
+  {
+    pauseAll();
+    Character character = player.GetComponent<Character>();
+    character.adjustStats(-15.0f, 0.0f, -30.0f, 0.0f);
+    officer.GetComponent<PoliceBehavior>().stopChasing();
+    arrested = true;
+    pauseUntil = Time.time + 2;
+    player.GetComponent<MainCharacterMovement>().stopMovement();
+    Camera.main.GetComponent<PostProcessing>().arrested = true;
   }
 
   public void train(bool hit) {

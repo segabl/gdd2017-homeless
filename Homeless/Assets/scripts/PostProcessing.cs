@@ -13,6 +13,7 @@ public class PostProcessing : MonoBehaviour {
 
   public bool sleep = false;
   public bool trainHit = false;
+  public bool arrested = false;
 
   private Material daylightCycleMaterial;
   private Material blurMaterial;
@@ -158,7 +159,7 @@ public class PostProcessing : MonoBehaviour {
   }
 
   internal void ProcessSleep(RenderTexture source, RenderTexture destination) {
-    if (sleep || trainHit) {
+    if (sleep || trainHit || arrested) {
       if (fadeTime == 0) {
         fadeTime = Time.time;
       }

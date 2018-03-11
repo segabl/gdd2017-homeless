@@ -248,6 +248,7 @@ namespace KarmaSystem {
     internal static readonly SocialEffector gettingCaughtStealing = new SocialEffector(new ReputationEffector(0, -1, 2, 0));
     internal static readonly SocialEffector gettingCaughtStealingFromFriend = new SocialEffector(new ReputationEffector(0, -1, 2, 0),
       new RelationshipEffector(null, -3, -3));
+    internal static readonly SocialEffector gettingCaughtByPolice = new SocialEffector(new ReputationEffector(0, -1, 4, 0));
   }
 
 }
