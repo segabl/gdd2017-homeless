@@ -3,15 +3,15 @@ using System;
 
 public class CharacterAnimation : PausableAnimatedObject {
 
-  public String currentAnimation;
-  public String previousAnimation;
+  public String currentAnimation { get; set; }
+  public String followUpAnimation { get; protected set; }
 
   private bool oncePlaying;
 
   // Use this for initialization
   void Start() {
     currentAnimation = "idle";
-    previousAnimation = "idle";
+    followUpAnimation = "idle";
     oncePlaying = false;
   }
 
@@ -33,9 +33,9 @@ public class CharacterAnimation : PausableAnimatedObject {
     }
   }
 
-  public void playOnce(String animation, String nextAnimation) {
+  public void playOnce(String animation, String next = null) {
     if (!currentAnimation.Equals(animation)) {
-      previousAnimation = nextAnimation;
+      followUpAnimation = next;
       currentAnimation = animation;
       oncePlaying = true;
     }
@@ -44,10 +44,10 @@ public class CharacterAnimation : PausableAnimatedObject {
   private void onAnimationFinished(string animation) {
     if (oncePlaying) {
       oncePlaying = false;
-      if (previousAnimation.Equals("NONE")) {
+      if (followUpAnimation == null) {
         spriterAnimator.Speed = 0;
       } else {
-        currentAnimation = previousAnimation;
+        currentAnimation = followUpAnimation;
       }
     }
   }

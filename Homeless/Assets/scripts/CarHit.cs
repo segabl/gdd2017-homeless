@@ -49,7 +49,7 @@ public class CarHit : MonoBehaviour {
       if (hitDirection > 0 && hitDirection <= Mathf.PI) {
         this.transform.localScale = new Vector3(this.transform.localScale.x * -1.0f, this.transform.localScale.y, this.transform.localScale.z);
       }
-      GetComponent<CharacterAnimation>().playOnce("carhit", "NONE");
+      GetComponent<CharacterAnimation>().playOnce("carhit");
       hit = true;
     }
   }

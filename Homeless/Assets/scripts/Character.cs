@@ -143,7 +143,7 @@ public class Character : PausableObject {
 
   private void die(String reason) {
     this.alive = false;
-    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("die", "NONE");
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("die");
     GameController.instance.panelDead.SetActive(true);
     int days = GameController.instance.day;
     GameController.instance.panelDead.GetComponentInChildren<Text>().text = "You survived " + days + (days != 1 ? " days" : " day") + " before dying due to " + reason;
@@ -154,7 +154,7 @@ public class Character : PausableObject {
   public void arrest(String reason)
   {
     this.alive = false;
-    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle", "NONE");
+    GameController.instance.player.GetComponent<CharacterAnimation>().playOnce("idle");
     GameController.instance.panelDead.SetActive(true);
     int days = GameController.instance.day;
     GameController.instance.panelDead.GetComponentInChildren<Text>().text = "You survived " + days + (days != 1 ? " days" : " day") + " before being arrested for "

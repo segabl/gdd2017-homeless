@@ -136,7 +136,7 @@ public class GameController : MonoBehaviour {
     character.adjustStats(-18.0f, spot.healthGain, spot.sanityGain, -0.6f);
     sleepUntil = Time.time + 2;
     Camera.main.GetComponent<PostProcessing>().sleep = true;
-    player.GetComponent<CharacterAnimation>().playOnce("liedown", "NONE");
+    player.GetComponent<CharacterAnimation>().playOnce("liedown");
   }
 
   public void train(bool hit) {
