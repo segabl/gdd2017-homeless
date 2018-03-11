@@ -14,12 +14,14 @@ public class SleepingBoxInteraction : CharacterInteraction {
   public void Sleep() {
     GameController.instance.player.GetComponent<Character>().permisionToSleepInBox = false;
     SetNextTree("default");
-    GameController.instance.player.GetComponent<CharacterAnimation>().SendMessage("OnUnpauseGame", SendMessageOptions.RequireReceiver);
+
+    GameController.instance.unpauseAll();
     GameController.instance.pauseGameAndBlend(GameController.PauseReason.SLEEPING, false, gameObject);
     Debug.Log("Slept in the box");
   }
   protected override bool displayInteractionText()
   {
+
     interactText.text = "Press 'E' to interact";
     return true;
   }
