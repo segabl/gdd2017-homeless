@@ -119,12 +119,17 @@ public class GameController : MonoBehaviour {
     if(trainInteraction) {
       if(Time.time >= pauseUntil) {
         trainInteraction = false;
+        var clara = GameObject.Find("Clara");
         if (trainHit) {
-          Destroy(GameObject.Find("Clara"));
+          Destroy(clara);
         }
+        else {
+          clara.transform.position = new Vector3(clara.transform.position.x, -25.6f, clara.transform.position.z);
+          clara.GetComponent<Dialogues>().SetTree("ClaraAfterTrain");
+        }
+
         player.transform.position = new Vector3(player.transform.position.x, -25.6f, player.transform.position.z);
         player.GetComponent<MainCharacterMovement>().up = true;
-        GameObject.Find("Clara").transform.position = new Vector3(GameObject.Find("Clara").transform.position.x, -25.6f, GameObject.Find("Clara").transform.position.z);
         unpauseAll();
         Camera.main.GetComponent<PostProcessing>().trainHit = false;
       }
