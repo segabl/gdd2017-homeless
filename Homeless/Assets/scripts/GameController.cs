@@ -154,14 +154,12 @@ public class GameController : MonoBehaviour {
           break;
         }
     }
-    unpauseAll();
     gamePaused = false;
     Camera.main.GetComponent<PostProcessing>().paused = false;
+    player.GetComponent<MainCharacterMovement>().externalPause = false;
   }
 
   public void pauseGameAndBlend(PauseReason reason, bool flag1 = false, GameObject other = null) {
-    player.GetComponent<CharacterAnimation>().ignoreNextOnPause();
-    pauseAll();
     pauseReason = reason;
     Character character = player.GetComponent<Character>();
 
@@ -195,6 +193,7 @@ public class GameController : MonoBehaviour {
     Camera.main.GetComponent<PostProcessing>().paused = true;
     Camera.main.GetComponent<PostProcessing>().pauseReason = reason;
     player.GetComponent<MainCharacterMovement>().stopMovement();
+    player.GetComponent<MainCharacterMovement>().externalPause = true;
   }
 
   public void saveGame() {
