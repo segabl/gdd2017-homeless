@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 114366585163486650}
   - component: {fileID: 114874008926752372}
   m_Layer: 0
-  m_Name: New Prefab
+  m_Name: Police
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -985,7 +985,7 @@ MonoBehaviour:
   targetWasAlreadyRobbed: 0
   playerWasCaught: 0
   reward: {fileID: 1903788293247078, guid: 309efebf95c8d924d9e0c50b2361ac56, type: 2}
-  policePrefab: {fileID: 1430980498559614, guid: 9486889eb50a0bf40a9cd7cfb0a6af78,
+  policePrefab: {fileID: 1349272342165842, guid: 447396df5ac899145bff6541bcf92571,
     type: 2}
 --- !u!114 &114472663894188706
 MonoBehaviour:
