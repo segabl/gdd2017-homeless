@@ -99,7 +99,7 @@ public class TheftHandler : PausableObject {
       if (pushAway) {
         float delta = (GameController.instance.dayTime - pushStart);
         if (delta < 0.15f / GameController.instance.dayLength) {
-          GameController.instance.player.transform.position += new Vector3(-Mathf.Sin(pushDirection), Mathf.Cos(pushDirection)) * (0.1f - delta);
+          GameController.instance.player.transform.position += new Vector3(-Mathf.Sin(pushDirection), Mathf.Cos(pushDirection)) * (0.05f - delta);
         }
         else {
           pushAway = false;
@@ -215,7 +215,7 @@ public class TheftHandler : PausableObject {
     Vector3 relativeTargetPosition = Camera.main.WorldToScreenPoint(GameController.instance.player.transform.position);
     Vector3 relativeThisPosition = Camera.main.WorldToScreenPoint(transform.position);
     Vector3 direction = relativeThisPosition - relativeTargetPosition;
-    pushDirection = Mathf.Sign(direction.x);
+    pushDirection = direction.x;
 
     pushStart = GameController.instance.dayTime;
     pushAway = true;
