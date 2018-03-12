@@ -67321,7 +67321,7 @@ MonoBehaviour:
   panelInGameMenu: {fileID: 2137048547}
   panelInventory: {fileID: 459893567}
   panelDead: {fileID: 115464157}
-  dayLength: 1440
+  dayLength: 900
 --- !u!114 &1725227881
 MonoBehaviour:
   m_ObjectHideFlags: 0
