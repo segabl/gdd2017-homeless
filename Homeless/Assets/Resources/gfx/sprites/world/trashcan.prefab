@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212713747924149608}
   - component: {fileID: 114016351440325658}
   - component: {fileID: 58855150740323178}
+  - component: {fileID: 114874492948288034}
   m_Layer: 0
   m_Name: trashcan
   m_TagString: Untagged
@@ -68,6 +69,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05830439b5ec332498b49bd3ec983688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114874492948288034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1015907398786526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1a3843df0a05a4884f515631061d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerDistance: 1
+  items:
+  - {fileID: 1674000133586476, guid: 35c84e9fdc50f82498746792ff051125, type: 2}
+  - {fileID: 1840668056442712, guid: fc3d0e801a98bc94aa875fcd97f462a7, type: 2}
+  - {fileID: 1332461906000848, guid: 1945162cd0b69254c8b78a3eaa84bb77, type: 2}
+  startChance: 0.5
+  chanceIncrement: 0.0001
 --- !u!212 &212713747924149608
 SpriteRenderer:
   m_ObjectHideFlags: 1

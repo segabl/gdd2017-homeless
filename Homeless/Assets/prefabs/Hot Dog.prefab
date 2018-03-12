@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114640180014530726}
   - component: {fileID: 114726056440600896}
   m_Layer: 0
-  m_Name: HotDog
+  m_Name: Hot Dog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
