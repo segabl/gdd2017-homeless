@@ -5,7 +5,7 @@ Players are able to interact with the environment, such as searching the trash f
 Movement is handled by clicking on a spot in the world where the player wants to go.
 A karma system keeps track of the players actions and makes the world respond accordingly.
 The game's goal is to let the player shape their own story.
-They can try to survive as long as possible, or become criminal, or drink theirselves to death and so on.
+They can try to survive as long as possible, or become criminal, or drink yourself to death and so on.
 
 2)
 Sebastian Gabl         01130970
@@ -24,4 +24,5 @@ SpriterDotNet library by Luka "loodakrawa". <https://github.com/loodakrawa/Sprit
 Game soundtrack by Michael Berr
 
 5)
-masterxy.bplaced.net/Homeless.7z
+https://www.dropbox.com/s/7mizqcoa428rrwf/Homeless.7z?dl=0
+(Also located on this disk)
