@@ -12848,6 +12848,11 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0.5713835
       objectReference: {fileID: 0}
+    - target: {fileID: 114671101621612856, guid: 447396df5ac899145bff6541bcf92571,
+        type: 2}
+      propertyPath: dontWalk
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 447396df5ac899145bff6541bcf92571, type: 2}
   m_IsPrefabParent: 0
@@ -46470,7 +46475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ded0ac0fe4cd14789ef4518ae0942d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 4
   externalPause: 0
   ridiculousHotFixWorkaround: 0
 --- !u!114 &1302206912

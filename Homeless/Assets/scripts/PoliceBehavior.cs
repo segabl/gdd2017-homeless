@@ -16,6 +16,7 @@ public class PoliceBehavior : NPCMovement
   protected AudioClip shootingClip;
   public static bool audioTriggered = false;
   private float shootIn;
+  public bool dontWalk = false;
 
   void Start()
   {
@@ -35,7 +36,7 @@ public class PoliceBehavior : NPCMovement
   }
   protected override void updatePausable()
   {
-    if (!chasing && !shooting && !aiming)
+    if (!chasing && !shooting && !aiming && !dontWalk)
     {
       base.updatePausable();
       return;
@@ -69,7 +70,9 @@ public class PoliceBehavior : NPCMovement
     {
       return;
     }
-    if (GameController.instance.karmaController.isCriminal(target))
+    if (!chasing)
+      return;
+    if (GameController.instance.karmaController != null &&  GameController.instance.karmaController.isCriminal(target))
     {
       catchRange = 4f;
     }
