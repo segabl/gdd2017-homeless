@@ -27,7 +27,11 @@ public class PostProcessing : MonoBehaviour {
   private float fadeTime;
   private float insanityTime;
 
+  private RenderTexture renderTexture;
+
   void Awake() {
+    renderTexture = new RenderTexture(Screen.width, Screen.height, 24);
+
     daylightCycleMaterial = new Material(daylightCycleShader);
     blurMaterial = new Material(blurShader);
     redRadiationMaterial = new Material(redRadiationShader);
@@ -73,14 +77,16 @@ public class PostProcessing : MonoBehaviour {
     if (repletion < 80.0f) {
       blurMaterial.SetFloat("hstep", 3.20f / repletion);
       blurMaterial.SetFloat("vstep", 1.80f / repletion);
-      Graphics.Blit(source, destination, blurMaterial);
+      Graphics.Blit(source, renderTexture, blurMaterial);
+      Graphics.Blit(renderTexture, destination);
     }
   }
 
   internal void ProcessDaylight(RenderTexture source, RenderTexture destination) {
     daylightCycleMaterial.SetTexture("_daylight", daylightTexture);
     daylightCycleMaterial.SetFloat("_time", GameController.instance.dayTime);
-    Graphics.Blit(source, destination, daylightCycleMaterial);
+    Graphics.Blit(source, renderTexture, daylightCycleMaterial);
+    Graphics.Blit(renderTexture, destination);
   }
   internal void ProcessPlayerHealth(RenderTexture source, RenderTexture destination) {
     float health = GameController.instance.player.GetComponent<Character>().health;
@@ -107,13 +113,15 @@ public class PostProcessing : MonoBehaviour {
         pulseMaterial.SetFloat("_time", timeDiff);
         pulseMaterial.SetFloat("_strength", strength);
         pulseMaterial.SetFloat("_speed", speed);
-        Graphics.Blit(source, destination, pulseMaterial);
+        Graphics.Blit(source, renderTexture, pulseMaterial);
+        Graphics.Blit(renderTexture, destination);
       }
       else {
         lowHealthTime = 0;
       }
 
-      Graphics.Blit(source, destination, redRadiationMaterial);
+      Graphics.Blit(source, renderTexture, redRadiationMaterial);
+      Graphics.Blit(renderTexture, destination);
     }
   }
   internal void ProcessPlayerSanity(RenderTexture source, RenderTexture destination) {
@@ -128,7 +136,9 @@ public class PostProcessing : MonoBehaviour {
         timeDiff *= (80f - sanity) / 80f;
       strangeMaterial.SetFloat("_time", timeDiff);
       strangeMaterial.SetFloat("_strength", (80f - sanity) / 80f);
-      Graphics.Blit(source, destination, strangeMaterial);
+
+      Graphics.Blit(source, renderTexture, strangeMaterial);
+      Graphics.Blit(renderTexture, destination);
       //strangeMaterial.SetFloat("")
     }
     else {
@@ -149,7 +159,8 @@ public class PostProcessing : MonoBehaviour {
       if (intoxicationDelta > 0) {
         swirlMaterial.SetFloat("_time", intoxicationDelta * (1 + intoxication));
         swirlMaterial.SetFloat("_strength", intoxication + (float)System.Math.Pow(4, intoxication >= 0.7 ? intoxication - 0.7 : 0) - 1);
-        Graphics.Blit(source, destination, swirlMaterial);
+        Graphics.Blit(source, renderTexture, swirlMaterial);
+        Graphics.Blit(renderTexture, destination);
       }
     }
     else {
@@ -170,7 +181,8 @@ public class PostProcessing : MonoBehaviour {
       }
       if (deltaTime > 0) {
         blackFadeMaterial.SetFloat("_factor", System.Math.Min(deltaTime, 1.0f));
-        Graphics.Blit(source, destination, blackFadeMaterial);
+        Graphics.Blit(source, renderTexture, blackFadeMaterial);
+        Graphics.Blit(renderTexture, destination);
       }
     }
     else {
