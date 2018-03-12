@@ -85,7 +85,7 @@ namespace KarmaSystem {
         return true;
       return false;
     }
-    public bool isCriminal(GameObject A, int requiredCriminality = 15) {
+    public bool isCriminal(GameObject A, int requiredCriminality = 10) {
       if (SocialStatusDict[A].reputation.criminality >= requiredCriminality)
         return true;
       return false;

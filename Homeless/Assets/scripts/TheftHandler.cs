@@ -49,7 +49,7 @@ public class TheftHandler : PausableObject {
     LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();
 
     Color c1 = new Color(0.5f, 0.5f, 0.5f, 1);
-    lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+    //lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
     lineRenderer.startColor = c1;
     lineRenderer.endColor = c1;
     lineRenderer.startWidth = width;
